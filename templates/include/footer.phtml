@@ -1,0 +1,73 @@
+<div id="footerwrap">
+    <div class="container">
+        <div class="row site-map">
+            <div class="col-lg-3">
+              <p>
+                <strong>About</strong><br />
+                <a href="/about">Overview</a><br />
+                <a href="/about/faq">FAQ</a><br />
+                <a href="/license">License</a><br />
+                <a href="/long-term-support">Long Term Support</a><br />
+                <a href="/changelog">Changelog</a><br />
+                <a href="/security">Security</a><br />
+                <a href="/blog">Blog</a>
+              </p>
+            </div>
+            <div class="col-lg-3">
+              <p>
+                <strong>Download</strong><br />
+                <a href="/components">Components</a><br />
+                <a href="">Get the last stable</a><br />
+                <a href="">Get zend-expressive</a><br />
+                <a href="">Get the MVC skeleton app</a><br />
+                <a href="">Archive releases</a><br />
+              </p>
+            </div>
+            <div class="col-lg-3">
+              <p>
+                <strong>Learn</strong><br />
+                <a href="https://zendframework.github.io/zend-expressive/">Expressive: PSR-7 Middleware</a><br />
+                <a href="/manual/current/en/user-guide/overview.html">Get started</a><br />
+                <a href="/manual/current/en/index.html">Reference guide</a><br />
+                <a href="/docs/api/">APIs</a><br />
+                <a href="/learn/training-and-certification/">Training and Certification</a><br />
+                <a href="/learn/support-and-consulting/">Support and Consulting</a>
+              </p>
+            </div>
+            <div class="col-lg-3">
+              <p>
+                <strong>Participate</strong><br />
+                <a href="/participate">Overview</a><br />
+                <a href="/participate/contributor-guide">Contributors guide</a><br />
+                <a href="/participate/community">Community</a><br />
+                <a href="/participate/user-groups">User groups</a><br />
+                <a href="/participate/conferences">Conferences</a><br />
+                <a href="/contact">Contacts</a>
+              </p>
+            </div>
+        </div>
+        <div class="spacing"></div>
+        <div class="row">
+            <div class="col-lg-8">
+                <h4>Copyright</h4>
+                <div class="hline-w"></div>
+                <p>&copy; 2006-<?php echo date("Y") ?> by <a href="http://www.zend.com">Zend</a>, a Rogue Wave Company. Made with <i class="fa fa-heart"></i> by an awesome <a href="https://github.com/zendframework">community</a>.</p>
+                <p>This website is built using <a href="https://github.com/zendframework/zend-expressive">zend-expressive</a> and it runs on <a href="http://www.zend.com/en/resources/php-7">PHP 7</a>.
+                <?php if (parse_url($this->serverUrl(), PHP_URL_PATH) === '/'): ?>
+                  <br /><small>We thanks <a href="http://www.gajadigital.com/" target="_blank">Gaja Digital Agency</a> for the ZF-superman logo!</small>
+                <?php endif; ?>
+                </p>
+            </div>
+            <div class="col-lg-4">
+                <h4>Contacts</h4>
+                <div class="hline-w"></div>
+                <p>
+                    <a href="/archives" class="btn-social btn-outline" alt="Mailing List" title="Mailing List"><i class="fa fa-envelope"></i></a>
+                    <a href="/irc" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
+                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                </p>
+            </div>
+        </div>
+    </div><! --/container -->
+</div><! --/footerwrap -->

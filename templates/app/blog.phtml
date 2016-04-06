@@ -1,0 +1,66 @@
+<?php $this->headTitle('Blog'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Blog</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <!-- -- SINGLE POST ---->
+        <div class="col-lg-8">
+            <?php foreach ($posts as $post): ?>
+                <a href="<?php echo $post['permalink'] ?>"><h3 class="ctitle"><?php echo $post['title'] ?></h3></a>
+                <p><csmall><?php echo date("Y-m-d", $post['date']) ?> | By: <a href="<?php echo $post['url_author'] ?>"><?php echo $post['author'] ?></a></csmall></p>
+
+                <p>
+                  <?php echo $post['excerpt'] ?> ... <a href="<?php echo $post['permalink'] ?>">(continue)</a>
+                </p>
+                <div class="hline"></div>
+                <div class="spacing"></div>
+            <?php endforeach; ?>
+            <p>
+              <div class="row">
+                <div class="col-lg-4 text-center">
+                  <?php if ($prev) : ?>
+                  <a href="/blog?page=<?php echo $prev ?>"><i class="fa fa-chevron-left"></i> Previous</a>
+                  <?php endif; ?>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <?php printf("Page %d/%d", $page, $tot) ?>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <?php if ($next) : ?>
+                  <a href="/blog?page=<?php echo $next ?>">Next <i class="fa fa-chevron-right"></i></a>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </p>
+        </div>
+
+        <div class="col-lg-4">
+
+          <h4>Share</h4>
+          <div class="hline"></div>
+          <p class="share">
+              <a href="https://twitter.com/home?status=Latest blog posts by @zfdevteam, <?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $this->serverUrl() ?>&title=<?php echo urlencode($title . ', latest posts by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+              <a href="https://plus.google.com/share?url=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+          </p>
+          <div class="spacing"></div>
+
+          <h4>Subscribe</h4>
+          <div class="hline"></div>
+              <p>
+                  </p><p class="rss-subscribe">Subscribe to this blog <a href="/feed.xml">via RSS</a>.</p>
+              <p></p>
+
+        </div>
+
+
+    </div><!-- --/row ---->
+</div>

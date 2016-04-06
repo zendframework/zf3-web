@@ -1,0 +1,47 @@
+---
+layout: post
+title: Zend Framework 2.2.5 Released!
+date: 2013-10-31 20:00
+update: 2013-10-31 20:00
+author: Matthew Weier O'Phinney
+url_author: http://mwop.net/
+permalink: /blog/zend-framework-2-2-5-released.html
+categories:
+- blog
+- released
+
+---
+
+ The Zend Framework community is pleased to announce the immediate availability of Zend Framework 2.2.5! Packages and installation instructions are available at:
+
+- [http://framework.zend.com/downloads/latest](/downloads/latest)
+
+ This release includes a security fix for `Zend\Http\PhpEnvironment\RemoteAddress` and `Zend\Session\Validator\RemoteAddr`; if you use either of these classes, we urge you to upgrade to 2.2.5 immediately.
+
+ We've not had a release in a couple of months, due to an exciting development: Zend's Zend Framework team has announced an initial preview release of [Apigility](http://apigility.org), an API builder and management tool, built on top of Zend Framework 2! If you are building APIs or plan to in the future, we encourage you to check out this tool and help drive it toward a stable release!
+
+Security
+--------
+
+ A developer reported a problem with how we were handling situations when `Zend\Http\PhpEnvironment\RemoteAddress` was configured to use proxies, had a list of trusted proxies, `$_SERVER['REMOTE_ADDR']` was not in that list of trusted proxies. Essentially, we were still consulting the `X-Forwarded-For` header in this situation, but should have been used the provided `$_SERVER['REMOTE_ADDR']`, according to the specification.
+
+ 2.2.5 fixes this situation. If you use that class, or `Zend\Session\Validator\RemoteAddr`, you should upgrade immediately.
+
+ For more details, visit the [ZF2013-04 security advisory](/security/advisory/ZF2013-04).
+
+Changelog
+---------
+
+ To see the full changelog, visit:
+
+- [http://framework.zend.com/changelog/2.2.5](/changelog/2.2.5)
+
+Thank You!
+----------
+
+ Thank you to everybody who has contributed to this release. With more than 70 issues resolved, it's one of the busiest and most robust releases on the 2.2 branch to-date.
+
+Roadmap
+-------
+
+ Maintenance releases happen (roughly) monthly on (approximately) the third Wednesday. We will be gearing up for the next minor release, 2.3.0, soon.

@@ -1,0 +1,111 @@
+---
+layout: post
+title: Apigility 0.9.0 Released!
+date: 2014-03-01 00:00
+update: 2014-03-03 19:00
+author: Matthew Weier O'Phinney
+url_author: http://mwop.net/
+permalink: /blog/apigility-0-9-0-released.html
+categories:
+- blog
+- apigility
+- released
+
+---
+
+Today, we're releasing version 0.9.0 of Apigility! You can grab and test it using one of the following two methods:
+
+- Composer: `composer create-project zfcampus/zf-apigility-skeleton apigility 0.9.0`
+- Manual download: 
+            wget https://github.com/zfcampus/zf-apigility-skeleton/releases/download/0.9.0/zf-apigility-skeleton-0.9.0.zip
+            unzip zf-apigility-skeleton-0.9.0.zip
+
+This release brings in our last planned feature for the upcoming 1.0.0 stable release: the ability to document your APIs, and then provide that documentation to your end-users!
+
+Documentation
+-------------
+
+ An API is useless without documentation.
+
+ The Apigility admin UI now allows you to capture narrative documentation for your services, collections, entities, and operations. You can document what the request and response bodies should look like. You can document each field you configure.
+
+ Apigility then merges this documentation with what it knows of your services: what Accept headers are allowed, what Content-Types are allowed, what response status codes may be expected, what fields are available, whether or not authorization is required, and more. The admin UI provides a visualization of this information for you.
+
+ We provide several more visualizations, too. The zf-apigility-documentation module is enabled now by default in the zf-apigility-skeleton, providing both JSON and HTML representations of the documentation at the URI /apigility/documentation (the representation will depend on the Accept header value you provide -- Apigility's own content negotiation at work!).
+
+ You can also opt in to the new zf-apigility-documentation-swagger module, which will allow you to either seed an existing [Swagger UI](https://github.com/wordnik/swagger-ui) installation, or, if you visit the /apigility/swagger URI, provide the Swagger UI itself.
+
+ To see what's possible, [Introduction to Documentation](http://apigility.org/get-started-video.html) video on the Apigility website!
+
+#### Adding documentation to existing Apigility installs
+
+ If you are already using Apigility, you will need to add the new modules to your application. Add the following dependencies to your composer.json:
+
+- "zfcampus/zf-apigility-documentation": "~1.0-dev" (necessary for any documentation visualization, other than in the admin)
+- "zfcampus/zf-apigility-documentation-swagger": "~1.0-dev" (if you want the Swagger UI)
+
+ After running composer update, add the modules to your `config/application.config.php`:
+
+- ZF\\Apigility\\Documentation
+- ZF\\Apigility\\Documentation\\Swagger
+
+Changelog
+---------
+
+ This release has been a little over two months in the making, and has a ton of changes. The following is a list of important changes for existing users.
+
+- **Changes minimum supported PHP version to 5.3.23**, in line with the upcoming ZF 2.3.0. We still recommend **5.4.8** for serving the admin user interface.
+- New modules, [zf-apigility-documentation](https://github.com/zfcampus/zf-apigility-documentation) and [zf-apigility-documentation-swagger](https://github.com/zfcampus/zf-apigility-documentation-swagger), providing documentation visualizations of APIs created with Apigility. The base module provides both JSON and HTML visualizations via the URI `/apigility/documentation`, based on the Accept header value present. zf-apigility-documentation-swagger provides an additional JSON visualization for the mediatype `application/vnd.swagger+json`, for seeding a [Swagger UI](https://github.com/wordnik/swagger-ui) installation; additionally, it provides the Swagger UI via `/apigility/swagger`.
+
+zf-apigility-documentation is enabled by default in zf-apigility-skeleton; zf-apigility-documentation-swagger is an opt-in module.
+
+- **The `/admin` and `/welcome` routes are now removed!** The admin UI now uses `/apigility/ui`, and the welcome screen uses `/apigility/welcome`. New routes for documentation are also available, as detailed above.
+- A new module was created for Apigility-specific interfaces, [zf-apigility-provider](https://github.com/zfcampus/zf-apigility-provider). The primary use case is for composition in modules that may or may not be consumed by Apigility (e.g., a general-purpose module that could be composed into many projects). The only interface currently is `ZF\Apigility\Provider\ApigilityProviderInterface`, which replaces `Zend\Apigility\ApigilityModuleInterface` (and thus prevents the necessity of installing all Apigility modules just to implement the interface!).
+- A new module was introduced for handling development mode, [zf-development-mode](https://github.com/zfcampus/zf-development-mode); this is a fork of [NFDevelopmentMode](https://github.com/19ft/NFDevelopmentMode), which was based off the equivalent functionality in zf-apigility-skeleton's `Application` module. We removed the functionality from the skeleton, and added a dependency on the new module.
+- zf-apigility-skeleton's layout was updated to match that of the admin UI.
+- zf-apigility-admin received numerous updates:
+
+
+  - Ability to add documentation of services, fields, and operations.
+  - Ability to use [MongoDB](http://www.mongodb.org/) when configuring an OAuth2 authentication adapter.
+  - Ability to inspect, add, configure, and delete zf-content-negotiation selectors.
+  - Links to HTML documentation of APIs managed by the Apigility instance (more on this below).
+  - Ability to create and manipulate filter chains for each field in a service.
+  - (Limited) detection of whether or not an opcode cache is enabled; if detected, a modal dialog will be presented to the end-user detailing how to disable it.
+  - Completely overhauled and refactored admin UI application to ease maintenance and feature additions. The admin UI now uses [Bower](http://bower.io) for managing UI asset dependencies, and [Grunt](http://gruntjs.com) for building the UI distribution. We have dropped ng-route for the [angular-ui ui-router](https://github.com/angular-ui/ui-router), providing us with more flexibility in UI implementation and layout. All services, controllers, and directives have been moved into their own files.
+  - Countless UI/UX improvements.
+- zf-apigility-welcome has been updated to use the Apigility "Rocket ElePHPant" logo for the splash screen, and to provide buttons to the HTML and Swagger documentation, if the appropriate modules are available.
+- **zf-rest and zf-rpc now each store a `service_name` key in the configuration for each service.** While efforts have been made to ensure existing configuration still works, we recommend adding this key to each service. The value should be the short name representation for the service, usually the name you provided when creating the service.
+- **All repositories have been updated to make a clean distinction between the terms "Entity", "Collection", and "Resource".** An "Entity" is anything addressable via a URI containing a unique identifier. A "Collection" is any URI that returns a set of entities. A "Resource" refers to a URI that may return collections and/or entities. As such, we have several BC breaks:
+
+
+  - The event `renderResource` is now `renderEntity`.
+  - The event `renderCollection.resource` is now `renderCollection.entity`.
+  - `ZF\Hal\Resource` was renamed to `ZF\Hal\Entity`.
+  - The subkey `resource` in the zf-mvc-auth configuration is now `entity`.
+  - The subkey `resource_http_methods` in zf-rest is now `entity_http_methods`.
+  - The subkey `resource_class` in zf-rest is now `entity_class`.
+  - The subkey `resource_identifier_name` in zf-rest is now `entity_identifier_name`. (This change only affects those who have been using latest master, but have not updated since late-January 2014.)
+  - The subkey `identifier_name` in zf-apigility `db-connected` configuration is now `entity_identifier_name`;
+- zf-hal now properly differentiates between the identifier used in the route definition, and the identifier used for the entity; this allows you to use one value on the uri -- e.g., `status_id` -- and another in your entity class -- e.g., `id`. zf-hal will fallback to the `route_identifier_name` if no `entity_identifier_name` is present.
+- zf-apigility, when detecting an input filter is present, will pull values from the input filter, and not use any other values even if provided in the request. This prevents SQL errors due to unknown columns.
+
+Additionally, zf-apigility's assets were updated, and a Grunt + Bower toolchain provided for keeping them up-to-date.
+
+- zf-rest, when detecting an input filter is present for the current request, will inject it into the `ResourceEvent`, allowing developers to retrieve it via `$this->getEvent()->getInputFilter()`.
+
+Additionally, support for `patchList` was added to the `AbstractResourceListener`.
+
+- zf-api-problem was updated to match [Problem API draft 5](http://tools.ietf.org/html/draft-nottingham-http-problem-05). This has changed the internal structure and JSON representation of problem results. If you were manipulating `ApiProblem` objects directly previously, you may need to alter your code.
+
+Future
+------
+
+ At this point, we turn our attention to stabilizing Zend Framework 2.3.0, on which Apigility will depend, due to features added to that upcoming version.
+
+ Once Zend Framework 2.3.0 is released, we will begin the beta cycle for Apigility 1.0.0. During that timeframe, we will due some additional improvements to the UI, and work to ensure the engine is stable. Additionally, we will document the project, providing documentation for each module, as well as for how the modules work together as a whole. We hope to provide "recipes" for a number of common practices and development and deployment situations.
+
+#### Updates
+
+- 2014-03-03 12:00: Fixed zf-apigility-documentation to read zf-apigility-provider in fourth bullet-point of changelog.
+- 2014-03-01 12:20: Fixed wget command to reference correct download link.

@@ -1,0 +1,201 @@
+<?php $this->headTitle('Home'); ?>
+
+<div id="headerwrap">
+    <div class="container">
+        <div class="row">
+            <a id="github-link" href="https://github.com/zendframework">
+              <img src="https://github-camo.global.ssl.fastly.net/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
+            </a>
+            <div class="col-lg-3">
+                <img class="img-responsive" src="/img/zfsuperman.png">
+            </div>
+            <div class="col-lg-9">
+              <h1>Zend Framework 3</h1>
+              <h3>The most popular PHP framework, ready for PHP 7!</h3>
+              <h2>Focused on Simplicity, Reusability and Performance</h2>
+              <p><br /><a href="#" class="btn btn-theme">Download now</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="service">
+    <div class="container">
+        <div class="row centered">
+            <div class="col-md-3">
+                <i class="fa fa-dashboard"></i>
+                <h4>High Performing</h4>
+                <p>Engineered with performance tuning in mind. Performance improvement of 2x compared with version 2.</p>
+
+            </div>
+            <div class="col-md-3">
+                <i class="fa fa-gears"></i>
+                <h4>Extensible</h4>
+                <p>Open architecture with Middleware and MVC patterns, easily adapt to all your needs. <a href="http://www.php-fig.org/">PHP-FIG</a> standard compliant.</p>
+
+            </div>
+            <div class="col-md-3">
+                <i class="fa fa-lock"></i>
+                <h4>Secure</h4>
+                <p>Built with security best practices in place. Protect password with <a href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a> and encryption using <a href="https://it.wikipedia.org/wiki/Advanced_Encryption_Standard">AES</a> standard (<a href="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf">FIPS-197</a>).</p>
+
+            </div>
+            <div class="col-md-3">
+                <i class="fa fa-building-o"></i>
+                <h4>Enterprise Ready</h4>
+                <p>A proven history of success running business critical and high-usage applications. Ready for <a href="http://www.php.net">PHP 7</a>.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+
+        <div class="col-lg-5">
+            <h4>Latest blog posts <small>( <a href="/blog">full list</a> )</small></h4>
+            <div class="hline"></div>
+            <?php foreach($posts as $post): ?>
+                <p><a href="<?php echo $post['permalink'] ?>"><?php echo $post['title'] ?></a></p>
+            <?php endforeach; ?>
+            <br />
+            <h4>Latest security advisories <small>( <a href="/security/advisories">full list</a> )</small></h4>
+            <div class="hline"></div>
+            <?php foreach($advisories as $advisor): ?>
+                <p><a href="/security/advisory/<?php echo $advisor['id'] ?>"><?php echo $advisor['title'] ?></a></p>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="col-lg-7">
+            <h4>Maximize Development Productivity</h4>
+            <div class="hline"></div><br />
+            <div class="row">
+                <div class="col-lg-4 centered">
+                  <img src="/img/ag-hero.png"><br />
+                  <p>The world's easiest way to create high-quality APIs</p>
+                  <a href="https://apigility.org" class="btn btn-theme btn-sm">Learn more</a>
+                </div>
+                <div class="col-lg-4 centered">
+                  <img src="/img/zray.png">
+                  <p>The Ultimate PHP Productivity Solution</p>
+                  <a href="http://www.zend.com/en/products/server/z-ray" class="btn btn-theme btn-sm">Learn more</a>
+                </div>
+                <div class="col-lg-4 centered">
+                  <img src="/img/zend-studio.png">
+                  <p>The PHP IDE for Smarter Development</p>
+                  <a href="http://www.zend.com/en/products/studio" class="btn btn-theme btn-sm">Learn more</a>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 centered" id="getcertified">
+                <a href="http://www.zend.com/en/services/certification"><img align="center" src="/img/certifications.png" alt="Get certified!" title="Get certified!"></a>
+              </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="portfoliowrap">
+    <div class="portfolio-centered">
+        <h3>Who uses Zend Framework?</h3>
+        <div class="recentitems portfolio">
+            <?php foreach($projects as $project): ?>
+                <div class="portfolio-item graphic-design">
+                    <div class="he-wrap tpl6">
+                    <img src="/img/clients/<?= $project['img']; ?>" alt="">
+                        <div class="he-view">
+                            <div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown"><?= $project['name']; ?><br /><font size="-1">(<?= $project['country']; ?>)</font></h3>
+                                <a href="<?= $project['url']; ?>" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+(function($) {
+	"use strict";
+	var $container = $('.portfolio'),
+		$items = $container.find('.portfolio-item'),
+		portfolioLayout = 'fitRows';
+
+		if( $container.hasClass('portfolio-centered') ) {
+			portfolioLayout = 'masonry';
+		}
+
+		$container.isotope({
+			filter: '*',
+			animationEngine: 'best-available',
+			layoutMode: portfolioLayout,
+			animationOptions: {
+			duration: 750,
+			easing: 'linear',
+			queue: false
+		},
+		masonry: {
+		}
+		}, refreshWaypoints());
+
+		function refreshWaypoints() {
+			setTimeout(function() {
+			}, 1000);
+		}
+
+		$('nav.portfolio-filter ul a').on('click', function() {
+				var selector = $(this).attr('data-filter');
+				$container.isotope({ filter: selector }, refreshWaypoints());
+				$('nav.portfolio-filter ul a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+		});
+
+		function getColumnNumber() {
+			var winWidth = $(window).width(),
+			columnNumber = 1;
+
+			if (winWidth > 1200) {
+				columnNumber = 5;
+			} else if (winWidth > 950) {
+				columnNumber = 4;
+			} else if (winWidth > 600) {
+				columnNumber = 3;
+			} else if (winWidth > 400) {
+				columnNumber = 2;
+			} else if (winWidth > 250) {
+				columnNumber = 1;
+			}
+				return columnNumber;
+			}
+
+			function setColumns() {
+				var winWidth = $(window).width(),
+				columnNumber = getColumnNumber(),
+				itemWidth = Math.floor(winWidth / columnNumber);
+
+				$container.find('.portfolio-item').each(function() {
+					$(this).css( {
+					width : itemWidth + 'px'
+				});
+			});
+		}
+
+		function setPortfolio() {
+			setColumns();
+			$container.isotope('reLayout');
+		}
+
+		$container.imagesLoaded(function () {
+			setPortfolio();
+		});
+
+		$(window).on('resize', function () {
+		setPortfolio();
+	});
+})(jQuery);
+<?php $this->inlineScript()->captureEnd(); ?>

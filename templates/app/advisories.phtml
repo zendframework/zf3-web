@@ -1,0 +1,47 @@
+<?php $this->headTitle('Advisories'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Security Advisories</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h3>Vulnerabilities reported against Zend Framework, and recommendations for mitigation</h3>
+            <div class="spacing"></div>
+            <?php foreach ($advisories as $advisory): ?>
+              <p>
+                <i class="fa fa-bug"></i> <a href="/security/advisory/<?php echo $advisory['id'] ?>"><?php echo $advisory['title'] ?></a><br />
+                <small>Published <?php echo date("l m, Y", $advisory['date']) ?></small>
+              </p>
+            <?php endforeach; ?>
+            <div class="spacing"></div>
+            <div class="hline"></div>
+            <p>
+              <div class="row">
+                <div class="col-lg-4 text-center">
+                  <?php if ($prev) : ?>
+                  <a href="?page=<?php echo $prev ?>"><i class="fa fa-chevron-left"></i> Previous</a>
+                  <?php endif; ?>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <?php printf("Page %d/%d", $page, $tot) ?>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <?php if ($next) : ?>
+                  <a href="?page=<?php echo $next ?>">Next <i class="fa fa-chevron-right"></i></a>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </p>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::security-menu') ?>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<?php $this->headTitle('About'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>FAQ</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <p>
+              <strong>What version of PHP is Zend Framework 3 based on?</strong><br />
+              Zend Framework 3 runs on PHP 5.5+ and is optimized for PHP 7.
+            </p>
+            <p>
+              <strong>I’m starting a new project – which version of Zend Framework should I use?</strong><br />
+              Start using Zend Framework 3! It's already stable.
+            </p>
+            <p>
+              <strong>I have an application built with Zend Framework 2 – will I be able to migrate it to version 3?</strong><br />
+              Zend Framework 3 is almost backward compatible with ZF2, we said "almost" because there are few BC breaks. We put effort in the development of ZF3 in order to minimize these changes.
+            </p>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::about-menu', [ 'active' => '/about/faq' ]) ?>
+        </div>
+    </div>
+</div>

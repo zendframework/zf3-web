@@ -1,0 +1,17 @@
+<?php
+$links = [
+  '/about'     => 'About',
+  '/about/faq' => 'FAQ',
+  '/license'   => 'License',
+  '/long-term-support' => 'Long Term Support',
+  '/changelog' => 'Changelog'
+];
+?>
+
+<ul class="nav nav-pills nav-stacked">
+  <?php foreach($links as $url => $title): ?>
+      <li <?php if ($url === $active) echo 'class="active"' ?>>
+        <a href="<?php echo $url ?>"><span class="glyphicon glyphicon-chevron-right"></span> <?php echo $title ?></a>
+      </li>
+  <?php endforeach; ?>
+</ul>

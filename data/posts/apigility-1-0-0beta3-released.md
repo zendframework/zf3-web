@@ -1,0 +1,67 @@
+---
+layout: post
+title: Apigility 1.0.0beta3 Released!
+date: 2014-04-30 22:30
+update: 2014-04-30 22:30
+author: Matthew Weier O'Phinney
+url_author: http://mwop.net/
+permalink: /blog/apigility-1-0-0beta3-released.html
+categories:
+- blog
+- apigility
+- released
+
+---
+
+We are pleased to announce the immediate availability of Apigility 1.0.0beta3!
+
+- <http://apigility.org/download>
+
+This is our third -- and likely last! -- beta release of Apigility! The features in this release are mainly around stabilization.
+
+Deployment and Console
+----------------------
+
+Most of the work we've performed since beta2 was on [zf-deploy](https://github.com/zfcampus/zf-deploy), our packaging/deployment tool. We made the following changes:
+
+- First, the tool can now be used both within an application, as well as a standalone [phar](http://php.net/phar) file. When used as a standalone phar file, you can now self update it with the `self-update` command; this will check <https://packages.zendframework.com/> for any new versions, and, if found, do an "in-place" update of the tool. (Note: the library we use that provides this functionality often emits PHP fatal errors; in practice, however, we've noticed that the process works even when such errors are reported.)
+- Second, we were not happy with the argument handling we were using, nor with the strong coupling of console argument parsing logic with the logic consuming the arguments. We built a small microframework around `Zend\Console`'s `RouteMatcher` subcomponent that provides more flexibility around argument handling, and are now shipping this in the module [zf-console](https://github.com/zfcampus/zf-console).
+
+In addition to these architectural changes, we also implemented two new features in the tool:
+
+- You can specify a directory with the "local" configuration you want to use in the deployment package via the `--configs` argument.
+- You can specify a directory containing the ZPK skeleton you wish to use when creating a ZPK (Zend Server deployment package); this directory should contain a `deployment.xml` and any scripts you will be using.
+
+With these changes, we feel that `zf-deploy` is ready for inclusion in a stable Apigility release!
+
+Documentation Updates
+---------------------
+
+We've received a number of documentation improvements since beta2, and added a few documents as well.
+
+In particular:
+
+- An error was spotted in the "HAL for RPC services" recipe that made the code unusable.
+- We've documented how to use the Zend Server SDK to deploy ZPK packages.
+- We've added a recipe for adding Apigility modules to an existing Zend Framework 2 application.
+- We've added documentation on the new `zf-console` module.
+
+Beta3 Updates
+-------------
+
+In addition to the deployment and console tooling, we made the following changes:
+
+- We updated the `SendResponse` listener in `zf-api-problem` to merge in any headers set in the application response object before sending the API Problem response. This ensures that any previously set headers are also set -- solving several issues observed when using third-party modules for Cross Origin Resource Sharing (CORS), as well as HTTP authentication.
+- The storage adapters we ship with `zf-oauth` now both allow you to specify configuration via a `storage_settings` key; this change allows you to specify custom tables for both the PDO and Mongo adapters.
+- We've updated the "api.enable" service to ensure it works with current versions of Apigility (and no longer raises errors!).
+- We no longer display a resource class in the "Source Code" tab of a service if a corresponding class does not exist (e.g., DB-Connected resource classes are virtual services).
+- We've added the option to recursively delete the directory for a service to the Admin API; the Admin UI now presents a checkbox with this option.
+- We've added the option to delete an entire API. By default, this only removes the API's module from application configuration; however, you have the option to recursively delete the API module as well (once again presented in the Admin UI via a checkbox).
+- We now generate factories for RPC controllers and REST resource classes when creating new services. This simplifies the story for dependency injection of these classes.
+
+Roadmap
+-------
+
+At this time, we feel Apigility has become very stable, and that we have addressed the most pressing usability issues. We anticipate issuing a stable release next week (week of 5 May 2014).
+
+As noted in previous beta announcements, reaching stability is only the first step, however! Features such as "Doctrine-Connected", "Mongo-Connected", and "DB-Autodiscovery" REST services are already either implemented or will be soon, and we will be debuting these in a 1.1 version in the very near future.

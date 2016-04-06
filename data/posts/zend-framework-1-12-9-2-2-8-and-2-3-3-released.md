@@ -1,0 +1,38 @@
+---
+layout: post
+title: Zend Framework 1.12.9, 2.2.8, and 2.3.3 Released!
+date: 2014-09-17 17:30
+update: 2014-09-17 17:30
+author: Matthew Weier O'Phinney
+url_author: http://mwop.net/
+permalink: /blog/zend-framework-1-12-9-2-2-8-and-2-3-3-released.html
+categories:
+- blog
+- released
+
+---
+
+ The Zend Framework community is pleased to announce the immediate availability of:
+
+- Zend Framework **1.12.9**
+- Zend Framework **2.2.8**
+- Zend Framework **2.3.3**
+
+- [http://framework.zend.com/downloads/latest](/downloads/latest)
+
+ These are security releases; we strongly encourage users to upgrade.
+
+Security Fixes
+--------------
+
+ Two new security advisories have been made:
+
+- [ZF2014-05](/security/advisory/ZF2014-05), which mititages null byte poisoning of the password provided for LDAP authentication, thus prevening unauthorized LDAP binding. This corrects for unpatched versions of PHP (versions 5.5.11 and below, 5.4.27 and below, and any prior releases).
+- [ZF2014-06](/security/advisory/ZF2014-06), which mitigates null byte poisoning of quoted SQL values provided to the sqlsrv extension, thus preventing a potential SQL injection vector.
+
+ For more information, follow the links above; if you use either of the components affected, please upgrade as soon as possible.
+
+Thank You!
+----------
+
+ Thank you to the two reporters of the security issues, Matthew Daley (LDAP vulnerability) and Jonas Sandström (sqlsrv vulnerability).
