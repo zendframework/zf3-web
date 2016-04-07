@@ -31,7 +31,7 @@ class SecurityAction
             $params = $request->getQueryParams();
             $page = isset($params['page']) ? (int) $params['page'] : 1;
 
-            $allAdvisories = $this->advisory->getAllAdvisories();
+            $allAdvisories = $this->advisory->getAll();
             $totPages = ceil(count($allAdvisories) / self::ADVISORY_PER_PAGE);
 
             if ($page > $totPages || $page < 1) {

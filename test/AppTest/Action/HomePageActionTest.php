@@ -25,13 +25,13 @@ class HomePageActionTest extends \PHPUnit_Framework_TestCase
         $this->post = $this->getMockBuilder(Post::class)
                            ->disableOriginalConstructor()
                            ->getMock();
-        $this->post->method('getAllPosts')
+        $this->post->method('getAll')
                    ->willReturn([]);
 
         $this->advisory = $this->getMockBuilder(Advisory::class)
                                ->disableOriginalConstructor()
                                ->getMock();
-        $this->advisory->method('getAllAdvisories')
+        $this->advisory->method('getAll')
                        ->willReturn([]);
 
         $this->template = $this->getMockBuilder(TemplateRendererInterface::class)

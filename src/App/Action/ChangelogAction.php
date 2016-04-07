@@ -20,14 +20,14 @@ class ChangelogAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $allChangelog = $this->changelog->getAllChangelog();
+        $allChangelog = $this->changelog->getAll();
         $changelog = $request->getAttribute('changelog', basename(key($allChangelog), '.md'));
 
         $file = "data/changelog/$changelog.md";
         if (! $changelog || ! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
-        $content = $this->changelog->getChangelogFromFile($file);
+        $content = $this->changelog->getFromFile($file);
         $content['layout'] = 'layout::default';
         $content['changelog'] = $changelog;
         $content['versions'] = array_map(function($value){

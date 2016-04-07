@@ -33,8 +33,8 @@ class BlogAction
           return new HtmlResponse($this->template->render('error::404'));
         }
 
-        $content = $this->posts->getPostFromFile($post);
-        $content['posts'] = array_slice($this->posts->getAllPosts(), 0, self::POST_PER_PAGE);
+        $content = $this->posts->getFromFile($post);
+        $content['posts'] = array_slice($this->posts->getAll(), 0, self::POST_PER_PAGE);
         $content['layout'] = 'layout::default';
 
         return new HtmlResponse($this->template->render('app::post', $content));
@@ -45,7 +45,7 @@ class BlogAction
         $params = $request->getQueryParams();
         $page = isset($params['page']) ? (int) $params['page'] : 1;
 
-        $allPosts = $this->posts->getAllPosts();
+        $allPosts = $this->posts->getAll();
         $totPages = ceil(count($allPosts) / self::POST_PER_PAGE);
 
         if ($page > $totPages || $page < 1) {
@@ -55,6 +55,9 @@ class BlogAction
         $prevPage = ($page === 1) ? 0 : $page - 1;
 
         $posts = array_slice($allPosts, ($page - 1) * self::POST_PER_PAGE, self::POST_PER_PAGE);
+        foreach ($posts as $key => $value) {
+            $posts[$key]['excerpt'] = substr(strip_tags($this->posts->getFromFile($key)['body']), 0, 256);
+        }
         return new HtmlResponse($this->template->render('app::blog', [
             'posts' => $posts,
             'tot'   => $totPages,

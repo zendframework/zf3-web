@@ -29,10 +29,9 @@ class HomePageAction
     {
         $data = [
             'projects' => require 'data/projects.php',
-            'posts' => array_slice($this->posts->getAllPosts(), 0, self::NUM_POSTS),
-            'advisories' =>  array_slice($this->advisories->getAllAdvisories(), 0, self::NUM_POSTS)
+            'posts' => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
+            'advisories' =>  array_slice($this->advisories->getAll(), 0, self::NUM_POSTS)
         ];
-        $this->template->addDefaultParam('layout::default', 'thanks', true);
         $data['layout'] = 'layout::default';
         return new HtmlResponse($this->template->render('app::home-page', $data));
     }

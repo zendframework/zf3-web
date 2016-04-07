@@ -62,8 +62,8 @@
             <br />
             <h4>Latest security advisories <small>( <a href="/security/advisories">full list</a> )</small></h4>
             <div class="hline"></div>
-            <?php foreach($advisories as $advisor): ?>
-                <p><a href="/security/advisory/<?php echo $advisor['id'] ?>"><?php echo $advisor['title'] ?></a></p>
+            <?php foreach($advisories as $key => $advisor): ?>
+                <p><a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisor['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
 

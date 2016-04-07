@@ -13,9 +13,9 @@
         <div class="col-lg-8">
             <h3>Vulnerabilities reported against Zend Framework, and recommendations for mitigation</h3>
             <div class="spacing"></div>
-            <?php foreach ($advisories as $advisory): ?>
+            <?php foreach ($advisories as $key => $advisory): ?>
               <p>
-                <i class="fa fa-bug"></i> <a href="/security/advisory/<?php echo $advisory['id'] ?>"><?php echo $advisory['title'] ?></a><br />
+                <i class="fa fa-bug"></i> <a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisory['title'] ?></a><br />
                 <small>Published <?php echo date("l m, Y", $advisory['date']) ?></small>
               </p>
             <?php endforeach; ?>
