@@ -21,7 +21,8 @@ return [
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
             App\Model\Post::class => App\Model\PostFactory::class,
             App\Model\Advisory::class => App\Model\AdvisoryFactory::class,
-            App\Model\Changelog::class => App\Model\ChangelogFactory::class
+            App\Model\Changelog::class => App\Model\ChangelogFactory::class,
+            App\Model\Issue::class => App\Model\IssueFactory::class
         ],
     ],
 ];

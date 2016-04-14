@@ -40,7 +40,7 @@ class BlogAction
         return new HtmlResponse($this->template->render('app::post', $content));
     }
 
-    public function blogPage(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function blogPage(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $params = $request->getQueryParams();
         $page = isset($params['page']) ? (int) $params['page'] : 1;

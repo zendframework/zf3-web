@@ -1,0 +1,47 @@
+<?php $this->headTitle('Issues'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3><?php echo $ver ?> Issue Archive</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <!-- -- SINGLE POST ---->
+        <div class="col-lg-8">
+            <h2>Archive <?php echo $ver ?> issue (<?php echo $tot_issue ?> total)</h2>
+            <p><small>Click on each for the details</small></p>
+            <div class="spacing"></div>
+            <?php foreach ($issues as $issue): ?>
+                <p><i class="fa fa-chevron-right" aria-hidden="true"></i> <a href="/issues/browse/<?php echo $issue['id'] ?>"><?php echo $issue['id'] ?>: <?php echo $issue['title'] ?></a></p>
+            <?php endforeach; ?>
+            <div class="spacing"></div>
+            <p>
+              <div class="row">
+                <div class="col-lg-4 text-center">
+                  <?php if ($prev) : ?>
+                  <a href="?page=<?php echo $prev ?>"><i class="fa fa-chevron-left"></i> Previous</a>
+                  <?php endif; ?>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <?php printf("Page %d/%d", $page, $tot) ?>
+                </div>
+                <div class="col-lg-4 text-center">
+                  <?php if ($next) : ?>
+                  <a href="?page=<?php echo $next ?>">Next <i class="fa fa-chevron-right"></i></a>
+                  <?php endif; ?>
+                </div>
+              </div>
+            </p>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::issue-menu') ?>
+        </div>
+
+
+    </div><!-- --/row ---->
+</div>

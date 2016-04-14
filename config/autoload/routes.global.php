@@ -12,6 +12,7 @@ return [
             App\Action\AdvisoryAction::class => App\Action\AdvisoryFactory::class,
             App\Action\SecurityAction::class => App\Action\SecurityFactory::class,
             App\Action\ChangelogAction::class => App\Action\ChangelogFactory::class,
+            App\Action\IssueAction::class => App\Action\IssueFactory::class,
         ],
     ],
 
@@ -57,5 +58,10 @@ return [
             'path' => '/changelog[/:changelog]',
             'middleware' => App\Action\ChangelogAction::class
         ],
+        [
+            'name' => 'issue',
+            'path' => '/issues[/:type[/:issue]]',
+            'middleware' => App\Action\IssueAction::class
+        ]
     ],
 ];
