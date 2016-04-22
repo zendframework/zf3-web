@@ -10,7 +10,9 @@ use App\Model;
 
 class HomePageAction
 {
-    const NUM_POSTS = 4;
+    const NUM_POSTS = 5;
+
+    const NUM_ADVISORIES = 4;
 
     private $template;
 
@@ -30,7 +32,7 @@ class HomePageAction
         $data = [
             'projects' => require 'data/projects.php',
             'posts' => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
-            'advisories' =>  array_slice($this->advisories->getAll(), 0, self::NUM_POSTS)
+            'advisories' =>  array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES)
         ];
         $data['layout'] = 'layout::default';
         return new HtmlResponse($this->template->render('app::home-page', $data));

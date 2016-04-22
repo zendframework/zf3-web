@@ -21,6 +21,21 @@ $ composer serve
 
 You can then browse to http://localhost:8080.
 
+## Cache management
+
+The first time that you open the web site you will notice a response delay. This
+is due to the cache generation files under the `/data/cache` folder.
+
+This will occur only for the first request, the application will reuse the
+generated files from the second request.
+
+## Update the website content
+
+If you want to add or update content of the website related to blog, security
+advisories or changelog, you need to remove the cache files under the
+`/data/cache` folder. These files are auto-generated during the first HTTP
+request.
+
 
 ## TO DO
 

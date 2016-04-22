@@ -1,0 +1,90 @@
+<div id="select-version">
+    Select a version:
+    <select>
+        <?php foreach ($this->versions as $ver):
+            $versionValue = $ver;
+            if ($ver === $this->latestVersion) {
+                $versionValue = 'current';
+            }
+        ?>
+            <option
+                value="<?php echo $versionValue ?>"
+                <?php echo ($ver === $this->version) ? ' selected="selected"' : '' ?>>
+              Version <?php echo $ver ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $('#select-version select').change(function(){
+        $.ajax({
+            type: 'post',
+            url: '/switch-manual',
+            data: JSON.stringify({
+                old  : '$version',
+                new  : $(this).val(),
+                lang : '$lang',
+                page : '$page'
+
+            }),
+            success: function(data){
+              location.href = data.url;
+            },
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+        });
+    });
+JS;
+$this->inlineScript()->captureEnd();
+?>
+
+
+<?php if (count($contentList)): ?>
+    <div id="select-chapter">
+        Select chapter:
+        <select>
+            <?php foreach ($contentList as $headline => $items): ?>
+
+                <?php if (is_array($items)): ?>
+                    <optgroup label="<?php echo $headline ?>">
+                        <?php foreach ($items as $link => $label): ?>
+                            <option value="<?php echo $link ?>"<?php echo ($currentPage == $link)?' selected="selected"':'' ?>>
+                                <?php echo $label ?>
+                            </option>
+                        <?php endforeach ?>
+                    </optgroup>
+                <?php else: ?>
+                    <option value="<?php echo $headline ?>"<?php echo ($currentPage == $headline)?' selected="selected"':'' ?>>
+                        <?php echo $items ?>
+                    </option>
+                <?php endif ?>
+
+            <?php endforeach ?>
+        </select>
+    </div>
+
+<?php
+// $basePath = sprintf('/manual/%s/en/', $this->version);
+// $this->inlineScript()->captureStart();
+// echo <<<JS
+//     $('#select-chapter select').change(function(){
+//         location.href = '$basePath' + $(this).val();
+//     });
+// JS;
+// $this->inlineScript()->captureEnd();
+?>
+<?php endif ?>
+
+<div id="toc">
+<?php echo $sidebar; ?>
+</div>
+
+<div class="zf2a-course">
+    <a href="http://www.zend.com/en/services/certification/framework-2/">
+        <img src="/img/ZF2-Certification-390x300px.png" alt="New! Zend Framework 2 Certification">
+    </a>
+</div>

@@ -1,0 +1,75 @@
+<?php $this->headTitle('Learn'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Learn</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>Learn</h1>
+            <p>
+              No matter what your preferred format or experience level, we have the docs you're looking for.
+            </p>
+            <div class="spacing"></div>
+            <h2>Getting started</h2>
+            <p>
+              Our QuickStart will take you on a short tour of some important Zend Framework components while demonstrating how a ZF2 or ZF1 application can be built from the ground up.
+            </p>
+            <div class="row">
+              <div class ="col-lg-10">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                    <a href="/manual/current/en/user-guide/overview.html"><button type="button" class="btn btn-default"><i class="fa fa-book" aria-hidden="true"></i> Zend Framework 2</button></a>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <a href="/manual/1.12/en/learning.quickstart.html"><button type="button" class="btn btn-default"><i class="fa fa-book" aria-hidden="true"></i> Zend Framework 1</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="spacing"></div>
+            <h2>Reference guide</h2>
+            <p>
+              With over 1000 pages and 500 examples, our Reference Guide complements quality code with quality documentation.
+            </p>
+            <div class="row">
+              <div class ="col-lg-10">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                    <a href="/manual/current/en/index.html"><button type="button" class="btn btn-default"><i class="fa fa-book" aria-hidden="true"></i> Zend Framework 2</button></a>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <a href="/manual/1.12/en/manual.html"><button type="button" class="btn btn-default"><i class="fa fa-book" aria-hidden="true"></i> Zend Framework 1</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="spacing"></div>
+            <h2>API</h2>
+            <p>
+              Looking for a particular method's signature? Can't remember the name of a constant? With Zend Framework's thoroughly self-documenting codebase, you can answer all your API questions with a few clicks.
+            </p>
+            <div class="row">
+              <div class ="col-lg-10">
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                    <a href="/docs/api/#zf2"><button type="button" class="btn btn-default"><i class="fa fa-book" aria-hidden="true"></i> Zend Framework 2</button></a>
+                  </div>
+                  <div class="btn-group" role="group">
+                    <a href="/docs/api/#zf1"><button type="button" class="btn btn-default"><i class="fa fa-book" aria-hidden="true"></i> Zend Framework 1</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::learn-menu', [ 'active' => '/learn' ]) ?>
+        </div>
+    </div>
+</div>

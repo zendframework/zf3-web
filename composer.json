@@ -23,6 +23,7 @@
         "zendframework/zend-stdlib": "~2.7",
         "zendframework/zend-expressive-zendrouter": "^1.0",
         "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
+        "zendframework/zend-dom": "~2.6",
         "ocramius/proxy-manager": "^1.0 || ^2.0",
         "zendframework/zend-expressive-zendviewrenderer": "^1.0",
         "league/commonmark": "^0.13.2",

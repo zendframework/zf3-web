@@ -22,7 +22,7 @@
 	}
 
 body {
-	background: #f0f0f0;
+	background: white;
 	margin: 0;
 	height: 100%;
 	color: #0f1419;
@@ -258,7 +258,7 @@ a:focus {
 
 /* Portfolio Wrap */
 #portfoliowrap {
-	padding-top: 0px;
+	padding-top: 60px;
 	margin-bottom: 60px;
 	display: block;
 	text-align: center
@@ -307,7 +307,7 @@ a:focus {
 /* Testimonials Wrap */
 #twrapback {
     background-color: #68b604;
-    background-color:rgba(0,179,254,.8);
+    background-color:rgba(0,179,0,.8);
     position: absolute;
     top: 0;
     left: 0;
@@ -347,6 +347,10 @@ a:focus {
 	color: white;
 	font-size: 15px;
 	line-height: 30px;
+}
+
+#twrap h1 {
+	color: white;
 }
 
 /* clients logo */

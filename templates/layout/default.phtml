@@ -12,7 +12,7 @@ $this->inlineScript()
 <!DOCTYPE html>
 <html class="csstransforms no-csstransforms3d csstransitions">
 <?php echo $this->render('include::head') ?>
-<body>
+<body <?php if (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) echo 'id="manual"' ?>>
     <?php echo $this->render('include::nav') ?>
 
     <?php echo $this->content ?>

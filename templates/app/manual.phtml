@@ -1,0 +1,33 @@
+<?php $this->headTitle('Issue'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3><?php echo $title ?></h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb" id="content">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1 id="component-name"><?php echo $currentPageTitle ?></h1>
+            <p>
+              <?php echo $body ?>
+            </p>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::manual-sidebar', [
+              'sidebar'       => $this->sidebar,
+              'versions'      => $this->versions,
+              'version'       => $this->version,
+              'latestVersion' => $this->latestVersion,
+              'contentList'   => $contentList,
+              'currentPage'   => $currentPage,
+              'lang'          => $this->lang,
+              'page'          => $this->page
+          ]); ?>
+        </div>
+    </div>
+</div>

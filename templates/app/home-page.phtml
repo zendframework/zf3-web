@@ -25,7 +25,7 @@
             <div class="col-md-3">
                 <i class="fa fa-dashboard"></i>
                 <h4>High Performing</h4>
-                <p>Engineered with performance tuning in mind. Zend Framework 3 runs up to 4x than version 2!</p>
+                <p>Engineered with performance tuning in mind. Zend Framework 3 runs up to 4x than previous version.</p>
 
             </div>
             <div class="col-md-3">
@@ -53,23 +53,36 @@
 <div class="container mtb">
     <div class="row">
 
-        <div class="col-lg-5">
+        <div class="col-lg-4">
             <h4>Latest blog posts <small>( <a href="/blog">full list</a> )</small></h4>
             <div class="hline"></div>
             <?php foreach($posts as $post): ?>
                 <p><a href="<?php echo $post['permalink'] ?>"><?php echo $post['title'] ?></a></p>
             <?php endforeach; ?>
-            <br />
+        </div>
+        <div class="col-lg-5">
             <h4>Latest security advisories <small>( <a href="/security/advisories">full list</a> )</small></h4>
             <div class="hline"></div>
             <?php foreach($advisories as $key => $advisor): ?>
                 <p><a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisor['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
-
-        <div class="col-lg-7">
-            <h4>Maximize Development Productivity</h4>
-            <div class="hline"></div><br />
+        <div class="col-lg-3">
+            <h4>Issues and Security</h4>
+            <div class="hline"></div>
+            <p><i class="fa fa-github fa-2x"></i> Did you find an issue in Zend Framework?
+            <a href="/issues">Read here</a> how to report it on <a href="https://github.com/zendframework">github</a>, thanks!</p>
+            <div class="spacing"></div>
+            <p><i class="fa fa-bug fa-2x"></i> Did you find a security vulnerability in ZF?
+            Please report it to us at <a href="mailto:zf-security@zend.com">zf-security@zend.com</a></p>
+        </div>
+    </div>
+    <div class="spacing"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 align="center">Maximize Development Productivity</h2>
+            <div class="hline"></div>
+            <div class="spacing"></div>
             <div class="row">
                 <div class="col-lg-4 centered">
                   <img src="/img/ag-hero.png"><br />
@@ -87,19 +100,38 @@
                   <a href="http://www.zend.com/en/products/studio" class="btn btn-theme btn-sm">Learn more</a>
                 </div>
             </div>
-            <div class="row">
-              <div class="col-lg-12 centered" id="getcertified">
-                <a href="http://www.zend.com/en/services/certification"><img align="center" src="/img/certifications.png" alt="Get certified!" title="Get certified!"></a>
-              </div>
+        </div>
+    </div>
+</div>
+
+<div id="twrap">
+    <div id="twrapback"></div>
+    <div class="container centered">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 align="center">Get certified!</h1>
+                <h4>Becoming a Zend Certified Engineer is a measure of your experience in the world of PHP.</h4>
+                <h4>Take a look at the specific PHP and Zend Framework certifications.</h4>
             </div>
         </div>
-
-    </div>
+        <div class="spacing"></div>
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="http://www.zend.com/en/services/certification"><img src="img/phpcert.png" alt="Zend Certified PHP Engineer" title="Zend Certified PHP Engineer"></a>
+            </div>
+            <div class="col-lg-4">
+                <a href="http://www.zend.com/en/services/certification"><img src="img/zf2cert.png" alt="Zend Framework 2 Certified Architect" title="Zend Framework 2 Certified Architect"></a>
+            </div>
+            <div class="col-lg-4">
+                <a href="http://www.zend.com/en/services/certification"><img src="img/zf1cert.png" alt="Zend Framework 1 Certified Engineer" title="Zend Framework 1 Certified Engineer"></a>
+            </div>
+        </div>
+    </div><!-- --/container ---->
 </div>
 
 <div id="portfoliowrap">
     <div class="portfolio-centered">
-        <h3>Who uses Zend Framework?</h3>
+        <h2>Who uses Zend Framework?</h2>
         <div class="recentitems portfolio">
             <?php foreach($projects as $project): ?>
                 <div class="portfolio-item graphic-design">

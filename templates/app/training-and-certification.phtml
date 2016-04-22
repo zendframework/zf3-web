@@ -1,0 +1,31 @@
+<?php $this->headTitle('Training & Certifications'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Training & Certifications</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h1>Training & Certification</h1>
+            <p><a href="http://www.zend.com">Zend</a> offers a full range of ZF training courses online, in classroom or onsite for beginners and experienced programmers.</p>
+            <div class="spacing"></div>
+            <h2>Training</h2>
+            <p>Take a look at the <a href="http://www.zend.com/en/services/training">Zend training</a> programs.</p>
+            <div class="spacing"></div>
+            <h2>Certification</h2>
+            <p>As a Zend Certified Engineer, you will join the ranks of the world's best and brightest Zend Framework engineers and architects. Zend Framework ZCE's have the advantage in today's competitive job market for PHP engineers. Whether you're looking for a new job or upgrading your responsibilities at your current job, Zend Framework Certification can help. </p>
+            <p>For more information on becoming a Zend Framework ZCE and other PHP certifications, please visit the <a href="http://www.zend.com/en/services/certification">Zend Certification Center</a>.</p>
+            <div class="spacing"></div>
+            <a href="http://www.zend.com"><img src="/img/zend-logo.png" alt="Zend, a Rogue Wave Company" title="Zend, a Rogue Wave Company" align="left"></a>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::learn-menu', [ 'active' => '/learn/training-and-certification' ]) ?>
+        </div>
+    </div>
+</div>
