@@ -13,9 +13,42 @@
         <div class="col-lg-8">
             <h1>Learn</h1>
             <p>
-              No matter what your preferred format or experience level, we have the docs you're looking for.
+              <strong>Zend Framework 3</strong> is a collection of <b><?php echo count($components); ?> packages</b> for professional PHP development.
+              Each package is available on a github repository and can be installed via <a href="https://getcomposer.org">composer</a>.
             </p>
-            <div class="spacing"></div>
+            <p>
+              Here the list of all the packages including the link to the documentation pages:
+            </p>
+            <?php
+              reset($components);
+              while ($comp = next($components)): ?>
+              <div class="row">
+                <div class="col-lg-6">
+                  <h3><i class="fa fa-caret-right"></i> <?php echo $comp->name ?></h3>
+                  <p><?php echo $comp->description ?></p>
+                  <p>
+                    <i class="fa fa-github"></i> <a href="https://github.com/zendframework/<?php echo basename($comp->url) ?>" target="_blank">Github</a> -
+                    <i class="fa fa-book"></i> <a href="<?php echo $comp->url ?>" target="_blank">Documentation</a>
+                  </p>
+                </div>
+                <?php
+                  $comp = next($components);
+                  if (!$comp) break;
+                ?>
+                <div class="col-lg-6">
+                  <h3><i class="fa fa-caret-right"></i> <?php echo $comp->name ?></h3>
+                  <p><?php echo $comp->description ?></p>
+                  <p>
+                    <i class="fa fa-github"></i> <a href="https://github.com/zendframework/<?php echo basename($comp->url) ?>" target="_blank">Github</a> -
+                    <i class="fa fa-book"></i> <a href="<?php echo $comp->url ?>" target="_blank">Documentation</a>
+                  </p>
+                </div>
+              </div>
+              <div class="spacing"></div>
+            <?php endwhile; ?>
+
+
+            <!--
             <h2>Getting started</h2>
             <p>
               Our QuickStart will take you on a short tour of some important Zend Framework components while demonstrating how a ZF2 or ZF1 application can be built from the ground up.
@@ -65,7 +98,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
         </div>
 
         <div class="col-lg-4">
