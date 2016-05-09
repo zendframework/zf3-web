@@ -41,7 +41,7 @@ request.
 
 - [x] issues pages on /issues/browser/:code, where code is in the format ZF-number
 - [x] reference guide for ZF1 and ZF2, based on the [existing one](http://framework.zend.com/manual/current/en/index.html)
-- [ ] new manual page for ZF3, basically a static page with links to all the docs of the specific components
+- [x] new manual page for ZF3, basically a static page with links to all the docs of the specific components
 - [ ] download page, with the list of all the components
 - [ ] participate page based on the [existing one](http://framework.zend.com/participate/)
 - [ ] /security/feed as RSS
