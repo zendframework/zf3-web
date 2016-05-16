@@ -6,10 +6,7 @@
             <a id="github-link" href="https://github.com/zendframework">
               <img src="https://github-camo.global.ssl.fastly.net/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
             </a>
-            <div class="col-lg-3">
-                <img class="img-responsive" src="/img/zfsuperman.png">
-            </div>
-            <div class="col-lg-9">
+            <div class="col-lg-12">
               <h1>Zend Framework 3</h1>
               <h3>Professional PHP packages ready for PHP7!</h3>
               <h2>Focused on Simplicity, Reusability and Performance</h2>
@@ -70,8 +67,8 @@
         <div class="col-lg-3">
             <h4>Issues and Security</h4>
             <div class="hline"></div>
-            <p><i class="fa fa-github fa-2x"></i> Did you find an issue in Zend Framework?
-            <a href="/issues">Read here</a> how to report it on <a href="https://github.com/zendframework">github</a>, thanks!</p>
+            <p><i class="fa fa-github fa-2x"></i> Did you find an issue in Zend Framework?<br />
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal" style="width:100%">Please report here!</button><br />
             <div class="spacing"></div>
             <p><i class="fa fa-bug fa-2x"></i> Did you find a security vulnerability in ZF?
             Please report it to us at <a href="mailto:zf-security@zend.com">zf-security@zend.com</a></p>
@@ -79,6 +76,8 @@
     </div>
     <div class="spacing"></div>
 </div>
+
+<?php echo $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>
 
 <div id="zendcon">
     <div class="container centered">
@@ -242,7 +241,12 @@
 		});
 
 		$(window).on('resize', function () {
-		setPortfolio();
-	});
+		  setPortfolio();
+	  });
+
+    $('#openIssue').on('click', function () {
+      $('#issueModal').modal("hide");
+      window.open($('#gitrepo').val(), '_blank');
+    });
 })(jQuery);
 <?php $this->inlineScript()->captureEnd(); ?>

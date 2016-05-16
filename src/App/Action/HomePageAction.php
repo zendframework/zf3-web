@@ -30,9 +30,10 @@ class HomePageAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $data = [
-            'projects' => require 'data/projects.php',
-            'posts' => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
-            'advisories' =>  array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES)
+            'projects'   => require 'data/projects.php',
+            'posts'      => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
+            'advisories' =>  array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES),
+            'repository' => json_decode(file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'))
         ];
         $data['layout'] = 'layout::default';
         return new HtmlResponse($this->template->render('app::home-page', $data));

@@ -3,12 +3,6 @@
     "type": "project",
     "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
     "license": "BSD-3-CLAUSE",
-    "authors": [
-        {
-            "name": "Geert Eltink",
-            "homepage": "https://xtreamwayz.com/"
-        }
-    ],
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
