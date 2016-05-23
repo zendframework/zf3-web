@@ -1504,7 +1504,7 @@
     'data/issues/ZF-10222.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'ZF 2.0: Zend oader\\ShortNameLocater is probably better as Zend oader\\ShortNameLocator',
+      'title' => 'ZF 2.0: Zend\\Loader\\ShortNameLocater is probably better as Zend\\Loader\\ShortNameLocator',
       'id' => 'ZF-10222',
     ),
     'data/issues/ZF-10223.md' => 
@@ -2110,7 +2110,7 @@
     'data/issues/ZF-10313.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend df2 should be able to support the spacing of characters',
+      'title' => 'Zend\\Pdf2 should be able to support the spacing of characters',
       'id' => 'ZF-10313',
     ),
     'data/issues/ZF-10314.md' => 
@@ -2584,13 +2584,13 @@
     'data/issues/ZF-10385.md' => 
     array (
       'layout' => 'issue',
-      'title' => '\\Zend\\Db rofiler\\Firebug generates an error due to wrong class name',
+      'title' => 'Zend\\Db\\Profiler\\Firebug generates an error due to wrong class name',
       'id' => 'ZF-10385',
     ),
     'data/issues/ZF-10386.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Problem in \\Zend\\Translator\\Adapter when checking if log option is valid',
+      'title' => 'Problem in Zend\\Translator\\Adapter when checking if log option is valid',
       'id' => 'ZF-10386',
     ),
     'data/issues/ZF-10387.md' => 
@@ -2926,7 +2926,7 @@
     'data/issues/ZF-10437.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'i am getting this error (Class \'Zend_Uri_Http\' not found in C:' . "\0" . 'ampp\\htdocs\\youtube\\Zend\\Gdata\\App.php on line 643) when try to use youtube api',
+      'title' => 'i am getting this error (Class \'Zend_Uri_Http\' not found in C:\\xampp\\htdocs\\youtube\\Zend\\Gdata\\App.php on line 643) when try to use youtube api',
       'id' => 'ZF-10437',
     ),
     'data/issues/ZF-10438.md' => 
@@ -4450,13 +4450,13 @@
     'data/issues/ZF-10666.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Class \\Zend\\Reflection\\ReflectionMethod not found while using zf.bat',
+      'title' => 'Class Zend\\Reflection\\ReflectionMethod not found while using zf.bat',
       'id' => 'ZF-10666',
     ),
     'data/issues/ZF-10667.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'ZF2: Zend\\Tool roject rovider\\AbstractProvider.php refers to non-existent class - preventing &quot;zf create project&quot;',
+      'title' => 'ZF2: Zend\\Tool\\Project\\Provider\\AbstractProvider.php refers to non-existent class - preventing &quot;zf create project&quot;',
       'id' => 'ZF-10667',
     ),
     'data/issues/ZF-10668.md' => 
@@ -4840,7 +4840,7 @@
     'data/issues/ZF-10724.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Deprecated \\Zend oader::loadClass call in Zend\\Db\\Adapter\\AbstractPdoAdapter on line 168',
+      'title' => 'Deprecated Zend\\Loader::loadClass call in Zend\\Db\\Adapter\\AbstractPdoAdapter on line 168',
       'id' => 'ZF-10724',
     ),
     'data/issues/ZF-10725.md' => 
@@ -5230,13 +5230,13 @@
     'data/issues/ZF-10783.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Loading of Zend\\View\\Helperavigation\\Helper classes in Zend\\View\\Helperavigation::findHelper() fails',
+      'title' => 'Loading of Zend\\View\\Helper\\Navigation\\Helper classes in Zend\\View\\Helper\\Navigation::findHelper() fails',
       'id' => 'ZF-10783',
     ),
     'data/issues/ZF-10784.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Call to deprecated view helper escape in Zend\\Viewavigation\\Menu on line 247',
+      'title' => 'Call to deprecated view helper escape in Zend\\View\\Navigation\\Menu on line 247',
       'id' => 'ZF-10784',
     ),
     'data/issues/ZF-10785.md' => 
@@ -6478,7 +6478,7 @@
     'data/issues/ZF-10973.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\View hpRenderer is broken',
+      'title' => 'Zend\\View\\PhpRenderer is broken',
       'id' => 'ZF-10973',
     ),
     'data/issues/ZF-10974.md' => 
@@ -7480,7 +7480,7 @@
     'data/issues/ZF-11123.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'ZF2: Bug in Zend og\\Writer\\Syslog',
+      'title' => 'ZF2: Bug in Zend\\Log\\Writer\\Syslog',
       'id' => 'ZF-11123',
     ),
     'data/issues/ZF-11124.md' => 
@@ -7666,7 +7666,7 @@
     'data/issues/ZF-11151.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'PHP Notice: Undefined variable: show in library\\Zend\\Form\\Decorator\\FormErrors.php on line 357',
+      'title' => 'PHP Notice: Undefined variable: show in Zend\\Form\\Decorator\\FormErrors.php on line 357',
       'id' => 'ZF-11151',
     ),
     'data/issues/ZF-11152.md' => 
@@ -8098,7 +8098,7 @@
     'data/issues/ZF-11218.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Use statements are ignored in CodeGenerator hp hpFile',
+      'title' => 'Use statements are ignored in CodeGenerator\\Php\\PhpFile',
       'id' => 'ZF-11218',
     ),
     'data/issues/ZF-11219.md' => 
@@ -8158,7 +8158,7 @@
     'data/issues/ZF-11227.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Application\\Application::setAutoloaderNamespaces needs to be refactored into using Zend oader\\StandardAutoloader::registerNamespaces',
+      'title' => 'Zend\\Application\\Application::setAutoloaderNamespaces needs to be refactored into using Zend\\Loader\\StandardAutoloader::registerNamespaces',
       'id' => 'ZF-11227',
     ),
     'data/issues/ZF-11228.md' => 
@@ -8188,7 +8188,7 @@
     'data/issues/ZF-11231.md' => 
     array (
       'layout' => 'issue',
-      'title' => '\\Zend oader::isReadable() does not recognize absolute paths in phar archives',
+      'title' => 'Zend\\Loader::isReadable() does not recognize absolute paths in phar archives',
       'id' => 'ZF-11231',
     ),
     'data/issues/ZF-11232.md' => 
@@ -8722,7 +8722,7 @@
     'data/issues/ZF-11312.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'RequestTest Zend ocale ocale::setDefault method doesn\'t exist',
+      'title' => 'RequestTest Zend\\Locale\\Locale::setDefault method doesn\'t exist',
       'id' => 'ZF-11312',
     ),
     'data/issues/ZF-11313.md' => 
@@ -8788,13 +8788,13 @@
     'data/issues/ZF-11322.md' => 
     array (
       'layout' => 'issue',
-      'title' => '[ZFDEV2] Invalid method declarations in \\Zend ocale\\Data\\AbstractLocale class',
+      'title' => '[ZFDEV2] Invalid method declarations in Zend\\Locale\\Data\\AbstractLocale class',
       'id' => 'ZF-11322',
     ),
     'data/issues/ZF-11323.md' => 
     array (
       'layout' => 'issue',
-      'title' => '[ZFDEV2] Cldr class used in \\Zend ocale\\Format class but not imported/aliased',
+      'title' => '[ZFDEV2] Cldr class used in Zend\\Locale\\Format class but not imported/aliased',
       'id' => 'ZF-11323',
     ),
     'data/issues/ZF-11324.md' => 
@@ -9838,7 +9838,7 @@
     'data/issues/ZF-11481.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend dap dap references DN but should be Dn.',
+      'title' => 'Zend\\Ldap\\Ldap references DN but should be Dn.',
       'id' => 'ZF-11481',
     ),
     'data/issues/ZF-11482.md' => 
@@ -11260,7 +11260,7 @@
     'data/issues/ZF-11698.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend_Acl &quot;Notice: Undefined index: allPrivileges in ...\\library\\Zend\\Acl.php on line 761&quot;',
+      'title' => 'Zend_Acl &quot;Notice: Undefined index: allPrivileges in Zend\\Acl on line 761&quot;',
       'id' => 'ZF-11698',
     ),
     'data/issues/ZF-11699.md' => 
@@ -14332,7 +14332,7 @@
     'data/issues/ZF-12165.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Warning: htmlspecialchars() expects parameter 1 to be string, array given in \\Zend\\View\\Abstract.php on line 905',
+      'title' => 'Warning: htmlspecialchars() expects parameter 1 to be string, array given in Zend\\View\\Abstract.php on line 905',
       'id' => 'ZF-12165',
     ),
     'data/issues/ZF-12166.md' => 
@@ -14974,7 +14974,7 @@
     'data/issues/ZF-12267.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend_Acl &quot;Notice: Undefined index: allPrivileges in ...\\library\\Zend\\Acl.php on line 761&quot;',
+      'title' => 'Zend_Acl &quot;Notice: Undefined index: allPrivileges in Zend\\Acl.php on line 761&quot;',
       'id' => 'ZF-12267',
     ),
     'data/issues/ZF-12268.md' => 
@@ -16036,7 +16036,7 @@
     'data/issues/ZF-12428.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Sending multiple Mails with Zend\\Mime art (resource based content) failed',
+      'title' => 'Sending multiple Mails with Zend\\Mime\\Part (resource based content) failed',
       'id' => 'ZF-12428',
     ),
     'data/issues/ZF-12429.md' => 
@@ -16156,7 +16156,7 @@
     'data/issues/ZF-12446.md' => 
     array (
       'layout' => 'issue',
-      'title' => '\\Zend\\Form receives error for empty value in validator',
+      'title' => 'Zend\\Form receives error for empty value in validator',
       'id' => 'ZF-12446',
     ),
     'data/issues/ZF-12447.md' => 
@@ -16264,7 +16264,7 @@
     'data/issues/ZF-12462.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend dap dap.php (objectClass=posixAccount) should be removed as an invalid filter.',
+      'title' => 'Zend\\Ldap\\Ldap.php (objectClass=posixAccount) should be removed as an invalid filter.',
       'id' => 'ZF-12462',
     ),
     'data/issues/ZF-12463.md' => 
@@ -16492,7 +16492,7 @@
     'data/issues/ZF-12497.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Custom aginator\\Adapter\\DbSelect not reseting order in count()',
+      'title' => 'Zend\\Custom\\Paginator\\Adapter\\DbSelect not reseting order in count()',
       'id' => 'ZF-12497',
     ),
     'data/issues/ZF-12498.md' => 
@@ -17476,7 +17476,7 @@
     'data/issues/ZF-1345.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Undefined variable: response in file ...library\\Zend\\Controller\\Action\\Helper\\Redirector.php on line 411',
+      'title' => 'Undefined variable: response in file Zend\\Controller\\Action\\Helper\\Redirector.php on line 411',
       'id' => 'ZF-1345',
     ),
     'data/issues/ZF-1346.md' => 
@@ -27970,7 +27970,7 @@
     'data/issues/ZF-2936.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Fatal error: Class \'Zend_Loader_PluginLoader_Exception\' not found in [...]Zend oader luginLoader.php on line 316',
+      'title' => 'Fatal error: Class \'Zend_Loader_PluginLoader_Exception\' not found in [...]Zend\\Loader\\PluginLoader.php on line 316',
       'id' => 'ZF-2936',
     ),
     'data/issues/ZF-2937.md' => 
@@ -39556,8 +39556,7 @@
     'data/issues/ZF-4690.md' => 
     array (
       'layout' => 'issue',
-      'title' => '
- in AMF files',
+      'title' => '\\r\\n in AMF files',
       'id' => 'ZF-4690',
     ),
     'data/issues/ZF-4691.md' => 
@@ -52061,7 +52060,7 @@
     'data/issues/ZF-6574.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Searching with ? in conjunction with highlightMatches throws warning Wrong parameter count for array_merge() in Search ucene\\Document\\Html.php on line 400',
+      'title' => 'Searching with ? in conjunction with highlightMatches throws warning Wrong parameter count for array_merge() in Search\\Lucene\\Document\\Html.php on line 400',
       'id' => 'ZF-6574',
     ),
     'data/issues/ZF-6575.md' => 
@@ -67667,7 +67666,7 @@
     'data/issues/ZF-8930.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Fatal error: Class name must be a valid object or a string in C:\\Archivos de programa\\Zend\\ZendServer\\share\\ZendFramework\\library\\Zend\\Db\\Table\\Row\\Abstract.php on line 343',
+      'title' => 'Fatal error: Class name must be a valid object or a string in C:\\Archivos de programa Zend\\ZendServer\\share\\ZendFramework\\library\\Zend\\Db\\Table\\Row\\Abstract.php on line 343',
       'id' => 'ZF-8930',
     ),
     'data/issues/ZF-8931.md' => 
@@ -71837,7 +71836,7 @@
     'data/issues/ZF-9559.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Argument 1 passed to Zend_Search_Lucene_LockManager::releaseReadLock() must be an instance of Zend_Search_Lucene_Storage_Directory, instance of __PHP_Incomplete_Class given, called in 	runk\\Zend\\Search ucene.php on line 572 and d',
+      'title' => 'Argument 1 passed to Zend_Search_Lucene_LockManager::releaseReadLock() must be an instance of Zend_Search_Lucene_Storage_Directory, instance of __PHP_Incomplete_Class given, called in trunk\\Zend\\Search\\Lucene.php on line 572 and d',
       'id' => 'ZF-9559',
     ),
     'data/issues/ZF-956.md' => 
@@ -74039,8 +74038,7 @@
     'data/issues/ZF-9890.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Stomp Connection stops reading to early when ' . "\0" . '
- in body',
+      'title' => 'Stomp Connection stops reading to early when \\x00\\n in body',
       'id' => 'ZF-9890',
     ),
     'data/issues/ZF-9891.md' => 
@@ -74484,7 +74482,7 @@
     'data/issues/ZF-9957.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'ZF 2.0: Zend' . "\0" . 'RI' . "\0" . 'RL::validate() does not strictly validate as an absolute URL',
+      'title' => 'ZF 2.0: Zend\\URI\\URL::validate() does not strictly validate as an absolute URL',
       'id' => 'ZF-9957',
     ),
     'data/issues/ZF-9958.md' => 
@@ -74781,7 +74779,7 @@
     'data/issues/ZF2-101.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend oader\\ClassMapLoader | realpath() is not tolerant of phar paths',
+      'title' => 'Zend\\Loader\\ClassMapLoader | realpath() is not tolerant of phar paths',
       'id' => 'ZF2-101',
     ),
     'data/issues/ZF2-102.md' => 
@@ -74805,7 +74803,7 @@
     'data/issues/ZF2-105.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Mvc\\Router\\Http art child routes should be an array',
+      'title' => 'Zend\\Mvc\\Router\\Http\\Part child routes should be an array',
       'id' => 'ZF2-105',
     ),
     'data/issues/ZF2-106.md' => 
@@ -74859,7 +74857,7 @@
     'data/issues/ZF2-113.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Uncaught ReflectionExcemption being thrown from within Zend oader luginBroker',
+      'title' => 'Uncaught ReflectionExcemption being thrown from within Zend\\Loader\\PluginBroker',
       'id' => 'ZF2-113',
     ),
     'data/issues/ZF2-114.md' => 
@@ -74883,7 +74881,7 @@
     'data/issues/ZF2-117.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zendavigation\\Container::addPages() should accept a ZendavigationContainer',
+      'title' => 'Zend\\Navigation\\Container::addPages() should accept a Zend\\NavigationContainer',
       'id' => 'ZF2-117',
     ),
     'data/issues/ZF2-118.md' => 
@@ -75063,7 +75061,7 @@
     'data/issues/ZF2-144.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Stdlib riorityQueue clone problem',
+      'title' => 'Zend\\Stdlib\\PriorityQueue clone problem',
       'id' => 'ZF2-144',
     ),
     'data/issues/ZF2-145.md' => 
@@ -75123,7 +75121,7 @@
     'data/issues/ZF2-153.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend dapode\\RootDse is on some places called as RootDSE',
+      'title' => 'Zend\\Ldap\\Node\\RootDse is on some places called as RootDSE',
       'id' => 'ZF2-153',
     ),
     'data/issues/ZF2-154.md' => 
@@ -75219,7 +75217,7 @@
     'data/issues/ZF2-168.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Strict checking in \\Zend oader\\AutoloaderFactory',
+      'title' => 'Strict checking in Zend\\Loader\\AutoloaderFactory',
       'id' => 'ZF2-168',
     ),
     'data/issues/ZF2-169.md' => 
@@ -75291,7 +75289,7 @@
     'data/issues/ZF2-179.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Serializer\\Adapter hpCode \'s testcase will fail in PHP 5.4',
+      'title' => 'Serializer\\Adapter\\PhpCode \'s testcase will fail in PHP 5.4',
       'id' => 'ZF2-179',
     ),
     'data/issues/ZF2-18.md' => 
@@ -75357,7 +75355,7 @@
     'data/issues/ZF2-189.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'DSN creation in Zend\\Db\\Adapter\\Driver do\\Connection',
+      'title' => 'DSN creation in Zend\\Db\\Adapter\\Driver\\Pdo\\Connection',
       'id' => 'ZF2-189',
     ),
     'data/issues/ZF2-19.md' => 
@@ -75387,7 +75385,7 @@
     'data/issues/ZF2-194.md' => 
     array (
       'layout' => 'issue',
-      'title' => '$_SERVER not defined in Zend ocale ocale::getBrowser',
+      'title' => '$_SERVER not defined in Zend\\Locale\\Locale::getBrowser',
       'id' => 'ZF2-194',
     ),
     'data/issues/ZF2-195.md' => 
@@ -75441,7 +75439,7 @@
     'data/issues/ZF2-202.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'PHP Fatal Error in Zend\\Db\\Adapter\\Driver do\\Connection::getDefaultSchema() when using a Postgresql database',
+      'title' => 'PHP Fatal Error in Zend\\Db\\Adapter\\Driver\\Pdo\\Connection::getDefaultSchema() when using a Postgresql database',
       'id' => 'ZF2-202',
     ),
     'data/issues/ZF2-203.md' => 
@@ -75453,7 +75451,7 @@
     'data/issues/ZF2-204.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Module istener istenerOptions fails with passing object of type Zend\\Config\\Config',
+      'title' => 'Zend\\Module\\Listener\\ListenerOptions fails with passing object of type Zend\\Config\\Config',
       'id' => 'ZF2-204',
     ),
     'data/issues/ZF2-205.md' => 
@@ -75489,7 +75487,7 @@
     'data/issues/ZF2-21.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend/Application/Resource/Navigation.php: Call to undefined method Zend\\View hpRenderer::getHelper()',
+      'title' => 'Zend/Application/Resource/Navigation.php: Call to undefined method Zend\\View\\PhpRenderer::getHelper()',
       'id' => 'ZF2-21',
     ),
     'data/issues/ZF2-210.md' => 
@@ -75891,7 +75889,7 @@
     'data/issues/ZF2-270.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Validator\\DboRecordExists - Fatal error: Class \'Zend\\Db\\Table\\AbstractTable\' not found',
+      'title' => 'Validator\\Db\\NoRecordExists - Fatal error: Class \'Zend\\Db\\Table\\AbstractTable\' not found',
       'id' => 'ZF2-270',
     ),
     'data/issues/ZF2-271.md' => 
@@ -75939,7 +75937,7 @@
     'data/issues/ZF2-278.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Db redicate\\Operator fails on 0 and &quot;&quot; (empty string)',
+      'title' => 'Zend\\Db\\Predicate\\Operator fails on 0 and &quot;&quot; (empty string)',
       'id' => 'ZF2-278',
     ),
     'data/issues/ZF2-279.md' => 
@@ -76083,13 +76081,13 @@
     'data/issues/ZF2-3.md' => 
     array (
       'layout' => 'issue',
-      'title' => '&quot;Class \\Zend dap\\DN not found&quot;  --seems to be an incorrect class name used in Zend dap dap.php',
+      'title' => '&quot;Class \\Zend\\Ldap\\DN not found&quot;  --seems to be an incorrect class name used in Zend\\Ldap\\Ldap.php',
       'id' => 'ZF2-3',
     ),
     'data/issues/ZF2-30.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Multiple initialization of \\Zend\\Application\\Resource plugins',
+      'title' => 'Multiple initialization of Zend\\Application\\Resource plugins',
       'id' => 'ZF2-30',
     ),
     'data/issues/ZF2-300.md' => 
@@ -76113,7 +76111,7 @@
     'data/issues/ZF2-303.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'zend\\gdata &amp; zend\\http\\client',
+      'title' => 'Zend\\Gdata &amp; Zend\\Http\\Client',
       'id' => 'ZF2-303',
     ),
     'data/issues/ZF2-304.md' => 
@@ -76353,7 +76351,7 @@
     'data/issues/ZF2-34.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Array arguments get flattened when creating Zend og ogger',
+      'title' => 'Array arguments get flattened when creating Zend\\Log\\Logger',
       'id' => 'ZF2-34',
     ),
     'data/issues/ZF2-340.md' => 
@@ -76467,7 +76465,7 @@
     'data/issues/ZF2-357.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Confusing usage of Interfaces &quot;Color&quot; and &quot;ColorInterface&quot; in \\Zend DF',
+      'title' => 'Confusing usage of Interfaces &quot;Color&quot; and &quot;ColorInterface&quot; in \\Zend\\PDF',
       'id' => 'ZF2-357',
     ),
     'data/issues/ZF2-358.md' => 
@@ -76521,7 +76519,7 @@
     'data/issues/ZF2-365.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'custom validator base on  Zend\\ValidatorotEmpty',
+      'title' => 'custom validator base on  Zend\\Validator\\NotEmpty',
       'id' => 'ZF2-365',
     ),
     'data/issues/ZF2-366.md' => 
@@ -76683,7 +76681,7 @@
     'data/issues/ZF2-39.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'PHP Fatal error:  Class \'Zend oader\\StandardAutoloader\' not found in ~/ZendFramework-2.0.0dev3/bin/zfals.php on line 16',
+      'title' => 'PHP Fatal error:  Class \'Zend\\Loader\\StandardAutoloader\' not found in ~/ZendFramework-2.0.0dev3/bin/zfals.php on line 16',
       'id' => 'ZF2-39',
     ),
     'data/issues/ZF2-390.md' => 
@@ -76995,7 +76993,7 @@
     'data/issues/ZF2-436.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Mvc\\Router\\Http itteral route crashes with empty string as route',
+      'title' => 'Zend\\Mvc\\Router\\Http\\Litteral route crashes with empty string as route',
       'id' => 'ZF2-436',
     ),
     'data/issues/ZF2-437.md' => 
@@ -77067,7 +77065,7 @@
     'data/issues/ZF2-447.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Inconsistency in \'controller\' key causes error with Zendavigation age::isActive()',
+      'title' => 'Inconsistency in \'controller\' key causes error with Zend\\Navigation\\Page::isActive()',
       'id' => 'ZF2-447',
     ),
     'data/issues/ZF2-448.md' => 
@@ -77115,7 +77113,7 @@
     'data/issues/ZF2-454.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Fatal error: Call to a member function getEnabled() on a non-object in &lt;path&gt;endor\\ZF2\\library\\Zend og\\Writer\\FirePhp.php on line 53',
+      'title' => 'Fatal error: Call to a member function getEnabled() on a non-object in &lt;path&gt;\\vendor\\ZF2\\library\\Zend\\Log\\Writer\\FirePhp.php on line 53',
       'id' => 'ZF2-454',
     ),
     'data/issues/ZF2-455.md' => 
@@ -77139,7 +77137,7 @@
     'data/issues/ZF2-458.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Using Zend\\Http\\Client\\Adapter roxy with HTTPS uris results in Notice and Fatal error',
+      'title' => 'Using Zend\\Http\\Client\\Adapter\\Proxy with HTTPS uris results in Notice and Fatal error',
       'id' => 'ZF2-458',
     ),
     'data/issues/ZF2-459.md' => 
@@ -77175,7 +77173,7 @@
     'data/issues/ZF2-463.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zendavigation\\Container::addPage does not inject RouteMatch or Router',
+      'title' => 'Zend\\Navigation\\Container::addPage does not inject RouteMatch or Router',
       'id' => 'ZF2-463',
     ),
     'data/issues/ZF2-464.md' => 
@@ -77199,7 +77197,7 @@
     'data/issues/ZF2-467.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Db\\Sql redicate redicate::nest() @return type wrong in PHPDoc',
+      'title' => 'Zend\\Db\\Sql\\Predicate\\Predicate::nest() @return type wrong in PHPDoc',
       'id' => 'ZF2-467',
     ),
     'data/issues/ZF2-468.md' => 
@@ -77463,7 +77461,7 @@
     'data/issues/ZF2-506.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Validator\\DboRecordExists throws PDOException when used with exclude option',
+      'title' => 'Zend\\Validator\\Db\\NoRecordExists throws PDOException when used with exclude option',
       'id' => 'ZF2-506',
     ),
     'data/issues/ZF2-507.md' => 
@@ -77547,7 +77545,7 @@
     'data/issues/ZF2-519.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Unable to use persistent HTTPS connections with \\Zend\\Http\\Client\\Adapter\\Socket',
+      'title' => 'Unable to use persistent HTTPS connections with Zend\\Http\\Client\\Adapter\\Socket',
       'id' => 'ZF2-519',
     ),
     'data/issues/ZF2-52.md' => 
@@ -77649,7 +77647,7 @@
     'data/issues/ZF2-534.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend og\\Writer\\Syslog prevents setting application name',
+      'title' => 'Zend\\Log\\Writer\\Syslog prevents setting application name',
       'id' => 'ZF2-534',
     ),
     'data/issues/ZF2-535.md' => 
@@ -77697,7 +77695,7 @@
     'data/issues/ZF2-541.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend og\\Writer\\Stream cannot be used in error handlers',
+      'title' => 'Zend\\Log\\Writer\\Stream cannot be used in error handlers',
       'id' => 'ZF2-541',
     ),
     'data/issues/ZF2-542.md' => 
@@ -77745,7 +77743,7 @@
     'data/issues/ZF2-549.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend og\\Formatter\\ErrorHandler does not handle complex events generated by error handlers',
+      'title' => 'Zend\\Log\\Formatter\\ErrorHandler does not handle complex events generated by error handlers',
       'id' => 'ZF2-549',
     ),
     'data/issues/ZF2-55.md' => 
@@ -77835,13 +77833,13 @@
     'data/issues/ZF2-562.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend og\\Write\\Db creates non-existing database table columns',
+      'title' => 'Zend\\Log\\Write\\Db creates non-existing database table columns',
       'id' => 'ZF2-562',
     ),
     'data/issues/ZF2-563.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend og\\Write\\Db::mapEventIntoColumn creates non-existing database table column due to PHP type juggling',
+      'title' => 'Zend\\Log\\Write\\Db::mapEventIntoColumn creates non-existing database table column due to PHP type juggling',
       'id' => 'ZF2-563',
     ),
     'data/issues/ZF2-564.md' => 
@@ -77859,7 +77857,7 @@
     'data/issues/ZF2-566.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Undefined indexes and huge args-data in Zend og\\Formatter\\ExceptionHandler::format',
+      'title' => 'Undefined indexes and huge args-data in Zend\\Log\\Formatter\\ExceptionHandler::format',
       'id' => 'ZF2-566',
     ),
     'data/issues/ZF2-567.md' => 
@@ -78099,7 +78097,7 @@
     'data/issues/ZF2-74.md' => 
     array (
       'layout' => 'issue',
-      'title' => '\\Zend\\Http\\Request::getRawBody() is undefined method (called in test case RequestTest.php)',
+      'title' => 'Zend\\Http\\Request::getRawBody() is undefined method (called in test case RequestTest.php)',
       'id' => 'ZF2-74',
     ),
     'data/issues/ZF2-75.md' => 
@@ -78111,13 +78109,13 @@
     'data/issues/ZF2-76.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\View\\Helper artial clears variables in the view if cloned from',
+      'title' => 'Zend\\View\\Helper\\Partial clears variables in the view if cloned from',
       'id' => 'ZF2-76',
     ),
     'data/issues/ZF2-77.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Zend\\Db rofiler\\Firebug references FirePhp where it\'s not',
+      'title' => 'Zend\\Db\\Profiler\\Firebug references FirePhp where it\'s not',
       'id' => 'ZF2-77',
     ),
     'data/issues/ZF2-78.md' => 

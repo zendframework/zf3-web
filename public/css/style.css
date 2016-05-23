@@ -594,3 +594,50 @@ border-right:1px solid #dadada;
 .site-map p {
 	font-size: 13px;
 }
+
+.server-download {
+		-moz-box-align: center;
+    -moz-box-orient: horizontal;
+    align-items: center;
+    background-color: #c3f0fc;
+    border-radius: 6px;
+    box-shadow: 0 0 7px #dadada;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 2em;
+}
+
+.server-download .zend-blocks {
+    display: block;
+    width: 25%;
+}
+
+.server-download .server-content {
+    font-size: 24px;
+    text-align: left;
+    width: 75%;
+}
+
+.server-download .server-content span.product {
+    color: #6ac00e;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.server-download .server-content span.promo {
+    color: #103754;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.server-download .server-content img.server-logo {
+    padding-bottom: 1em;
+}
+.server-download .server-content img {
+    padding-top: 1em;
+}
+
+pre {
+	font-size : 16px;
+}

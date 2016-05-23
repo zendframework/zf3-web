@@ -1,0 +1,53 @@
+<?php $this->headTitle('Learn'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Install</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2>Get started</h2>
+            <p>Installation of Zend Framework 3 is only a <a href="http://getcomposer.org">Composer</a> command away:</p>
+            <pre><code class="language-bash">composer require zendframework/zendframework</code></pre>
+            <p>This will install all the Zend packages at once. You can also install Zend's component as separate packages. For instance, if you need only the MVC package, you can install it using the following command:</p>
+            <pre><code class="language-bash">composer require zendframework/zend-mvc</code></pre>
+            <p>The complete list of Zend packages is reported <a href="/learn">here</a>.</p>
+
+            <h2>Zend Server</h2>
+            <p>If you are looking for a professional solution with Monitoring and Root-cause analysis, Job Queue, Code tracing, Caching, etc you can download the <strong>30-day trial free edition of Zend Server</strong>.</p>
+            <div class="server-download">
+                <div class="zend-blocks">
+                    <img src="/images/ZF-Server-boxes-120x185px.png">
+                </div>
+
+                <div class="server-content">
+                    Try <span class="product">Zend Framework</span> with
+                    <nobr><span class="product">Z-Ray</span></nobr><br>
+                    in the <span class="promo">30-day Trial Edition</span> of
+
+                    <br>
+
+                    <img alt="Zend Server" src="/images/Zend-Server-logo-368x51px.png" class="server-logo">
+
+                    <br>
+                    the Professional PHP Distribution
+
+                    <br>
+
+                    <a href="http://www.zend.com/en/products/server/downloads?utm_source=zfd">
+                        <img alt="Try Now" src="/images/Try-Now-button-135x39px.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::download-menu', [ 'active' => '/downloads' ]) ?>
+        </div>
+    </div>
+</div>

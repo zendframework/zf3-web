@@ -16,6 +16,7 @@ return [
             App\Action\ManualAction::class => App\Action\ManualFactory::class,
             App\Action\LearnAction::class => App\Action\LearnFactory::class,
             App\Action\SwitchManualAction::class => App\Action\SwitchManualFactory::class,
+            App\Action\InstallAction::class => App\Action\InstallFactory::class,
         ],
     ],
 
@@ -90,6 +91,12 @@ return [
             'name' => 'learn',
             'path' => '/learn[/:page]',
             'middleware' => App\Action\LearnAction::class,
+            'allowed_methods' => ['GET']
+        ],
+        [
+            'name' => 'install',
+            'path' => '/downloads[/:page]',
+            'middleware' => App\Action\InstallAction::class,
             'allowed_methods' => ['GET']
         ],
     ],

@@ -1,0 +1,28 @@
+<?php $this->headTitle('Learn'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>MVC Skeleton Application</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2>MVC Skeleton Application</h2>
+            <p>If you want to use the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller</a> (MVC) architecture for build your PHP application, you can use the skeleton provided by Zend Framework. You can easily install the skeleton using <a href="https://getcomposer.org/">composer</a> with the following command:</p>
+            <pre><code class="language-bash">composer create-project zendframework/skeleton-application path/to/install</code></pre>
+            <p>Where path/to/install is the path where to install the skeleton source code.</p>
+            <p>After the installation you can run the skeleton using the following command:</p>
+            <pre><code class="language-bash">composer serve</code></pre>
+            <p>This will run the skeleton using the internal PHP web server on localhost with port 8080.<br />Open you browser at <a href="http://localhost:8080">http://localhost:8080</a> and you will see the following home page:</p>
+            <img src="img/mvc-skeleton.png">
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::download-menu', [ 'active' => '/downloads/skeleton-app' ]) ?>
+        </div>
+    </div>
+</div>
