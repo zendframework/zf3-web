@@ -4,9 +4,8 @@ namespace App\Action;
 
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use App\Model\Release;
 
-class InstallFactory
+class ParticipateFactory
 {
     public function __invoke(ContainerInterface $container)
     {
@@ -14,7 +13,6 @@ class InstallFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
 
-        $release = $container->get(Release::class);
-        return new InstallAction($release, $template);
+        return new ParticipateAction($template);
     }
 }

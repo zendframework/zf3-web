@@ -22,7 +22,8 @@ return [
             App\Model\Post::class => App\Model\PostFactory::class,
             App\Model\Advisory::class => App\Model\AdvisoryFactory::class,
             App\Model\Changelog::class => App\Model\ChangelogFactory::class,
-            App\Model\Issue::class => App\Model\IssueFactory::class
+            App\Model\Issue::class => App\Model\IssueFactory::class,
+            App\Model\Release::class => App\Model\ReleaseFactory::class
         ],
     ],
 ];

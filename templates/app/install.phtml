@@ -14,10 +14,9 @@
             <h2>Get started</h2>
             <p>Installation of Zend Framework 3 is only a <a href="http://getcomposer.org">Composer</a> command away:</p>
             <pre><code class="language-bash">composer require zendframework/zendframework</code></pre>
-            <p>This will install all the Zend packages at once. You can also install Zend's component as separate packages. For instance, if you need only the MVC package, you can install it using the following command:</p>
+            <p>This will install all the <strong><?php echo count($require) - 1 ?></strong>  packages required in <a href="<?php echo $composerUrl ?>">composer.json</a>. All the Zend packages can be installed individually. For instance, if you need only the MVC package, you can install with the following command:</p>
             <pre><code class="language-bash">composer require zendframework/zend-mvc</code></pre>
-            <p>The complete list of Zend packages is reported <a href="/learn">here</a>.</p>
-
+            <p>A list of all the packages can be found in the <a href="/learn">documentation page</a>.</p>
             <h2>Zend Server</h2>
             <p>If you are looking for a professional solution with Monitoring and Root-cause analysis, Job Queue, Code tracing, Caching, etc you can download the <strong>30-day trial free edition of Zend Server</strong>.</p>
             <div class="server-download">

@@ -24,8 +24,8 @@ $path = parse_url($this->serverUrl(), PHP_URL_PATH);
   <li>
     <a href="/manual/current/en/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Reference guide</a>
   </li>
-  <li>
-    <a href="/docs/api#zf2"><span class="glyphicon glyphicon-chevron-right"></span> API</a>
+  <li <?php if ($path === '/docs/api/zf2') echo 'class="active"' ?>>
+    <a href="/docs/api/zf2"><span class="glyphicon glyphicon-chevron-right"></span> API</a>
   </li>
 </ul>
 
@@ -37,8 +37,8 @@ $path = parse_url($this->serverUrl(), PHP_URL_PATH);
   <li>
     <a href="/manual/1.12/en/manual.html"><span class="glyphicon glyphicon-chevron-right"></span> Reference guide</a>
   </li>
-  <li>
-    <a href="/docs/api#zf1"><span class="glyphicon glyphicon-chevron-right"></span> API</a>
+  <li <?php if ($path === '/docs/api/zf1') echo 'class="active"' ?>>
+    <a href="/docs/api/zf1"><span class="glyphicon glyphicon-chevron-right"></span> API</a>
   </li>
 </ul>
 

@@ -1,0 +1,63 @@
+<?php $this->headTitle('Learn'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Install</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2>Archives</h2>
+            <p>Every public release of Zend Framework all in one place.</p>
+            <?php
+              foreach ($this->releases->getVersions() as $version):
+                  $date = $this->releases->getReleaseDate($version);
+            ?>
+            <div class="spacing"></div>
+            <div class="row">
+                <div class="col-lg-3">
+                  <strong>ZF <?php echo $version ?></strong><br />Released <?php echo $date ?>
+                </div>
+                <div class="col-lg-2">
+                  Full<br />
+                  <a href="<?php echo $this->releases->getArchive($version, 'zip') ?>">zip</a>, <a href="<?php echo $this->releases->getArchive($version, 'tar.gz') ?>">tar.gz</a><br />
+                </div>
+                <div class="col-lg-2">
+                  <?php if ($this->releases->hasMinimalVersion($version)): ?>
+                    Minimal<br />
+                    <a href="<?php echo $this->releases->getMinimalArchive($version, 'zip') ?>">zip</a>, <a href="<?php echo $this->releases->getMinimalArchive($version, 'tar.gz') ?>">tar.gz</a><br />
+                  <?php endif; ?>
+                </div>
+                <div class="col-lg-2">
+                  <?php if ($this->releases->hasApidocs($version)): ?>
+                    API<br />
+                    <a href="<?php echo $this->releases->getApidocArchive($version, 'zip') ?>">zip</a>, <a href="<?php echo $this->releases->getApidocArchive($version, 'tar.gz') ?>">tar.gz</a>
+                  <?php endif; ?>
+                </div>
+                <div class="col-lg-3">
+                  <?php if ($this->releases->hasDocumentation($version)): ?>
+                    Documentation<br />
+                    <?php
+                    echo $this->render('include::documentation-links', [
+                        'version'  => $version,
+                        'id'       => 'zf' . str_replace('.', '_', $version),
+                        'releases' => $this->releases,
+                    ]);
+                    ?>
+                  <?php endif; ?>
+                </div>
+            </div>
+            <div class="spacing"></div>
+            <div class="hline"></div>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="col-lg-4">
+          <?php echo $this->render('include::download-menu', [ 'active' => '/downloads/archives' ]) ?>
+        </div>
+    </div>
+</div>

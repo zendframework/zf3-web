@@ -6,17 +6,19 @@ return [
             Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\ZendRouter::class
         ],
         'factories' => [
-            App\Action\HomePageAction::class => App\Action\HomePageFactory::class,
-            App\Action\BlogAction::class => App\Action\BlogFactory::class,
-            App\Action\AboutAction::class => App\Action\AboutFactory::class,
-            App\Action\AdvisoryAction::class => App\Action\AdvisoryFactory::class,
-            App\Action\SecurityAction::class => App\Action\SecurityFactory::class,
-            App\Action\ChangelogAction::class => App\Action\ChangelogFactory::class,
-            App\Action\IssueAction::class => App\Action\IssueFactory::class,
-            App\Action\ManualAction::class => App\Action\ManualFactory::class,
-            App\Action\LearnAction::class => App\Action\LearnFactory::class,
+            App\Action\HomePageAction::class     => App\Action\HomePageFactory::class,
+            App\Action\BlogAction::class         => App\Action\BlogFactory::class,
+            App\Action\AboutAction::class        => App\Action\AboutFactory::class,
+            App\Action\AdvisoryAction::class     => App\Action\AdvisoryFactory::class,
+            App\Action\SecurityAction::class     => App\Action\SecurityFactory::class,
+            App\Action\ChangelogAction::class    => App\Action\ChangelogFactory::class,
+            App\Action\IssueAction::class        => App\Action\IssueFactory::class,
+            App\Action\ManualAction::class       => App\Action\ManualFactory::class,
+            App\Action\LearnAction::class        => App\Action\LearnFactory::class,
+            App\Action\DocsAction::class         => App\Action\DocsFactory::class,
             App\Action\SwitchManualAction::class => App\Action\SwitchManualFactory::class,
-            App\Action\InstallAction::class => App\Action\InstallFactory::class,
+            App\Action\InstallAction::class      => App\Action\InstallFactory::class,
+            App\Action\ParticipateAction::class  => App\Action\ParticipateFactory::class,
         ],
     ],
 
@@ -94,10 +96,28 @@ return [
             'allowed_methods' => ['GET']
         ],
         [
+            'name' => 'docs',
+            'path' => '/docs[/api/:ver]',
+            'middleware' => App\Action\DocsAction::class,
+            'allowed_methods' => ['GET']
+        ],
+        [
             'name' => 'install',
             'path' => '/downloads[/:page]',
             'middleware' => App\Action\InstallAction::class,
             'allowed_methods' => ['GET']
         ],
+        [
+            'name' => 'participate',
+            'path' => '/participate[/:page]',
+            'middleware' => App\Action\ParticipateAction::class,
+            'allowed_methods' => ['GET']
+        ],
+        [
+            'name' => 'contacts',
+            'path' => '/irc|/archives',
+            'middleware' => App\Action\ContactsAction::class,
+            'allowed_methods' => ['GET']
+        ]
     ],
 ];
