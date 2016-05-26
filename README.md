@@ -13,14 +13,13 @@ Install all the dependency using [composer](https://getcomposer.org/):
 $ composer install
 ```
 
-After you need to build the cache files of the web site using the following
-command:
+After you need to build the configuration and cache files of the web site using
+the following command:
 
 ```bash
 php bin/build_cache.php
 ```
 
-This command will create the cache files under the folder `/data/cache`.
 After that you can execute the web site, for instance using the PHP web server:
 
 ```bash
@@ -45,7 +44,7 @@ php bin/build_cache.php
 - [x] reference guide for ZF1 and ZF2, based on the [existing one](http://framework.zend.com/manual/current/en/index.html)
 - [x] new manual page for ZF3, basically a static page with links to all the docs of the specific components
 - [x] download page, with the list of all the components
-- [ ] participate page based on the [existing one](http://framework.zend.com/participate/)
+- [x] participate page based on the [existing one](http://framework.zend.com/participate/)
 - [ ] /security/feed as RSS
 - [ ] subscribe to the blog via RSS
 - [ ] English text review of all the pages

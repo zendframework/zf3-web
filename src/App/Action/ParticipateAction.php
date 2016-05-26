@@ -9,9 +9,10 @@ use Zend\Expressive\Template;
 
 class ParticipateAction
 {
-    public function __construct(Template\TemplateRendererInterface $template = null)
+    public function __construct(array $zfComponents, Template\TemplateRendererInterface $template = null)
     {
-        $this->template = $template;
+        $this->zfComponents = $zfComponents;
+        $this->template     = $template;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -28,7 +29,7 @@ class ParticipateAction
 
         if ($page === 'contributor-guide') {
             return new HtmlResponse($this->template->render("app::$page", [
-                'repository' => json_decode(file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'))
+                'repository' => $this->zfComponents
             ]));
         }
         return new HtmlResponse($this->template->render("app::$page"));

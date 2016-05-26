@@ -8,7 +8,7 @@
           <h4>Open an issue</h4>
           <p>Zend Framework manages issues on <a href="https://github.com">GitHub</a>. Please choose the Zend package where to report the issue, from the list below, and click on "Open Issue" button.</p>          <select class="form-control" id="gitrepo">
             <?php foreach($repository as $repo): ?>
-              <option value="https://github.com/zendframework/<?php echo basename($repo->url) ?>/issues/new"><?php echo $repo->name ?></option>
+              <option value="https://github.com/zendframework/<?php echo basename($repo['url']) ?>/issues/new"><?php echo $repo['name'] ?></option>
             <?php endforeach; ?>
           </select>
       </div>

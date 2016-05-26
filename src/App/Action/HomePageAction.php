@@ -20,11 +20,12 @@ class HomePageAction
 
     private $advisories;
 
-    public function __construct(Model\Post $posts, Model\Advisory $advisories, Template\TemplateRendererInterface $template = null)
+    public function __construct(array $zfComponents, Model\Post $posts, Model\Advisory $advisories, Template\TemplateRendererInterface $template = null)
     {
-        $this->posts      = $posts;
-        $this->advisories = $advisories;
-        $this->template   = $template;
+        $this->zfComponents = $zfComponents;
+        $this->posts        = $posts;
+        $this->advisories   = $advisories;
+        $this->template     = $template;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -32,8 +33,8 @@ class HomePageAction
         $data = [
             'projects'   => require 'data/projects.php',
             'posts'      => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
-            'advisories' =>  array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES),
-            'repository' => json_decode(file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'))
+            'advisories' => array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES),
+            'repository' => $this->zfComponents
         ];
         $data['layout'] = 'layout::default';
         return new HtmlResponse($this->template->render('app::home-page', $data));

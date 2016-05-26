@@ -9,9 +9,10 @@ use Zend\Expressive\Template;
 
 class LearnAction
 {
-    public function __construct(Template\TemplateRendererInterface $template = null)
+    public function __construct(array $zfComponents, Template\TemplateRendererInterface $template = null)
     {
-        $this->template = $template;
+        $this->zfComponents = $zfComponents;
+        $this->template     = $template;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -19,8 +20,7 @@ class LearnAction
         $page = $request->getAttribute('page', false);
 
         if (false === $page) {
-            $components = json_decode(file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'));
-            return new HtmlResponse($this->template->render("app::learn", [ 'components' => $components ]));
+            return new HtmlResponse($this->template->render("app::learn", [ 'components' => $this->zfComponents ]));
         }
 
         if (! in_array($page, [ 'learn', 'training-and-certification', 'support-and-consulting' ])) {

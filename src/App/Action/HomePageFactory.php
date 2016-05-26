@@ -14,9 +14,10 @@ class HomePageFactory
         $template = ($container->has(TemplateRendererInterface::class))
             ? $container->get(TemplateRendererInterface::class)
             : null;
-        $post     = $container->get(Post::class);
-        $advisory = $container->get(Advisory::class);
-
-        return new HomePageAction($post, $advisory, $template);
+        $post         = $container->get(Post::class);
+        $advisory     = $container->get(Advisory::class);
+        $zfComponents = $container->get('config')['zf_components'];
+        
+        return new HomePageAction($zfComponents, $post, $advisory, $template);
     }
 }

@@ -10,7 +10,13 @@ $path = parse_url($this->serverUrl(), PHP_URL_PATH);
 <ul class="nav nav-pills nav-stacked">
   <?php foreach($links as $url => $title): ?>
       <li <?php if ($path === $url) echo 'class="active"' ?>>
-        <a href="<?php echo $url ?>"><span class="glyphicon glyphicon-chevron-right"></span> <?php echo $title ?></a>
+        <a href="<?php echo $url ?>">
+          <?php if ('/security/feed' === $url): ?>
+            <i class="fa fa-rss-square"></i>
+          <?php else: ?>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          <?php endif; ?>
+        <?php echo $title ?></a>
       </li>
   <?php endforeach; ?>
 </ul>

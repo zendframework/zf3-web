@@ -16,7 +16,7 @@
             <?php foreach ($advisories as $key => $advisory): ?>
               <p>
                 <i class="fa fa-bug"></i> <a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisory['title'] ?></a><br />
-                <small>Published <?php echo date("l m, Y", $advisory['date']) ?></small>
+                <small>Published <?php echo date("M d, Y", $advisory['date']) ?></small>
               </p>
             <?php endforeach; ?>
             <div class="spacing"></div>

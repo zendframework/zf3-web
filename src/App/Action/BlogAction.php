@@ -7,10 +7,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 use App\Model\Post;
+use Zend\Feed\Writer\Feed;
 
 class BlogAction
 {
     const POST_PER_PAGE = 10;
+    const POST_PER_FEED = 15;
 
     private $template;
 
@@ -25,6 +27,10 @@ class BlogAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $file = $request->getAttribute('file', false);
+
+        if ('feed-rss.xml' === $file) {
+            return $this->feed($request, $response, $next);
+        }
         if (! $file) {
             return $this->blogPage($request, $response, $next);
         }
@@ -65,5 +71,36 @@ class BlogAction
             'prev'  => $prevPage,
             'next'  => $nextPage
         ]));
+    }
+
+    protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    {
+        $feed = new Feed();
+        $feed->setTitle('Blog Entries - ZF Blog');
+        $feed->setLink('http://framework.zend.com/blog.html');
+        $feed->setDescription('Blog Entries - ZF Blog');
+        $feed->setFeedLink('http://framework.zend.com/blog/feed-rss.xml', 'atom');
+        $feed->setDateModified(time());
+
+        $posts = array_slice($this->posts->getAll(), 0, self::POST_PER_FEED);
+
+        foreach($posts as $id => $post) {
+            $content = $this->posts->getFromFile($id);
+
+            $entry = $feed->createEntry();
+            $entry->setTitle($content['title']);
+            $entry->setLink($content['permalink']);
+            $entry->addAuthor([
+                'name' => $content['author'],
+                'url'  => $content['url_author']
+            ]);
+            $entry->setDateCreated($content['date']);
+            $entry->setDateModified($content['date']);
+            $entry->setContent($content['body']);
+            $feed->addEntry($entry);
+        }
+
+        $response->getBody()->write($feed->export('atom'));
+        return $response;
     }
 }

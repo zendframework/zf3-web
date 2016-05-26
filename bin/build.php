@@ -31,3 +31,10 @@ printf("done.\n");
 printf("Post...");
 $issue = new Model\Issue($parser);
 printf("done.\n");
+
+printf("Building the config files:\n");
+
+printf("Update ZF component list...");
+$list = json_decode(file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'), true);
+file_put_contents(dirname(__DIR__) . '/config/autoload/zf-components.global.php', '<?php return [ "zf_components" => '. var_export($list, true) . ' ];');
+printf("done.\n");

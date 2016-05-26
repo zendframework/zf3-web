@@ -12,7 +12,8 @@ class DocsFactory
         $template = ($container->has(TemplateRendererInterface::class))
             ? $container->get(TemplateRendererInterface::class)
             : null;
-        $config = require 'config/autoload/zf-apidoc-versions.php';
-        return new DocsAction($config, $template);
+        $apidoc       = require 'config/autoload/zf-apidoc-versions.php';
+        $zfComponents = $containger->get('config')['zf_components'];
+        return new DocsAction($apidoc, $zfComponents, $template);
     }
 }

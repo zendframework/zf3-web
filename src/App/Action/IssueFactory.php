@@ -13,7 +13,7 @@ class IssueFactory
         $template = ($container->has(TemplateRendererInterface::class))
             ? $container->get(TemplateRendererInterface::class)
             : null;
-        $issue = $container->get(Issue::class);
+        $issue        = $container->get(Issue::class);
 
         return new IssueAction($issue, $template);
     }

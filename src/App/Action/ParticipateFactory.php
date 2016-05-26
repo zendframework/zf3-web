@@ -12,7 +12,8 @@ class ParticipateFactory
         $template = ($container->has(TemplateRendererInterface::class))
             ? $container->get(TemplateRendererInterface::class)
             : null;
+        $zfComponents = $container->get('config')['zf_components'];
 
-        return new ParticipateAction($template);
+        return new ParticipateAction($zfComponents, $template);
     }
 }
