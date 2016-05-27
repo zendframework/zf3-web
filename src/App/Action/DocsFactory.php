@@ -13,7 +13,7 @@ class DocsFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
         $apidoc       = require 'config/autoload/zf-apidoc-versions.php';
-        $zfComponents = $containger->get('config')['zf_components'];
+        $zfComponents = $container->get('config')['zf_components'];
         return new DocsAction($apidoc, $zfComponents, $template);
     }
 }
