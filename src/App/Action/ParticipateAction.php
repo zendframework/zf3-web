@@ -24,7 +24,7 @@ class ParticipateAction
             return new HtmlResponse($this->template->render("app::participate"));
         }
 
-        if (! in_array($page, [ 'contributor-guide', 'contributors', 'logos' ])) {
+        if (! in_array($page, [ 'contributor-guide', 'code-manifesto', 'contributors', 'logos' ])) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
