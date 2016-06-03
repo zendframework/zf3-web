@@ -243,10 +243,5 @@
 		$(window).on('resize', function () {
 		  setPortfolio();
 	  });
-
-    $('#openIssue').on('click', function () {
-      $('#issueModal').modal("hide");
-      window.open($('#gitrepo').val(), '_blank');
-    });
 })(jQuery);
 <?php $this->inlineScript()->captureEnd(); ?>

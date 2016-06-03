@@ -13,7 +13,8 @@ class ParticipateFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
         $zfComponents = $container->get('config')['zf_components'];
-
-        return new ParticipateAction($zfComponents, $template);
+        $reviewTeam   = $container->get('config')['zf-review-team'];
+        
+        return new ParticipateAction($zfComponents, $reviewTeam, $template);
     }
 }

@@ -14,7 +14,8 @@ class IssueFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
         $issue        = $container->get(Issue::class);
+        $zfComponents = $container->get('config')['zf_components'];
 
-        return new IssueAction($issue, $template);
+        return new IssueAction($issue, $zfComponents, $template);
     }
 }

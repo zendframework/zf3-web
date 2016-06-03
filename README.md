@@ -17,7 +17,7 @@ After you need to build the configuration and cache files of the web site using
 the following command:
 
 ```bash
-php bin/build_cache.php
+php bin/build.php
 ```
 
 After that you can execute the web site, for instance using the PHP web server:
@@ -31,20 +31,9 @@ You can then browse to http://localhost:8080.
 ## Update the website content
 
 If you want to add or update content of the website related to blog, security
-advisories, issues or changelog, you need to re-build the cache files using
-the following command:
+advisories, issues or changelog, you need to re-build the configuration files
+using the following command:
 
 ```bash
-php bin/build_cache.php
+php bin/build.php
 ```
-
-## TO DO
-
-- [x] issues pages on /issues/browser/:code, where code is in the format ZF-number
-- [x] reference guide for ZF1 and ZF2, based on the [existing one](http://framework.zend.com/manual/current/en/index.html)
-- [x] new manual page for ZF3, basically a static page with links to all the docs of the specific components
-- [x] download page, with the list of all the components
-- [x] participate page based on the [existing one](http://framework.zend.com/participate/)
-- [ ] /security/feed as RSS
-- [ ] subscribe to the blog via RSS
-- [ ] English text review of all the pages

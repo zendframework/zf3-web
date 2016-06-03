@@ -29,7 +29,7 @@ $issue = new Model\Issue($parser);
 printf("done.\n");
 
 printf("Post...");
-$issue = new Model\Issue($parser);
+$post = new Model\Post($parser);
 printf("done.\n");
 
 printf("Building the config files:\n");

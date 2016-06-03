@@ -12,7 +12,44 @@
     <div class="row">
         <div class="col-lg-8">
           <h2>Contributors</h2>
+          <p>Zend Framework is an open source project sponsored by <a href="http://www.zend.com">Zend Technologies</a>, a Rogue Wave Company. The Zend's team working on the project is composed by <a href="https://mwop.net/">Matthew Weier O'Phinney</a>, Principal Engineer and <a href="http://www.zimuel.it/">Enrico Zimuel</a>, Senior Software Engineer.</p>
+          <div class="row">
+              <div class="col-lg-6">
+                <a href="https://mwop.net/"><img src="/img/matthew.jpg" alt="Matthew Weier O'Phinney" title="Matthew Weier O'Phinney"><br />
+                Matthew Weier O'Phinney</a>, ZF Team Leader
+              </div>
+              <div class="col-lg-6">
+                <a href="http://www.zimuel.it/"><img src="/img/enrico.jpg" alt="Enrico Zimuel" title="Enrico Zimuel"><br />
+                Enrico Zimuel</a>, ZF Core Developer
+              </div>
+          </div>
+          <p>The other contributors are volunteers and they represent the big portion of the project, they are <strong>almost 700</strong>! You can read the <a href="https://github.com/zendframework/zendframework/graphs/contributors">full list of contributors</a> on github.</p>
+          <p>Some of these volunteers are part of the <strong>Community Review Team</strong> reported below:</p>
+          <?php
+            $i = 0;
+            foreach ($this->reviewTeam as $name => $url):
+                if ($i % 3 === 0):
+          ?>
+              <div class="spacing"></div>
+              <div class="row">
+          <?php endif; ?>
+                <div class="col-lg-4">
+                  <a href="<?php echo $url['web'] ?>"><img src="<?php echo $url['img'] ?>" alt="<?php echo $name ?>" title="<?php echo $name ?>" height="180" width="180"></a><br />
+                  <i class="fa fa-github" aria-hidden="true"></i> <a href="<?php echo $url['web'] ?>"><?php echo $name ?></a>
+                </div>
+          <?php if ($i % 3 === 2): ?>
+              </div>
+          <?php
+                endif;
+                $i++;
+            endforeach;
+            if ($i % 3 !== 0) {
+                echo str_repeat('<div class="col-log-4"></div>', 3 - $i % 3);
+                echo '</div>';
+            }
+          ?>
         </div>
+
 
         <div class="col-lg-4">
           <?php echo $this->render('include::participate-menu', [ 'active' => '/participate/contributors' ]) ?>

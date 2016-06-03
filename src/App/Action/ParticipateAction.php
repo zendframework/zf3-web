@@ -9,9 +9,10 @@ use Zend\Expressive\Template;
 
 class ParticipateAction
 {
-    public function __construct(array $zfComponents, Template\TemplateRendererInterface $template = null)
+    public function __construct(array $zfComponents, array $reviewTeam, Template\TemplateRendererInterface $template = null)
     {
         $this->zfComponents = $zfComponents;
+        $this->reviewTeam   = $reviewTeam;
         $this->template     = $template;
     }
 
@@ -32,6 +33,6 @@ class ParticipateAction
                 'repository' => $this->zfComponents
             ]));
         }
-        return new HtmlResponse($this->template->render("app::$page"));
+        return new HtmlResponse($this->template->render("app::$page", [ 'reviewTeam' => $this->reviewTeam ]));
     }
 }

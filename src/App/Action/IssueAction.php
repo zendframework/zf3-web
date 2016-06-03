@@ -14,17 +14,21 @@ class IssueAction
 
     private $issue;
 
-    public function __construct(Issue $issue, Template\TemplateRendererInterface $template = null)
+    public function __construct(Issue $issue, array $zfComponents, Template\TemplateRendererInterface $template = null)
     {
-        $this->issue = $issue;
-        $this->template = $template;
+        $this->issue        = $issue;
+        $this->zfComponents = $zfComponents;
+        $this->template     = $template;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $action = $request->getAttribute('type', false);
         if (!$action) {
-            return new HtmlResponse($this->template->render("app::issue-overview", [ 'active' => '/issues' ]));
+            return new HtmlResponse($this->template->render("app::issue-overview", [
+                'active'     => '/issues',
+                'repository' => $this->zfComponents
+            ]));
         }
         if (! in_array($action, [ 'ZF1', 'ZF2', 'browse'])) {
             return new HtmlResponse($this->template->render('error::404'));
@@ -42,9 +46,10 @@ class IssueAction
         if (! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
-        $content = $this->issue->getFromFile($file);
-        $content['layout'] = 'layout::default';
-        $content['active'] = strpos($issueId, 'ZF-') !== false ? '/issues/ZF1' : '/issues/ZF2';
+        $content               = $this->issue->getFromFile($file);
+        $content['layout']     = 'layout::default';
+        $content['active']     = strpos($issueId, 'ZF-') !== false ? '/issues/ZF1' : '/issues/ZF2';
+        $content['repository'] = $this->zfComponents;
 
         return new HtmlResponse($this->template->render('app::issue', $content));
     }
@@ -75,14 +80,15 @@ class IssueAction
         $active = "/issues/$action";
         $issues = array_slice($allIssues, ($page - 1) * self::ISSUE_PER_PAGE, self::ISSUE_PER_PAGE);
         return new HtmlResponse($this->template->render('app::zf-issue', [
-            'issues'    => $issues,
-            'ver'       => $action,
-            'tot_issue' => $totIssues,
-            'tot'       => $totPages,
-            'page'      => $page,
-            'prev'      => $prevPage,
-            'next'      => $nextPage,
-            'active'    => $active
+            'issues'     => $issues,
+            'ver'        => $action,
+            'tot_issue'  => $totIssues,
+            'tot'        => $totPages,
+            'page'       => $page,
+            'prev'       => $prevPage,
+            'next'       => $nextPage,
+            'active'     => $active,
+            'repository' => $this->zfComponents
         ]));
     }
 }
