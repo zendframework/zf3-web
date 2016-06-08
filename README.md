@@ -28,6 +28,17 @@ $ composer serve
 
 You can then browse to http://localhost:8080.
 
+## Stats and statistics pages
+
+The web site offers a statistics and status page. In order to generate the
+statistics data we used the  [Packagist API](https://packagist.org/apidoc).
+
+You need to execute the following command to generate it:
+
+```bash
+php bin/stats.php
+```
+
 ## Update the website content
 
 If you want to add or update content of the website related to blog, security
@@ -37,3 +48,7 @@ using the following command:
 ```bash
 php bin/build.php
 ```
+
+To update the statistics you should schedule the execution of the `bin/stats.php`
+script. For instance you can use [Cron](https://en.wikipedia.org/wiki/Cron) on a
+GNU/Linux environment and schedule the execution each hour.
