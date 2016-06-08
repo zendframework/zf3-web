@@ -1,0 +1,71 @@
+<?php $this->headTitle('Status'); ?>
+
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Status</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+      <div class="col-lg-2">
+        <strong>Package</strong>
+      </div>
+      <div class="col-lg-1">
+        <strong>Docs</strong>
+      </div>
+      <div class="col-lg-1">
+        <strong>Changelog</strong>
+      </div>
+      <div class="col-lg-2">
+        <strong>Travis</strong>
+      </div>
+      <div class="col-lg-2">
+        <strong>Master</strong>
+      </div>
+      <div class="col-lg-2">
+        <strong>Develop</strong>
+      </div>
+      <div class="col-lg-2">
+        <strong>Downloads</strong>
+      </div>
+    </div>
+    <?php foreach ($stats as $name => $value): ?>
+      <?php if ($name === 'total' || $name === 'date') continue; ?>
+      <div class="row">
+          <div class="col-lg-2">
+            <a href="https://github.com/zendframework/<?php echo $name; ?>">
+                <?php echo $name; ?>
+            </a>
+          </div>
+          <div class="col-lg-1">
+            <a href="https://zendframework.github.io/<?php echo $name; ?>">docs</a>
+          </div>
+          <div class="col-lg-1">
+            <a href="https://zendframework.github.io/<?php echo $name; ?>/blob/master/CHANGELOG.md">changelog</a>
+          </div>
+          <div class="col-lg-2">
+            <a href="https://secure.travis-ci.org/zendframework/<?php echo $name; ?>">
+                <img src="https://secure.travis-ci.org/zendframework/<?php echo $name; ?>.svg?branch=master">
+            </a>
+          </div>
+          <div class="col-lg-2">
+            <a href="https://github.com/zendframework/<?php echo $name; ?>">
+                <img src="https://poser.pugx.org/zendframework/<?php echo $name; ?>/v/stable">
+            </a>
+          </div>
+          <div class="col-lg-2">
+            <a href="https://github.com/zendframework/<?php echo $name; ?>/tree/develop">
+                <img src="https://poser.pugx.org/zendframework/<?php echo $name; ?>/v/unstable">
+            </a>
+          </div>
+          <div class="col-lg-2">
+            <a href="https://github.com/zendframework/<?php echo $name; ?>/releases">
+                <img src="https://poser.pugx.org/zendframework/<?php echo $name; ?>/downloads">
+            </a>
+          </div>
+      </div>
+    <?php endforeach; ?>
+</div>

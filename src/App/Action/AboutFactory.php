@@ -12,7 +12,8 @@ class AboutFactory
         $template = ($container->has(TemplateRendererInterface::class))
             ? $container->get(TemplateRendererInterface::class)
             : null;
+        $config   = $container->get('config');
 
-        return new AboutAction($template);
+        return new AboutAction($config, $template);
     }
 }

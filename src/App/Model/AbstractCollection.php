@@ -19,9 +19,9 @@ abstract class AbstractCollection
         }
         $this->yamlParser = $yamlParser;
         if (!file_exists(static::CACHE_FILE)) {
-          $this->buildCache();
+            $this->buildCache();
         } else {
-          $this->collection = require static::CACHE_FILE;
+            $this->collection = require static::CACHE_FILE;
         }
     }
 
@@ -34,9 +34,9 @@ abstract class AbstractCollection
     {
         $result = [];
         if (file_exists($file)) {
-          $doc            = $this->yamlParser->parse(file_get_contents($file));
-          $result         = $doc->getYAML();
-          $result['body'] = $doc->getContent();
+            $doc            = $this->yamlParser->parse(file_get_contents($file));
+            $result         = $doc->getYAML();
+            $result['body'] = $doc->getContent();
         }
         return $result;
     }
@@ -47,9 +47,9 @@ abstract class AbstractCollection
             throw new RuntimeException('The folder collection is not defined!');
         }
         foreach (glob(static::FOLDER_COLLECTION . '/*.md') as $file) {
-          $doc = $this->yamlParser->parse(file_get_contents($file));
-          $fields = $doc->getYAML();
-          $this->collection[$file] = $fields;
+            $doc = $this->yamlParser->parse(file_get_contents($file));
+            $fields = $doc->getYAML();
+            $this->collection[$file] = $fields;
         }
         uasort($this->collection, [ $this, 'order' ]);
         file_put_contents(static::CACHE_FILE, '<?php return ' . var_export($this->collection, true) . ';', LOCK_EX);

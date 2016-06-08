@@ -8,8 +8,10 @@
             </div>
             <div class="col-lg-8">
               <h1>Zend Framework 3</h1>
-              <h3>Professional PHP packages ready for PHP7!</h3>
-              <h2>Focused on Simplicity, Reusability and Performance</h2>
+              <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7">PHP 7</a><br />Focused on Simplicity, Reusability and Performance</h3>
+              <?php if ($stats > 0): ?>
+                <h2><?php echo number_format($stats); ?> installs from <a href="https://packagist.org/">Packagist</a>!</a></h2>
+              <?php endif; ?>
               <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
             </div>
         </div>
@@ -40,7 +42,7 @@
             <div class="col-md-3">
                 <i class="fa fa-building-o"></i>
                 <h4>Enterprise Ready</h4>
-                <p>A proven history of success running business critical and high-usage applications. Ready for <a href="http://www.php.net">PHP 7</a>.</p>
+                <p>A proven history of success running business critical and high-usage applications. Ready for <a href="http://www.zend.com/en/resources/php-7">PHP 7</a>.</p>
 
             </div>
         </div>

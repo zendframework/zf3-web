@@ -19,6 +19,8 @@ return [
             App\Action\SwitchManualAction::class => App\Action\SwitchManualFactory::class,
             App\Action\InstallAction::class      => App\Action\InstallFactory::class,
             App\Action\ParticipateAction::class  => App\Action\ParticipateFactory::class,
+            App\Action\StatusAction::class       => App\Action\StatusFactory::class,
+            App\Action\StatisticsAction::class   => App\Action\StatisticsFactory::class,
         ],
     ],
 
@@ -114,9 +116,15 @@ return [
             'allowed_methods' => ['GET']
         ],
         [
-            'name' => 'contacts',
-            'path' => '/irc|/archives',
-            'middleware' => App\Action\ContactsAction::class,
+            'name' => 'status',
+            'path' => '/status',
+            'middleware' => App\Action\StatusAction::class,
+            'allowed_methods' => ['GET']
+        ],
+        [
+            'name' => 'statistics',
+            'path' => '/stats',
+            'middleware' => App\Action\StatisticsAction::class,
             'allowed_methods' => ['GET']
         ]
     ],

@@ -8,11 +8,11 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 use ArrayObject;
 
-class AboutAction
+class StatusAction
 {
-    protected $config;
+    private $template;
 
-    protected $template;
+    private $config;
 
     public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template = null)
     {
@@ -22,8 +22,9 @@ class AboutAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $page = basename($request->getUri()->getPath());
-        $stat = $this->config['zf_stats']['total']  ?? false;
-        return new HtmlResponse($this->template->render("app::$page", [ 'stats' => $stat ]));
+        if (!isset($this->config['zf_stats'])) {
+            return new HtmlResponse($this->template->render('error::404'));
+        }
+        return new HtmlResponse($this->template->render('app::status', [ 'stats' => $this->config['zf_stats'] ]));
     }
 }

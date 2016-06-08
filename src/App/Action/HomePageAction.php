@@ -7,6 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 use App\Model;
+use ArrayObject;
 
 class HomePageAction
 {
@@ -20,12 +21,14 @@ class HomePageAction
 
     private $advisories;
 
-    public function __construct(array $zfComponents, Model\Post $posts, Model\Advisory $advisories, Template\TemplateRendererInterface $template = null)
+    private $config;
+
+    public function __construct(ArrayObject $config, Model\Post $posts, Model\Advisory $advisories, Template\TemplateRendererInterface $template = null)
     {
-        $this->zfComponents = $zfComponents;
-        $this->posts        = $posts;
-        $this->advisories   = $advisories;
-        $this->template     = $template;
+        $this->config     = $config;
+        $this->posts      = $posts;
+        $this->advisories = $advisories;
+        $this->template   = $template;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -34,7 +37,8 @@ class HomePageAction
             'projects'   => require 'data/projects.php',
             'posts'      => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
             'advisories' => array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES),
-            'repository' => $this->zfComponents
+            'repository' => $this->config['zf_components'],
+            'stats'      => $this->config['zf_stats']['total'] ?? false
         ];
         $data['layout'] = 'layout::default';
         return new HtmlResponse($this->template->render('app::home-page', $data));
