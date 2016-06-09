@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Expressive 1.0.0RC6/RC7 Released!
-date: 2016-01-19 20:10
-update: 2016-01-19 20:10
+date: 2016-01-19
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2016-01-19-expressive-rc6-rc7.html
@@ -17,15 +16,17 @@ The Zend Framework community is pleased to announce the immediate availability o
 
 You can install the latest versions using [Composer](https://getcomposer.org), via the `create-project` command:
 
- 
-    <code class="language-bash">$ composer create-project -s rc zendframework/zend-expressive-skeleton expressive
+
+    $ composer create-project -s rc zendframework/zend-expressive-skeleton expressive
 
 
 You can update your existing applications using:
 
- 
-    <code class="language-bash">$ composer update
 
+    $ composer update
+
+
+<!--more-->
 
 Unfortunately, zend-expressive RC6 introduces some breaking changes. Several issues were raised that could not be handled in a fully backwards compatible fashion, and we felt they were important enough to introduce before a stable release is made. We continue to honor previous application configuration; however, deprecation notices will be raised, and the code for parsing the old configuration will be removed for the 1.1 release.
 
@@ -69,7 +70,7 @@ However, you don't want to perform these actions for _every_ request, only speci
 
 Previously, you would need to define an array of middleware for each route that needs this set of responsibilities:
 
- 
+
     <code class="language-php">[
         'routes' => [
             'api.ping' => [
@@ -104,25 +105,25 @@ Splitting the routing and dispatch middleware allows you to pipe middleware _bet
 
 This means you can now write middleware like this:
 
- 
+
     <code class="language-php">use Zend\Expressive\Router\RouteResult;
-    
+
     $authenticationMiddleware = function ($request, $response, $next) use ($map, $authenticate) {
         $routeResult = $request->getAttribute(RouteResult::class, false);
         if (! $routeResult instanceof RouteResult) {
             return $next($request, $response);
         }
-    
+
         if (! in_array($routeResult->getMatchedRouteName(), $map)) {
             return $next($request, $response);
         }
-    
+
         $authenticationResult = $authenticate($request);
         if (! $authenticationResult->isSuccess()) {
             // ERROR!
             return new AuthenticationErrorResponse();
         }
-    
+
         return $next(
             $request->withAttribute($authenticationResult->getIdentity()),
             $response
@@ -132,7 +133,7 @@ This means you can now write middleware like this:
 
 You would then sandwich it between the routing and dispatch middleware. Programmatically, that looks like:
 
- 
+
     <code class="language-php">$app->pipeRoutingMiddleware();
     $app->pipe($authenticationMiddleware);
     $app->pipeDispatchMiddleware();
@@ -153,7 +154,7 @@ Because routing was split into two distinct actions, and one primary purpose for
 
 As such, when creating your application programmatically, there is now _exactly one workflow_ to use to enable the routing and dispatch middleware: each must be piped explicitly into the pipeline:
 
- 
+
     <code class="language-php">$app->pipe(ServerUrlMiddleware::class);
     $app->pipe(BaseParamsMiddleware::class);
     $app->pipeRoutingMiddleware();
@@ -199,10 +200,10 @@ Additionally, we realized we could lever another existing feature: middleware sp
 
 What we came up with ends up looking like this when you start out with the new skeleton:
 
- 
+
     <code class="language-php">use Zend\Expressive\Container\ApplicationFactory;
     use Zend\Expressive\Helper;
-    
+
     return [
         'dependencies' => [
             'factories' => [
@@ -244,7 +245,7 @@ What we came up with ends up looking like this when you start out with the new s
                 ],
                 'priority' => 10000,
             ],
-    
+
             'routing' => [
                 'middleware' => [
                     ApplicationFactory::ROUTING_MIDDLEWARE,
@@ -258,7 +259,7 @@ What we came up with ends up looking like this when you start out with the new s
                 ],
                 'priority' => 1,
             ],
-    
+
             'error' => [
                 'middleware' => [
                     // Add error middleware here.
@@ -272,7 +273,7 @@ What we came up with ends up looking like this when you start out with the new s
 For existing users:
 
 - Existing RC5 and earlier configuration is still honored, but will emit deprecation notices, prompting you to update; these notices include links to the migration guide.
-- To update, you'll need to: 
+- To update, you'll need to:
   - update your zend-expressive-helpers version constraint to `^2.0`.
   - update your configuration, using the above as a guide.
 
