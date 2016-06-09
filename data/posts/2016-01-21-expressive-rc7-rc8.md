@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Expressive 1.0.0RC7/RC8 Released!
-date: 2016-01-21 17:35
-update: 2016-01-21 17:35
+date: 2016-01-21
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2016-01-21-expressive-rc7-rc8.html
@@ -17,15 +16,17 @@ The Zend Framework community is pleased to announce the immediate availability o
 
 You can install the latest versions using [Composer](https://getcomposer.org), via the `create-project` command:
 
- 
-    <code class="language-bash">$ composer create-project -s rc zendframework/zend-expressive-skeleton expressive
+
+    $ composer create-project -s rc zendframework/zend-expressive-skeleton expressive
 
 
 You can update your existing applications using:
 
- 
-    <code class="language-bash">$ composer update
 
+    $ composer update
+
+
+<!--more-->
 
 This release candidate contains bug fixes for dispatching error middleware pipelines. Additionally, we've released a new version of our Twig integration, and detail those changes below.
 
@@ -36,10 +37,10 @@ RC6 updated the configuration for the middleware pipeline to make it a single pi
 
 Per our suggested, default configuration:
 
- 
+
     <code class="language-php">use Zend\Expressive\Container\ApplicationFactory;
     use Zend\Expressive\Helper;
-    
+
     return [
         'dependencies' => [
             'factories' => [
@@ -81,7 +82,7 @@ Per our suggested, default configuration:
                 ],
                 'priority' => 10000,
             ],
-    
+
             'routing' => [
                 'middleware' => [
                     ApplicationFactory::ROUTING_MIDDLEWARE,
@@ -95,7 +96,7 @@ Per our suggested, default configuration:
                 ],
                 'priority' => 1,
             ],
-    
+
             'error' => [
                 'middleware' => [
                     // Add error middleware here.
