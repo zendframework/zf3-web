@@ -48,7 +48,9 @@ $stats['zf_stats']['total'] = $tot;
 $stats['zf_stats']['date']  = $date;
 
 // Write the stats file renaming the file for locking the reading
-rename($fileStats, $fileStats . '.lock');
+if (file_exists($fileStats)) {
+    rename($fileStats, $fileStats . '.lock');
+}
 file_put_contents($fileStats . '.lock', '<?php return '. var_export($stats, true) . ';', LOCK_EX);
 rename($fileStats . '.lock', $fileStats);
 printf("Total installs: %d\n", $tot);

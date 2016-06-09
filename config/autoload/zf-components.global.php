@@ -344,7 +344,7 @@
   57 => 
   array (
     'name' => 'Test',
-    'url' => 'https://zendframework.github.io/zend-text/',
+    'url' => 'https://zendframework.github.io/zend-test/',
     'description' => 'Tools to facilitate unit testing of zend-mvc applications.',
   ),
   58 => 
