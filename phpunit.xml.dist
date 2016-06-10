@@ -1,4 +1,4 @@
-<phpunit bootstrap="./vendor/autoload.php" colors="true">
+<phpunit bootstrap="./test/bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="App\\Tests">
             <directory>./test</directory>
@@ -10,4 +10,9 @@
             <directory suffix=".php">src</directory>
         </whitelist>
     </filter>
+    <php>
+      <const name="WEB_SERVER_HOST" value="localhost" />
+      <const name="WEB_SERVER_PORT" value="1349" />
+      <const name="WEB_SERVER_DOCROOT" value="./public" />
+    </php>
 </phpunit>

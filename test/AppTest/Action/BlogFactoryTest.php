@@ -2,15 +2,13 @@
 
 namespace AppTest\Action;
 
-use App\Action\HomePageAction;
-use App\Action\HomePageFactory;
+use App\Action\BlogAction;
+use App\Action\BlogFactory;
 use Interop\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 use App\Model\Post;
-use App\Model\Advisory;
-use ArrayObject;
 
-class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
+class BlogFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ContainerInterface */
     protected $container;
@@ -18,39 +16,34 @@ class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->container = $this->prophesize(ContainerInterface::class);
-
         $post = $this->prophesize(Post::class);
-        $advisory = $this->prophesize(Advisory::class);
-
         $this->container->get(Post::class)->willReturn($post);
-        $this->container->get(Advisory::class)->willReturn($advisory);
-        $this->container->get('config')->willReturn(new ArrayObject([ 'zf_components' => [] ]));
     }
 
     public function testFactoryWithoutTemplate()
     {
-        $factory = new HomePageFactory();
+        $factory = new BlogFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
-        $this->assertTrue($factory instanceof HomePageFactory);
+        $this->assertTrue($factory instanceof BlogFactory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertTrue($homePage instanceof HomePageAction);
+        $this->assertTrue($homePage instanceof BlogAction);
     }
 
     public function testFactoryWithTemplate()
     {
-        $factory = new HomePageFactory();
+        $factory = new BlogFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(true);
         $this->container
             ->get(TemplateRendererInterface::class)
             ->willReturn($this->prophesize(TemplateRendererInterface::class));
 
-        $this->assertTrue($factory instanceof HomePageFactory);
+        $this->assertTrue($factory instanceof BlogFactory);
 
         $homePage = $factory($this->container->reveal());
 
-        $this->assertTrue($homePage instanceof HomePageAction);
+        $this->assertTrue($homePage instanceof BlogAction);
     }
 }
