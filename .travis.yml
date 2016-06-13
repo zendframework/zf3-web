@@ -6,9 +6,8 @@ matrix:
   fast_finish: true
   include:
     - php: 7
-    - php: hhvm
-  allow_failures:
-    - php: hhvm
+      env:
+        - EXECUTE_CS_CHECK=true
 
 before_install:
   - composer self-update

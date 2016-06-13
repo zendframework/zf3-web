@@ -10,7 +10,7 @@ class AdvisoryFactory
     public function __invoke(ContainerInterface $container)
     {
         return new Advisory(
-          new Parser(null, new CommonMarkParser())
+            new Parser(null, new CommonMarkParser())
         );
     }
 }

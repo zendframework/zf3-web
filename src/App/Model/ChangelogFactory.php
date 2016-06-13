@@ -10,7 +10,7 @@ class ChangelogFactory
     public function __invoke(ContainerInterface $container)
     {
         return new Changelog(
-          new Parser(null, new CommonMarkParser())
+            new Parser(null, new CommonMarkParser())
         );
     }
 }

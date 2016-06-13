@@ -13,7 +13,7 @@ class LearnFactory
             ? $container->get(TemplateRendererInterface::class)
             : null;
         $zfComponents = $container->get('config')['zf_components'];
-        
+
         return new LearnAction($zfComponents, $template);
     }
 }

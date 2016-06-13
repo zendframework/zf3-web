@@ -25,7 +25,7 @@ class SwitchManualAction
 
         $docFile = $this->config['zf_document_path'][$newVer][$body->lang] . $body->page;
         if (! file_exists($docFile)) {
-            if (substr($newVer, 0, 3) === '1.1' ) {
+            if (substr($newVer, 0, 3) === '1.1') {
                 $body->page = 'manual.html';
             } elseif (substr($newVer, 0, 2) === '1.' || substr($newVer, 0, 2) === '2.') {
                 $body->page = 'index.html';

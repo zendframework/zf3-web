@@ -13,16 +13,16 @@ class Release
     const ARCHIVE_TAR = 'tar.gz';
     const ARCHIVE_ZIP = 'zip';
 
-    protected $archiveTypes = array(
+    protected $archiveTypes = [
         self::ARCHIVE_TAR,
         self::ARCHIVE_ZIP,
-    );
+    ];
     protected $languages;
     protected $mostRecentVersion;
     protected $normalizedVersions;
     protected $products;
     protected $releaseBasePath;
-    protected $releaseTemplates = array(
+    protected $releaseTemplates = [
         'framework-full-v0'    => '%s/ZendFramework-%s.%s',
         'framework-full'       => '%s/ZendFramework-%s/ZendFramework-%s.%s',
         'framework-minimal'    => '%s/ZendFramework-%s/ZendFramework-%s-minimal.%s',
@@ -30,7 +30,7 @@ class Release
         'framework-manual'     => '%s/ZendFramework-%s/ZendFramework-%s-manual-%s.%s',
         'framework-apidoc'     => '%s/ZendFramework-%s/ZendFramework-%s-apidoc.%s',
         'product'              => '%s/Zend%s-%s/Zend%s-%s.%s',
-    );
+    ];
     protected $sortedVersions;
     protected $versions;
 
@@ -55,8 +55,8 @@ class Release
         if (!is_array($languages) && !$languages instanceof Traversable) {
             throw new InvalidArgumentException('Invalid languages provided');
         }
-        $this->languages = array();
-        foreach ($languages  as $data) {
+        $this->languages = [];
+        foreach ($languages as $data) {
             if (!is_array($data) && !$data instanceof Traversable) {
                 throw new InvalidArgumentException('Invalid language specification provided');
             }
@@ -70,7 +70,7 @@ class Release
         if (!is_array($products) && !$products instanceof Traversable) {
             throw new InvalidArgumentException('Invalid products provided');
         }
-        $this->products = array();
+        $this->products = [];
         foreach ($products as $product => $data) {
             if (!is_array($data) && !$data instanceof Traversable) {
                 throw new InvalidArgumentException('Invalid product specification provided');
@@ -252,7 +252,7 @@ class Release
         $segments = explode('.', $version, 3);
         $major    = array_shift($segments);
         $minor    = array_shift($segments);
-        foreach (array('major' => $major, 'minor' => $minor) as $key => $value) {
+        foreach (['major' => $major, 'minor' => $minor] as $key => $value) {
             if (!is_numeric($value)) {
                 throw new InvalidArgumentException(sprintf(
                     '%s: Invalid %s version segment "%s"; must be numeric',
@@ -298,21 +298,21 @@ class Release
         }
 
         $template = $this->releaseTemplates['framework-full'];
-        $params   = array(
+        $params   = [
             $this->releaseBasePath,
             $version,
             $version,
             $format,
-        );
+        ];
         if (strnatcasecmp($version, '1.0.0') < 0
             || preg_match('/^1\.0\.0-rc1$/i', $version)
         ) {
             $template = $this->releaseTemplates['framework-full-v0'];
-            $params   = array(
+            $params   = [
                 $this->releaseBasePath,
                 $version,
                 $format,
-            );
+            ];
         }
 
         return vsprintf($template, $params);
@@ -386,7 +386,7 @@ class Release
                 return $languages;
             }
         }
-        return array();
+        return [];
     }
 
     /**
@@ -577,7 +577,7 @@ class Release
         $last  = $this->getCurrentStableVersion($last);
 
         $allVersions = $this->sortVersions();
-        $versions    = array();
+        $versions    = [];
         foreach ($allVersions as $version) {
             if (version_compare($version, $first, 'lt')) {
                 continue;
@@ -602,7 +602,7 @@ class Release
      */
     public function getProducts()
     {
-        $products = array();
+        $products = [];
         foreach ($this->products as $data) {
             $products[] = $data['product'];
         }
@@ -654,7 +654,7 @@ class Release
             return $this->normalizedVersions;
         }
 
-        $this->normalizedVersions = array();
+        $this->normalizedVersions = [];
         foreach ($this->versions as $version => $date) {
             $this->normalizedVersions[$this->normalizeVersion($version)] = $date;
         }
@@ -732,7 +732,7 @@ class Release
             return $this->sortedVersions;
         }
         $versions = array_keys($this->versions);
-        array_walk($versions, array($this, 'normalizeVersion'));
+        array_walk($versions, [$this, 'normalizeVersion']);
         if (!usort($versions, 'version_compare')) {
             throw new \DomainException('Sorting failed?');
         }

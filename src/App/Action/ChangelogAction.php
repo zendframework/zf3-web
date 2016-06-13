@@ -30,7 +30,7 @@ class ChangelogAction
         $content = $this->changelog->getFromFile($file);
         $content['layout'] = 'layout::default';
         $content['changelog'] = $changelog;
-        $content['versions'] = array_map(function($value){
+        $content['versions'] = array_map(function ($value) {
             return basename($value, '.md');
         }, array_keys($allChangelog));
         return new HtmlResponse($this->template->render("app::changelog", $content));

@@ -10,7 +10,7 @@ class IssueFactory
     public function __invoke(ContainerInterface $container)
     {
         return new Issue(
-          new Parser(null, new CommonMarkParser())
+            new Parser(null, new CommonMarkParser())
         );
     }
 }

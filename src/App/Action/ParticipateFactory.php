@@ -14,7 +14,7 @@ class ParticipateFactory
             : null;
         $zfComponents = $container->get('config')['zf_components'];
         $reviewTeam   = $container->get('config')['zf-review-team'];
-        
+
         return new ParticipateAction($zfComponents, $reviewTeam, $template);
     }
 }

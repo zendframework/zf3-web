@@ -9,8 +9,11 @@ use Zend\Expressive\Template;
 
 class ParticipateAction
 {
-    public function __construct(array $zfComponents, array $reviewTeam, Template\TemplateRendererInterface $template = null)
-    {
+    public function __construct(
+        array $zfComponents,
+        array $reviewTeam,
+        Template\TemplateRendererInterface $template = null
+    ) {
         $this->zfComponents = $zfComponents;
         $this->reviewTeam   = $reviewTeam;
         $this->template     = $template;

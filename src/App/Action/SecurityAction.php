@@ -41,7 +41,7 @@ class SecurityAction
             $totPages = ceil(count($allAdvisories) / self::ADVISORY_PER_PAGE);
 
             if ($page > $totPages || $page < 1) {
-              return new HtmlResponse($this->template->render('error::404'));
+                return new HtmlResponse($this->template->render('error::404'));
             }
             $nextPage = ($page === $totPages) ? 0 : $page + 1;
             $prevPage = ($page === 1) ? 0 : $page - 1;
@@ -75,7 +75,7 @@ class SecurityAction
         $first      = current($advisories);
         $feed->setDateModified($first['date']);
 
-        foreach($advisories as $id => $advisory) {
+        foreach ($advisories as $id => $advisory) {
             $content = $this->advisory->getFromFile($id);
             $entry = $feed->createEntry();
             $entry->setTitle($content['title']);

@@ -36,7 +36,7 @@ class BlogAction
         }
         $post = 'data/posts/' . basename($file, '.html') . '.md';
         if (! file_exists($post)) {
-          return new HtmlResponse($this->template->render('error::404'));
+            return new HtmlResponse($this->template->render('error::404'));
         }
 
         $content = $this->posts->getFromFile($post);
@@ -55,7 +55,7 @@ class BlogAction
         $totPages = ceil(count($allPosts) / self::POST_PER_PAGE);
 
         if ($page > $totPages || $page < 1) {
-          return new HtmlResponse($this->template->render('error::404'));
+            return new HtmlResponse($this->template->render('error::404'));
         }
         $nextPage = ($page === $totPages) ? 0 : $page + 1;
         $prevPage = ($page === 1) ? 0 : $page - 1;
@@ -84,7 +84,7 @@ class BlogAction
 
         $posts = array_slice($this->posts->getAll(), 0, self::POST_PER_FEED);
 
-        foreach($posts as $id => $post) {
+        foreach ($posts as $id => $post) {
             $content = $this->posts->getFromFile($id);
 
             $entry = $feed->createEntry();

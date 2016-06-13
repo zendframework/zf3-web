@@ -26,7 +26,7 @@ class StatisticsAction
             return new HtmlResponse($this->template->render('error::404'));
         }
         $stats = $this->config['zf_stats'];
-        uasort($stats, function($a, $b){
+        uasort($stats, function ($a, $b) {
             return ($a['total'] <=> $b['total']) * -1;
         });
         return new HtmlResponse($this->template->render('app::statistics', [ 'stats' => $stats ]));

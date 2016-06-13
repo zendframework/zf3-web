@@ -72,7 +72,7 @@ class IssueAction
         $totPages = ceil($totIssues / self::ISSUE_PER_PAGE);
 
         if ($page > $totPages || $page < 1) {
-          return new HtmlResponse($this->template->render('error::404'));
+            return new HtmlResponse($this->template->render('error::404'));
         }
         $nextPage = ($page === $totPages) ? 0 : $page + 1;
         $prevPage = ($page === 1) ? 0 : $page - 1;

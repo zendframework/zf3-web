@@ -23,8 +23,13 @@ class HomePageAction
 
     private $config;
 
-    public function __construct(ArrayObject $config, Model\Post $posts, Model\Advisory $advisories, Template\TemplateRendererInterface $template = null)
-    {
+    public function __construct(
+        ArrayObject $config,
+        Model\Post $posts,
+        Model\Advisory $advisories,
+        Template\TemplateRendererInterface $template = null
+    ) {
+
         $this->config     = $config;
         $this->posts      = $posts;
         $this->advisories = $advisories;

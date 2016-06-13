@@ -17,7 +17,7 @@ class HomePageFactory
         $post     = $container->get(Post::class);
         $advisory = $container->get(Advisory::class);
         $config   = $container->get('config');
-        
+
         return new HomePageAction($config, $post, $advisory, $template);
     }
 }

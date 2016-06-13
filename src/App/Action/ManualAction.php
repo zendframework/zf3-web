@@ -66,7 +66,7 @@ class ManualAction
 
         // Get current page link for select element with content list
         $getLinks = function ($pages) use (&$getLinks) {
-            $links = array();
+            $links = [];
             foreach ($pages as $key => $value) {
                 $links[] = $key;
                 if (is_array($value)) {
@@ -144,7 +144,7 @@ class ManualAction
      */
     protected function getOldV1PageContent($file)
     {
-        $pageContent = array();
+        $pageContent = [];
 
         $doc                    = new DomQuery(file_get_contents($file));
         $pageContent['body']    = '';
@@ -291,7 +291,7 @@ class ManualAction
      */
     protected function getV1PageContent($file)
     {
-        $pageContent            = array();
+        $pageContent            = [];
         $doc                    = new DomQuery(file_get_contents($file));
         $pageContent['body']    = '';
         $pageContent['sidebar'] = '';
@@ -528,7 +528,7 @@ class ManualAction
      */
     protected function getV2PageContent($file)
     {
-        $pageContent = array();
+        $pageContent = [];
         $doc         = new DomQuery(file_get_contents($file));
 
         // body
@@ -671,10 +671,10 @@ class ManualAction
     protected function getContentList($path, $version)
     {
         if ('1.1' === substr($version, 0, 3)) {
-            return array();
+            return [];
         }
         if ('1.' === substr($version, 0, 2)) {
-            return array();
+            return [];
         }
         return $this->getV2ContentList($path);
     }
@@ -686,9 +686,9 @@ class ManualAction
     protected function getV2ContentList($path)
     {
         // Create list
-        $list = array(
+        $list = [
             'index.html' => 'Programmer’s Reference Guide',
-        );
+        ];
         $doc  = new DomQuery(file_get_contents($path . 'index.html'));
 
         // Anonymous function for string replacement
@@ -713,7 +713,7 @@ class ManualAction
                 }
 
                 // Create optgroup
-                $list[$group] = array();
+                $list[$group] = [];
 
                 // Fetch subsections
                 $subSections = $xpath->query(
@@ -841,5 +841,4 @@ class ManualAction
 
         return null;
     }
-
 }
