@@ -39,9 +39,6 @@ class ManualAction
         $name = $page;
 
         // Create doc filename
-        if ('current' === $version) {
-            $version = $this->config['zf_latest_version'];
-        }
 
         $docFile = $this->config['zf_document_path'][$version][$lang] . $page;
 
