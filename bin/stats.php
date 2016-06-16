@@ -2,6 +2,12 @@
 chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
+if (!isset($argv[1])) {
+  printf("Usage: php %s <path/to/stat>\n", basename(__FILE__));
+  exit(1);
+}
+$fileStats = $argv[1];
+
 $fileZfComponents = 'config/autoload/zf-components.global.php';
 if (!file_exists($fileZfComponents)) {
     printf("Error: the %s file doesn't exist!\n", $fileZfComponents);
@@ -14,7 +20,6 @@ if (!isset($zfComponents['zf_components'])) {
     exit(1);
 }
 
-$fileStats = 'config/autoload/zf-stats.local.php';
 $stats = [ 'zf_stats' => [] ];
 if (file_exists($fileStats)) {
     $stats = require $fileStats;
@@ -47,10 +52,14 @@ foreach ($zfComponents['zf_components'] as $comp) {
 $stats['zf_stats']['total'] = $tot;
 $stats['zf_stats']['date']  = $date;
 
-// Write the stats file renaming the file for locking the reading
-if (file_exists($fileStats)) {
-    rename($fileStats, $fileStats . '.lock');
+// Store the stats and create the link under config/autoload
+file_put_contents($fileStats, '<?php return '. var_export($stats, true) . ';', LOCK_EX);
+$localConfig = 'config/autoload/zf-stats.local.php';
+if (file_exists($localConfig)) {
+  unlink($localConfig);
 }
-file_put_contents($fileStats . '.lock', '<?php return '. var_export($stats, true) . ';', LOCK_EX);
-rename($fileStats . '.lock', $fileStats);
+if (!symlink($fileStats, $localConfig)) {
+  printf("Error: I cannot create the link to %s\n", $fileStats);
+  exit(1);
+}
 printf("Total installs: %d\n", $tot);

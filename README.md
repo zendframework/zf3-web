@@ -64,8 +64,15 @@ statistics data we used the  [Packagist API](https://packagist.org/apidoc).
 You need to execute the following command to generate it:
 
 ```bash
-php bin/stats.php
+php bin/stats.php <path-to-stat-file>
 ```
+
+This script will save the statistics number in the `<path-to-stat-file>` and
+create a symlink to it in the `config/autoload/zf-stats.local.php` file.
+
+**Note:** if you have the config cache in place, remember to delete the cache
+file in order to get the updated statistics number.
+
 
 ## Update the website content
 
@@ -76,7 +83,3 @@ using the following command:
 ```bash
 php bin/build.php
 ```
-
-To update the statistics you should schedule the execution of the `bin/stats.php`
-script. For instance you can use [Cron](https://en.wikipedia.org/wiki/Cron) on a
-GNU/Linux environment and schedule the execution each hour.
