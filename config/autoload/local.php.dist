@@ -1,8 +1,7 @@
 <?php
 
 return [
-    'debug' => true,
+    'debug' => false,
     'zf_manual_basepath' => '<path to ZF manuals folder>',
-    'config_cache_enabled' => false,
-    'cache_dir' => '<path to cache folder>',
+    'config_cache_enabled' => false
 ];

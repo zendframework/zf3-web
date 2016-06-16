@@ -12,7 +12,8 @@ use Zend\Stdlib\Glob;
  * Obviously, if you use closures in your config you can't cache it.
  */
 
-$cachedConfigFile = 'data/cache/app_config.php';
+$cachePath = $_SERVER['APP_CACHE'] ?? 'data/cache';
+$cachedConfigFile = $cachePath . '/app_config.php';
 
 $config = [];
 if (is_file($cachedConfigFile)) {
@@ -26,6 +27,9 @@ if (is_file($cachedConfigFile)) {
 
     // Cache config if enabled
     if (isset($config['config_cache_enabled']) && $config['config_cache_enabled'] === true) {
+        if (!is_dir($cachePath)) {
+            mkdir($cachePath, 0775, true);
+        }
         file_put_contents($cachedConfigFile, '<?php return ' . var_export($config, true) . ';');
     }
 }

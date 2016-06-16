@@ -22,7 +22,33 @@ the following command:
 php bin/build.php
 ```
 
-After that you can execute the web site, for instance using the PHP web server:
+After you need to configure the `config/autoload/local.php` file:
+
+```bash
+cp config/autoload/local.php.dist config/autoload/local.php
+```
+
+Edit the local.php file and fill the fields with the right values:
+
+```php
+return [
+    'debug' => false,
+    'zf_manual_basepath' => '<path to ZF manuals folder>',
+    'config_cache_enabled' => false
+];
+```
+If you set true the `config_cache_enabled` remember to configure the ENV
+variable `APP_CACHE` in your webserver. For instance, using Nginx:
+
+```
+server {
+  ...
+  fastcgi_param APP_CACHE "<path to cache folder>";
+  ...
+}
+```
+
+Finally you can execute the web site, for instance using the PHP web server:
 
 ```bash
 $ composer serve
