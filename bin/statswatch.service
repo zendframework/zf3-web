@@ -2,7 +2,7 @@
 Description=Watch service for Zend Framework web site statistics
 
 [Service]
-ExecStart=/var/vhosts/framework.zend.com/htdocs/bin/watch.js
+ExecStart=/var/vhosts/framework.zend.com/htdocs/bin/watch.js /var/vhosts/framework.zend.com/htdocs/config/zf-stats.local.php /mnt/local/cache/framework.zend.com/app_config.php
 Restart=always
 User=www-data
 Group=www-data

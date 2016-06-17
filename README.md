@@ -84,6 +84,37 @@ node watch.js <file-to-watch> <file-cache-to-remove>
 where `<file-to-watch>` is the stat file to watch and `<file-cache-to-remove>`
 is the file cache to remove.
 
+This script can be easily configured as a service in GNU/Linux environments
+using [Systemd](https://en.wikipedia.org/wiki/Systemd).
+
+We provided a `bin/statswatch.system` configuration file to be used to execute
+the script as a service. First copy the `bin/statswatch.system` in your
+`/etc/systemd/system` directory:
+
+```bash
+sudo cp bin/statswatch.system /etc/systemd/system
+```
+
+Then we can refresh the systemd daemon and start the statswatch service:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start statswatch
+```
+
+To watch logs for `statswatch` in realtime:
+
+```bash
+sudo journalctl --follow -u statswatch
+```
+
+To start the service during the boot of the server:
+
+```bash
+sudo systemctl enable statswatch
+```
+
+
 ## Update the website content
 
 If you want to add or update content of the website related to blog, security
