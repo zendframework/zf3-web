@@ -16,7 +16,7 @@ if (!fileExists(fileName)) {
 }
 
 console.log("Watching file: " + fileName);
-fs.watch('test', (event, filename) => {
+fs.watch(fileName, (event, filename) => {
   if (event === 'change') {
     console.log("Delete the cache file: " + fileCache);
     fs.unlink(fileCache);
