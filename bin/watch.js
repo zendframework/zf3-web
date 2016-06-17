@@ -1,4 +1,4 @@
-// Watch the stat file and remove the cache file
+#!/usr/bin/env node
 var fs = require('fs');
 
 var args = process.argv.slice(2);
