@@ -16,11 +16,9 @@ if (!fileExists(fileName)) {
 }
 
 console.log("Watching file: " + fileName);
-fs.watch(fileName, (event, filename) => {
-  if (event === 'change') {
-    console.log("Delete the cache file: " + fileCache);
-    fs.unlink(fileCache);
-  }
+fs.watchFile(fileName, (curr, prev) => {
+  console.log("Delete the cache file: " + fileCache);
+  fs.unlink(fileCache);
 });
 
 function fileExists(filePath)
