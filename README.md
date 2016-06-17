@@ -72,8 +72,8 @@ create a symlink to it in the `config/autoload/zf-stats.local.php` file.
 
 When you update the stats file with the config cache enabled, you need to
 delete the cache file to get the new statistics numbers. In order to faciliate
-this process, we provided a (node.js)[https://nodejs.org/en/] script
-(`bin/watch.js`) that removes the cache file on each change of the file stat.
+this process, we provided a [node.js](https://nodejs.org/en/) script
+`bin/watch.js` that removes the cache file on each change of the file stat.
 
 You can execute the watch.js script using the following command:
 
