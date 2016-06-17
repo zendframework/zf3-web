@@ -70,9 +70,19 @@ php bin/stats.php <path-to-stat-file>
 This script will save the statistics number in the `<path-to-stat-file>` and
 create a symlink to it in the `config/autoload/zf-stats.local.php` file.
 
-**Note:** if you have the config cache in place, remember to delete the cache
-file in order to get the updated statistics number.
+When you update the stats file with the config cache enabled, you need to
+delete the cache file to get the new statistics numbers. In order to faciliate
+this process, we provided a (node.js)[https://nodejs.org/en/] script
+(`bin/watch.js`) that removes the cache file on each change of the file stat.
 
+You can execute the watch.js script using the following command:
+
+```bash
+node watch.js <file-to-watch> <file-cache-to-remove>
+```
+
+where `<file-to-watch>` is the stat file to watch and `<file-cache-to-remove>`
+is the file cache to remove.
 
 ## Update the website content
 
