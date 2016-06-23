@@ -6,7 +6,7 @@
     <meta name="author" content="Zend, a Rogue Wave Company">
     <link rel="shortcut icon" href="/ico/favicon.ico">
 
-    <title>Zend Framework - Home</title>
+    <title>Zend Framework - <?= $this->headTitle()->renderTitle() ?></title>
 
 
     <!-- Bootstrap core CSS -->
@@ -17,7 +17,7 @@
     <link href="/css/prism.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
-    <?php if (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')): ?>
+    <?php if (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) : ?>
     <link rel="stylesheet" href="/css/manual.css">
     <?php endif; ?>
 
