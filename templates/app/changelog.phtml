@@ -12,17 +12,20 @@
     <div class="row">
         <div class="col-lg-8">
             <h2>Changelog</h2>
-            <h3><?php echo $changelog ?> (<?php echo date("Y-m-d", $date) ?>)</h3>
-            <select id="version" onchange="window.location='/changelog/' + this.options[this.selectedIndex].value">
-              <?php foreach($versions as $ver): ?>
-                <option value="<?php echo $ver ?>" <?php if ($ver == $changelog) echo 'selected'; ?>><?php echo $ver ?></option>
-              <?php endforeach; ?>
-              </select>
-            <p><?php echo $body ?></p>
+
+            <h3><?= $changelog ?> (<?= date("Y-m-d", $date) ?>)</h3>
+
+            <select id="version" class="form-control" onchange="window.location='/changelog/' + this.options[this.selectedIndex].value">
+            <?php foreach ($versions as $ver) : ?>
+              <option value="<?= $ver ?>" <?= ($ver == $changelog) ? 'selected' : '' ?>><?= $ver ?></option>
+            <?php endforeach; ?>
+            </select>
+
+            <p><?= $body ?></p>
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::about-menu', [ 'active' => '/changelog' ]) ?>
+            <?= $this->render('include::about-menu', [ 'active' => '/changelog' ]) ?>
         </div>
     </div>
 </div>

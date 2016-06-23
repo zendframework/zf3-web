@@ -11,22 +11,54 @@
 <div class="container mtb">
     <div class="row">
         <div class="col-lg-8">
-            <p>
-              <strong>What version of PHP is Zend Framework 3 based on?</strong><br />
-              Zend Framework 3 runs on PHP 5.5+ and is optimized for PHP 7.
-            </p>
-            <p>
-              <strong>I’m starting a new project – which version of Zend Framework should I use?</strong><br />
-              Start using Zend Framework 3! It's already stable.
-            </p>
-            <p>
-              <strong>I have an application built with Zend Framework 2 – will I be able to migrate it to version 3?</strong><br />
-              Zend Framework 3 is almost backward compatible with ZF2, we said "almost" because there are few BC breaks. We put effort in the development of ZF3 in order to minimize these changes.
-            </p>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">What version of PHP is Zend Framework 3 based on?</h4>
+              </div>
+
+              <div class="panel-body">
+                <p>Zend Framework 3 depends on PHP 5.6+ and is optimized for PHP 7.</p>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">I’m starting a new project – which version of Zend Framework should I use?</h4>
+              </div>
+
+              <div class="panel-body">
+                <p>We recommend using either:</p>
+                <ul>
+                  <li><a href="https://docs.zendframework.com/zend-expressive/">Expressive</a>,
+                    which is currently stable at version 1.0.2. If you have never developed with
+                    Zend Framework before, or not comfortable with zend-mvc, we recommend Expressive.
+                  </li>
+
+                  <li>Zend Framework version 3, via the
+                    <a href="https://docs.zendframework.com/tutorials/getting-started/skeleton-application/">Skeleton
+                    Application</a>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">I have an application built with Zend Framework 2 – will I be able to migrate it to version 3?</h4>
+              </div>
+
+              <div class="panel-body">
+                <p>
+                  Development of Zend Framework 3 was highly focused on mitigating migration issues,
+                  and included a number of releases that provided forwards compatibility features
+                  to assist in migration. You can <a href="https://docs.zendframework.com/tutorials/migration/to-v3/overview/">read about migration in our documentation</a>.
+                </p>
+              </div>
+            </div>
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::about-menu', [ 'active' => '/about/faq' ]) ?>
+            <?php echo $this->render('include::about-menu', [ 'active' => '/about/faq' ]) ?>
         </div>
     </div>
 </div>

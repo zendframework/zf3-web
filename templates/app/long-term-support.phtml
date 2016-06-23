@@ -11,40 +11,45 @@
 <div class="container mtb">
     <div class="row">
         <div class="col-lg-8">
-            <h3></h3>
             <p>
               Periodically, we will announce a Long Term Support (LTS) version. LTS versions are supported for a duration of 3 years from the time of release with security and critical bug fixes.
             </p>
+
             <h3>Adopting an LTS version</h3>
+
             <p>
               Opting-in to an LTS version can be done by modifying the <a href="">Composer</a> requirement for Zend Framework:
-              <code class="lang-console hljs ruby">
-<span class="hljs-variable">$ </span>composer <span class="hljs-keyword">require</span> <span class="hljs-string">"zendframework/zendframework:~2.4.0"</span>
-</code>
             </p>
-            <p>
-    The above will modify your <kbd>composer.json</kbd> to pin to the semantic version <kbd>2.4.0</kbd>,
-    ensuring you only get updates in the 2.4 series. If you want to pin to a different LTS version,
-    specify the <kbd>X.Y.0</kbd> version for it instead.
-</p>
-            <h3>Versions</h3>
-            <table class="long-term-support">
-    <thead>
-        <tr>
-            <td class="version">Version</td>
-            <td class="release">Released</td>
-            <td class="lts">LTS Ends</td>
-        </tr>
-    </thead>
 
-    <tbody>
-        <tr>
-            <td class="version">Zend Framework 2.4</td>
-            <td class="release">2015-03-31</td>
-            <td class="lts">2018-03-31</td>
-        </tr>
-    </tbody>
-</table>
+            <pre><code class="lang-bash" data-trim>
+$ composer require "zendframework/zendframework:~2.4.0"
+            </code></pre>
+
+            <p>
+                The above will modify your <kbd>composer.json</kbd> to pin to the semantic version <kbd>2.4.0</kbd>,
+                ensuring you only get updates in the 2.4 series. If you want to pin to a different LTS version,
+                specify the <kbd>X.Y.0</kbd> version for it instead.
+            </p>
+
+            <h3>Versions</h3>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td class="version">Version</td>
+                        <td class="release">Released</td>
+                        <td class="lts">LTS Ends</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="version">Zend Framework 2.4</td>
+                        <td class="release">2015-03-31</td>
+                        <td class="lts">2018-03-31</td>
+                    </tr>
+                </tbody>
+            </table>
           </div>
 
           <div class="col-lg-4">
