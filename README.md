@@ -1,6 +1,6 @@
 # Zend Framework 3 web site
 
-[![Build Status](https://secure.travis-ci.org/ezimuel/zf3-web.svg?branch=master)](https://secure.travis-ci.org/ezimuel/zf3-web)
+[![Build Status](https://secure.travis-ci.org/zendframework/zf3-web.svg?branch=master)](https://secure.travis-ci.org/zendframework/zf3-web)
 
 This is the prototype version of the new Zend Framework web site.
 
