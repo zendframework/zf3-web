@@ -7,10 +7,11 @@
               <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
             </div>
             <div class="col-lg-8">
-              <h1>Zend Framework 3</h1>
-              <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7">PHP 7</a><br />Focused on Simplicity, Reusability and Performance</h3>
+              <h1>Zend Framework</h1>
+
+              <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
               <?php if ($stats > 0): ?>
-                <h2><?php echo number_format($stats); ?> installs from <a href="https://packagist.org/">Packagist</a>!</a></h2>
+              <h2><?php echo number_format($stats); ?> installs from <a href="https://packagist.org/">Packagist</a>!</a></h2>
               <?php endif; ?>
               <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
             </div>
@@ -23,27 +24,26 @@
         <div class="row centered">
             <div class="col-md-3">
                 <i class="fa fa-dashboard"></i>
-                <h4>High Performing</h4>
-                <p>Engineered with performance tuning in mind. Zend Framework 3 runs up to 4x than previous version.</p>
-
+                <h4>Performance</h4>
+                <p>Engineered with performance tuning in mind. Zend Framework 3 runs up to 4x faster than version 2 releases!</p>
             </div>
+
             <div class="col-md-3">
                 <i class="fa fa-gears"></i>
                 <h4>Extensible</h4>
-                <p>Open architecture based on Middleware or MVC. <a href="http://www.php-fig.org/">PHP-FIG</a> standard compliant.</p>
-
+                <p>Open architecture based on Middleware or MVC, following<br /><a href="http://www.php-fig.org/">PHP-FIG</a> standards.</p>
             </div>
+
             <div class="col-md-3">
                 <i class="fa fa-lock"></i>
                 <h4>Secure</h4>
-                <p>Built with security best practices in place. Store password using <a href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a> and encrypt with <a href="https://it.wikipedia.org/wiki/Advanced_Encryption_Standard">AES-256</a>.</p>
-
+                <p>Built with security best practices. Store passwords using <a href="https://en.wikipedia.org/wiki/Bcrypt">bcrypt</a>, encrypt with <a href="https://it.wikipedia.org/wiki/Advanced_Encryption_Standard">AES-256</a>, and more.</p>
             </div>
+
             <div class="col-md-3">
                 <i class="fa fa-building-o"></i>
                 <h4>Enterprise Ready</h4>
                 <p>A proven history of success running business critical and high-usage applications. Ready for <a href="http://www.zend.com/en/resources/php-7">PHP 7</a>.</p>
-
             </div>
         </div>
     </div>
@@ -51,7 +51,6 @@
 
 <div class="container mtb">
     <div class="row">
-
         <div class="col-lg-4">
             <h4>Latest blog posts <small>( <a href="/blog">full list</a> )</small></h4>
             <div class="hline"></div>
@@ -59,6 +58,7 @@
                 <p><a href="<?php echo $post['permalink'] ?>"><?php echo $post['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
+
         <div class="col-lg-5">
             <h4>Latest security advisories <small>( <a href="/security/advisories">full list</a> )</small></h4>
             <div class="hline"></div>
@@ -66,14 +66,22 @@
                 <p><a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisor['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
+
         <div class="col-lg-3">
             <h4>Issues and Security</h4>
             <div class="hline"></div>
-            <p><i class="fa fa-github fa-2x"></i> Did you find an issue in Zend Framework?<br />
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal" style="width:100%">Please report here!</button><br />
+
+            <p>
+                <i class="fa fa-github fa-2x pull-left"></i>Have you found a bug in Zend Framework?<br />
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal" style="width:100%">Report here!</button>
+            </p>
+
             <div class="spacing"></div>
-            <p><i class="fa fa-bug fa-2x"></i> Did you find a security vulnerability in ZF?
-            Please report it to us at <a href="mailto:zf-security@zend.com">zf-security@zend.com</a></p>
+
+            <p>
+                <i class="fa fa-bug fa-2x pull-left"></i> Have you identified a security vulnerability in ZF?<br />
+                Please report it to us at <br /><a href="mailto:zf-security@zend.com">zf-security@zend.com</a>
+            </p>
         </div>
     </div>
     <div class="spacing"></div>
@@ -85,7 +93,7 @@
     <div class="container centered">
         <div class="row">
           <div class="col-lg-12">
-              <h2>Welcome to ZendCon 2016, October 18-21, Las Vegas</h2>
+              <h2>Welcome to ZendCon 2016,<br />October 18&ndash;21, Las Vegas</h2>
               <div class="spacing"></div>
               <a href="http://www.zendcon.com"><img src="img/zendcon.png" alt="ZendCon 2016" title="ZendCon 2016"></a>
           </div>
@@ -127,7 +135,7 @@
             <div class="col-lg-12">
                 <h1 align="center">Get certified!</h1>
                 <h4>Becoming a Zend Certified Engineer is a measure of your experience in the world of PHP.</h4>
-                <h4>Take a look at the specific PHP and Zend Framework certifications.</h4>
+                <h4>Take a look at our PHP and Zend Framework certifications!</h4>
             </div>
         </div>
         <div class="spacing"></div>
