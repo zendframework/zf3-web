@@ -21,29 +21,21 @@ if (!isset($zfComponents['zf_components'])) {
 }
 
 $stats = [ 'zf_stats' => [] ];
-if (file_exists($fileStats)) {
-    $stats = require $fileStats;
-}
+
 printf("Generating the stats from packagist.org:\n");
 $tot = 0;
 foreach ($zfComponents['zf_components'] as $comp) {
     $name   = basename($comp['url']);
     $apiUrl = sprintf("https://packagist.org/packages/zendframework/%s.json", $name);
-    if (!isset($stats['zf_stats'][$name])) {
-        $stats['zf_stats'][$name] = 0;
-    }
     printf("%s...", $name);
     $json = json_decode(file_get_contents($apiUrl));
     $date = time();
     if (!empty($json)) {
-        $total = (int) $json->package->downloads->total;
-        if ($total > $stats['zf_stats'][$name]) {
-            $stats['zf_stats'][$name] = [
-                'daily'   => (int) $json->package->downloads->daily,
-                'monthly' => (int) $json->package->downloads->monthly,
-                'total'   => (int) $json->package->downloads->total
-            ];
-        }
+        $stats['zf_stats'][$name] = [
+            'daily'   => (int) $json->package->downloads->daily,
+            'monthly' => (int) $json->package->downloads->monthly,
+            'total'   => (int) $json->package->downloads->total
+        ];
     }
     printf("done\n");
     $tot += $stats['zf_stats'][$name]['total'];
