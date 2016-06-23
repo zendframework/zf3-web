@@ -12,13 +12,32 @@
     <div class="row">
         <div class="col-lg-8">
             <h2>Get started</h2>
-            <p>Installation of Zend Framework 3 is only a <a href="http://getcomposer.org">Composer</a> command away:</p>
-            <pre><code class="language-bash">composer require zendframework/zendframework</code></pre>
-            <p>This will install all the <strong><?php echo count($require) - 1 ?></strong>  packages required in <a href="<?php echo $composerUrl ?>">composer.json</a>. All the Zend packages can be installed individually. For instance, if you need only the MVC package, you can install with the following command:</p>
-            <pre><code class="language-bash">composer require zendframework/zend-mvc</code></pre>
+
+            <p>Installation of Zend Framework is only a <a href="http://getcomposer.org">Composer</a> command away:</p>
+
+            <pre><code class="lang-bash" data-trim>$ composer require zendframework/zendframework</code></pre>
+
+            <p>
+              This will install all <strong><?= count($require) - 1 ?></strong>
+              packages required in <a href="<?= $composerUrl ?>">composer.json</a>.
+              Alternately, all Zend Framework packages can be installed individually; for
+              instance, if you need only the MVC package, you can install with the following
+              command:
+            </p>
+
+            <pre><code class="lang-bash">$ composer require zendframework/zend-mvc</code></pre>
+
             <p>A list of all the packages can be found in the <a href="/learn">documentation page</a>.</p>
+
             <h2>Zend Server</h2>
-            <p>If you are looking for a professional solution with Monitoring and Root-cause analysis, Job Queue, Code tracing, Caching, etc you can download the <strong>30-day trial free edition of Zend Server</strong>.</p>
+
+            <p>
+                If you are looking for a professional solution with monitoring
+                and root-cause analysis, job queues, code tracing, caching,
+                etc., you can download the <strong>30-day trial, free edition
+                of Zend Server</strong>.
+            </p>
+
             <div class="server-download">
                 <div class="zend-blocks">
                     <img src="/images/ZF-Server-boxes-120x185px.png">
@@ -46,7 +65,7 @@
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::download-menu', [ 'active' => '/downloads' ]) ?>
+            <?= $this->render('include::download-menu', [ 'active' => '/downloads' ]) ?>
         </div>
     </div>
 </div>
