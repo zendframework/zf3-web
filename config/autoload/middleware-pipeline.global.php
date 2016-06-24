@@ -1,12 +1,15 @@
 <?php
+use App\Action\StripTrailingSlashMiddleware;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'dependencies' => [
         'factories' => [
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
+            StripTrailingSlashMiddleware::class => InvokableFactory::class,
         ],
     ],
     // This can be used to seed pre- and/or post-routing middleware
@@ -39,6 +42,7 @@ return [
                 // - bootstrapping
                 // - pre-conditions
                 // - modifications to outgoing responses
+                StripTrailingSlashMiddleware::class,
                 Helper\ServerUrlMiddleware::class,
             ],
             'priority' => 10000,

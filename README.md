@@ -19,28 +19,30 @@ After you need to build the configuration and cache files of the web site using
 the following command:
 
 ```bash
-php bin/build.php
+$ php bin/build.php
 ```
 
-After you need to configure the `config/autoload/local.php` file:
+Next, configure the `config/autoload/local.php` file:
 
 ```bash
-cp config/autoload/local.php.dist config/autoload/local.php
+$ cp config/autoload/local.php.dist config/autoload/local.php
 ```
 
-Edit the local.php file and fill the fields with the right values:
+Edit the `config/autoload/local.php` file and fill the fields with the right
+values:
 
 ```php
 return [
     'debug' => false,
     'zf_manual_basepath' => '<path to ZF manuals folder>',
-    'config_cache_enabled' => false
+    'config_cache_enabled' => false,
 ];
 ```
-If you set true the `config_cache_enabled` remember to configure the ENV
-variable `APP_CACHE` in your webserver. For instance, using Nginx:
 
-```
+If you enable `config_cache_enabled`, you will need to configure the ENV
+variable `APP_CACHE` in the file `.docker/nginx/default.conf`:
+
+```nginx
 server {
   ...
   fastcgi_param APP_CACHE "<path to cache folder>";
@@ -48,13 +50,25 @@ server {
 }
 ```
 
-Finally you can execute the web site, for instance using the PHP web server:
+## Docker
+
+For development, we use [docker-compose](https://docs.docker.com/compose/);
+make sure you have both that and Docker installed on your machine.
+
+Build the images:
 
 ```bash
-$ composer serve
+$ docker-compose build
 ```
 
-You can then browse to http://localhost:8080.
+And then launch them:
+
+```bash
+$ docker-compose up -d
+```
+
+You can then browse to http://localhost:8080, and any changes you make in the
+project will be reflected immediately.
 
 ## Stats and statistics pages
 
@@ -64,7 +78,7 @@ statistics data we used the  [Packagist API](https://packagist.org/apidoc).
 You need to execute the following command to generate it:
 
 ```bash
-php bin/stats.php <path-to-stat-file>
+$ php bin/stats.php <path-to-stat-file>
 ```
 
 This script will save the statistics number in the `<path-to-stat-file>` and
@@ -75,10 +89,10 @@ delete the cache file to get the new statistics numbers. In order to faciliate
 this process, we provided a [node.js](https://nodejs.org/en/) script
 `bin/watch.js` that removes the cache file on each change of the file stat.
 
-You can execute the watch.js script using the following command:
+You can execute the `watch.js` script using the following command:
 
 ```bash
-node watch.js <file-to-watch> <file-cache-to-remove>
+$ node watch.js <file-to-watch> <file-cache-to-remove>
 ```
 
 where `<file-to-watch>` is the stat file to watch and `<file-cache-to-remove>`
@@ -92,35 +106,34 @@ the script as a service. First copy the `bin/statswatch.system` in your
 `/etc/systemd/system` directory:
 
 ```bash
-sudo cp bin/statswatch.system /etc/systemd/system
+$ sudo cp bin/statswatch.system /etc/systemd/system
 ```
 
 Then we can refresh the systemd daemon and start the statswatch service:
 
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl start statswatch
+$ sudo systemctl daemon-reload
+$ sudo systemctl start statswatch
 ```
 
 To watch logs for `statswatch` in realtime:
 
 ```bash
-sudo journalctl --follow -u statswatch
+$ sudo journalctl --follow -u statswatch
 ```
 
 To start the service during the boot of the server:
 
 ```bash
-sudo systemctl enable statswatch
+$ sudo systemctl enable statswatch
 ```
-
 
 ## Update the website content
 
-If you want to add or update content of the website related to blog, security
-advisories, issues or changelog, you need to re-build the configuration files
+Any time you add or update content of the website related to the blog, security
+advisories, issues, or changelogs, you need to re-build the configuration files
 using the following command:
 
 ```bash
-php bin/build.php
+$ php bin/build.php
 ```
