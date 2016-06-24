@@ -12,19 +12,46 @@
     <div class="row">
         <div class="col-lg-8">
             <h2>Expressive Skeleton Application</h2>
-            <p>Zend Framework 3 gives you the possibility to develop PHP application using <a href="https://github.com/zendframework/zend-stratigility/blob/master/doc/book/middleware.md">Middleware</a> based on <a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> standard. You can easily install the skeleton using <a href="https://getcomposer.org/">composer</a> with the following command:</p>
-            <pre><code class="language-bash"> composer create-project zendframework/zend-expressive-skeleton path/to/install</code></pre>
-            <p>Where path/to/install is the path where to install the skeleton source code.</p>
-            <p>After the installation you can run the skeleton using the following command:</p>
-            <pre><code class="language-bash">cd path/to/install
-composer serve</code></pre>
-            <p>This will run the skeleton using the internal PHP web server on localhost at port 8080.<br />Open you browser at <a href="http://localhost:8080">http://localhost:8080</a> and you will see the following home page (if you installed the full skeleton):</p>
+
+            <p>
+                Zend Framework allows you to develop PHP
+                applications using <a href="https://docs.zendframework.com/zend-stratigility/middleware/">Middleware</a>
+                based on the <a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a>
+                HTTP Messages interfaces standard. Install the Expressive skeleton using
+                <a href="https://getcomposer.org/">composer</a> with the following
+                command:
+            </p>
+
+            <pre><code class="language-bash">$ composer create-project zendframework/zend-expressive-skeleton path/to/install</code></pre>
+
+            <p>Where <code>path/to/install</code> is the path where you wish to create your new application.</p>
+
+            <p>After installation, you can run the skeleton using the following command:</p>
+
+            <pre><code class="language-bash" data-trim>
+$ cd path/to/install
+$ composer serve
+            </code></pre>
+
+            <p>
+                This will run the skeleton using the internal PHP web server on localhost at port 8080.
+            </p>
+            
+            <p>
+                Open your browser to http://localhost:8080, and you should see the
+                following home page (if you installed the full skeleton):
+            </p>
+
             <img src="/img/expressive-skeleton.jpg">
-            <p>Check out the <a href="https://zendframework.github.io/zend-expressive/">zend-expressive</a> web site for more information!</p>
+
+            <p>
+                Check out the <a href="https://docs.zendframework.com/zend-expressive/">zend-expressive</a>
+                web site for more information!
+            </p>
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::download-menu', [ 'active' => '/downloads/expressive' ]) ?>
+            <?= $this->render('include::download-menu', [ 'active' => '/downloads/expressive' ]) ?>
         </div>
     </div>
 </div>
