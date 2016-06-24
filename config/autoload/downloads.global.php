@@ -1,47 +1,47 @@
 <?php
 return [
-  'downloads' => array(
+  'downloads' => [
         'release_base_path' => 'https://packages.zendframework.com/releases/',
-        'manual_languages' => array(
-            array(
-                'version_match' => array(
+        'manual_languages' => [
+            [
+                'version_match' => [
                     'min' => '1.0.0rc3',
                     'max' => '2.0.0rc1',
-                ),
-                'languages' => array(
+                ],
+                'languages' => [
                     'en',
                     'de',
                     'fr',
                     'ja',
                     'ru',
                     'zh',
-                ),
-            ),
-            array(
-                'version_match' => array(
+                ],
+            ],
+            [
+                'version_match' => [
                     'min' => '2.0.0rc1',
                     'max' => false,
-                ),
-                'languages' => array(
+                ],
+                'languages' => [
                     'en',
-                ),
-            ),
-        ),
-        'products' => array(
-            'AMF' => array(
+                ],
+            ],
+        ],
+        'products' => [
+            'AMF' => [
                 'first'  => '1.7.0',
                 'latest' => '1',
-            ),
-            'Gdata' => array(
+            ],
+            'Gdata' => [
                 'first'  => '0.2.0',
                 'latest' => '1',
-            ),
-            'InfoCard' => array(
+            ],
+            'InfoCard' => [
                 'first'  => '1.5.0',
                 'latest' => '1',
-            ),
-        ),
-        'versions' => array(
+            ],
+        ],
+        'versions' => [
             '2.0.0rc6'  => '2012-08-29',
             '2.0.0rc5'  => '2012-08-23',
             '2.0.0rc4'  => '2012-08-17',
@@ -156,6 +156,6 @@ return [
             '0.1.3'     => '2006-04-18',
             '0.1.2'     => '2006-03-08',
             '0.1.1'     => '2006-03-03',
-        ),
-    )
+        ],
+    ]
 ];

@@ -9,11 +9,11 @@ if (!isset($config['zf_manual_basepath'])) {
 }
 $paths         = [];
 $zf1ManualPath = $config['zf_manual_basepath'] . '/ZendFramework-%s/documentation/manual/core/%s/';
-$zf1langs      = array('en', 'de', 'fr', 'ru', 'ja', 'zh');
+$zf1langs      = ['en', 'de', 'fr', 'ru', 'ja', 'zh'];
 $zf1versions   = include __DIR__ . '/zf1-manual-versions.php';
 
 foreach ($zf1versions as $minorVersion => $specificVersion) {
-    $paths[$minorVersion] = array();
+    $paths[$minorVersion] = [];
     foreach ($zf1langs as $lang) {
         $paths[$minorVersion][$lang] = sprintf($zf1ManualPath, $specificVersion, $lang);
     }
@@ -21,9 +21,9 @@ foreach ($zf1versions as $minorVersion => $specificVersion) {
 
 $zf2ManualPath = $config['zf_manual_basepath'] . '/ZendFramework-%s/manual/%s/';
 $zf2versions    = include __DIR__ . '/zf2-manual-versions.php';
-$zf2langs       = array('en');
+$zf2langs       = ['en'];
 foreach ($zf2versions as $minorVersion => $specificVersion) {
-    $paths[$minorVersion] = array();
+    $paths[$minorVersion] = [];
     foreach ($zf2langs as $lang) {
         $paths[$minorVersion][$lang] = sprintf($zf2ManualPath, $specificVersion, $lang);
     }
