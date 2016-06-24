@@ -4,16 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-              <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
+                <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
             </div>
-            <div class="col-lg-8">
-              <h1>Zend Framework</h1>
 
-              <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
-              <?php if ($stats > 0): ?>
-              <h2><?php echo number_format($stats); ?> installs from <a href="https://packagist.org/">Packagist</a>!</a></h2>
-              <?php endif; ?>
-              <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
+            <div class="col-lg-8">
+                <h1>Zend Framework</h1>
+
+                <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
+                <?php if ($stats > 0) : ?>
+                <h2><?= number_format($stats); ?> installs from <a href="https://packagist.org/" class="text-info">Packagist</a>!</a></h2>
+                <?php endif; ?>
+                <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
             </div>
         </div>
     </div>
@@ -54,16 +55,16 @@
         <div class="col-lg-4">
             <h4>Latest blog posts <small>( <a href="/blog">full list</a> )</small></h4>
             <div class="hline"></div>
-            <?php foreach($posts as $post): ?>
-                <p><a href="<?php echo $post['permalink'] ?>"><?php echo $post['title'] ?></a></p>
+            <?php foreach ($posts as $post) : ?>
+                <p><a href="<?= $post['permalink'] ?>"><?= $post['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
 
         <div class="col-lg-5">
             <h4>Latest security advisories <small>( <a href="/security/advisories">full list</a> )</small></h4>
             <div class="hline"></div>
-            <?php foreach($advisories as $key => $advisor): ?>
-                <p><a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisor['title'] ?></a></p>
+            <?php foreach ($advisories as $key => $advisor) : ?>
+                <p><a href="/security/advisory/<?= basename($key, '.md') ?>"><?= $advisor['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
 
@@ -87,7 +88,7 @@
     <div class="spacing"></div>
 </div>
 
-<?php echo $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>
+<?= $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>
 
 <div id="zendcon">
     <div class="container centered">
@@ -150,20 +151,20 @@
                 <a href="http://www.zend.com/en/services/certification"><img src="img/zf1cert.png" alt="Zend Framework 1 Certified Engineer" title="Zend Framework 1 Certified Engineer"></a>
             </div>
         </div>
-    </div><!-- --/container ---->
+    </div>
 </div>
 
 <div id="portfoliowrap">
     <div class="portfolio-centered">
         <h2>Who uses Zend Framework?</h2>
         <div class="recentitems portfolio">
-            <?php foreach($projects as $project): ?>
+            <?php foreach ($projects as $project) : ?>
                 <div class="portfolio-item graphic-design">
                     <div class="he-wrap tpl6">
                     <img src="/img/clients/<?= $project['img']; ?>" alt="">
                         <div class="he-view">
                             <div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown"><?= $project['name']; ?><br /><font size="-1">(<?= $project['country']; ?>)</font></h3>
+                                <h3 class="a1" data-animate="fadeInDown"><?= $project['name']; ?><br /><font size="-1">(<?= $project['country'] ?>)</font></h3>
                                 <a href="<?= $project['url']; ?>" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
                             </div>
                         </div>
@@ -176,82 +177,82 @@
 
 <?php $this->inlineScript()->captureStart(); ?>
 (function($) {
-	"use strict";
-	var $container = $('.portfolio'),
-		$items = $container.find('.portfolio-item'),
-		portfolioLayout = 'fitRows';
+    "use strict";
+    var $container = $('.portfolio'),
+        $items = $container.find('.portfolio-item'),
+        portfolioLayout = 'fitRows';
 
-		if( $container.hasClass('portfolio-centered') ) {
-			portfolioLayout = 'masonry';
-		}
+        if( $container.hasClass('portfolio-centered') ) {
+            portfolioLayout = 'masonry';
+        }
 
-		$container.isotope({
-			filter: '*',
-			animationEngine: 'best-available',
-			layoutMode: portfolioLayout,
-			animationOptions: {
-			duration: 750,
-			easing: 'linear',
-			queue: false
-		},
-		masonry: {
-		}
-		}, refreshWaypoints());
+        $container.isotope({
+            filter: '*',
+            animationEngine: 'best-available',
+            layoutMode: portfolioLayout,
+            animationOptions: {
+            duration: 750,
+            easing: 'linear',
+            queue: false
+        },
+        masonry: {
+        }
+        }, refreshWaypoints());
 
-		function refreshWaypoints() {
-			setTimeout(function() {
-			}, 1000);
-		}
+        function refreshWaypoints() {
+            setTimeout(function() {
+            }, 1000);
+        }
 
-		$('nav.portfolio-filter ul a').on('click', function() {
-				var selector = $(this).attr('data-filter');
-				$container.isotope({ filter: selector }, refreshWaypoints());
-				$('nav.portfolio-filter ul a').removeClass('active');
-				$(this).addClass('active');
-				return false;
-		});
+        $('nav.portfolio-filter ul a').on('click', function() {
+                var selector = $(this).attr('data-filter');
+                $container.isotope({ filter: selector }, refreshWaypoints());
+                $('nav.portfolio-filter ul a').removeClass('active');
+                $(this).addClass('active');
+                return false;
+        });
 
-		function getColumnNumber() {
-			var winWidth = $(window).width(),
-			columnNumber = 1;
+        function getColumnNumber() {
+            var winWidth = $(window).width(),
+            columnNumber = 1;
 
-			if (winWidth > 1200) {
-				columnNumber = 5;
-			} else if (winWidth > 950) {
-				columnNumber = 4;
-			} else if (winWidth > 600) {
-				columnNumber = 3;
-			} else if (winWidth > 400) {
-				columnNumber = 2;
-			} else if (winWidth > 250) {
-				columnNumber = 1;
-			}
-				return columnNumber;
-			}
+            if (winWidth > 1200) {
+                columnNumber = 5;
+            } else if (winWidth > 950) {
+                columnNumber = 4;
+            } else if (winWidth > 600) {
+                columnNumber = 3;
+            } else if (winWidth > 400) {
+                columnNumber = 2;
+            } else if (winWidth > 250) {
+                columnNumber = 1;
+            }
+                return columnNumber;
+            }
 
-			function setColumns() {
-				var winWidth = $(window).width(),
-				columnNumber = getColumnNumber(),
-				itemWidth = Math.floor(winWidth / columnNumber);
+            function setColumns() {
+                var winWidth = $(window).width(),
+                columnNumber = getColumnNumber(),
+                itemWidth = Math.floor(winWidth / columnNumber);
 
-				$container.find('.portfolio-item').each(function() {
-					$(this).css( {
-					width : itemWidth + 'px'
-				});
-			});
-		}
+                $container.find('.portfolio-item').each(function() {
+                    $(this).css( {
+                    width : itemWidth + 'px'
+                });
+            });
+        }
 
-		function setPortfolio() {
-			setColumns();
-			$container.isotope('reLayout');
-		}
+        function setPortfolio() {
+            setColumns();
+            $container.isotope('reLayout');
+        }
 
-		$container.imagesLoaded(function () {
-			setPortfolio();
-		});
+        $container.imagesLoaded(function () {
+            setPortfolio();
+        });
 
-		$(window).on('resize', function () {
-		  setPortfolio();
-	  });
+        $(window).on('resize', function () {
+          setPortfolio();
+      });
 })(jQuery);
 <?php $this->inlineScript()->captureEnd(); ?>
