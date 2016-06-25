@@ -16,7 +16,7 @@ class StripTrailingSlashMiddleware
         $uri = $request->getUri();
         $path = $uri->getPath();
 
-        if (preg_match('#/$#', $path)) {
+        if ('/' !== $path && preg_match('#/$#', $path)) {
             return new RedirectResponse(
                 (string) $uri->withPath(rtrim($path, '/')),
                 301
