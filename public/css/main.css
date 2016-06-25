@@ -151,6 +151,11 @@
   padding-right: 0;
 }
 
+.panel-component .panel-heading,
+.panel-component .panel-footer {
+  background-color: transparent;
+}
+
 .panel-component .panel-body {
-  min-height: 212px;
+  min-height: 144px;
 }
