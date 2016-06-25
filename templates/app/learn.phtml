@@ -21,14 +21,20 @@ reset($components);
                 <a href="https://getcomposer.org">Composer</a>.
             </p>
 
-        <div class="col-md-11 panel panel-default">
-            <h3><a href="https://docs.zendframework.com/tutorials/">Tutorials</a></h3>
-            
-            <p>
-                We provide tutorials for getting started with zend-mvc,
-                understanding advanced topics of many components, and migration
-                from version 2 to version 3.
-            </p>
+        <div class="col-md-11 panel panel-default panel-tutorial">
+            <div class="panel-body">
+                <h3><a href="https://docs.zendframework.com/tutorials/">Tutorials</a></h3>
+                
+                <p>
+                    We provide tutorials for getting started with zend-mvc,
+                    understanding advanced topics of many components, and migration
+                    from version 2 to version 3.
+                </p>
+            </div>
+
+            <div class="panel-footer">
+                <span class="pull-right"><i class="fa fa-book"></i>&nbsp;<a href="https://docs.zendframework.com/tutorials/">Read tutorials</a></span>
+            </div>
         </div>
 
         <?php while ($comp = next($components)) : ?>
@@ -61,8 +67,8 @@ reset($components);
                     </div>
 
                     <div class="panel-footer">
-                        <span class="pull-left"><i class="fa fa-github"></i> <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a></span>
-                        <span class="pull-right"><i class="fa fa-book"></i> <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a></span>
+                        <span class="pull-left"><i class="fa fa-github"></i>&nbsp;<a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a></span>
+                        <span class="pull-right"><i class="fa fa-book"></i>&nbsp;<a href="<?= $comp['url'] ?>" target="_blank">Documentation</a></span>
                     </div>
                 </div>
                 <?php endif ?>

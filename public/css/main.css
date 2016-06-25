@@ -146,13 +146,14 @@
   top: 0px;
 }
 
-.panel-component {
+.panel-component, .panel-tutorial {
   padding-left: 0;
   padding-right: 0;
 }
 
 .panel-component .panel-heading,
-.panel-component .panel-footer {
+.panel-component .panel-footer,
+.panel-tutorial .panel-footer {
   background-color: transparent;
 }
 
