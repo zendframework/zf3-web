@@ -145,3 +145,12 @@
   right: 0;
   top: 0px;
 }
+
+.panel-component {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.panel-component .panel-body {
+  min-height: 212px;
+}
