@@ -1,10 +1,4 @@
 <?php return [ "zf_components" => array (
-  0 => 
-  array (
-    'name' => 'Tutorials',
-    'url' => 'https://docs.zendframework.com/tutorials',
-    'description' => 'Learn how to create zend-mvc applications, get in-depth guides into components, and discover how to migrate your applications to version 3!',
-  ),
   1 => 
   array (
     'name' => 'Authentication',
