@@ -99,109 +99,109 @@ Configuration changes are only necessary if (a) you are upgrading from a previou
 
 For the `UrlHelper`, you will need to make the following additions to the `config/autoload/middleware-pipeline.global.php` file:
 
+```php
+use Zend\Expressive\Helper;
 
-    <code class="language-php">use Zend\Expressive\Helper;
-
-    return [
-        'dependencies' => [
-            'factories' => [
-                /* ... */
-                Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
-            ],
+return [
+    'dependencies' => [
+        'factories' => [
+            /* ... */
+            Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
         ],
-        'middleware_pipeline' => [
-            'pre_routing' => [
-                // This entry was originally just for the ServerUrlMiddleware;
-                // make it an array listing both that and the UrlHelperMiddleware,
-                // as below:
-                [
-                    'middleware' => [
-                        Helper\ServerUrlMiddleware::class,
-                        Helper\UrlHelperMiddleware::class,
-                    ],
+    ],
+    'middleware_pipeline' => [
+        'pre_routing' => [
+            // This entry was originally just for the ServerUrlMiddleware;
+            // make it an array listing both that and the UrlHelperMiddleware,
+            // as below:
+            [
+                'middleware' => [
+                    Helper\ServerUrlMiddleware::class,
+                    Helper\UrlHelperMiddleware::class,
                 ],
-                /* ... */
             ],
-            'post_routing' => [
-                /* ... */
-            ],
+            /* ... */
         ],
-        /* ... */
-    ];
-
+        'post_routing' => [
+            /* ... */
+        ],
+    ],
+    /* ... */
+];
+```
 
 #### Twig changes
 
 In the Twig configuration file, `config/autoload/templates.global.php`, originally the structure was as follows:
 
-
-    <code class="language-php">return [
-        'dependencies' => [ /* ... */ ],
-        'templates' => [
-            'extension' => 'html.twig',
-            'cache_dir' => 'data/cache/twig',
-            'assets_url' => '/',
-            'assets_version' => null,
-            'paths' => [
-                'app' => ['templates/app'],
-                'layout' => ['templates/layout'],
-                'error' => ['templates/error'],
-            ],
+```php
+return [
+    'dependencies' => [ /* ... */ ],
+    'templates' => [
+        'extension' => 'html.twig',
+        'cache_dir' => 'data/cache/twig',
+        'assets_url' => '/',
+        'assets_version' => null,
+        'paths' => [
+            'app' => ['templates/app'],
+            'layout' => ['templates/layout'],
+            'error' => ['templates/error'],
         ],
-    ];
-
+    ],
+];
+```
 
 While this will continue to work, we recommend updating to the following structure:
 
-
-    <code class="language-php">return [
-        'dependencies' => [ /* ... */ ],
-        'templates' => [
-            'extension' => 'html.twig',
-            'paths' => [
-                'app' => ['templates/app'],
-                'layout' => ['templates/layout'],
-                'error' => ['templates/error'],
-            ],
+```php
+return [
+    'dependencies' => [ /* ... */ ],
+    'templates' => [
+        'extension' => 'html.twig',
+        'paths' => [
+            'app' => ['templates/app'],
+            'layout' => ['templates/layout'],
+            'error' => ['templates/error'],
         ],
-        'twig' => [
-            'cache_dir' => 'data/cache/twig',
-            'assets_url' => '/',
-            'assets_version' => null,
-            'extensions' => [
-                // extension service names or instances
-            ],
+    ],
+    'twig' => [
+        'cache_dir' => 'data/cache/twig',
+        'assets_url' => '/',
+        'assets_version' => null,
+        'extensions' => [
+            // extension service names or instances
         ],
-    ];
-
+    ],
+];
+```
 
 #### zend-view changes
 
 If you are upgrading from a previous release candidate, we recommend making the following changes to your `config/autoload/templates.global.php` file:
 
-
-    <code class="language-php">return [
-        'dependencies' => [
-            'factories' => [
-                /* ... */
-                Zend\View\HelperPluginManager::class =>
-                    Zend\Expressive\ZendView\HelperPluginManagerFactory::class,
-            ],
-        ],
-
-        'templates' => [
+```php
+return [
+    'dependencies' => [
+        'factories' => [
             /* ... */
+            Zend\View\HelperPluginManager::class =>
+                Zend\Expressive\ZendView\HelperPluginManagerFactory::class,
         ],
+    ],
 
-        // Also, add this key, to provide a place to register view helpers:
-        'view_helpers' => [
-            'aliases' => [ /* ... */ ],
-            'invokables' => [ /* ... */ ],
-            'factories' => [ /* ... */ ],
-            // add other keys as necessary
-        ],
-    ]
+    'templates' => [
+        /* ... */
+    ],
 
+    // Also, add this key, to provide a place to register view helpers:
+    'view_helpers' => [
+        'aliases' => [ /* ... */ ],
+        'invokables' => [ /* ... */ ],
+        'factories' => [ /* ... */ ],
+        // add other keys as necessary
+    ],
+]
+```
 
 ### Autoloading/structure changes
 
@@ -219,18 +219,18 @@ If you want to bring your application fully up-to-date with the expressive skele
 
 and the `autoload` and `autoload-dev` sections of `composer.json` become:
 
-
-    <code class="language-javascript">"autoload": {
-        "psr-4": {
-            "App\\": "src/App/",
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "AppTest\\": "test/AppTest/",
-        }
+```json
+"autoload": {
+    "psr-4": {
+        "App\\": "src/App/",
     }
-
+},
+"autoload-dev": {
+    "psr-4": {
+        "AppTest\\": "test/AppTest/",
+    }
+}
+```
 
 The above will allow you to start considering your middleware as discrete units of functionality, and potentially allow you to port them betweeen applications.
 

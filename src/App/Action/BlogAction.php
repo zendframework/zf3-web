@@ -5,6 +5,7 @@ namespace App\Action;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
 use App\Model\Post;
 use Zend\Feed\Writer\Feed;
@@ -26,14 +27,16 @@ class BlogAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $file = $request->getAttribute('file', false);
-
-        if ('feed-rss.xml' === $file) {
+        if (preg_match('#/feed.*?\.xml$#', $request->getUri()->getPath())) {
             return $this->feed($request, $response, $next);
         }
+
+        $file = $request->getAttribute('file', false);
+
         if (! $file) {
             return $this->blogPage($request, $response, $next);
         }
+
         $post = 'data/posts/' . basename($file, '.html') . '.md';
         if (! file_exists($post)) {
             return new HtmlResponse($this->template->render('error::404'));
@@ -75,17 +78,25 @@ class BlogAction
 
     protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
+        $blogUrl = (string) $request->getUri()->withPath('/blog');
+        $feedUrl = (string) $request->getUri()->withQuery('')->withFragment('');
+
+        $matches = [];
+        preg_match('#(?P<type>atom|rss)#', $feedUrl, $matches);
+        $feedType = isset($matches['type']) ? $matches['type'] : 'rss';
+
         $feed = new Feed();
         $feed->setTitle('Blog Entries - ZF Blog');
-        $feed->setLink('http://framework.zend.com/blog.html');
+        $feed->setLink((string) $blogUrl);
         $feed->setDescription('Blog Entries - ZF Blog');
-        $feed->setFeedLink('http://framework.zend.com/blog/feed-rss.xml', 'atom');
-        $feed->setDateModified(time());
+        $feed->setFeedLink($feedUrl, $feedType);
 
-        $posts = array_slice($this->posts->getAll(), 0, self::POST_PER_FEED);
+        $dateModified = false;
 
-        foreach ($posts as $id => $post) {
+        foreach (array_slice($this->posts->getAll(), 0, self::POST_PER_FEED) as $id => $post) {
             $content = $this->posts->getFromFile($id);
+
+            $dateModified = $dateModified ?: $content['date'];
 
             $entry = $feed->createEntry();
             $entry->setTitle($content['title']);
@@ -100,7 +111,9 @@ class BlogAction
             $feed->addEntry($entry);
         }
 
-        $response->getBody()->write($feed->export('atom'));
-        return $response;
+        $feed->setDateModified($dateModified);
+
+        $response = new TextResponse($feed->export($feedType));
+        return $response->withHeader('Content-Type', 'application/' . $feedType . '+xml');
     }
 }

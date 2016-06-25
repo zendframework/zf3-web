@@ -39,32 +39,32 @@ The past two weeks have been heavily focused on preparing components to be forwa
 
 First, we can test the different versions via additional Travis-CI jobs. As an example, consider these PHP 5.5 entries from the zend-cache test matrix:
 
-
-    <code class="language-yaml">matrix:
-      include:
-        - php: 5.5
-          env:
-            - EXECUTE_CS_CHECK=true
-            - PECL_INSTALL_APCU='apcu-4.0.8'
-        - php: 5.5
-          env:
-            - SERVICE_MANAGER_VERSION="^2.7.5"
-            - EVENT_MANAGER_VERSION="^2.6.2"
-            - PECL_INSTALL_APCU='apcu-4.0.8'
-
+```yaml
+matrix:
+    include:
+    - php: 5.5
+        env:
+        - EXECUTE_CS_CHECK=true
+        - PECL_INSTALL_APCU='apcu-4.0.8'
+    - php: 5.5
+        env:
+        - SERVICE_MANAGER_VERSION="^2.7.5"
+        - EVENT_MANAGER_VERSION="^2.6.2"
+        - PECL_INSTALL_APCU='apcu-4.0.8'
+```
 
 Note that in the second entry, we specify specific v2 versions of zend-eventmanager and zend-servicemanager to use.
 
 Later, in our `before_install` section, we do the following:
 
-
-    <code class="language-yaml">before_install:
-      - if [[ $SERVICE_MANAGER_VERSION != '' ]]; then composer require --no-update "zendframework/zend-servicemanager:$SERVICE_MANAGER_VERSION" ; fi
-      - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer require --no-update "zendframework/zend-servicemanager:^3.0.3" ; fi
-      - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer remove --dev --no-update zendframework/zend-session ; fi
-      - if [[ $EVENT_MANAGER_VERSION != '' ]]; then composer require --no-update "zendframework/zend-eventmanager:$EVENT_MANAGER_VERSION" ; fi
-      - if [[ $EVENT_MANAGER_VERSION == '' ]]; then composer require --no-update "zendframework/zend-eventmanager:^3.0" ; fi
-
+```yaml
+before_install:
+    - if [[ $SERVICE_MANAGER_VERSION != '' ]]; then composer require --no-update "zendframework/zend-servicemanager:$SERVICE_MANAGER_VERSION" ; fi
+    - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer require --no-update "zendframework/zend-servicemanager:^3.0.3" ; fi
+    - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer remove --dev --no-update zendframework/zend-session ; fi
+    - if [[ $EVENT_MANAGER_VERSION != '' ]]; then composer require --no-update "zendframework/zend-eventmanager:$EVENT_MANAGER_VERSION" ; fi
+    - if [[ $EVENT_MANAGER_VERSION == '' ]]; then composer require --no-update "zendframework/zend-eventmanager:^3.0" ; fi
+```
 
 Essentially, we have two builds. One against the v2 components, and one against the v3 components; the items above force one or the other for the particular build. This allows us to verify that the code works against both versions, and that any later changes require that both versions continue to work.
 

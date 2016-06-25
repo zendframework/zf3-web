@@ -17,15 +17,15 @@ The Zend Framework community is pleased to announce the immediate availability o
 
 You can install it using [Composer](https://getcomposer.org), via the `create-project` command:
 
- 
-    <code class="language-bash">$ composer create-project zendframework/zend-expressive-skeleton expressive
-
+```bash
+$ composer create-project zendframework/zend-expressive-skeleton expressive
+```
 
 If you were using a release candidate, you can update your existing applications using:
 
- 
-    <code class="language-bash">$ composer require "zendframework/zend-expressive:^1.0"
-
+```bash
+$ composer require "zendframework/zend-expressive:^1.0"
+```
 
 What's new in the stable version?
 ---------------------------------

@@ -17,9 +17,9 @@ The Zend Framework community is pleased to announce the immediate availability o
 
 You can install it using [Composer](https://getcomposer.org), using the `create-project` command:
 
- 
-    <code class="language-bash">$ composer create-project zendframework/zend-expressive-skeleton:1.0.0rc3@rc expressive
-
+```bash 
+$ composer create-project zendframework/zend-expressive-skeleton:1.0.0rc3@rc expressive
+```
 
 If you're already using Expressive, read below for how to update your application!
 
@@ -66,48 +66,30 @@ A small number of fixes and improvements were also made during the RC3 lifecycle
 
 To illustrate:
 
- 
-    <code class="language-php">// Manually, for pipeline middleware:
-    $app->pipe('/api', [
-        'Authentication',
-        'Authorization',
-        'ContentNegotiation',
-        'Validation',
-        'Resource',
-    ]);
-    
-    // Manually, for routed middleware:
-    $app->get('/api/resource[/{id:\d+}]', [
-        'Authentication',
-        'Authorization',
-        'ContentNegotiation',
-        'Validation',
-        'Resource',
-    ]);
-    
-    // Via configuration, for pipeline middleware:
-    return [
-        'middleware_pipeline' => [
-            'pre_routing' => [
-                [
-                    'path' => '/api',
-                    'middleware' => [
-                        'Authentication',
-                        'Authorization',
-                        'ContentNegotiation',
-                        'Validation',
-                        'Resource',
-                    ],
-                ],
-            ],
-        ],
-    ];
-    
-    // Via configuration, for routed middleware:
-    return [
-        'routes' => [
+```php 
+// Manually, for pipeline middleware:
+$app->pipe('/api', [
+    'Authentication',
+    'Authorization',
+    'ContentNegotiation',
+    'Validation',
+    'Resource',
+]);
+
+// Manually, for routed middleware:
+$app->get('/api/resource[/{id:\d+}]', [
+    'Authentication',
+    'Authorization',
+    'ContentNegotiation',
+    'Validation',
+    'Resource',
+]);
+
+// Via configuration, for pipeline middleware:
+return [
+    'middleware_pipeline' => [
+        'pre_routing' => [
             [
-                'name' => 'api',
                 'path' => '/api',
                 'middleware' => [
                     'Authentication',
@@ -116,11 +98,29 @@ To illustrate:
                     'Validation',
                     'Resource',
                 ],
-                'allowed_method' => ['GET'],
             ],
         ],
-    ];
+    ],
+];
 
+// Via configuration, for routed middleware:
+return [
+    'routes' => [
+        [
+            'name' => 'api',
+            'path' => '/api',
+            'middleware' => [
+                'Authentication',
+                'Authorization',
+                'ContentNegotiation',
+                'Validation',
+                'Resource',
+            ],
+            'allowed_method' => ['GET'],
+        ],
+    ],
+];
+```
 
 In each case, any individual middleware in the list may be a callable middleware, or the name of a service that resolves as middleware.
 
@@ -171,48 +171,48 @@ The only configuration changes necessary are if you want to use the new helpers.
 
 First, add service entries for each to `config/autoload/dependencies.global.php`:
 
- 
-    <code class="language-php">use Zend\Expressive\Helper;
+```php 
+use Zend\Expressive\Helper;
     
-    return [
-        'dependencies' => [
-            'invokables' => [
-                Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
-                /* ... */
-            ],
-            'factories' => [
-                Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
-                /* ... */
-            ],
+return [
+    'dependencies' => [
+        'invokables' => [
+            Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
+            /* ... */
         ],
-    ];
-
+        'factories' => [
+            Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
+            /* ... */
+        ],
+    ],
+];
+```
 
 Next, you'll need to add the `ServerUrlMiddleware` to the midddleware pipeline. Edit `config/autoload/middleware-pipeline.global.php` as follows:
 
- 
-    <code class="language-php">use Zend\Expressive\Helper;
-    
-    return [
-        // This section will likely be new:
-        'dependencies' => [
-            'factories' => [
-                Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
-            ],
-        ],
-        // This section existed, but needs edits:
-        'middleware_pipeline' => [
-            'pre_routing' => [
-                // Add the following:
-                [ 'middleware' => ServerUrlMiddleware::class ],
-                /* ... */
-            ],
-            'post_routing' => [
-                /* ... */
-            ],
-        ],
-    ];
+```php 
+use Zend\Expressive\Helper;
 
+return [
+    // This section will likely be new:
+    'dependencies' => [
+        'factories' => [
+            Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
+        ],
+    ],
+    // This section existed, but needs edits:
+    'middleware_pipeline' => [
+        'pre_routing' => [
+            // Add the following:
+            [ 'middleware' => ServerUrlMiddleware::class ],
+            /* ... */
+        ],
+        'post_routing' => [
+            /* ... */
+        ],
+    ],
+];
+```
 
 Once these changes are made, your application should now be ready to use the helpers.
 

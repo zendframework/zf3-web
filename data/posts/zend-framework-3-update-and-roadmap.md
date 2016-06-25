@@ -62,13 +62,13 @@ When describing Stratigility in the previous section, I used the term "middlewar
 
 Middleware is, quite simply, code sitting between an incoming HTTP request, and the outgoing HTTP response. There are a number of different middleware signatures floating around (subject for a pending blog post!), but the one we've implemented in Stratigility is:
 
- 
-    <code class="language-php">function (
-        ServerRequestInterface $request
-        ResponseInterface $response,
-        callable $next
-    ) : ResponseInterface
-
+```php 
+function (
+    ServerRequestInterface $request
+    ResponseInterface $response,
+    callable $next
+) : ResponseInterface
+```
 
 where `$next` can be used to invoke the next middleware in the system, if any. This same signature is being adopted by a number of emerging PSR-7 centric projects such as [Relay](http://relayphp.com), and [Slim v3](http://www.slimframework.com/2015/02/11/whats-up-with-version-3.html).
 
@@ -170,11 +170,11 @@ As such, we've decided to change the requirements for zend-mvc, the framework re
 
 This will, of course, affect existing applications. You will need to add in dependencies that previously were assumed. Composer, however, makes these relatively trivial:
 
- 
-    <code class="language-bash">$ composer require zendframework/zend-form
-    $ composer require zendframework/zend-session
-    $ composer require zendframework/zend-paginator
-
+```bash 
+$ composer require zendframework/zend-form
+$ composer require zendframework/zend-session
+$ composer require zendframework/zend-paginator
+```
 
 The more problematic part of this will be registration of abstract factories, plugin managers, etc. We're still working on a plan for that, and encourage you [to share any ideas you might have around it](https://github.com/zendframework/zend-mvc/issues/46).
 

@@ -1,4 +1,8 @@
-<?php $this->headTitle('Blog'); ?>
+<?php
+$this->headTitle('Blog');
+$this->headLink()->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 'Zend Framework Blog RSS Feed');
+$this->headLink()->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml', 'Zend Framework Blog Atom Feed');
+?>
 
 <div id="blue">
     <div class="container">
@@ -12,55 +16,46 @@
     <div class="row">
         <!-- -- SINGLE POST ---->
         <div class="col-lg-8">
-            <?php foreach ($posts as $post): ?>
-                <a href="<?php echo $post['permalink'] ?>"><h3 class="ctitle"><?php echo $post['title'] ?></h3></a>
-                <p><csmall><?php echo date("Y-m-d", $post['date']) ?> | By: <a href="<?php echo $post['url_author'] ?>"><?php echo $post['author'] ?></a></csmall></p>
+        <?php foreach ($posts as $post) : ?>
+            <a href="<?= $post['permalink'] ?>"><h3 class="ctitle"><?= $post['title'] ?></h3></a>
 
-                <p>
-                  <?php echo $post['excerpt'] ?> ... <a href="<?php echo $post['permalink'] ?>">(continue)</a>
-                </p>
-                <div class="hline"></div>
-                <div class="spacing"></div>
-            <?php endforeach; ?>
+            <p><csmall><?= date('Y-m-d', $post['date']) ?> | By: <a href="<?= $post['url_author'] ?>"><?= $post['author'] ?></a></csmall></p>
+
             <p>
-              <div class="row">
-                <div class="col-lg-4 text-center">
-                  <?php if ($prev) : ?>
-                  <a href="/blog?page=<?php echo $prev ?>"><i class="fa fa-chevron-left"></i> Previous</a>
-                  <?php endif; ?>
-                </div>
-                <div class="col-lg-4 text-center">
-                  <?php printf("Page %d/%d", $page, $tot) ?>
-                </div>
-                <div class="col-lg-4 text-center">
-                  <?php if ($next) : ?>
-                  <a href="/blog?page=<?php echo $next ?>">Next <i class="fa fa-chevron-right"></i></a>
-                  <?php endif; ?>
-                </div>
-              </div>
+                <?= $post['excerpt'] ?> ... <a href="<?= $post['permalink'] ?>">(continue)</a>
             </p>
+
+            <div class="hline"></div>
+            <div class="spacing"></div>
+        <?php endforeach; ?>
+
+            <div class="row">
+                <ul class="pager">
+                    <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '/blog?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
+                    <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
+                    <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '/blog?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
+                </ul>
+            </div>
         </div>
 
         <div class="col-lg-4">
+            <h4>Share</h4>
 
-          <h4>Share</h4>
-          <div class="hline"></div>
-          <p class="share">
-              <a href="https://twitter.com/home?status=Latest blog posts by @zfdevteam, <?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $this->serverUrl() ?>&title=<?php echo urlencode('Latest posts by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-              <a href="https://plus.google.com/share?url=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
-          </p>
-          <div class="spacing"></div>
+            <div class="hline"></div>
 
-          <h4>Subscribe</h4>
-          <div class="hline"></div>
-              <p>
-                  </p><p class="rss-subscribe">Subscribe to this blog <a href="/feed.xml">via RSS</a>.</p>
-              <p></p>
+            <p class="share">
+                <a href="https://twitter.com/home?status=Latest blog posts by @zfdevteam, <?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode('Latest posts by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+                <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+            </p>
 
+            <div class="spacing"></div>
+
+            <h4>Subscribe</h4>
+
+            <div class="hline"></div>
+            <p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
         </div>
-
-
-    </div><!-- --/row ---->
+    </div>
 </div>

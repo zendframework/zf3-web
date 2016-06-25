@@ -17,15 +17,15 @@ The Zend Framework community is pleased to announce the immediate availability o
 
 You can install the latest versions using [Composer](https://getcomposer.org), via the `create-project` command:
 
- 
-    <code class="language-bash">$ composer create-project -s rc zendframework/zend-expressive-skeleton expressive
-
+```bash 
+$ composer create-project -s rc zendframework/zend-expressive-skeleton expressive
+```
 
 You can update your existing applications using:
 
- 
-    <code class="language-bash">$ composer update
-
+```bash 
+$ composer update
+```
 
 Unfortunately, zend-expressive RC6 introduces some breaking changes. Several issues were raised that could not be handled in a fully backwards compatible fashion, and we felt they were important enough to introduce before a stable release is made. We continue to honor previous application configuration; however, deprecation notices will be raised, and the code for parsing the old configuration will be removed for the 1.1 release.
 
@@ -69,34 +69,34 @@ However, you don't want to perform these actions for _every_ request, only speci
 
 Previously, you would need to define an array of middleware for each route that needs this set of responsibilities:
 
- 
-    <code class="language-php">[
-        'routes' => [
-            'api.ping' => [
-                'path' => '/api/ping',
-                'middleware' => [
-                    AuthenticationMiddleware::class,
-                    AuthorizationMiddleware::class,
-                    ContentNegotiationMiddleware::class,
-                    BodyValidationMiddleware::class,
-                    PingMiddleware::class,
-                ],
-                'allowed_methods' => ['GET'],
+```php 
+[
+    'routes' => [
+        'api.ping' => [
+            'path' => '/api/ping',
+            'middleware' => [
+                AuthenticationMiddleware::class,
+                AuthorizationMiddleware::class,
+                ContentNegotiationMiddleware::class,
+                BodyValidationMiddleware::class,
+                PingMiddleware::class,
             ],
-            'api.books' => [
-                'path' => '/api/books[/{id:[a-f0-9]{8}}]',
-                'middleware' => [
-                    AuthenticationMiddleware::class,
-                    AuthorizationMiddleware::class,
-                    ContentNegotiationMiddleware::class,
-                    BodyValidationMiddleware::class,
-                    BooksMiddleware::class,
-                ],
-            ],
-            /* etc. */
+            'allowed_methods' => ['GET'],
         ],
-    ]
-
+        'api.books' => [
+            'path' => '/api/books[/{id:[a-f0-9]{8}}]',
+            'middleware' => [
+                AuthenticationMiddleware::class,
+                AuthorizationMiddleware::class,
+                ContentNegotiationMiddleware::class,
+                BodyValidationMiddleware::class,
+                BooksMiddleware::class,
+            ],
+        ],
+        /* etc. */
+    ],
+]
+```
 
 This is repetitive, and prone to error: any change in the workflow requires propagation to _every route_.
 
@@ -104,39 +104,39 @@ Splitting the routing and dispatch middleware allows you to pipe middleware _bet
 
 This means you can now write middleware like this:
 
- 
-    <code class="language-php">use Zend\Expressive\Router\RouteResult;
+```php 
+use Zend\Expressive\Router\RouteResult;
     
-    $authenticationMiddleware = function ($request, $response, $next) use ($map, $authenticate) {
-        $routeResult = $request->getAttribute(RouteResult::class, false);
-        if (! $routeResult instanceof RouteResult) {
-            return $next($request, $response);
-        }
-    
-        if (! in_array($routeResult->getMatchedRouteName(), $map)) {
-            return $next($request, $response);
-        }
-    
-        $authenticationResult = $authenticate($request);
-        if (! $authenticationResult->isSuccess()) {
-            // ERROR!
-            return new AuthenticationErrorResponse();
-        }
-    
-        return $next(
-            $request->withAttribute($authenticationResult->getIdentity()),
-            $response
-        );
+$authenticationMiddleware = function ($request, $response, $next) use ($map, $authenticate) {
+    $routeResult = $request->getAttribute(RouteResult::class, false);
+    if (! $routeResult instanceof RouteResult) {
+        return $next($request, $response);
     }
 
+    if (! in_array($routeResult->getMatchedRouteName(), $map)) {
+        return $next($request, $response);
+    }
+
+    $authenticationResult = $authenticate($request);
+    if (! $authenticationResult->isSuccess()) {
+        // ERROR!
+        return new AuthenticationErrorResponse();
+    }
+
+    return $next(
+        $request->withAttribute($authenticationResult->getIdentity()),
+        $response
+    );
+}
+```
 
 You would then sandwich it between the routing and dispatch middleware. Programmatically, that looks like:
 
- 
-    <code class="language-php">$app->pipeRoutingMiddleware();
-    $app->pipe($authenticationMiddleware);
-    $app->pipeDispatchMiddleware();
-
+```php 
+$app->pipeRoutingMiddleware();
+$app->pipe($authenticationMiddleware);
+$app->pipeDispatchMiddleware();
+```
 
 We'll look at configuration later, as it changes more dramatically.
 
@@ -153,13 +153,13 @@ Because routing was split into two distinct actions, and one primary purpose for
 
 As such, when creating your application programmatically, there is now _exactly one workflow_ to use to enable the routing and dispatch middleware: each must be piped explicitly into the pipeline:
 
- 
-    <code class="language-php">$app->pipe(ServerUrlMiddleware::class);
-    $app->pipe(BaseParamsMiddleware::class);
-    $app->pipeRoutingMiddleware();
-    $app->pipe(UrlHelperMiddleware::class);
-    $app->pipeDispatchMiddleware();
-
+```php 
+$app->pipe(ServerUrlMiddleware::class);
+$app->pipe(BaseParamsMiddleware::class);
+$app->pipeRoutingMiddleware();
+$app->pipe(UrlHelperMiddleware::class);
+$app->pipeDispatchMiddleware();
+```
 
 **If you are building your application programmatically, you _must_ update it to pipe the routing and dispatch middleware in order for it to continue to work.**
 
@@ -199,82 +199,82 @@ Additionally, we realized we could lever another existing feature: middleware sp
 
 What we came up with ends up looking like this when you start out with the new skeleton:
 
- 
-    <code class="language-php">use Zend\Expressive\Container\ApplicationFactory;
-    use Zend\Expressive\Helper;
-    
-    return [
-        'dependencies' => [
-            'factories' => [
-                Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
-                Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
-            ],
-        ],
-        // This can be used to seed pre- and/or post-routing middleware
-        'middleware_pipeline' => [
-            // An array of middleware to register. Each item is of the following
-            // specification:
-            //
-            // [
-            //  Required:
-            //     'middleware' => 'Name or array of names of middleware services and/or callables',
-            //  Optional:
-            //     'path'     => '/path/to/match', // string; literal path prefix to match
-            //                                     // middleware will not execute
-            //                                     // if path does not match!
-            //     'error'    => true, // boolean; true for error middleware
-            //     'priority' => 1, // int; higher values == register early;
-            //                      // lower/negative == register last;
-            //                      // default is 1, if none is provided.
-            // ],
-            //
-            // While the ApplicationFactory ignores the keys associated with
-            // specifications, they can be used to allow merging related values
-            // defined in multiple configuration files/locations. This file defines
-            // some conventional keys for middleware to execute early, routing
-            // middleware, and error middleware.
-            'always' => [
-                'middleware' => [
-                    // Add more middleware here that you want to execute on
-                    // every request:
-                    // - bootstrapping
-                    // - pre-conditions
-                    // - modifications to outgoing responses
-                    Helper\ServerUrlMiddleware::class,
-                ],
-                'priority' => 10000,
-            ],
-    
-            'routing' => [
-                'middleware' => [
-                    ApplicationFactory::ROUTING_MIDDLEWARE,
-                    Helper\UrlHelperMiddleware::class,
-                    // Add more middleware here that needs to introspect the routing
-                    // results; this might include:
-                    // - route-based authentication
-                    // - route-based validation
-                    // - etc.
-                    ApplicationFactory::DISPATCH_MIDDLEWARE,
-                ],
-                'priority' => 1,
-            ],
-    
-            'error' => [
-                'middleware' => [
-                    // Add error middleware here.
-                ],
-                'priority' => -10000,
-            ],
-        ],
-    ];
+```php 
+use Zend\Expressive\Container\ApplicationFactory;
+use Zend\Expressive\Helper;
 
+return [
+    'dependencies' => [
+        'factories' => [
+            Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
+            Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
+        ],
+    ],
+    // This can be used to seed pre- and/or post-routing middleware
+    'middleware_pipeline' => [
+        // An array of middleware to register. Each item is of the following
+        // specification:
+        //
+        // [
+        //  Required:
+        //     'middleware' => 'Name or array of names of middleware services and/or callables',
+        //  Optional:
+        //     'path'     => '/path/to/match', // string; literal path prefix to match
+        //                                     // middleware will not execute
+        //                                     // if path does not match!
+        //     'error'    => true, // boolean; true for error middleware
+        //     'priority' => 1, // int; higher values == register early;
+        //                      // lower/negative == register last;
+        //                      // default is 1, if none is provided.
+        // ],
+        //
+        // While the ApplicationFactory ignores the keys associated with
+        // specifications, they can be used to allow merging related values
+        // defined in multiple configuration files/locations. This file defines
+        // some conventional keys for middleware to execute early, routing
+        // middleware, and error middleware.
+        'always' => [
+            'middleware' => [
+                // Add more middleware here that you want to execute on
+                // every request:
+                // - bootstrapping
+                // - pre-conditions
+                // - modifications to outgoing responses
+                Helper\ServerUrlMiddleware::class,
+            ],
+            'priority' => 10000,
+        ],
+
+        'routing' => [
+            'middleware' => [
+                ApplicationFactory::ROUTING_MIDDLEWARE,
+                Helper\UrlHelperMiddleware::class,
+                // Add more middleware here that needs to introspect the routing
+                // results; this might include:
+                // - route-based authentication
+                // - route-based validation
+                // - etc.
+                ApplicationFactory::DISPATCH_MIDDLEWARE,
+            ],
+            'priority' => 1,
+        ],
+
+        'error' => [
+            'middleware' => [
+                // Add error middleware here.
+            ],
+            'priority' => -10000,
+        ],
+    ],
+];
+```
 
 For existing users:
 
 - Existing RC5 and earlier configuration is still honored, but will emit deprecation notices, prompting you to update; these notices include links to the migration guide.
 - To update, you'll need to: 
-  - update your zend-expressive-helpers version constraint to `^2.0`.
-  - update your configuration, using the above as a guide.
+    - update your zend-expressive-helpers version constraint to `^2.0`.
+    - update your configuration, using the above as a guide.
 
 We're excited about this change, as we feel it simplifies the configuration, adds flexibility, and provides predictability in the system. While it is a large change for a release candidate, we also felt it was important enough to warrant introducing before the stable release.
 

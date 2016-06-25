@@ -1,9 +1,13 @@
-<?php $this->headTitle('Blog'); ?>
+<?php
+$this->headTitle('Blog - ' . $title);
+$this->headLink()->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 'Zend Framework Blog RSS Feed');
+$this->headLink()->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml', 'Zend Framework Blog Atom Feed');
+?>
 
 <div id="blue">
     <div class="container">
         <div class="row">
-            <h3><?php echo $title ?></h3>
+            <h3><?= $title ?></h3>
         </div><!-- /row -->
     </div> <!-- /container -->
 </div>
@@ -13,56 +17,55 @@
         <!-- -- SINGLE POST ---->
         <div class="col-lg-8">
             <!-- -- Blog Post  ---->
-            <a href="<?php echo $permalink ?>"><h3 class="ctitle"><?php echo $title ?></h3></a>
-            <p><csmall><?php echo $date ?> | By: <a href="<?php echo $url_author ?>"><?php echo $author ?></a></csmall></p>
+            <a href="<?= $permalink ?>"><h3 class="ctitle"><?= $title ?></h3></a>
+            <p><csmall><?= $date ?> | By: <a href="<?= $url_author ?>"><?= $author ?></a></csmall></p>
 
-            <?php echo $body ?>
-
+            <?= $body ?>
 
             <div class="spacing"></div>
+
             <h6>SHARE:</h6>
+
             <p class="share">
-                <a href="https://twitter.com/home?status=<?php echo urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $this->serverUrl() ?>&title=<?php echo urlencode($title . ', last post by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://plus.google.com/share?url=<?php echo $this->serverUrl()?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+                <a href="https://twitter.com/home?status=<?= urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode($title . ', last post by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+                <a href="https://plus.google.com/share?url=<?= $this->serverUrl()?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
             </p>
         </div>
 
         <div class="col-lg-4">
+            <h4>Share</h4>
+            <div class="hline"></div>
+            <p class="share">
+                <a href="https://twitter.com/home?status=<?= urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode($title . ', last post by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+                <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+            </p>
 
-          <h4>Share</h4>
-          <div class="hline"></div>
-          <p class="share">
-              <a href="https://twitter.com/home?status=<?php echo urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $this->serverUrl() ?>&title=<?php echo urlencode($title . ', last post by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-              <a href="https://plus.google.com/share?url=<?php echo $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
-          </p>
-          <div class="spacing"></div>
+            <div class="spacing"></div>
 
-          <h4>Subscribe</h4>
-          <div class="hline"></div>
-              <p>
-                  </p><p class="rss-subscribe">Subscribe to this blog <a href="/feed.xml">via RSS</a>.</p>
-              <p></p>
-          <div class="spacing"></div>
+            <h4>Subscribe</h4>
+            <div class="hline"></div>
 
-          <h4>Recent Posts</h4>
-          <div class="hline"></div>
-              <ul class="popular-posts">
-                <?php foreach($posts as $post): ?>
-                    <li>
-                      <p><i class="fa fa-hand-o-right"></i> <a href="<?php echo $post['permalink'] ?>"><?php echo $post['title'] ?></a></p>
-                      <em><?php echo date("Y-m-d", $post['date']) ?></em>
-                    </li>
-                <?php endforeach; ?>
-              </ul>
+            <p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
 
-          <div class="spacing"></div>
+            <div class="spacing"></div>
 
+            <h4>Recent Posts</h4>
+            <div class="hline"></div>
+
+            <ul class="popular-posts">
+            <?php foreach ($posts as $post) : ?>
+                <li>
+                      <p><i class="fa fa-hand-o-right"></i> <a href="<?= $post['permalink'] ?>"><?= $post['title'] ?></a></p>
+                      <em><?= date('Y-m-d', $post['date']) ?></em>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+
+            <div class="spacing"></div>
         </div>
-
-
-    </div><!-- --/row ---->
+    </div>
 </div>
