@@ -1,16 +1,15 @@
 <div id="select-version">
     Select a version:
-    <select>
-        <?php foreach ($this->versions as $ver): ?>
+    <select class="form-control">
+        <?php foreach ($this->versions as $ver) : ?>
             <option
-                value="<?php echo $ver ?>"
-                <?php echo ($ver === $this->version) ? ' selected="selected"' : '' ?>>
-              Version <?php echo $ver ?>
+                value="<?= $ver ?>"
+                <?= ($ver === $this->version) ? ' selected="selected"' : '' ?>>
+              Version <?= $ver ?>
             </option>
         <?php endforeach; ?>
     </select>
 </div>
-
 
 <?php
 $this->inlineScript()->captureStart();
@@ -37,24 +36,23 @@ JS;
 $this->inlineScript()->captureEnd();
 ?>
 
-
-<?php if (count($contentList)): ?>
+<?php if (count($contentList)) : ?>
     <div id="select-chapter">
         Select chapter:
-        <select>
-            <?php foreach ($contentList as $headline => $items): ?>
+        <select class="form-control">
+            <?php foreach ($contentList as $headline => $items) : ?>
 
-                <?php if (is_array($items)): ?>
-                    <optgroup label="<?php echo $headline ?>">
-                        <?php foreach ($items as $link => $label): ?>
-                            <option value="<?php echo $link ?>"<?php echo ($currentPage == $link)?' selected="selected"':'' ?>>
-                                <?php echo $label ?>
+                <?php if (is_array($items)) : ?>
+                    <optgroup label="<?= $headline ?>">
+                        <?php foreach ($items as $link => $label) : ?>
+                            <option value="<?= $link ?>"<?= ($currentPage == $link)?' selected="selected"':'' ?>>
+                                <?= $label ?>
                             </option>
                         <?php endforeach ?>
                     </optgroup>
-                <?php else: ?>
-                    <option value="<?php echo $headline ?>"<?php echo ($currentPage == $headline)?' selected="selected"':'' ?>>
-                        <?php echo $items ?>
+                <?php else : ?>
+                    <option value="<?= $headline ?>"<?= ($currentPage == $headline)?' selected="selected"':'' ?>>
+                        <?= $items ?>
                     </option>
                 <?php endif ?>
 
@@ -62,20 +60,19 @@ $this->inlineScript()->captureEnd();
         </select>
     </div>
 
-<?php
-// $basePath = sprintf('/manual/%s/en/', $this->version);
-// $this->inlineScript()->captureStart();
-// echo <<<JS
-//     $('#select-chapter select').change(function(){
-//         location.href = '$basePath' + $(this).val();
-//     });
-// JS;
-// $this->inlineScript()->captureEnd();
-?>
-<?php endif ?>
+    <?php
+    $basePath = sprintf('/manual/%s/en/', $this->version);
+    $this->inlineScript()->captureStart();
+    echo <<<JS
+    $('#select-chapter select').change(function(){
+        location.href = '$basePath' + $(this).val();
+    });
+JS;
+    $this->inlineScript()->captureEnd();
+endif ?>
 
 <div id="toc">
-<?php echo $sidebar; ?>
+    <?= $sidebar; ?>
 </div>
 
 <div class="zf2a-course">
