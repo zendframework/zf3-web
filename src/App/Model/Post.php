@@ -1,7 +1,6 @@
 <?php
 namespace App\Model;
 
-use Mni\FrontYAML\Parser;
 
 class Post extends AbstractCollection
 {
