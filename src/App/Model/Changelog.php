@@ -1,7 +1,6 @@
 <?php
 namespace App\Model;
 
-
 class Changelog extends AbstractCollection
 {
     const FOLDER_COLLECTION = 'data/changelog';

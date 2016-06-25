@@ -1,7 +1,6 @@
 <?php
 namespace App\Model;
 
-
 class Post extends AbstractCollection
 {
     const FOLDER_COLLECTION = 'data/posts';
