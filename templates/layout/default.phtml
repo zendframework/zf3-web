@@ -1,4 +1,9 @@
 <?php
+$this->headLink()
+    ->appendAlternate('/security/feed', 'application/rss+xml', 'Zend Framework Security Advisories')
+    ->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml', 'Zend Framework Blog Atom Feed')
+    ->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 'Zend Framework Blog RSS Feed');
+
 $this->inlineScript()
     ->prependFile('/js/prism.js')
     ->prependFile('/js/custom.js')
@@ -13,7 +18,7 @@ $this->inlineScript()
 <!DOCTYPE html>
 <html class="csstransforms no-csstransforms3d csstransitions">
 <?php echo $this->render('include::head') ?>
-<body <?php if (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) echo 'id="manual"' ?>>
+<body<?= (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) ? ' id="manual"' : '' ?>>
     <?php echo $this->render('include::nav') ?>
 
     <?php echo $this->content ?>

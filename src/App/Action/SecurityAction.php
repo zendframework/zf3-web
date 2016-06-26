@@ -5,6 +5,7 @@ namespace App\Action;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
 use App\Model\Advisory;
 use Zend\Feed\Writer\Feed;
@@ -29,9 +30,11 @@ class SecurityAction
         if ($action === 'feed') {
             return $this->feed($request, $response, $next);
         }
+
         if (! file_exists("templates/app/$action.phtml")) {
             return new HtmlResponse($this->template->render('error::404'));
         }
+
         $content = [];
         if ('advisories' === $action) {
             $params = $request->getQueryParams();
@@ -60,17 +63,27 @@ class SecurityAction
 
     protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
+        $baseUrl = (string) $request->getUri()->withPath('/security');
+        $feedUrl = (string) $request->getUri()->withQuery('')->withFragment('');
+        $advisoryUrl = $request->getUri()->withPath('/security/advisory');
+
+        $matches = [];
+        preg_match('#(?P<type>atom|rss)#', $feedUrl, $matches);
+        $feedType = isset($matches['type']) ? $matches['type'] : 'rss';
+
         $feed = new Feed();
         $feed->setTitle('Zend Framework Security Advisories');
-        $feed->setLink('http://framework.zend.com/security');
+        $feed->setLink($baseUrl);
         $feed->setDescription('Reported and patched vulnerabilities in Zend Framework');
-        $feed->setFeedLink('http://framework.zend.com/security/feed', 'atom');
-        $feed->setLanguage('en-us');
-        /*
-        $feed->addAuthor([
-            'email' => 'zf-security@zend.com (Zend Framework Security)'
-        ]);
-        */
+        $feed->setFeedLink($feedUrl, $feedType);
+
+        if ($feedType === 'rss') {
+            $feed->addAuthor([
+                'name' => 'Zend Framework Security',
+                'email' => 'zf-security@zend.com (Zend Framework Security)',
+            ]);
+        }
+
         $advisories = array_slice($this->advisory->getAll(), 0, self::ADVISORY_PER_FEED);
         $first      = current($advisories);
         $feed->setDateModified($first['date']);
@@ -79,10 +92,10 @@ class SecurityAction
             $content = $this->advisory->getFromFile($id);
             $entry = $feed->createEntry();
             $entry->setTitle($content['title']);
-            $entry->setLink('http://framework.zend.com//security/advisory/' . basename($id, '.md'));
+            $entry->setLink(sprintf('%s/%s', $advisoryUrl, basename($id, '.md')));
             $entry->addAuthor([
                 'name' => 'Zend Framework Security',
-                'email' => 'zf-security@zend.com'
+                'email' => 'zf-security@zend.com',
             ]);
             $entry->setDateCreated($content['date']);
             $entry->setDateModified($content['date']);
@@ -90,8 +103,7 @@ class SecurityAction
             $feed->addEntry($entry);
         }
 
-        $response->getBody()->write($feed->export('atom'));
-        return $response;
-
+        $response = new TextResponse($feed->export($feedType));
+        return $response->withHeader('Content-Type', 'application/' . $feedType . '+xml');
     }
 }

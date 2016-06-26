@@ -12,36 +12,30 @@
     <div class="row">
         <div class="col-lg-8">
             <h3>Vulnerabilities reported against Zend Framework, and recommendations for mitigation</h3>
+
             <div class="spacing"></div>
-            <?php foreach ($advisories as $key => $advisory): ?>
-              <p>
-                <i class="fa fa-bug"></i> <a href="/security/advisory/<?php echo basename($key, '.md') ?>"><?php echo $advisory['title'] ?></a><br />
-                <small>Published <?php echo date("M d, Y", $advisory['date']) ?></small>
-              </p>
-            <?php endforeach; ?>
+
+            <div class="list-group">
+            <?php foreach ($advisories as $key => $advisory) : ?>
+                <a class="list-group-item" href="/security/advisory/<?= basename($key, '.md') ?>">
+                    <h4 class="list-group-item-heading"><i class="fa fa-bug"></i>&nbsp;<?= $advisory['title'] ?></h4>
+                    <p class="list-group-item-text">Published <?= date('Y-m-d', $advisory['date']) ?></p>
+                </a>
+            <?php endforeach ?>
+            </div>
+
             <div class="spacing"></div>
             <div class="hline"></div>
-            <p>
-              <div class="row">
-                <div class="col-lg-4 text-center">
-                  <?php if ($prev) : ?>
-                  <a href="?page=<?php echo $prev ?>"><i class="fa fa-chevron-left"></i> Previous</a>
-                  <?php endif; ?>
-                </div>
-                <div class="col-lg-4 text-center">
-                  <?php printf("Page %d/%d", $page, $tot) ?>
-                </div>
-                <div class="col-lg-4 text-center">
-                  <?php if ($next) : ?>
-                  <a href="?page=<?php echo $next ?>">Next <i class="fa fa-chevron-right"></i></a>
-                  <?php endif; ?>
-                </div>
-              </div>
-            </p>
+
+            <ul class="pager">
+                <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
+                <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
+                <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
+            </ul>
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::security-menu') ?>
+            <?= $this->render('include::security-menu') ?>
         </div>
     </div>
 </div>

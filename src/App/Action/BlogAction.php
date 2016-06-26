@@ -87,7 +87,7 @@ class BlogAction
 
         $feed = new Feed();
         $feed->setTitle('Blog Entries - ZF Blog');
-        $feed->setLink((string) $blogUrl);
+        $feed->setLink($blogUrl);
         $feed->setDescription('Blog Entries - ZF Blog');
         $feed->setFeedLink($feedUrl, $feedType);
 
