@@ -24,15 +24,17 @@ class IssueAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $action = $request->getAttribute('type', false);
-        if (!$action) {
+        if (! $action) {
             return new HtmlResponse($this->template->render("app::issue-overview", [
                 'active'     => '/issues',
                 'repository' => $this->zfComponents
             ]));
         }
+
         if (! in_array($action, [ 'ZF1', 'ZF2', 'browse'])) {
             return new HtmlResponse($this->template->render('error::404'));
         }
+
         return $this->$action($request, $response, $next);
     }
 
@@ -42,10 +44,12 @@ class IssueAction
         if (! $issueId) {
             return new HtmlResponse($this->template->render('error::404'));
         }
+
         $file = 'data/issues/' . $issueId . '.md';
         if (! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
+
         $content               = $this->issue->getFromFile($file);
         $content['layout']     = 'layout::default';
         $content['active']     = strpos($issueId, 'ZF-') !== false ? '/issues/ZF1' : '/issues/ZF2';
@@ -74,6 +78,7 @@ class IssueAction
         if ($page > $totPages || $page < 1) {
             return new HtmlResponse($this->template->render('error::404'));
         }
+
         $nextPage = ($page === $totPages) ? 0 : $page + 1;
         $prevPage = ($page === 1) ? 0 : $page - 1;
 

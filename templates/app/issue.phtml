@@ -3,7 +3,7 @@
 <div id="blue">
     <div class="container">
         <div class="row">
-            <h3><?php echo $id ?>: <?php echo $title ?></h3>
+            <h3>Issues</h3>
         </div>
     </div>
 </div>
@@ -11,13 +11,11 @@
 <div class="container mtb">
     <div class="row">
         <div class="col-lg-8">
-            <p>
-              <?php echo $body ?>
-            </p>
+            <?= $body ?>
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::issue-menu') ?>
+            <?= $this->render('include::issue-menu') ?>
         </div>
     </div>
 </div>

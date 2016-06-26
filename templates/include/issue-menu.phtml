@@ -1,23 +1,27 @@
 <?php
 $links = [
-  '/issues'     => 'Overview',
-  '/issues/ZF2' => 'ZF2 Issue Archive',
-  '/issues/ZF1' => 'ZF1 Issue Archive'
+    '/issues'     => 'Overview',
+    '/issues/ZF2' => 'ZF2 Issue Archive',
+    '/issues/ZF1' => 'ZF1 Issue Archive'
 ];
 $path = parse_url($this->serverUrl(), PHP_URL_PATH);
 ?>
 
 <ul class="nav nav-pills nav-stacked">
-  <?php foreach($links as $url => $title): ?>
-      <li <?php if ($url === $active) echo 'class="active"' ?>>
-        <a href="<?php echo $url ?>"><span class="glyphicon glyphicon-chevron-right"></span> <?php echo $title ?></a>
-      </li>
-  <?php endforeach; ?>
+<?php foreach ($links as $url => $title) : ?>
+    <li<?= ($url ===  $active) ? ' class="active"' : '' ?>>
+        <a href="<?= $url ?>"><span class="glyphicon glyphicon-chevron-right"></span> <?= $title ?></a>
+    </li>
+<?php endforeach ?>
 </ul>
 
 <div class="spacing"></div>
-<p><i class="fa fa-github fa-2x"></i> Did you find an issue in Zend Framework?<br />
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal">Please report here!</button><br />
+
+<div>
+    <p><i class="fa fa-github fa-2x"></i> Have you found an issue?</p>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal">Please report here!</button>
+</div>
+
 <p>See the <a href="/issues">Overview</a> section for more details.</p>
 
-<?php echo $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>
+<?= $this->render('include::modal-issue', [ 'repository' => $repository ]) ?>
