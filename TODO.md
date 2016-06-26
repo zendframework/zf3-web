@@ -11,6 +11,7 @@
 - [ ] Participate
 - [ ] Security
 - [ ] Issues
+- [ ] Test /api endpoints!
 
 ## To ADD
 
