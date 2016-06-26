@@ -73,7 +73,7 @@ project will be reflected immediately.
 ## Stats and statistics pages
 
 The web site offers a statistics and status page. In order to generate the
-statistics data we used the  [Packagist API](https://packagist.org/apidoc).
+statistics data we used the [Packagist API](https://packagist.org/apidoc).
 
 You need to execute the following command to generate it:
 

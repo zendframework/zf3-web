@@ -22,9 +22,12 @@ class StatusAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        if (!isset($this->config['zf_stats'])) {
+        if (! isset($this->config['zf_stats'])) {
             return new HtmlResponse($this->template->render('error::404'));
         }
-        return new HtmlResponse($this->template->render('app::status', [ 'stats' => $this->config['zf_stats'] ]));
+
+        return new HtmlResponse($this->template->render('app::status', [
+            'stats' => $this->config['zf_stats']
+        ]));
     }
 }

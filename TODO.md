@@ -8,7 +8,7 @@
 
 ## Sections left for Matthew to review
 
-- [ ] Participate
+- [X] Participate
 - [X] Security
 - [X] Issues
 - [ ] Test /api endpoints!

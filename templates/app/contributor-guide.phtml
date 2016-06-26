@@ -11,45 +11,91 @@
 <div class="container mtb">
     <div class="row">
         <div class="col-lg-8">
-          <h3>Have something you want to contribute back?</h3>
-          <p>In the spirit of open-source software, you can contribute as little or as much as you like: bug reports, patches, full components or documentation are all equally appreciated. The following section describes contributing for Zend Framework version 3.</p>
-          <h3>So, You Want to File A Bug Report ...</h3>
-          <p>So, you've found what you think might be a bug. Before you file it, we'd ask that you ensure that what you have is indeed a bug, by doing a little due-diligence (which also is good information to add to the bug report):
+            <h3>Have something you want to contribute back?</h3>
+
+            <p>
+                In the spirit of open-source software, you can contribute as
+                little or as much as you like: bug reports, patches, full
+                components or documentation are all equally appreciated. The
+                following section describes contributing to Zend Framework.
+            </p>
+
+            <h3>So, You Want to File A Bug Report ...</h3>
+
+            <p>
+                So, you've found what you think might be a bug. Before you file
+                it, we'd ask that you ensure that what you have is indeed a
+                bug, by doing a little due-diligence (which also is good
+                information to add to the bug report):
+            </p>
+
             <ul>
-              <li>see if your use case is covered in the <a href="/learn">manual</a>;</li>
-              <li>ask the <a href="">mailing list</a> about your particular use case;</li>
-              <li>discuss your issue with someone in the <a href="">IRC channel</a>;</li>
-              <li>write a failing test case using <a href="https://phpunit.de/">PHPUnit</a>.</li>
+                <li>see if your use case is covered in the <a href="/learn">documentation</a>;</li>
+                <li>search the <a href="/issues">issue trackers</a> for your particular use case;</li>
+                <li>discuss your issue with someone in the <a href="irc://irc.freenode.net/zftalk">IRC channel</a>;</li>
+                <li>write a failing test case using <a href="https://phpunit.de/">PHPUnit</a>.</li>
             </ul>
-          </p>
-          <p>You don't have to do all of those, but by doing a few of them, it helps ensure that your bug report is complete and will get tended to.</p>
-          <p>When you're finally ready, go to <button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal">Github Issue page</button></p>
-          <p></p>
-          <h3>So, You Want to Contribute Code ...</h3>
-          <p>By and large, this framework is built and maintained by the community. This means that process for submitting something back, be it a patch, some documentation, or new feature requires some level of community interactions. As you can see with the "Fork Me On Github" banner on the top right of this page, we proudly host our code on <a href="https://github.com/">github.com</a>.</p>
-          <p>If you're not already familar with git or github, take a moment to read through our <a href="https://github.com/zendframework/zendframework/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a>. Committing code is easy:
+
+            <p>
+                You don't have to do all of those, but by doing a few of them,
+                it helps ensure that your bug report is complete and will get tended to.
+            </p>
+
+            <p>
+                When you're finally ready:<br />
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#issueModal">Submit an issue</button>
+            </p>
+
+            <h3>So, You Want to Contribute Code ...</h3>
+
+            <p>
+                By and large, this framework is built and maintained by the
+                community. This means that process for submitting something
+                back, be it a patch, some documentation, or new feature
+                requires some level of community interaction. 
+                We proudly host our code on <a href="https://github.com/zendframework">GitHub</a>.
+            </p>
+
+            <p>
+                If you're not already familar with git or GitHub, take a moment
+                to read through our <a href="https://github.com/zendframework/maintainers/blob/master/CONTRIBUTORS.md">CONTRIBUTING.md</a>.
+                The steps to create a patch are:
+            </p>
+
             <ul>
-              <li>fork the zend-<i>name</i> project (where <i>name</i> is the component you are interested);</li>
-              <li>create a local development Branch for the bugfix;</li>
-              <li>commit a change and push your local branch to your github fork;</li>
-              <li>send us a pull request for your changes to be included.</li>
+                <li><strong>fork</strong> the zend-<i>name</i> project (where <i>name</i> is the component you are interested);</li>
+                <li>create a local development <strong>branch</strong> for the bugfix;</li>
+                <li><strong>commit</strong> a change and <strong>push</strong> your local branch to your github fork;</li>
+                <li>send us a <strong>pull request</strong> for your changes to be included.</li>
             </ul>
-          </p>
-          <h3>So, You Want to Hang-out With A Great Community ...</h3>
-          <p>ZFers, as they are called, hang out in a number of different places. You can offline hangouts in conferences and Meetup. Check for <a href="http://zendcon.com/">ZendCon</a> conference, each year in USA around October and search for <a href="https://joind.in/search?keyword=Zend">Zend talks on joind.in</a>.</p>
-          <p>Online, ZFers can be found (links to more information on how to connect):
+
+            <h3>So, You Want to Hang-out With A Great Community ...</h3>
+
+            <p>
+                Zend Framework users hang out in a number of different places.
+                You can meet offline in conferences and in a number of user
+                groups and meetups. Check for the <a href="http://zendcon.com/">ZendCon</a>
+                conference, each year in the USA in October, and search for
+                <a href="https://joind.in/search?keyword=Zend">Zend Framework talks on joind.in</a>.
+            </p>
+
+            <p>
+                Online, Zend Framework users and developers can be found in
+                some of the following locations:
+            </p>
+
             <ul>
-              <li>IRC <a href="irc://irc.freenode.net/zftalk">#zftalk</a> channel</li>
-              <li>IRC <a href="irc://irc.freenode.net/zftalk.dev">#zftalk.dev</a> channel</li>
-              <li>Mailing list</li>
+                <li>IRC <a href="irc://irc.freenode.net/zftalk">#zftalk</a> channel (user questions and discussions)</li>
+                <li>IRC <a href="irc://irc.freenode.net/zftalk.dev">#zftalk.dev</a> channel (discussions relating to the development of Zend Framework itself)</li>
+                <li>Stack Overflow <a href="http://stackoverflow.com/questions/tagged/zend-framework">zend-framework tag</a> (ZF1 and forward)</li>
+                <li>Stack Overflow <a href="http://stackoverflow.com/questions/tagged/zend-framework2">zend-framework2 tag</a> (ZF2 and forward)</li>
             </ul>
-          </p>
         </div>
 
         <div class="col-lg-4">
-          <?php echo $this->render('include::participate-menu', [ 'active' => '/participate/contributor-guide' ]) ?>
+            <?= $this->render('include::participate-menu', [ 'active' => '/participate/contributor-guide' ]) ?>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
-<?php echo $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>
+<?= $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>

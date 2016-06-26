@@ -160,3 +160,15 @@
 .panel-component .panel-body {
   min-height: 144px;
 }
+
+.community-review-team {
+  min-height: 240px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.right-text {
+  text-align: right;
+}
