@@ -578,6 +578,11 @@ color: #000;
 text-decoration: none;
 }
 
+.nav-stacked>li {
+border-top:1px solid #dadada;
+border-left:1px solid #dadada;
+border-right:1px solid #dadada;
+}
 
 .nav-stacked>li+li {
 margin-top: 0px;
