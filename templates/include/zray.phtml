@@ -1,0 +1,47 @@
+<div style="display:none" class="row" id="dialog_promo">
+        <div class="twelve columns hide-for-medium-down">
+            <div>
+                <a id="promoLink" href="http://www.zend.com/en/products/server/z-ray-zend-framework-demo?utm_source=zfslide">
+                    <div id="promo-image"><img alt="" src="images/Z-ray-AD-for-Framework-1142x256px.png"></div>
+                </a>
+                <div id="promoClose">
+                    <img title="" alt="" src="images/X-icon-17x16px.png">
+                </div>
+            </div>
+        </div>
+</div>
+
+<?php $this->inlineScript()->captureStart(); ?>
+(function($) {
+    if (getCookie('promoClosed') != 1) {
+    	setTimeout(function() {
+    		$( "#dialog_promo" ).slideDown( 2000 );
+        }, 1000);
+    }
+	$(document).on('click','#promoClose',function(){
+		setCookieAndClose();
+	});
+	$(document).on('click', '#promoLink', function(){
+		setCookieAndClose();
+	});
+})(jQuery);
+
+function getCookie(name) {
+	  var value = "; " + document.cookie;
+	  var parts = value.split("; " + name + "=");
+	  if (parts.length == 2) return parts.pop().split(";").shift();
+	}
+
+function closeDialog() {
+	$("#dialog_promo").slideUp();
+}
+
+function setCookieAndClose() {
+    var days = 30;
+	var date = new Date();
+	date.setTime(date.getTime()+(days * 24 * 60 * 60 * 1000))
+	document.cookie="promoClosed=1; path=/; expires=" + date.toUTCString();
+	$("#dialog_promo").slideUp();
+}
+
+<?php $this->inlineScript()->captureEnd(); ?>

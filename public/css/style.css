@@ -647,3 +647,27 @@ text-decoration: none;
 pre {
 	font-size : 16px;
 }
+
+#dialog_promo {
+    bottom: 0;
+    left: 50%;
+    margin: 0 0 0 -600px;
+    overflow: hidden;
+    padding: 0;
+    position: fixed;
+    width: 1200px;
+    z-index: 100;
+}
+
+#promoClose {
+    color: #17729f;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    right: 65px;
+    top: 55px;
+}
+
+#promoLink a {
+	transition: all 0.25s linear 0s;
+}
