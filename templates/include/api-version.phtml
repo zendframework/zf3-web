@@ -10,7 +10,7 @@ $url = 'http://packages.zendframework.com/releases/ZendFramework-%s/ZendFramewor
     </div>
 
     <div class="col-lg-4">
-        <a href="/apidoc/<?= $short ?>">Browse Online</a>
+        <a href="/apidoc/<?= substr($this->version, 0, strrpos($this->version, '.')) ?>/index.html">Browse Online</a>
     </div>
 
     <div class="col-lg-4">
