@@ -1,40 +1,40 @@
 <div class="modal fade" id="issueModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"><i class="fa fa-github"></i> Report an issue</h4>
-      </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><i class="fa fa-github"></i> Report an issue</h4>
+            </div>
 
-      <div class="modal-body">
-        <h4>Open an issue</h4>
+            <div class="modal-body">
+                <h4>Open an issue</h4>
 
-        <p>
-          Zend Framework manages issues on <a href="https://github.com">GitHub</a>.
-          From the list below, please choose the package against which to report the issue,
-          and then click the "Open Issue" button.
-        </p>
+                <p>
+                    Zend Framework manages issues on <a href="https://github.com">GitHub</a>.
+                    From the list below, please choose the package against which to report the issue,
+                    and then click the "Open Issue" button.
+                </p>
 
-        <select class="form-control" id="gitrepo">
-        <?php foreach ($repository as $repo) : ?>
-          <option value="https://github.com/zendframework/<?php echo basename($repo['url']) ?>/issues/new"><?php echo $repo['name'] ?></option>
-        <?php endforeach; ?>
-        </select>
-      </div>
+                <select class="form-control" id="gitrepo">
+                <?php foreach ($repository as $repo) : ?>
+                    <option value="https://github.com/zendframework/<?= basename($repo['url']) ?>/issues/new"><?= $repo['name'] ?></option>
+                <?php endforeach; ?>
+                </select>
+            </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="openIssue" class="btn btn-primary">Open Issue</button>
-      </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" id="openIssue" class="btn btn-primary">Open Issue</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <?php $this->inlineScript()->captureStart(); ?>
 (function($) {
     "use strict";
     $('#openIssue').on('click', function () {
-      $('#issueModal').modal("hide");
-      window.open($('#gitrepo').val(), '_blank');
+        $('#issueModal').modal("hide");
+        window.open($('#gitrepo').val(), '_blank');
     });
 })(jQuery);
 <?php $this->inlineScript()->captureEnd(); ?>

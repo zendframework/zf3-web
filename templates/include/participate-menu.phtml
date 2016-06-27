@@ -1,18 +1,18 @@
 <?php
 $links = [
-  '/participate'                   => 'Overview',
-  '/participate/contributor-guide' => 'Contributor Guide',
-  '/participate/code-manifesto'    => 'Code Manifesto',
-  '/participate/contributors'      => 'Contributors',
-  '/participate/logos'             => 'Logos',
-  '/status'                        => 'Status'
+    '/participate'                   => 'Overview',
+    '/participate/contributor-guide' => 'Contributor Guide',
+    '/participate/code-manifesto'    => 'Code Manifesto',
+    '/participate/contributors'      => 'Contributors',
+    '/participate/logos'             => 'Logos',
+    '/status'                        => 'Status',
 ];
 ?>
 
 <ul class="nav nav-pills nav-stacked">
-  <?php foreach($links as $url => $title): ?>
-      <li <?php if ($url === $active) echo 'class="active"' ?>>
-        <a href="<?php echo $url ?>"><span class="glyphicon glyphicon-chevron-right"></span> <?php echo $title ?></a>
-      </li>
-  <?php endforeach; ?>
+<?php foreach ($links as $url => $title) : ?>
+    <li<?= ($url === $active) ? ' class="active"' : '' ?>>
+        <a href="<?= $url ?>"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;<?= $title ?></a>
+    </li>
+<?php endforeach ?>
 </ul>

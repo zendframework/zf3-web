@@ -1,18 +1,22 @@
+<?php
+$url = 'http://packages.zendframework.com/releases/ZendFramework-%s/ZendFramework-%s-apidoc.%s';
+?>
+
 <div class="spacing"></div>
+
 <div class="row">
     <div class="col-lg-4">
-        <strong>Version <?php
-          $short = substr($this->version, 0, strrpos($this->version, '.'));
-          echo $short;
-        ?></strong>
+        <strong>Version <?= substr($this->version, 0, strrpos($this->version, '.')) ?></strong>
     </div>
+
     <div class="col-lg-4">
-        <a href="/apidoc/<?php echo $short ?>">Browse Online</a>
+        <a href="/apidoc/<?= $short ?>">Browse Online</a>
     </div>
+
     <div class="col-lg-4">
-      <?php $url = 'http://packages.zendframework.com/releases/ZendFramework-%s/ZendFramework-%s-apidoc.%s'; ?>
-      Download <a href="<?php echo sprintf($url, $this->version, $this->version, 'tar.gz') ?>">tar.gz</a>, <a href="<?php echo sprintf($url, $this->version, $this->version, 'zip') ?>">zip</a>
+        Download <a href="<?= sprintf($url, $this->version, $this->version, 'tar.gz') ?>">tar.gz</a>, <a href="<?= sprintf($url, $this->version, $this->version, 'zip') ?>">zip</a>
     </div>
 </div>
+
 <div class="spacing"></div>
 <div class="hline"></div>

@@ -1,48 +1,55 @@
 <?php
 $links = [
-  '/learn' => 'Overview',
-  '/learn/training-and-certification' => 'Training & Certification',
-  '/learn/support-and-consulting' => 'Support & Consulting'
+    '/learn'                            => 'Overview',
+    '/learn/training-and-certification' => 'Training & Certification',
+    '/learn/support-and-consulting'     => 'Support & Consulting',
 ];
 $path = parse_url($this->serverUrl(), PHP_URL_PATH);
 ?>
 
 <ul class="nav nav-pills nav-stacked">
-  <?php foreach($links as $url => $title): ?>
-      <li <?php if ($url === $active) echo 'class="active"' ?>>
-        <a href="<?php echo $url ?>"><span class="glyphicon glyphicon-chevron-right"></span> <?php echo $title ?></a>
-      </li>
-  <?php endforeach; ?>
-  <li><a href="http://www.zend.com/en/webinars/recorded/show-by-topic/242_zend+framework"><span class="glyphicon glyphicon-chevron-right"></span> Webinars</li>
+<?php foreach ($links as $url => $title) : ?>
+    <li<?= ($url === $active) ? ' class="active"' : '' ?>>
+        <a href="<?= $url ?>"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;<?= $title ?></a>
+    </li>
+<?php endforeach ?>
+    <li><a href="http://www.zend.com/en/webinars/recorded/show-by-topic/242_zend+framework"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Webinars</a></li>
 </ul>
 
 <h3>Zend Framework 2</h3>
+
 <ul class="nav nav-pills nav-stacked">
-  <li>
-    <a href="/manual/2.4/en/user-guide/overview.html"><span class="glyphicon glyphicon-chevron-right"></span> Getting started</a>
-  </li>
-  <li>
-    <a href="/manual/2.4/en/index.html"><span class="glyphicon glyphicon-chevron-right"></span> Reference guide</a>
-  </li>
-  <li <?php if ($path === '/docs/api/zf2') echo 'class="active"' ?>>
-    <a href="/docs/api/zf2"><span class="glyphicon glyphicon-chevron-right"></span> API</a>
-  </li>
+    <li>
+        <a href="/manual/2.4/en/user-guide/overview.html"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Getting started</a>
+    </li>
+
+    <li>
+        <a href="/manual/2.4/en/index.html"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Reference guide</a>
+    </li>
+
+    <li<?= ($path === '/docs/api/zf2') ? ' class="active"' : '' ?>>
+        <a href="/docs/api/zf2"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;API</a>
+    </li>
 </ul>
 
 <h3>Zend Framework 1</h3>
+
 <ul class="nav nav-pills nav-stacked">
-  <li>
-    <a href="/manual/1.12/en/learning.quickstart.html"><span class="glyphicon glyphicon-chevron-right"></span> Getting started</a>
-  </li>
-  <li>
-    <a href="/manual/1.12/en/manual.html"><span class="glyphicon glyphicon-chevron-right"></span> Reference guide</a>
-  </li>
-  <li <?php if ($path === '/docs/api/zf1') echo 'class="active"' ?>>
-    <a href="/docs/api/zf1"><span class="glyphicon glyphicon-chevron-right"></span> API</a>
-  </li>
+    <li>
+        <a href="/manual/1.12/en/learning.quickstart.html"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Getting started</a>
+    </li>
+
+    <li>
+        <a href="/manual/1.12/en/manual.html"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Reference guide</a>
+    </li>
+
+    <li<?= ($path === '/docs/api/zf1') ? ' class="active"' : '' ?>>
+        <a href="/docs/api/zf1"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;API</a>
+    </li>
 </ul>
 
 <div class="spacing"></div>
+
 <div class="zf2a-course">
     <a href="http://www.zend.com/en/services/certification/framework-2/">
         <img src="/img/ZF2-Certification-390x300px.png" alt="New! Zend Framework 2 Certification">
