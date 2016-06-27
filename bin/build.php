@@ -11,7 +11,7 @@ printf("Building the cache files:\n");
 // remove all the .php files in data/cache
 $cacheFolder = dirname(__DIR__) . '/data/cache';
 foreach (glob("$cacheFolder/*.php") as $filename) {
-  unlink($filename);
+    unlink($filename);
 }
 
 $parser = new Parser(null, new CommonMarkParser());
@@ -35,6 +35,22 @@ printf("done.\n");
 printf("Building the config files:\n");
 
 printf("Update ZF component list...");
-$list = json_decode(file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'), true);
-file_put_contents(dirname(__DIR__) . '/config/autoload/zf-components.global.php', '<?php return [ "zf_components" => '. var_export($list, true) . ' ];', LOCK_EX);
+$list = json_decode(
+    file_get_contents('http://zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json'),
+    true
+);
+file_put_contents(
+    dirname(__DIR__) . '/config/autoload/zf-components.global.php',
+    '<' . '?php return [ "zf_components" => ' . var_export($list, true) . ' ];',
+    LOCK_EX
+);
+
+printf("Clearing config cache...\n");
+if (getenv('APP_CACHE')) {
+    $configCache = sprintf('%s/app_config.php', getenv('APP_CACHE'));
+    if (file_exists($configCache)) {
+        unlink($configCache);
+    }
+}
+
 printf("done.\n");

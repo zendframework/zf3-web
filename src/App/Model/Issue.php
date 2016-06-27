@@ -11,6 +11,12 @@ class Issue extends AbstractCollection
         if (empty(static::FOLDER_COLLECTION)) {
             throw new RuntimeException('The folder issues is not defined!');
         }
+
+        if (file_exists(self::CACHE_FILE)) {
+            // Nothing to do!
+            return;
+        }
+
         $this->collection = [ 'ZF1' => [], 'ZF2' => [] ];
         // ZF1 issues
         foreach (glob(static::FOLDER_COLLECTION . '/ZF-*.md') as $file) {

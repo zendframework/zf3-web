@@ -137,3 +137,10 @@ using the following command:
 ```bash
 $ php bin/build.php
 ```
+
+If you have setup a configuration cache directory, define the `APP_CACHE`
+environment variable before invoking the script:
+
+```bash
+$ APP_CACHE=/path/to/cache/ php bin/build.php
+```
