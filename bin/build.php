@@ -19,7 +19,7 @@ if (!isset($config['zf_manual_basepath']) || empty($config['zf_manual_basepath']
 }
 $pathApi = $config['zf_manual_basepath'];
 if (substr($pathApi, -1) == '/') {
-  $pathApi = substr($pathApi, 0, strlen($pathApi) - 1);
+    $pathApi = substr($pathApi, 0, strlen($pathApi) - 1);
 }
 
 $ver1 = [
@@ -42,8 +42,8 @@ $ver2 = [
 ];
 
 // symlinks for ZF1
-foreach($ver1 as $file => $ver) {
-    if (!file_exists("public/apidoc/$file")) {
+foreach ($ver1 as $file => $ver) {
+    if (! file_exists("public/apidoc/$file")) {
         $target = sprintf(
             "%s/ZendFramework-%s/documentation/api/core/",
             $pathApi,
@@ -54,8 +54,8 @@ foreach($ver1 as $file => $ver) {
 }
 
 // symlinks for ZF2
-foreach($ver2 as $file => $ver) {
-    if (!file_exists("public/apidoc/$file")) {
+foreach ($ver2 as $file => $ver) {
+    if (! file_exists("public/apidoc/$file")) {
         $target = sprintf(
             "%s/ZendFramework-%s/apidoc/",
             $pathApi,
@@ -71,6 +71,10 @@ printf("Building the cache files:\n");
 // remove all the .php files in data/cache
 $cacheFolder = dirname(__DIR__) . '/data/cache';
 foreach (glob("$cacheFolder/*.php") as $filename) {
+    if (preg_match('#/issues\.php$#', $filename)) {
+        // we really don't need to rebuild issues!
+        continue;
+    }
     unlink($filename);
 }
 
