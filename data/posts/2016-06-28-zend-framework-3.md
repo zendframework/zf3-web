@@ -71,7 +71,7 @@ original mission: a strong component library, with opt-in MVC features.
 
 Join our community today; we're available on the
 [#zftalk Freenode IRC channel](irc://irc.freenode.net:6697/zftalk), and via our
-[component repositoriess](/learn) (for discussing issues and development).
+[component repositories](/learn) (for discussing issues and development).
 
 &mdash; The Zend Framework Team &mdash;
 
