@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 3 Released!
-date: 2016-06-28 08:30
-update: 2016-06-28 08:30
+date: 2016-06-28T08:45:00-05:00
+update: 2016-06-28T08:45:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net/
 permalink: /blog/2016-06-28-zend-framework-3.html
