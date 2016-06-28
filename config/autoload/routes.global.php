@@ -7,6 +7,7 @@ return [
         ],
         'factories' => [
             App\Action\HomePageAction::class     => App\Action\HomePageFactory::class,
+            App\Action\ApiAction::class          => App\Action\ApiFactory::class,
             App\Action\BlogAction::class         => App\Action\BlogFactory::class,
             App\Action\AboutAction::class        => App\Action\AboutFactory::class,
             App\Action\AdvisoryAction::class     => App\Action\AdvisoryFactory::class,
@@ -25,6 +26,12 @@ return [
     ],
 
     'routes' => [
+        [
+            'name' => 'api-zf-version',
+            'path' => '/api/zf-version',
+            'middleware' => App\Action\ApiAction::class,
+            'allowed_methods' => ['GET'],
+        ],
         [
             'name' => 'home',
             'path' => '/',
