@@ -3,7 +3,7 @@
 <div id="blue">
     <div class="container">
         <div class="row">
-            <h3>API</h3>
+            <h3>Documentation</h3>
         </div>
     </div>
 </div>
@@ -11,7 +11,8 @@
 <div class="container mtb">
     <div class="row">
         <div class="col-lg-8">
-            <h2 id="zf2">Zend Framework <?php echo $this->zf ?></h2>
+            <h2>API</h2>
+            <h3 id="zf2">Zend Framework <?php echo $this->zf ?></h3>
             <?php
             foreach ($this->versions[$this->zf] as $version) {
                 echo $this->render('include::api-version', [ 'version' => $version ]);
