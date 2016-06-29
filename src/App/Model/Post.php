@@ -1,8 +1,6 @@
 <?php
 namespace App\Model;
 
-use Mni\FrontYAML\Parser;
-
 class Post extends AbstractCollection
 {
     const FOLDER_COLLECTION = 'data/posts';
