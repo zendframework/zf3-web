@@ -13,7 +13,7 @@
 
 <?php $this->inlineScript()->captureStart(); ?>
 (function($) {
-    if (getCookie('promoClosed') != 1) {
+    if (getCookie('promoClosed') != 1 && $(document).width() > $("#dialog_promo").width()) {
     	setTimeout(function() {
     		$( "#dialog_promo" ).slideDown( 2000 );
         }, 1000);
