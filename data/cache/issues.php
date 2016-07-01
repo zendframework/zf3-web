@@ -53002,7 +53002,7 @@
     'data/issues/ZF-6717.md' => 
     array (
       'layout' => 'issue',
-      'title' => 'Update Ec2 to use the lastest API Version 2009-04-04',
+      'title' => 'Update Ec2 to use the latest API Version 2009-04-04',
       'id' => 'ZF-6717',
     ),
     'data/issues/ZF-6718.md' => 
