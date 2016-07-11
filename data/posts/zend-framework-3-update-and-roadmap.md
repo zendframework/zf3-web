@@ -2,7 +2,7 @@
 layout: post
 title: Zend Framework 3 Update and Roadmap
 date: 2015-11-25T22:45:00Z
-update: 2015-11-25T22:45:00Z
+update: 2016-06-28T08:45:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net/
 permalink: /blog/zend-framework-3-update-and-roadmap.html
@@ -10,6 +10,11 @@ categories:
 - blog
 
 ---
+
+> ## Update: ZF3 Released!
+>
+> Zend Framework 3 was released 28 June 2016! [Read the
+> announcement](/blog/2016-06-28-zend-framework-3.html) for details!
 
 In October, while at ZendCon, I presented a talk on Zend Framework 3 entitled "Components, PSR-7, and Middleware: Zend Framework 3." You can [view it online](http://weierophinney.github.io/2015-10-22-ZF3/), but this post discusses current status, details some decisions, and points to the work still to be done. It's a long read; grab a warm beverage, maybe some popcorn, and take your time.
 
