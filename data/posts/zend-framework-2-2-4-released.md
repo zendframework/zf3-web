@@ -4,7 +4,7 @@ title: Zend Framework 2.2.4 Released!
 date: 2013-08-26T18:45:00Z
 update: 2013-08-26T18:45:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-2-4-released.html
 categories:
 - blog

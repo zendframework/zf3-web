@@ -4,7 +4,7 @@ title: Zend Framework 2.1.4, 2.0.8, and 1.12.3 Released!
 date: 2013-03-14T16:30:00Z
 update: 2013-03-14T16:30:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2013-03-14-zend-framework-3-for-1-release-day.html
 categories:
 - blog

@@ -3,7 +3,7 @@ layout: post
 title: Expressive 1.0.0RC6/RC7 Released!
 date: 2016-01-19
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2016-01-19-expressive-rc6-rc7.html
 categories:
 - blog

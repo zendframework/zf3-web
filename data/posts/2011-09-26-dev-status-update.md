@@ -4,7 +4,7 @@ title: 2011-09-26 Dev status update
 date: 2011-09-26T22:00:00Z
 update: 2011-09-26T22:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2011-09-26-dev-status-update.html
 categories:
 - blog

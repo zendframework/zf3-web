@@ -3,7 +3,7 @@ layout: post
 title: Expressive 1.0.0RC4 Released!
 date: 2015-12-09
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/expressive-1-0-0rc4-released.html
 categories:
 - blog

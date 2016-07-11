@@ -4,7 +4,7 @@ title: Apigility 1.0.0beta1 Released!
 date: 2014-03-23T16:00:00Z
 update: 2014-03-23T16:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/apigility-1-0-0beta1-released.html
 categories:
 - blog

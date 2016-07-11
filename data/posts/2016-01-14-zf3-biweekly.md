@@ -3,7 +3,7 @@ layout: post
 title: Zend Framework 3 Update for 2016-01-14
 date: 2016-01-15
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2016-01-14-zf3-biweekly-update.html
 categories:
 - blog

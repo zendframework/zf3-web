@@ -4,7 +4,7 @@ title: Announcing the Zend Framework 3 Roadmap
 date: 2015-01-21T18:00:00Z
 update: 2016-06-28T08:45:00-05:00
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/announcing-the-zend-framework-3-roadmap.html
 categories:
 - blog

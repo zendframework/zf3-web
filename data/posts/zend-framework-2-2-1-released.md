@@ -4,7 +4,7 @@ title: Zend Framework 2.2.1 Released!
 date: 2013-06-12T22:00:00Z
 update: 2013-06-12T22:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-2-1-released.html
 categories:
 - blog

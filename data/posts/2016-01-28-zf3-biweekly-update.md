@@ -4,7 +4,7 @@ title: Zend Framework 3 Update for 2016-01-28
 date: 2016-01-28T17:45:00Z
 update: 2016-01-28T17:45:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2016-01-28-zf3-biweekly-update.html
 categories:
 - blog

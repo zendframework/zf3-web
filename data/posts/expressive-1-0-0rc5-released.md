@@ -4,7 +4,7 @@ title: Expressive 1.0.0RC5 Released!
 date: 2015-12-22T23:15:00Z
 update: 2015-12-22T23:15:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/expressive-1-0-0rc5-released.html
 categories:
 - blog

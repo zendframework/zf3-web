@@ -3,7 +3,7 @@ layout: post
 title: Zend Framework 1.12.14, 2.4.6 and 2.5.2 Released!
 date: 2015-08-03
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-1-12-14-2-4-6-and-2-5-2-released.html
 categories:
 - blog

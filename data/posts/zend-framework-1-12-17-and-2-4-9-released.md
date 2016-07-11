@@ -4,7 +4,7 @@ title: Zend Framework 1.12.17 and 2.4.9 Released!
 date: 2015-11-23T21:30:00Z
 update: 2015-11-23T21:30:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-1-12-17-and-2-4-9-released.html
 categories:
 - blog

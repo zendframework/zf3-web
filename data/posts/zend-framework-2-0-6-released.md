@@ -4,7 +4,7 @@ title: Zend Framework 2.0.6 Released!
 date: 2012-12-20T00:00:00Z
 update: 2012-12-20T00:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-0-6-released.html
 categories:
 - blog

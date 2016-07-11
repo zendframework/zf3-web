@@ -4,7 +4,7 @@ title: Zend Framework 2.1.2 Released!
 date: 2013-02-20T22:17:00Z
 update: 2013-02-20T22:17:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-1-2-released.html
 categories:
 - blog

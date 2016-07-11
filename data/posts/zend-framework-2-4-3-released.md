@@ -4,7 +4,7 @@ title: Zend Framework 2.4.3 Released!
 date: 2015-06-18T16:30:00Z
 update: 2015-06-18T16:30:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-4-3-released.html
 categories:
 - blog

@@ -4,7 +4,7 @@ title: Zend Framework 3 Update for 2015-12-22
 date: 2015-12-23T00:10:00Z
 update: 2015-12-23T00:10:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2015-12-22-zf3-biweekly-update.html
 categories:
 - blog

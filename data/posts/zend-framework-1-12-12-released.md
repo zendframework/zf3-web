@@ -4,7 +4,7 @@ title: Zend Framework 1.12.12 Released!
 date: 2015-05-19T21:00:00Z
 update: 2015-05-19T21:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-1-12-12-released.html
 categories:
 - blog

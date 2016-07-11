@@ -4,7 +4,7 @@ title: Zend Framework 1.12.6 Released!
 date: 2014-04-15T22:00:00Z
 update: 2014-04-15T22:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-1-12-6-released.html
 categories:
 - blog

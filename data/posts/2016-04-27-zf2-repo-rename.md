@@ -3,7 +3,7 @@ layout: post
 title: "Announcement: ZF repository rename 2016-05-03"
 date: 2016-04-27
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2016-04-27-zf2-repo-rename.html
 categories:
 - blog

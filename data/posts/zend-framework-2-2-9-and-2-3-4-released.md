@@ -4,7 +4,7 @@ title: Zend Framework 2.2.9 and 2.3.4 Released!
 date: 2015-01-14T20:00:00Z
 update: 2015-01-14T20:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-2-9-and-2-3-4-released.html
 categories:
 - blog

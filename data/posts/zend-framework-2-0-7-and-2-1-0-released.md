@@ -4,7 +4,7 @@ title: Zend Framework 2.0.7 and 2.1.0 Released!
 date: 2013-01-30T21:15:00Z
 update: 2013-01-30T23:55:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-0-7-and-2-1-0-released.html
 categories:
 - blog

@@ -4,7 +4,7 @@ title: Expressive 1.0.0RC7/RC8 Released!
 date: 2016-01-21T17:35:00Z
 update: 2016-01-21T17:35:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/2016-01-21-expressive-rc7-rc8.html
 categories:
 - blog

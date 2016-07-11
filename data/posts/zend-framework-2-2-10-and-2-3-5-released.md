@@ -4,7 +4,7 @@ title: Zend Framework 2.2.10 and 2.3.5 Released!
 date: 2015-02-18T22:00:00Z
 update: 2015-02-18T22:00:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/zend-framework-2-2-10-and-2-3-5-released.html
 categories:
 - blog

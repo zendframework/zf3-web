@@ -4,7 +4,7 @@ title: Apigility 0.9.1 Released!
 date: 2014-03-01T19:20:00Z
 update: 2014-03-01T19:20:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/apigility-0-9-1-released.html
 categories:
 - blog

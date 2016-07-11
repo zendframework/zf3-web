@@ -4,7 +4,7 @@ title: Announcing Expressive
 date: 2015-08-26T20:25:00Z
 update: 2015-08-26T20:25:00Z
 author: Matthew Weier O'Phinney
-url_author: http://mwop.net/
+url_author: https://mwop.net/
 permalink: /blog/announcing-expressive.html
 categories:
 - blog
