@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.4.5 Released!
-date: 2015-07-28 18:45
-update: 2015-07-28 18:45
+date: 2015-07-28T18:45:00Z
+update: 2015-07-28T18:45:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-4-5-released.html

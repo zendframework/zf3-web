@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 1.12.10 Released!
-date: 2015-01-14 21:25
-update: 2015-01-14 21:25
+date: 2015-01-14T21:25:00Z
+update: 2015-01-14T21:25:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-1-12-10-released.html

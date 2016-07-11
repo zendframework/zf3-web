@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Welcome!
-date: 2011-08-09 20:45
-update: 2011-08-09 20:45
+date: 2011-08-09T20:45:00Z
+update: 2011-08-09T20:45:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/welcome.html

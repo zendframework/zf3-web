@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 1.12.9, 2.2.8, and 2.3.3 Released!
-date: 2014-09-17 17:30
-update: 2014-09-17 17:30
+date: 2014-09-17T17:30:00Z
+update: 2014-09-17T17:30:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-1-12-9-2-2-8-and-2-3-3-released.html

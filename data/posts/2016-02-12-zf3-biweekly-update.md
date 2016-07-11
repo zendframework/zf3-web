@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 3 Update for 2016-02-12
-date: 2016-02-12 18:40
-update: 2016-02-12 18:40
+date: 2016-02-12T18:40:00Z
+update: 2016-02-12T18:40:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2016-02-12-zf3-biweekly-update.html

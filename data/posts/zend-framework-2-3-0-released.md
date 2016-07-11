@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.3.0 Released!
-date: 2014-03-12 19:00
-update: 2014-03-12 19:00
+date: 2014-03-12T19:00:00Z
+update: 2014-03-12T19:00:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-3-0-released.html

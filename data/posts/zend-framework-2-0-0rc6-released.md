@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.0.0rc6 Released!
-date: 2012-08-29 19:55
-update: 2012-08-29 19:55
+date: 2012-08-29T19:55:00Z
+update: 2012-08-29T19:55:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-0-0rc6-released.html

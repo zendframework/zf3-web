@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 2011-08-31 IRC Meeting Log
-date: 2011-08-31 21:50
-update: 2011-08-31 21:50
+date: 2011-08-31T21:50:00Z
+update: 2011-08-31T21:50:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2011-08-31-irc-meeting-log.html

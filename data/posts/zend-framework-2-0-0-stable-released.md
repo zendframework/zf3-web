@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.0.0 STABLE Released!
-date: 2012-09-06 04:00
-update: 2012-09-06 04:00
+date: 2012-09-06T04:00:00Z
+update: 2012-09-06T04:00:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-0-0-stable-released.html

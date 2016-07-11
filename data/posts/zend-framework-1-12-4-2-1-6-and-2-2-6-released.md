@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 1.12.4, 2.1.6, and 2.2.6 Released!
-date: 2014-03-07 00:00
-update: 2014-03-07 00:00
+date: 2014-03-07T00:00:00Z
+update: 2014-03-07T00:00:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-1-12-4-2-1-6-and-2-2-6-released.html

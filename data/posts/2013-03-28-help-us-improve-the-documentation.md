@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Help us improve the documentation!
-date: 2013-03-28 10:15
-update: 2013-03-28 10:15
+date: 2013-03-28T10:15:00Z
+update: 2013-03-28T10:15:00Z
 author: Robert Basic
 url_author: http://robertbasic.com/
 permalink: /blog/2013-03-28-help-us-improve-the-documentation.html

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 1.12.15 and 2.4.7 Released!
-date: 2015-08-11 19:30
-update: 2015-08-11 19:30
+date: 2015-08-11T19:30:00Z
+update: 2015-08-11T19:30:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-1-12-15-and-2-4-7-released.html

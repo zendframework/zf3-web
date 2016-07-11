@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.0.0beta5 Released!
-date: 2012-07-06 18:30
-update: 2012-07-06 18:30
+date: 2012-07-06T18:30:00Z
+update: 2012-07-06T18:30:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-0-0beta5-released.html

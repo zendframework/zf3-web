@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.0.4 Released!
-date: 2012-11-21 00:00
-update: 2012-11-21 00:00
+date: 2012-11-21T00:00:00Z
+update: 2012-11-21T00:00:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-0-4-released.html

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 2011-08-19 Dev status update
-date: 2011-08-19 12:32
-update: 2011-08-19 12:32
+date: 2011-08-19T12:32:00Z
+update: 2011-08-19T12:32:00Z
 author: Enrico Zimuel
 url_author: http://www.zimuel.it/
 permalink: /blog/2011-08-19-dev-status-update.html

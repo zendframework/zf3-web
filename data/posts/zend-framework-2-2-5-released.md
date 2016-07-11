@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.2.5 Released!
-date: 2013-10-31 20:00
-update: 2013-10-31 20:00
+date: 2013-10-31T20:00:00Z
+update: 2013-10-31T20:00:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-2-5-released.html

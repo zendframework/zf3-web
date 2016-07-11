@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 1 is Migrating to Git!
-date: 2013-03-27 17:45
-update: 2013-03-27 17:45
+date: 2013-03-27T17:45:00Z
+update: 2013-03-27T17:45:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2013-03-27-zf1-git-migration.html

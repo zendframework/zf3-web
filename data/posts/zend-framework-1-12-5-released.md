@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 1.12.5 Released!
-date: 2014-03-07 18:50
-update: 2014-03-07 18:50
+date: 2014-03-07T18:50:00Z
+update: 2014-03-07T18:50:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-1-12-5-released.html

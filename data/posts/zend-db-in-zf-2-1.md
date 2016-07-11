@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend\Db in ZF 2.1
-date: 2013-02-01 18:00
-update: 2013-02-01 18:00
+date: 2013-02-01T18:00:00Z
+update: 2013-02-01T18:00:00Z
 author: Ralph Schindler
 url_author: http://ralphschindler.com/
 permalink: /blog/zend-db-in-zf-2-1.html

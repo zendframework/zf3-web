@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 2.2.7 and 2.3.1 Released!
-date: 2014-04-15 22:05
-update: 2014-04-15 22:05
+date: 2014-04-15T22:05:00Z
+update: 2014-04-15T22:05:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-2-2-7-and-2-3-1-released.html

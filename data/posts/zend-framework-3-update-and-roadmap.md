@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Zend Framework 3 Update and Roadmap
-date: 2015-11-25 22:45
-update: 2015-11-25 22:45
+date: 2015-11-25T22:45:00Z
+update: 2015-11-25T22:45:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/zend-framework-3-update-and-roadmap.html

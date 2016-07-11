@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 2011-11-11 Dev status update
-date: 2011-11-11 19:10
-update: 2011-11-11 19:10
+date: 2011-11-11T19:10:00Z
+update: 2011-11-11T19:10:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2011-11-11-dev-status-update.html

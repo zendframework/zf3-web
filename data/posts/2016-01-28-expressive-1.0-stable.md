@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Expressive 1.0.0 STABLE Released!
-date: 2016-01-28 17:00
-update: 2016-01-28 17:00
+date: 2016-01-28T17:00:00Z
+update: 2016-01-28T17:00:00Z
 author: Matthew Weier O'Phinney
 url_author: http://mwop.net/
 permalink: /blog/2016-01-28-expressive-1.0-stable.html
