@@ -1,4 +1,5 @@
 <?php
+use App\Action\Redirects;
 use App\Action\StripTrailingSlashMiddleware;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
@@ -9,6 +10,7 @@ return [
         'factories' => [
             Helper\ServerUrlMiddleware::class => Helper\ServerUrlMiddlewareFactory::class,
             Helper\UrlHelperMiddleware::class => Helper\UrlHelperMiddlewareFactory::class,
+            Redirects::class => InvokableFactory::class,
             StripTrailingSlashMiddleware::class => InvokableFactory::class,
         ],
     ],
@@ -43,6 +45,7 @@ return [
                 // - pre-conditions
                 // - modifications to outgoing responses
                 StripTrailingSlashMiddleware::class,
+                Redirects::class,
                 Helper\ServerUrlMiddleware::class,
             ],
             'priority' => 10000,
