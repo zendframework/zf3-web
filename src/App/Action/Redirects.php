@@ -10,6 +10,8 @@ class Redirects
 {
     private $redirects = [
         '/downloads/latest' => '/downloads/archives',
+        '/zf2'              => '/',
+        '/zf2/'             => '/',
     ];
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
