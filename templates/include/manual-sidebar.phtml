@@ -1,6 +1,6 @@
 <div id="select-version">
-    Select a version:
-    <select class="form-control">
+    <label for="version">Select a version:</label>
+    <select class="form-control" id="version">
         <?php foreach ($this->versions as $ver) : ?>
             <option
                 value="<?= $ver ?>"
@@ -38,8 +38,8 @@ $this->inlineScript()->captureEnd();
 
 <?php if (count($contentList)) : ?>
     <div id="select-chapter">
-        Select chapter:
-        <select class="form-control">
+        <label for="chapter">Select chapter:</label>
+        <select class="form-control" id="chapter">
             <?php foreach ($contentList as $headline => $items) : ?>
 
                 <?php if (is_array($items)) : ?>
