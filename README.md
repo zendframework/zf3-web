@@ -1,4 +1,4 @@
-# Zend Framework 3 web site
+# Zend Framework web site
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zf3-web.svg?branch=master)](https://secure.travis-ci.org/zendframework/zf3-web)
 
