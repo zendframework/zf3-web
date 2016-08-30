@@ -1,31 +1,37 @@
 version: 0.0
 os: linux
 files:
-  - source: ./composer.*
-    destination: /var/vhosts/framework.zend.com
-  - source: ./config
-    destination: /var/vhosts/framework.zend.com/config
-  - source: ./data
-    destination: /var/vhosts/framework.zend.com/data
-  - source: ./public
-    destination: /var/vhosts/framework.zend.com/public
-  - source: ./src
-    destination: /var/vhosts/framework.zend.com/src
-  - source: ./templates
-    destination: /var/vhosts/framework.zend.com/templates
+  - source: /
+    destination: /var/vhosts/framework.zend.com/htdocs
+permissions:
+    - object: /var/vhosts/framework.zend.com/htdocs
+      pattern: "**"
+      owner: www-data
+      group: www-data
+      mode: 4750
+      type:
+        - directory
+    - object: /var/vhosts/framework.zend.com/htdocs
+      pattern: "**"
+      owner: www-data
+      group: www-data
+      mode: 640
+      type:
+        - file
 hooks:
   ApplicationStop:
-    - location: service nginx stop
-      timeout: 300
+    - location: .aws/application-stop.sh
+      timeout: 30
       runas: root
-  ApplicationStart:
-    - location: service nginx start
+  BeforeInstall:
+    - location: .aws/before-install.sh
       timeout: 300
       runas: root
   AfterInstall:
-    - location: composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
-      timeout: 600
-    - location: php bin/build.php
+    - location: .aws/after-install-www-data.sh
       timeout: 300
-    - location: php bin/stats.php
-      timeout: 300
+      runas: www-data
+  ApplicationStart:
+    - location: .aws/application-start.sh
+      timeout: 30
+      runas: root
