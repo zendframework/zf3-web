@@ -65,7 +65,7 @@ And then launch them:
 $ docker-compose up -d
 ```
 
-You can then browse to http://localhost:8080, and any changes you make in the
+You can then browse to `http://localhost:8080`, and any changes you make in the
 project will be reflected immediately.
 
 ## Stats and statistics pages
