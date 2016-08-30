@@ -14,8 +14,8 @@
 ## To ADD
 
 - [ ] FAQ item: when to choose Expressive vs zend-mvc
-- [ ] ZF3 release blog post
-- [ ] ZF1 EOL announcement
+- [X] ZF3 release blog post
+- [X] ZF1 EOL announcement
 
 ## Wishlist
 
