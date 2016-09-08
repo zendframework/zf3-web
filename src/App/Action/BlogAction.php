@@ -81,7 +81,11 @@ class BlogAction
         $uri     = $request->getUri();
         $blogUrl = (string) $uri->withPath('/blog');
         $feedUrl = (string) $uri->withQuery('')->withFragment('');
-        $baseUrl = sprintf("%s://%s", $uri->getScheme(), $uri->getPort() == 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort());
+        $baseUrl = sprintf(
+            "%s://%s",
+            $uri->getScheme(),
+            $uri->getPort() == 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort()
+        );
 
         $matches = [];
         preg_match('#(?P<type>atom|rss)#', $feedUrl, $matches);
