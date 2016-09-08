@@ -78,8 +78,14 @@ class BlogAction
 
     protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        $blogUrl = (string) $request->getUri()->withPath('/blog');
-        $feedUrl = (string) $request->getUri()->withQuery('')->withFragment('');
+        $uri     = $request->getUri();
+        $blogUrl = (string) $uri->withPath('/blog');
+        $feedUrl = (string) $uri->withQuery('')->withFragment('');
+        $baseUrl = sprintf(
+            "%s://%s",
+            $uri->getScheme(),
+            $uri->getPort() == 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort()
+        );
 
         $matches = [];
         preg_match('#(?P<type>atom|rss)#', $feedUrl, $matches);
@@ -100,7 +106,7 @@ class BlogAction
 
             $entry = $feed->createEntry();
             $entry->setTitle($content['title']);
-            $entry->setLink($content['permalink']);
+            $entry->setLink($baseUrl . $content['permalink']);
             $entry->addAuthor([
                 'name' => $content['author'],
                 'url'  => $content['url_author']
