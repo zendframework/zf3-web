@@ -4,7 +4,7 @@ title: Paginating data collections with zend-paginator
 date: 2017-01-31T11:15:00-06:00
 author: Enrico Zimuel
 url_author: http://www.zimuel.it
-permalink: /blog/2017-01-31-paginating-data-zend-paginator.html
+permalink: /blog/2017-01-31-zend-paginator.html
 categories:
 - blog
 - components
@@ -12,54 +12,55 @@ categories:
 
 ---
 
-[Zend-paginator](https://zendframework.github.io/zend-paginator/) is a flexible
+[zend-paginator](https://docs.zendframework.com/zend-paginator/) is a flexible
 component for paginating collections of data and presenting that data to users.
 
 [Pagination](https://en.wikipedia.org/wiki/Pagination) is a standard UI solution
-to manage the visualization of list of items, like a list of posts in a blog web
-site or a list of products in online stores.
+to manage the visualization of lists of items, like a list of posts in a blog
+or a list of products in an online store.
 
+zend-paginator is very popular among Zend Framework developers, and it's often
+used with [zend-view](https://docs.zendframework.co/zend-view/), thanks to
+the pagination control view helper zend-view provides.
 
-Zend-paginator is very popular among Zend Framework developers and it's often
-used with [zend-view](https://github.com/zendframework/zend-view), thanks to
-specific plugin.
-
-It can be used also with other template engines and in this article, I will show
-how to use it in general, giving an example using [Plates](http://platesphp.com/).
+It can be used also with other template engines. In this article, I will
+demonstrate how to use it with [Plates](http://platesphp.com/).
 
 ## Usage of zend-paginator
 
-The component can be installed with [composer](https://getcomposer.org/), using
+The component can be installed via [composer](https://getcomposer.org/), using
 the following command:
 
 ```bash
-composer require zendframework/zend-paginator
+$ composer require zendframework/zend-paginator
 ```
 
-To consume the Paginator component we need to have a collection of items.
-We have different adapters available:
+To consume the paginator component, we need a collection of items.
+zend-paginator ships with several different adapters for common collection
+types:
 
-- *ArrayAdapter*, to work with PHP array;
-- *DbSelect*, to work with a SQL collection (using [zend-db](https://github.com/zendframework/zend-db));
+- *ArrayAdapter*, which works with PHP arrays;
+- *Callback*, which allows providing callbacks for obtaining counts of items and lists of items;
+- *DbSelect*, to work with a SQL collection (using [zend-db](https://docs.zendframework.com/zend-db/));
+- *DbTableGateway*, to work with a Table Data Gateway (using the TableGateway
+  feature from zend-db.
 - *Iterator*, to work with any [Iterator](http://php.net/manual/en/class.iterator.php) instance.
 
-In case we don't have a collection that is an array, a database, or an Iterator
-instance we can create a custom data source adapter.
-
-To do so, we need to implement `Zend\Paginator\Adapter\AdapterInterface`.
-There are two methods required to do this:
+If your collection does not fit one of these adapters, you can create a custom
+adapter. To do so, you will need to implement
+`Zend\Paginator\Adapter\AdapterInterface`, which defines two methods:
 
 - `count() : int`
 - `getItems(int $offset, int $itemCountPerPage) : array`
 
-We need to return the total number of items in the collection, implementing the
-`count()` method, and a portion (a *page*) starting from `$offset` position with
-a size of `$itemCountPerPage` per page.
+Each adapter need to return the total number of items in the collection,
+implementing the `count()` method, and a portion (a *page*) of items starting
+from `$offset` position with a size of `$itemCountPerPage` per page.
 
-With these two methods we can use zend-paginator with any type of collections.
+With these two methods we can use zend-paginator with any type of collection.
 
 For instance, imagine we need to paginate a collection of blog posts and we
-have a Posts class that manage all the posts. We can implement an adapter
+have a `Posts` class that manage all the posts. We can implement an adapter
 like this:
 
 ```php
@@ -69,14 +70,17 @@ use Zend\Paginator\Adapter\AdapterInterface;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\ScrollingStyle\Sliding;
 
-class Posts implements AdapterInterface {
+class Posts implements AdapterInterface
+{
     protected $posts = [];
 
-    public function __construct() {
+    public function __construct()
+    {
       // Read posts from file/database/whatever
     }
 
-    public function count() {
+    public function count()
+    {
         return count($this->posts);
     }
 
@@ -101,26 +105,27 @@ $pages = $paginator->getPages();
 var_dump($pages);
 ```
 
-In this example we created a `Zend\Paginator\Paginator` adapter using a custom
-`Posts` class. This class stores the collection of posts using a protected
-array (`$posts`). This adapter can be used to create the `Paginator` object.
+In this example, we created a zend-paginator adapter using a custom `Posts`
+class. This class stores the collection of posts using a protected array
+(`$posts`). This adapter is then passed to an instance of `Paginator`.
 
-We need to set some configuration values for `Paginator`, the first settings is
-the scrolling style. We used the [Sliding](https://github.com/zendframework/zend-paginator/blob/master/src/ScrollingStyle/Sliding.php)
-style, a Yahoo!-like scrolling style that positions the current page number in
-the center of the page range, or as close as possible.
+When creating a `Paginator`, we need to configure its behavior.
+The first setting is the scrolling style. In the example above, we used the
+[Sliding](https://github.com/zendframework/zend-paginator/blob/master/src/ScrollingStyle/Sliding.php)
+style, a Yahoo!-like scrolling style that positions the current page number as
+close as possible to the center of the page range.
 
 ![Scrolling style](/img/usage-rendering-control.png)
 
-> Note: the `Sliding` scrolling style is the default one of `Paginator`. We need
-> to set it explicitly using `Paginator::setDefaultScrollingStyle` only if we
+> Note: the `Sliding` scrolling style is the default style used by zend-paginator. We need
+> to set it explicitly using `Paginator::setDefaultScrollingStyle()` only if we
 > do not use [zend-servicemanager](https://github.com/zendframework/zend-servicemanager)
-> as Service Locator. Otherwise, the scrolling style is loaded by default from
-> the Service Manager.
+> as a plugin manager. Otherwise, the scrolling style is loaded by default from
+> the plugin manager.
 
-The other two configuration values are the current page number and the number of
-items per page. In the example we started from page 1 and we count 8 items per
-page.
+The other two configuration values are the current page number and the number
+of items per page. In the example above, we started from page 1, and we count 8
+items per page.
 
 We can then iterate on the `$paginator` object to retrieve the post of the
 current page in the collection.
@@ -167,26 +172,25 @@ object(stdClass)#81 (13) {
 }
 ```
 
-Using this information, we can easily build an HTML footer for navigate across
+Using this information, we can easily build an HTML footer to navigate across
 the collection.
 
-> Note: using zend-view we can easily consume the [paginationControl](http://zendframework.github.io/zend-paginator/usage/#rendering-pages-with-view-scripts)
-> helper that provides a navigation bar for the paginator using a single
-> function.
+> Note: using zend-view, we can consume the [paginationControl](https://docs.zendframework.com/zend-paginator/usage/#rendering-pages-with-view-scripts)
+> helper, which emits an HTML pagination bar.
 
-In the next section I show an example using the [Plates](http://platesphp.com/)
+In the next section, I'll demonstrate using the [Plates](http://platesphp.com/)
 template engine.
 
 ## An example using Plates
 
-Plates is a native PHP template, fast and easy to use, without any additional
-meta language, just PHP.
+Plates implements templates using native PHP; it is fast and easy to use,
+without any additional meta language; it is just PHP.
 
 In our example, we will create a Plates template to paginate a collection of
 data using zend-paginator. We will use [bootstrap](http://getbootstrap.com/) as
-UI framework.
+the UI framework.
 
-We suppose to manage the pagination of the blog posts using the following URL:
+For purposes of this example, blog posts will be accessible via the following URL:
 
 ```
 /blog[/page/{page:\d+}]
@@ -205,12 +209,14 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use League\Plates\Engine;
 use Zend\Paginator\Paginator;
+use Zend\Paginator\ScrollingStyle\Sliding;
 use Posts;
 
 class PaginatorMiddleware
 {
     /** @var Posts */
     protected $posts;
+
     /** @var Engine */
     protected $template;
 
@@ -220,11 +226,12 @@ class PaginatorMiddleware
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request,
-      ResponseInterface $response, callable $next = null)
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response, callable $next = null
+    ) {
         $paginator = new Paginator($this->posts);
-        $page = $request->getAttribute('page') ?? 1;
+        $page = $request->getAttribute('page', 1);
 
         Paginator::setDefaultScrollingStyle(new Sliding());
         $paginator->setCurrentPageNumber($page);
@@ -234,7 +241,7 @@ class PaginatorMiddleware
         $response->getBody()->write(
             $this->template->render('posts', [
                 'paginator' => $paginator,
-                'pages' => $pages
+                'pages' => $pages,
             ])
         );
         return $response;
@@ -243,7 +250,7 @@ class PaginatorMiddleware
 ```
 
 We used a `posts.php` template, passing the paginator (`$paginator`) and
-the pages (`$pages`) objects. This template should contain a code like this:
+the pages (`$pages`) instances. That template could then look like the following:
 
 ```php
 <?php $this->layout('template', ['title' => 'Blog Posts']) ?>
@@ -267,7 +274,7 @@ navigation control, with button like previous, next, and page numbers.
 ```php
 <nav aria-label="Page navigation">
   <ul class="pagination">
-    <?php if (!isset($pages->previous)): ?>
+    <?php if (! isset($pages->previous)): ?>
       <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
     <?php else: ?>
       <li><a href="/blog/page/<?php echo $pages->previous ?>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
@@ -281,7 +288,7 @@ navigation control, with button like previous, next, and page numbers.
       <?php endif; ?>
     <?php endforeach; ?>
 
-    <?php if (!isset($pages->next)): ?>
+    <?php if (! isset($pages->next)): ?>
       <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
     <?php else: ?>
       <li><a href="/blog/page/<?php echo $pages->next ?>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
@@ -294,9 +301,9 @@ navigation control, with button like previous, next, and page numbers.
 
 The zend-paginator component of Zend Framework is a powerful and easy to use
 package that provides pagination of data. It can be used as standalone component
-in many PHP projects using different frameworks and template engine. In this
-article, I showed how to use it in general purpose applications.
-Moreover, I showed an example using Plates and bootstrap, in a PSR-7 middleware
+in many PHP projects using different frameworks and template engines. In this
+article, I demonstrated how to use it in general purpose applications.
+Moreover, I showed an example using Plates and Bootstrap, in a PSR-7 middleware
 scenario.
 
 Visit the [zend-paginator documentation](https://docs.zendframework.com/zend-paginator/)
