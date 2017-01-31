@@ -180,7 +180,12 @@ template engine.
 ## An example using Plates
 
 Plates is a native PHP template, fast and easy to use, without any additional
-meta language, just PHP.
+meta language, just PHP. It can be installed using composer, with the following
+command:
+
+```bash
+composer require league/plates
+```
 
 In our example, we will create a Plates template to paginate a collection of
 data using zend-paginator. We will use [bootstrap](http://getbootstrap.com/) as
