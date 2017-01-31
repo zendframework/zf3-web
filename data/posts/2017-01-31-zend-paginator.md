@@ -41,6 +41,7 @@ We have different adapters available:
 
 - *ArrayAdapter*, to work with PHP array;
 - *DbSelect*, to work with a SQL collection (using [zend-db](https://github.com/zendframework/zend-db));
+- *DbTableGateway*, to work with Table Data Gateway (using [zend-db](https://github.com/zendframework/zend-db));
 - *Iterator*, to work with any [Iterator](http://php.net/manual/en/class.iterator.php) instance.
 
 In case we don't have a collection that is an array, a database, or an Iterator
@@ -69,14 +70,17 @@ use Zend\Paginator\Adapter\AdapterInterface;
 use Zend\Paginator\Paginator;
 use Zend\Paginator\ScrollingStyle\Sliding;
 
-class Posts implements AdapterInterface {
+class Posts implements AdapterInterface
+{
     protected $posts = [];
 
-    public function __construct() {
+    public function __construct()
+    {
       // Read posts from file/database/whatever
     }
 
-    public function count() {
+    public function count()
+    {
         return count($this->posts);
     }
 
