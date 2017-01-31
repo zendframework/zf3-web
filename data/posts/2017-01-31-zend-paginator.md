@@ -115,7 +115,7 @@ The first setting is the scrolling style. In the example above, we used the
 style, a Yahoo!-like scrolling style that positions the current page number as
 close as possible to the center of the page range.
 
-![Scrolling style](/img/usage-rendering-control.png)
+![Scrolling style](/img/blog/usage-rendering-control.png)
 
 > Note: the `Sliding` scrolling style is the default style used by zend-paginator. We need
 > to set it explicitly using `Paginator::setDefaultScrollingStyle()` only if we
