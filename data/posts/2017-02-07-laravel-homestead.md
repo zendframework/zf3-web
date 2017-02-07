@@ -185,5 +185,5 @@ giving developers a wide range of tools and technologies to work with as they
 develop applications.
 
 For more information about Laravel Homestead, visit the
-[official documentation]((https://laravel.com/docs/5.4/homestead))
+[official documentation](https://laravel.com/docs/5.4/homestead)
 of the project.
