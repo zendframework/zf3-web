@@ -14,6 +14,7 @@
                     and then click the "Open Issue" button.
                 </p>
 
+                <label for="gitrepo">Select GitHub repository:</label>
                 <select class="form-control" id="gitrepo">
                 <?php foreach ($repository as $repo) : ?>
                     <option value="https://github.com/zendframework/<?= basename($repo['url']) ?>/issues/new"><?= $repo['name'] ?></option>
