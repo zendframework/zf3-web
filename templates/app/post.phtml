@@ -18,7 +18,7 @@ $this->headLink()->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml'
         <div class="col-lg-8">
             <!-- -- Blog Post  ---->
             <h2><?= $title ?></h2>
-            <p><csmall><?= date('Y-m-d', $date) ?> | By: <a href="<?= $url_author ?>"><?= $author ?></a></csmall></p>
+            <p class="blog-post__metadata"><?= date('Y-m-d', $date) ?> | By: <a href="<?= $url_author ?>"><?= $author ?></a></p>
 
             <?= $body ?>
 

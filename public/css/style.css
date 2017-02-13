@@ -469,7 +469,7 @@ a:focus {
 	margin-bottom: 15px;
 }
 
-csmall {
+.blog-post__metadata {
 	font-size: 12px;
 	color: #b3b3b3;
 }
@@ -667,4 +667,10 @@ pre {
 
 #promoLink a {
 	transition: all 0.25s linear 0s;
+}
+
+.a1 small {
+    color       : #fff;
+    font-weight : bold;
+    font-size   : 13px;
 }
