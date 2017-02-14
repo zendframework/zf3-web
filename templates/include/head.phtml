@@ -1,5 +1,7 @@
 <?php
-$headTitle = $this->headTitle()->renderTitle();
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ */
 ?>
 <head>
     <meta charset="utf-8">
@@ -9,7 +11,7 @@ $headTitle = $this->headTitle()->renderTitle();
     <meta name="author" content="Zend, a Rogue Wave Company">
     <link rel="shortcut icon" href="/ico/favicon.ico">
 
-    <title>Zend Framework<?= empty($headTitle) ? '' : ' - ' . $headTitle ?></title>
+    <title><?= $this->headTitle('Zend Framework')->setSeparator(' - ') ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.css" rel="stylesheet">
