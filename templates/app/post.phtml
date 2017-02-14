@@ -1,5 +1,5 @@
 <?php
-$this->headTitle('Blog - ' . $title);
+$this->headTitle('Blog')->prepend($title);
 $this->headLink()->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 'Zend Framework Blog RSS Feed');
 $this->headLink()->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml', 'Zend Framework Blog Atom Feed');
 ?>
