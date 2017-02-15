@@ -15,7 +15,7 @@
         <?php foreach ($posts as $post) : ?>
             <a href="<?= $post['permalink'] ?>"><h3 class="ctitle"><?= $post['title'] ?></h3></a>
 
-            <p class="blog-post__metadata><?= date('Y-m-d', $post['date']) ?> | By: <a href="<?= $post['url_author'] ?>"><?= $post['author'] ?></a></p>
+            <p class="blog-post__metadata"><?= date('Y-m-d', $post['date']) ?> | By: <a href="<?= $post['url_author'] ?>"><?= $post['author'] ?></a></p>
 
             <p>
                 <?= $post['excerpt'] ?> ... <a href="<?= $post['permalink'] ?>">(continue)</a>
