@@ -27,8 +27,8 @@
             </ul>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::security-menu') ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::security-menu')
+        ) ?>
     </div>
 </div>

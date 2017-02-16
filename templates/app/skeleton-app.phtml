@@ -78,8 +78,8 @@
             <pre><code class="lang-bash">$ docker-compose run zf composer install</code></pre>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::download-menu', [ 'active' => '/downloads/skeleton-app' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::download-menu', [ 'active' => '/downloads/skeleton-app' ])
+        ) ?>
     </div>
 </div>

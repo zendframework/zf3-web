@@ -12,8 +12,8 @@
             ?>
           </div>
 
-          <div class="col-lg-4">
-            <?php echo $this->render('include::learn-menu', [ 'active' => '/docs/api/' . $this->zf ]) ?>
-          </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::learn-menu', [ 'active' => '/docs/api/' . $this->zf ])
+        ) ?>
       </div>
   </div>

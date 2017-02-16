@@ -88,8 +88,8 @@ reset($components);
             <?php endwhile; ?>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::learn-menu', [ 'active' => '/learn' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::learn-menu', [ 'active' => '/learn' ])
+        ) ?>
     </div>
 </div>

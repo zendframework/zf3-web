@@ -36,6 +36,11 @@ $this->inlineScript()
 
     <?php echo $this->content ?>
 
+    <!-- Sub-navigation -->
+    <div class="col-lg-4">
+        <?= $this->placeholder('sub-navigation') ?>
+    </div>
+
     <?php echo $this->render('include::footer') ?>
 
     <?php echo $this->inlineScript(); ?>

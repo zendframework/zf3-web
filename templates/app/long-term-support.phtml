@@ -51,8 +51,8 @@ $ composer require "zendframework/zendframework:~2.4.0"
             </table>
           </div>
 
-          <div class="col-lg-4">
-            <?php echo $this->render('include::about-menu', [ 'active' => '/long-term-support' ]) ?>
-          </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::about-menu', [ 'active' => '/long-term-support' ])
+        ) ?>
       </div>
 </div>

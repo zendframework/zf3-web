@@ -36,8 +36,8 @@
             <a href="http://www.zend.com"><img src="/img/zend-logo.png" alt="Zend, a Rogue Wave Company" title="Zend, a Rogue Wave Company" align="left"></a>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::learn-menu', [ 'active' => '/learn/support-and-consulting' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::learn-menu', [ 'active' => '/learn/support-and-consulting' ])
+        ) ?>
     </div>
 </div>

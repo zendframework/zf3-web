@@ -22,8 +22,8 @@
             </p>
           </div>
 
-          <div class="col-lg-4">
-            <?php echo $this->render('include::about-menu', [ 'active' => '/license' ]) ?>
-          </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::about-menu', [ 'active' => '/license' ])
+        ) ?>
       </div>
 </div>

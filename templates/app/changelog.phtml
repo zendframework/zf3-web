@@ -17,8 +17,8 @@
             <p><?= $body ?></p>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::about-menu', [ 'active' => '/changelog' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::about-menu', [ 'active' => '/changelog' ])
+        ) ?>
     </div>
 </div>

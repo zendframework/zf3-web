@@ -27,8 +27,8 @@
             <p>More information about the Code Manifesto are available at <a href="http://codemanifesto.com/">codemanifesto.com</a></p>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::participate-menu', [ 'active' => '/participate/code-manifesto' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::participate-menu', [ 'active' => '/participate/code-manifesto' ])
+        ) ?>
     </div>
 </div>

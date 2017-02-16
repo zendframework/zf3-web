@@ -18,17 +18,17 @@
             </p>
         </div>
 
-        <div class="col-lg-4">
-          <?php echo $this->render('include::manual-sidebar', [
-              'sidebar'       => $this->sidebar,
-              'versions'      => $this->versions,
-              'version'       => $this->version,
-              'latestVersion' => $this->latestVersion,
-              'contentList'   => $contentList,
-              'currentPage'   => $currentPage,
-              'lang'          => $this->lang,
-              'page'          => $this->page
-          ]); ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::manual-sidebar', [
+                'sidebar'       => $this->sidebar,
+                'versions'      => $this->versions,
+                'version'       => $this->version,
+                'latestVersion' => $this->latestVersion,
+                'contentList'   => $contentList,
+                'currentPage'   => $currentPage,
+                'lang'          => $this->lang,
+                'page'          => $this->page
+            ])
+        ) ?>
     </div>
 </div>

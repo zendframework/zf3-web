@@ -46,9 +46,9 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::issue-menu') ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::issue-menu')
+        ) ?>
     </div>
 </div>
 

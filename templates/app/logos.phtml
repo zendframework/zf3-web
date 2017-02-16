@@ -50,8 +50,8 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::participate-menu', [ 'active' => '/participate/logos' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::participate-menu', [ 'active' => '/participate/logos' ])
+        ) ?>
     </div>
 </div>

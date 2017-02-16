@@ -42,8 +42,8 @@ $ composer serve
             </p>
         </div>
 
-        <div class="col-lg-4">
-            <?= $this->render('include::download-menu', [ 'active' => '/downloads/expressive' ]) ?>
-        </div>
+        <?php $this->placeholder('sub-navigation')->set(
+            $this->render('include::download-menu', [ 'active' => '/downloads/expressive' ])
+        ) ?>
     </div>
 </div>
