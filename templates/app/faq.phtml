@@ -1,8 +1,5 @@
 <?php $this->headTitle('About')->prepend('FAQ'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>FAQ</h2>
 
             <div class="panel panel-default">
@@ -49,10 +46,7 @@
                 </p>
               </div>
             </div>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::about-menu', [ 'active' => '/about/faq' ])
         ) ?>
-    </div>
-</div>

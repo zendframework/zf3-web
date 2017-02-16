@@ -1,8 +1,5 @@
 <?php $this->headTitle('Issues'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Overview</h2>
 
             <p>
@@ -44,13 +41,10 @@
                     <li class="list-group-item"><a href="/issues/ZF1">Zend Framework 1 issue archive</a></li>
                 </ul>
             </div>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::issue-menu')
         ) ?>
-    </div>
-</div>
 
 <?php $this->inlineScript()->captureStart() ?>
 (function ($) {

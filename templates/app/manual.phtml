@@ -1,8 +1,5 @@
 <?php $this->headTitle('Documentation')->prepend('Manual'); ?>
 
-<div class="container mtb" id="content">
-    <div class="row">
-        <div class="col-lg-8">
             <!-- Warning message -->
             <p class="alert alert-warning" role="alert">
                 <strong>Caution:</strong> The documentation you are viewing is
@@ -16,7 +13,6 @@
             <p>
               <?php echo $body ?>
             </p>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::manual-sidebar', [
@@ -30,5 +26,3 @@
                 'page'          => $this->page
             ])
         ) ?>
-    </div>
-</div>

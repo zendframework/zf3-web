@@ -1,8 +1,5 @@
 <?php $this->headTitle('Participate')->prepend('Contributors'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Contributors</h2>
 
             <p>
@@ -49,10 +46,7 @@
                 </div>
             <?php endforeach ?>
             </div>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::participate-menu', [ 'active' => '/participate/contributors' ])
         ) ?>
-    </div>
-</div>

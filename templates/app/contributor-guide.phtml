@@ -1,8 +1,5 @@
 <?php $this->headTitle('Participate')->prepend('Contributor Guide'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Contributor Guide</h2>
             <h3>Have something you want to contribute back?</h3>
 
@@ -85,12 +82,9 @@
                 <li>Stack Overflow <a href="http://stackoverflow.com/questions/tagged/zend-framework3">zend-framework3 tag</a> (ZF3 and forward)</li>
                 <li>Stack Overflow <a href="http://stackoverflow.com/questions/tagged/zend-expressive">zend-expressive tag</a> (Expressive)</li>
             </ul>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::participate-menu', [ 'active' => '/participate/contributor-guide' ])
         ) ?>
-    </div>
-</div>
 
 <?= $this->render('include::modal-issue', [ 'repository' => $repository ]); ?>

@@ -1,8 +1,5 @@
 <?php $this->headTitle('Security')->prepend('Security Advisories'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Security Advisories</h2>
             <h3>Vulnerabilities reported against Zend Framework, and recommendations for mitigation</h3>
 
@@ -25,10 +22,7 @@
                 <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
                 <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
             </ul>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::security-menu')
         ) ?>
-    </div>
-</div>

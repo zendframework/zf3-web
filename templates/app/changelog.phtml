@@ -1,8 +1,5 @@
 <?php $this->headTitle('About')->prepend('Changelog'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Changelog</h2>
 
             <h3><?= $changelog ?> (<?= date("Y-m-d", $date) ?>)</h3>
@@ -15,10 +12,7 @@
             </select>
 
             <p><?= $body ?></p>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::about-menu', [ 'active' => '/changelog' ])
         ) ?>
-    </div>
-</div>

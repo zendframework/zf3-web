@@ -1,8 +1,5 @@
 <?php $this->headTitle('About'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Overview</h2>
             
             <p>
@@ -54,10 +51,7 @@
               Whatever question you have about Zend Framework, the community is
               always available to address it.
             </p>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::about-menu', [ 'active' => '/about' ])
         ) ?>
-    </div>
-</div>

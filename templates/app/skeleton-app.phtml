@@ -1,8 +1,5 @@
 <?php $this->headTitle('Install')->prepend('MVC Skeleton Application'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>MVC Skeleton Application</h2>
 
             <p>
@@ -76,10 +73,7 @@
             </p>
 
             <pre><code class="lang-bash">$ docker-compose run zf composer install</code></pre>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::download-menu', [ 'active' => '/downloads/skeleton-app' ])
         ) ?>
-    </div>
-</div>

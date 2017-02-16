@@ -1,8 +1,5 @@
 <?php $this->headTitle('Install')->prepend('Expressive Skeleton Application'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Expressive Skeleton Application</h2>
 
             <p>
@@ -40,10 +37,7 @@ $ composer serve
                 Check out the <a href="https://docs.zendframework.com/zend-expressive/">zend-expressive</a>
                 web site for more information!
             </p>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::download-menu', [ 'active' => '/downloads/expressive' ])
         ) ?>
-    </div>
-</div>

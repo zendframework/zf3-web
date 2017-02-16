@@ -1,8 +1,5 @@
 <?php $this->headTitle('Participate')->prepend('Code Manifesto'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Code Manifesto</h2>
             
             <p>We have adopted the <a href="http://codemanifesto.com/">Code Manifesto</a> in the Zend Framework organization.</p>
@@ -25,10 +22,7 @@
             </ol>
 
             <p>More information about the Code Manifesto are available at <a href="http://codemanifesto.com/">codemanifesto.com</a></p>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::participate-menu', [ 'active' => '/participate/code-manifesto' ])
         ) ?>
-    </div>
-</div>

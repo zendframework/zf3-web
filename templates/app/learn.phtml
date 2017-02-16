@@ -3,9 +3,6 @@ $this->headTitle('Documentation');
 reset($components);
 ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Overview</h2>
 
             <p>
@@ -86,10 +83,7 @@ reset($components);
                 </div>
 
             <?php endwhile; ?>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::learn-menu', [ 'active' => '/learn' ])
         ) ?>
-    </div>
-</div>

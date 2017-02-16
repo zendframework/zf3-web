@@ -1,8 +1,5 @@
 <?php $this->headTitle('Install')->prepend('Archives'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
             <h2>Archives</h2>
 
             <p>Every public release of Zend Framework all in one place.</p>
@@ -76,10 +73,7 @@
             <div class="spacing"></div>
             <div class="hline"></div>
             <?php endforeach; ?>
-        </div>
 
         <?php $this->placeholder('sub-navigation')->set(
             $this->render('include::download-menu', [ 'active' => '/downloads/archives' ])
         ) ?>
-    </div>
-</div>
