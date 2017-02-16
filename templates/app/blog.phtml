@@ -1,9 +1,5 @@
 <?php $this->headTitle('Blog'); ?>
 
-<div class="container mtb">
-    <div class="row">
-        <!-- -- SINGLE POST ---->
-        <div class="col-lg-8">
         <?php foreach ($posts as $post) : ?>
             <a href="<?= $post['permalink'] ?>"><h3 class="ctitle"><?= $post['title'] ?></h3></a>
 
@@ -24,9 +20,8 @@
                     <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '/blog?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
                 </ul>
             </div>
-        </div>
 
-        <div class="col-lg-4">
+        <?php $this->placeholder('sub-navigation')->captureStart() ?>
             <h4>Share</h4>
 
             <div class="hline"></div>
@@ -44,6 +39,4 @@
 
             <div class="hline"></div>
             <p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
-        </div>
-    </div>
-</div>
+        <?php $this->placeholder('sub-navigation')->captureEnd() ?>
