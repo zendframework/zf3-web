@@ -34,12 +34,23 @@ $this->inlineScript()
         </div>
     <?php endif ?>
 
-    <?php echo $this->content ?>
+    <?php if ((string) $this->placeholder('page-layout') === 'wide'): ?>
+        <?php echo $this->content ?>
+    <?php else: ?>
+        <div class="container mtb">
+            <div class="row">
+                <!-- Content -->
+                <div class="col-lg-8">
+                    <?php echo $this->content ?>
+                </div>
 
-    <!-- Sub-navigation -->
-    <div class="col-lg-4">
-        <?= $this->placeholder('sub-navigation') ?>
-    </div>
+                <!-- Sub-navigation -->
+                <div class="col-lg-4">
+                    <?= $this->placeholder('sub-navigation') ?>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
 
     <?php echo $this->render('include::footer') ?>
 
