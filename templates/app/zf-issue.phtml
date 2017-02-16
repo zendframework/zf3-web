@@ -1,26 +1,26 @@
 <?php $this->headTitle('Issues')->prepend('Issue Archive'); ?>
 
-            <h2><?= $ver ?> Issue Archive</h2>
-            <h3><?= $ver ?> Issue Archive (<?= $tot_issue ?> total)</h3>
+<h2><?= $ver ?> Issue Archive</h2>
+<h3><?= $ver ?> Issue Archive (<?= $tot_issue ?> total)</h3>
 
-            <p>
-                Click on an entry for full issue details.
-            </p>
+<p>
+    Click on an entry for full issue details.
+</p>
 
-            <div class="list-group">
-            <?php foreach ($issues as $issue) : ?>
-                <a class="list-group-item" href="/issues/browse/<?= $issue['id'] ?>"><?= $issue['id'] ?>: <?= $issue['title'] ?></a>
-            <?php endforeach; ?>
-            </div>
+<div class="list-group">
+    <?php foreach ($issues as $issue) : ?>
+        <a class="list-group-item" href="/issues/browse/<?= $issue['id'] ?>"><?= $issue['id'] ?>: <?= $issue['title'] ?></a>
+    <?php endforeach; ?>
+</div>
 
-            <div class="spacing"></div>
+<div class="spacing"></div>
 
-            <ul class="pager">
-                <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
-                <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
-                <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
-            </ul>
+<ul class="pager">
+    <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
+    <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
+    <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
+</ul>
 
-        <?php $this->placeholder('sub-navigation')->set(
-            $this->render('include::issue-menu')
-        ) ?>
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::issue-menu')
+) ?>

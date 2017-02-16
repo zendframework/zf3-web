@@ -1,50 +1,50 @@
 <?php $this->headTitle('Issues'); ?>
 
-            <h2>Overview</h2>
+<h2>Overview</h2>
 
-            <p>
-                Zend Framework manages issues on <a target="_blank" href="https://github.com/zendframework">GitHub</a>.
-                In order to <strong>create</strong> an issue, or <strong>browse active issues</strong>,
-                you should visit the appropriate project page.
-            </p>
+<p>
+    Zend Framework manages issues on <a target="_blank" href="https://github.com/zendframework">GitHub</a>.
+    In order to <strong>create</strong> an issue, or <strong>browse active issues</strong>,
+    you should visit the appropriate project page.
+</p>
 
-            <div class="panel panel-default panel-component toggle">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        Active Issue Trackers
-                        <span class="pull-right">(click to toggle)</span>
-                    </h4>
-                </div>
+<div class="panel panel-default panel-component toggle">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Active Issue Trackers
+            <span class="pull-right">(click to toggle)</span>
+        </h4>
+    </div>
 
-                <div class="list-group hidden">
-                <?php foreach ($repository as $component) : ?>
-                    <a class="list-group-item" href="https://github.com/zendframework/<?= basename($component['url']) ?>/issues"><?= basename($component['url']) ?></a>
-                <?php endforeach ?>
-                </div>
-            </div>
+    <div class="list-group hidden">
+        <?php foreach ($repository as $component) : ?>
+            <a class="list-group-item" href="https://github.com/zendframework/<?= basename($component['url']) ?>/issues"><?= basename($component['url']) ?></a>
+        <?php endforeach ?>
+    </div>
+</div>
 
-            <div class="panel panel-default panel-component">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Archived Issues</h4>
-                </div>
-                
-                <div class="panel-body">
-                    As we migrated our issues system to GitHub from another system, we are
-                    providing a <strong>read-only, static listing</strong> of archived issues
-                    and patches for all issues not migrated to the new system (generally
-                    because they have already been resolved, or due to age). You may browse or
-                    search those on the following pages:
-                </div>
+<div class="panel panel-default panel-component">
+    <div class="panel-heading">
+        <h4 class="panel-title">Archived Issues</h4>
+    </div>
 
-                <ul class="list-group">
-                    <li class="list-group-item"><a href="/issues/ZF2">Zend Framework 2 issue archive</a></li>
-                    <li class="list-group-item"><a href="/issues/ZF1">Zend Framework 1 issue archive</a></li>
-                </ul>
-            </div>
+    <div class="panel-body">
+        As we migrated our issues system to GitHub from another system, we are
+        providing a <strong>read-only, static listing</strong> of archived issues
+        and patches for all issues not migrated to the new system (generally
+        because they have already been resolved, or due to age). You may browse or
+        search those on the following pages:
+    </div>
 
-        <?php $this->placeholder('sub-navigation')->set(
-            $this->render('include::issue-menu')
-        ) ?>
+    <ul class="list-group">
+        <li class="list-group-item"><a href="/issues/ZF2">Zend Framework 2 issue archive</a></li>
+        <li class="list-group-item"><a href="/issues/ZF1">Zend Framework 1 issue archive</a></li>
+    </ul>
+</div>
+
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::issue-menu')
+) ?>
 
 <?php $this->inlineScript()->captureStart() ?>
 (function ($) {

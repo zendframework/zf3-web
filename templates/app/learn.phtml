@@ -3,87 +3,87 @@ $this->headTitle('Documentation');
 reset($components);
 ?>
 
-            <h2>Overview</h2>
+<h2>Overview</h2>
 
-            <p>
-                <strong>Zend Framework</strong> is a collection of <b>60+ packages</b> for
-                professional PHP development.  Each package is available on
-                <a href="https://github.com/zendframework">GitHub</a> and can be installed via
-                <a href="https://getcomposer.org">Composer</a>.
-            </p>
+<p>
+    <strong>Zend Framework</strong> is a collection of <b>60+ packages</b> for
+    professional PHP development. Each package is available on
+    <a href="https://github.com/zendframework">GitHub</a> and can be installed via
+    <a href="https://getcomposer.org">Composer</a>.
+</p>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default panel-tutorial">
-                        <div class="panel-body">
-                            <h3><a href="https://docs.zendframework.com/tutorials/">Tutorials</a></h3>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default panel-tutorial">
+            <div class="panel-body">
+                <h3><a href="https://docs.zendframework.com/tutorials/">Tutorials</a></h3>
 
-                            <p>
-                                We provide tutorials for getting started with zend-mvc,
-                                understanding advanced topics of many components, and migration
-                                from version 2 to version 3.
-                            </p>
-                        </div>
+                <p>
+                    We provide tutorials for getting started with zend-mvc,
+                    understanding advanced topics of many components, and migration
+                    from version 2 to version 3.
+                </p>
+            </div>
 
-                        <div class="panel-footer">
-                            <i class="fa fa-book"></i>
-                            <a href="https://docs.zendframework.com/tutorials/">Read tutorials</a>
-                        </div>
+            <div class="panel-footer">
+                <i class="fa fa-book"></i>
+                <a href="https://docs.zendframework.com/tutorials/">Read tutorials</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php while ($comp = next($components)) : ?>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default panel-component">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?= basename($comp['url']) ?></h3>
+                </div>
+
+                <div class="panel-body">
+                    <p><?= $comp['description'] ?></p>
+                </div>
+
+                <div class="panel-footer">
+                    <i class="fa fa-github"></i>
+                    <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a>
+                    <span class="pull-right">
+                                    <i class="fa fa-book"></i>
+                                    <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a>
+                                </span>
+                </div>
+            </div>
+        </div>
+
+        <?php $comp = next($components) ?>
+
+        <?php if ($comp) : ?>
+            <div class="col-md-6">
+                <div class="panel panel-default panel-component">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><?= basename($comp['url']) ?></h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <p><?= $comp['description'] ?></p>
+                    </div>
+
+                    <div class="panel-footer">
+                        <i class="fa fa-github"></i>
+                        <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a>
+                        <span class="pull-right">
+                                    <i class="fa fa-book"></i>
+                                    <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a>
+                                </span>
                     </div>
                 </div>
             </div>
+        <?php endif ?>
+    </div>
 
-            <?php while ($comp = next($components)) : ?>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-default panel-component">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><?= basename($comp['url']) ?></h3>
-                            </div>
+<?php endwhile; ?>
 
-                            <div class="panel-body">
-                                <p><?= $comp['description'] ?></p>
-                            </div>
-
-                            <div class="panel-footer">
-                                <i class="fa fa-github"></i>
-                                <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a>
-                                <span class="pull-right">
-                                    <i class="fa fa-book"></i>
-                                    <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <?php $comp = next($components) ?>
-
-                    <?php if ($comp) : ?>
-                    <div class="col-md-6">
-                        <div class="panel panel-default panel-component">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><?= basename($comp['url']) ?></h3>
-                            </div>
-
-                            <div class="panel-body">
-                                <p><?= $comp['description'] ?></p>
-                            </div>
-
-                            <div class="panel-footer">
-                                <i class="fa fa-github"></i>
-                                <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a>
-                                <span class="pull-right">
-                                    <i class="fa fa-book"></i>
-                                    <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <?php endif ?>
-                </div>
-
-            <?php endwhile; ?>
-
-        <?php $this->placeholder('sub-navigation')->set(
-            $this->render('include::learn-menu', [ 'active' => '/learn' ])
-        ) ?>
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::learn-menu', ['active' => '/learn'])
+) ?>

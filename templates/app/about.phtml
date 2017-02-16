@@ -1,57 +1,57 @@
 <?php $this->headTitle('About'); ?>
 
-            <h2>Overview</h2>
-            
-            <p>
-              <strong>Zend Framework</strong> is a collection of professional PHP packages with
-              <?php if (false !== $stats) : ?>
-                <strong>more than <?php echo floor($stats/1000000) ?> million</strong>
-              <?php else : ?>
-                <strong>millions</strong> of
-              <?php endif; ?>
-              installations. It can be used to develop web applications and
-              services using PHP 5.6+, and provides 100% object-oriented code using
-              a broad spectrum of language features.
-            </p>
+<h2>Overview</h2>
 
-            <p>
-              Zend Framework uses <a href="https://getcomposer.org/">Composer</a>
-              as a package dependency manager;
-              <a href="https://phpunit.de/">PHPUnit</a> to test all packages;
-              and <a href="https://travis-ci.org/">Travis CI</a> as a
-              Continuous Integration service.
-              Zend Framework also follows <a href="http://www.php-fig.org/">PHP-FIG</a>
-              standards, and includes an implementation of
-              <a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> for HTTP
-              message interfaces (as shepherded by <a href="https://mwop.net/">Matthew Weier O'Phinney</a>,
-              Zend Framework project lead).
-            </p>
+<p>
+    <strong>Zend Framework</strong> is a collection of professional PHP packages with
+    <?php if (false !== $stats) : ?>
+        <strong>more than <?php echo floor($stats / 1000000) ?> million</strong>
+    <?php else : ?>
+        <strong>millions</strong> of
+    <?php endif; ?>
+    installations. It can be used to develop web applications and
+    services using PHP 5.6+, and provides 100% object-oriented code using
+    a broad spectrum of language features.
+</p>
 
-            <p>
-              <strong>Zend Framework 3</strong> evolved from both Zend
-              Framework 2 and 1; cumulatively, the previous versions were
-              downloaded more than 15 million times.
-            </p>
+<p>
+    Zend Framework uses <a href="https://getcomposer.org/">Composer</a>
+    as a package dependency manager;
+    <a href="https://phpunit.de/">PHPUnit</a> to test all packages;
+    and <a href="https://travis-ci.org/">Travis CI</a> as a
+    Continuous Integration service.
+    Zend Framework also follows <a href="http://www.php-fig.org/">PHP-FIG</a>
+    standards, and includes an implementation of
+    <a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> for HTTP
+    message interfaces (as shepherded by <a href="https://mwop.net/">Matthew Weier O'Phinney</a>,
+    Zend Framework project lead).
+</p>
 
-            <p>
-              The principal sponsor of Zend Framework is <a href="http://www.zend.com">Zend</a>,
-              a <a href="http://www.roguewave.com/">Rogue Wave Company</a>, but
-              many others have contributed components or significant features
-              to the framework. Companies such as Google, Microsoft, and
-              StrikeIron have partnered with Zend to provide interfaces to web
-              services and other technologies they wish to make available to ZF
-              developers.
-            </p>
+<p>
+    <strong>Zend Framework 3</strong> evolved from both Zend
+    Framework 2 and 1; cumulatively, the previous versions were
+    downloaded more than 15 million times.
+</p>
 
-            <p>
-              <strong>Zend Framework 3</strong> could not deliver and support
-              all of these features without the help of the vibrant community.
-              Community members, including contributors, make themselves
-              available on mailing lists, IRC channels and other forums.
-              Whatever question you have about Zend Framework, the community is
-              always available to address it.
-            </p>
+<p>
+    The principal sponsor of Zend Framework is <a href="http://www.zend.com">Zend</a>,
+    a <a href="http://www.roguewave.com/">Rogue Wave Company</a>, but
+    many others have contributed components or significant features
+    to the framework. Companies such as Google, Microsoft, and
+    StrikeIron have partnered with Zend to provide interfaces to web
+    services and other technologies they wish to make available to ZF
+    developers.
+</p>
 
-        <?php $this->placeholder('sub-navigation')->set(
-            $this->render('include::about-menu', [ 'active' => '/about' ])
-        ) ?>
+<p>
+    <strong>Zend Framework 3</strong> could not deliver and support
+    all of these features without the help of the vibrant community.
+    Community members, including contributors, make themselves
+    available on mailing lists, IRC channels and other forums.
+    Whatever question you have about Zend Framework, the community is
+    always available to address it.
+</p>
+
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::about-menu', ['active' => '/about'])
+) ?>

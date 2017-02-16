@@ -1,79 +1,87 @@
 <?php $this->headTitle('Install')->prepend('Archives'); ?>
 
-            <h2>Archives</h2>
+<h2>Archives</h2>
 
-            <p>Every public release of Zend Framework all in one place.</p>
+<p>Every public release of Zend Framework all in one place.</p>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Archived Releases Only</h4>
-                </div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4 class="panel-title">Archived Releases Only</h4>
+    </div>
 
-                <div class="panel-body">
-                    <p>
-                        The Zend Framework project ceased creation of distribution tarballs/zip files
-                        for releases starting with the 2.5.0 release, in favor of distribution via 
-                        <a href="https://getcomposer.org">Composer</a>.
-                    </p>
+    <div class="panel-body">
+        <p>
+            The Zend Framework project ceased creation of distribution tarballs/zip files
+            for releases starting with the 2.5.0 release, in favor of distribution via
+            <a href="https://getcomposer.org">Composer</a>.
+        </p>
 
-                    <p>
-                        We will continue to create and provide them for the 2.4
-                        LTS release, and those packages will be reflected here.
-                    </p>
-                       
-                    <p>
-                        As such, this page is an historical record, and
-                        primarily of use for developers using older versions of
-                        the framework. We highly recommend upgrading to either
-                        an LTS or current stable version.
-                    </p>
-                </div>
-            </div>
+        <p>
+            We will continue to create and provide them for the 2.4
+            LTS release, and those packages will be reflected here.
+        </p>
 
-            <?php foreach ($this->releases->getVersions() as $version) :
-                $date = $this->releases->getReleaseDate($version);
-            ?>
-            <div class="spacing"></div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <strong>ZF <?= $version ?></strong><br />Released <?= $date ?>
-                </div>
+        <p>
+            As such, this page is an historical record, and
+            primarily of use for developers using older versions of
+            the framework. We highly recommend upgrading to either
+            an LTS or current stable version.
+        </p>
+    </div>
+</div>
 
-                <div class="col-lg-2">
-                    Full<br />
-                    <a href="<?= $this->releases->getArchive($version, 'zip') ?>">zip</a>, <a href="<?= $this->releases->getArchive($version, 'tar.gz') ?>">tar.gz</a><br />
-                </div>
+<?php foreach ($this->releases->getVersions() as $version) :
+    $date = $this->releases->getReleaseDate($version);
+    ?>
+    <div class="spacing"></div>
+    <div class="row">
+        <div class="col-lg-3">
+            <strong>ZF <?= $version ?></strong><br/>Released <?= $date ?>
+        </div>
 
-                <div class="col-lg-2">
-                <?php if ($this->releases->hasMinimalVersion($version)) : ?>
-                    Minimal<br />
-                    <a href="<?= $this->releases->getMinimalArchive($version, 'zip') ?>">zip</a>, <a href="<?= $this->releases->getMinimalArchive($version, 'tar.gz') ?>">tar.gz</a><br />
-                <?php endif; ?>
-                </div>
+        <div class="col-lg-2">
+            Full<br/>
+            <a href="<?= $this->releases->getArchive($version, 'zip') ?>">zip</a>, <a href="<?= $this->releases->getArchive(
+                $version, 'tar.gz'
+            ) ?>">tar.gz</a><br/>
+        </div>
 
-                <div class="col-lg-2">
-                <?php if ($this->releases->hasApidocs($version)) : ?>
-                    API<br />
-                    <a href="<?= $this->releases->getApidocArchive($version, 'zip') ?>">zip</a>, <a href="<?= $this->releases->getApidocArchive($version, 'tar.gz') ?>">tar.gz</a>
-                <?php endif; ?>
-                </div>
+        <div class="col-lg-2">
+            <?php if ($this->releases->hasMinimalVersion($version)) : ?>
+                Minimal<br/>
+                <a href="<?= $this->releases->getMinimalArchive($version, 'zip') ?>">zip</a>, <a href="<?= $this->releases->getMinimalArchive(
+                    $version, 'tar.gz'
+                ) ?>">tar.gz</a><br/>
+            <?php endif; ?>
+        </div>
 
-                <div class="col-lg-3">
-                <?php if ($this->releases->hasDocumentation($version)) : ?>
-                    Documentation<br />
-                    <?= $this->render('include::documentation-links', [
-                        'version'  => $version,
-                        'id'       => 'zf' . str_replace('.', '_', $version),
-                        'releases' => $this->releases,
-                    ]) ?>
-                <?php endif; ?>
-                </div>
-            </div>
+        <div class="col-lg-2">
+            <?php if ($this->releases->hasApidocs($version)) : ?>
+                API<br/>
+                <a href="<?= $this->releases->getApidocArchive($version, 'zip') ?>">zip</a>, <a href="<?= $this->releases->getApidocArchive(
+                    $version, 'tar.gz'
+                ) ?>">tar.gz</a>
+            <?php endif; ?>
+        </div>
 
-            <div class="spacing"></div>
-            <div class="hline"></div>
-            <?php endforeach; ?>
+        <div class="col-lg-3">
+            <?php if ($this->releases->hasDocumentation($version)) : ?>
+                Documentation<br/>
+                <?= $this->render(
+                    'include::documentation-links', [
+                    'version' => $version,
+                    'id' => 'zf' . str_replace('.', '_', $version),
+                    'releases' => $this->releases,
+                ]
+                ) ?>
+            <?php endif; ?>
+        </div>
+    </div>
 
-        <?php $this->placeholder('sub-navigation')->set(
-            $this->render('include::download-menu', [ 'active' => '/downloads/archives' ])
-        ) ?>
+    <div class="spacing"></div>
+    <div class="hline"></div>
+<?php endforeach; ?>
+
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::download-menu', ['active' => '/downloads/archives'])
+) ?>

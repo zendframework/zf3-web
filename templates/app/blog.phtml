@@ -1,42 +1,45 @@
 <?php $this->headTitle('Blog'); ?>
 
-        <?php foreach ($posts as $post) : ?>
-            <a href="<?= $post['permalink'] ?>"><h3 class="ctitle"><?= $post['title'] ?></h3></a>
+<?php foreach ($posts as $post) : ?>
+    <a href="<?= $post['permalink'] ?>"><h3 class="ctitle"><?= $post['title'] ?></h3></a>
 
-            <p class="blog-post__metadata"><?= date('Y-m-d', $post['date']) ?> | By: <a href="<?= $post['url_author'] ?>"><?= $post['author'] ?></a></p>
+    <p class="blog-post__metadata"><?= date('Y-m-d', $post['date']) ?> | By: <a href="<?= $post['url_author'] ?>"><?= $post['author'] ?></a></p>
 
-            <p>
-                <?= $post['excerpt'] ?> ... <a href="<?= $post['permalink'] ?>">(continue)</a>
-            </p>
+    <p>
+        <?= $post['excerpt'] ?> ... <a href="<?= $post['permalink'] ?>">(continue)</a>
+    </p>
 
-            <div class="hline"></div>
-            <div class="spacing"></div>
-        <?php endforeach; ?>
+    <div class="hline"></div>
+    <div class="spacing"></div>
+<?php endforeach; ?>
 
-            <div class="row">
-                <ul class="pager">
-                    <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '/blog?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
-                    <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
-                    <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '/blog?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
-                </ul>
-            </div>
+<div class="row">
+    <ul class="pager">
+        <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '/blog?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a>
+        </li>
+        <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
+        <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '/blog?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a>
+        </li>
+    </ul>
+</div>
 
-        <?php $this->placeholder('sub-navigation')->captureStart() ?>
-            <h4>Share</h4>
+<?php $this->placeholder('sub-navigation')->captureStart() ?>
+<h4>Share</h4>
 
-            <div class="hline"></div>
+<div class="hline"></div>
 
-            <p class="share">
-                <a href="https://twitter.com/home?status=Latest blog posts by @zfdevteam, <?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode('Latest posts by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
-            </p>
+<p class="share">
+    <a href="https://twitter.com/home?status=Latest blog posts by @zfdevteam, <?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode('Latest posts by Zend Framework project') ?>"
+       target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+    <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+</p>
 
-            <div class="spacing"></div>
+<div class="spacing"></div>
 
-            <h4>Subscribe</h4>
+<h4>Subscribe</h4>
 
-            <div class="hline"></div>
-            <p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
-        <?php $this->placeholder('sub-navigation')->captureEnd() ?>
+<div class="hline"></div>
+<p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
+<?php $this->placeholder('sub-navigation')->captureEnd() ?>

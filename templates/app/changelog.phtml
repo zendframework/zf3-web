@@ -1,18 +1,18 @@
 <?php $this->headTitle('About')->prepend('Changelog'); ?>
 
-            <h2>Changelog</h2>
+<h2>Changelog</h2>
 
-            <h3><?= $changelog ?> (<?= date("Y-m-d", $date) ?>)</h3>
+<h3><?= $changelog ?> (<?= date("Y-m-d", $date) ?>)</h3>
 
-            <label for="version">Select version:</label>
-            <select id="version" class="form-control" onchange="window.location='/changelog/' + this.options[this.selectedIndex].value">
-            <?php foreach ($versions as $ver) : ?>
-              <option value="<?= $ver ?>" <?= ($ver == $changelog) ? 'selected' : '' ?>><?= $ver ?></option>
-            <?php endforeach; ?>
-            </select>
+<label for="version">Select version:</label>
+<select id="version" class="form-control" onchange="window.location='/changelog/' + this.options[this.selectedIndex].value">
+    <?php foreach ($versions as $ver) : ?>
+        <option value="<?= $ver ?>" <?= ($ver == $changelog) ? 'selected' : '' ?>><?= $ver ?></option>
+    <?php endforeach; ?>
+</select>
 
-            <p><?= $body ?></p>
+<p><?= $body ?></p>
 
-        <?php $this->placeholder('sub-navigation')->set(
-            $this->render('include::about-menu', [ 'active' => '/changelog' ])
-        ) ?>
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::about-menu', ['active' => '/changelog'])
+) ?>
