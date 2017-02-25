@@ -623,6 +623,7 @@ text-decoration: none;
     color: #6ac00e;
     font-size: 1.5em;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .server-download .server-content span.promo {
