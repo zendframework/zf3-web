@@ -1,19 +1,26 @@
 <?php
-$links = [
-    '/learn'                            => 'Overview',
-    '/learn/training-and-certification' => 'Training & Certification',
-    '/learn/support-and-consulting'     => 'Support & Consulting',
-];
+/**
+ * @var string $active
+ */
 $path = parse_url($this->serverUrl(), PHP_URL_PATH);
 ?>
 
+<h3>Zend Framework 3</h3>
+
 <ul class="nav nav-pills nav-stacked">
-<?php foreach ($links as $url => $title) : ?>
-    <li<?= ($url === $active) ? ' class="active"' : '' ?>>
-        <a href="<?= $url ?>"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;<?= $title ?></a>
+    <li<?= ('/learn' === $active) ? ' class="active"' : '' ?>>
+        <a href="/learn"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Overview</a>
     </li>
-<?php endforeach ?>
-    <li><a href="http://www.zend.com/en/webinars/recorded/show-by-topic/242_zend+framework"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Webinars</a></li>
+    <li>
+        <a href="https://docs.zendframework.com/tutorials/getting-started/overview/">
+            <span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Getting started
+        </a>
+    </li>
+    <li>
+        <a href="https://docs.zendframework.com/tutorials/">
+            <span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Tutorials
+        </a>
+    </li>
 </ul>
 
 <h3>Zend Framework 2</h3>
@@ -46,6 +53,25 @@ $path = parse_url($this->serverUrl(), PHP_URL_PATH);
     <li<?= ($path === '/docs/api/zf1') ? ' class="active"' : '' ?>>
         <a href="/docs/api/zf1"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;API</a>
     </li>
+</ul>
+
+<div class="spacing"></div>
+
+<h3>Services</h3>
+
+<?php
+$links = [
+    '/learn/training-and-certification' => 'Training & Certification',
+    '/learn/support-and-consulting'     => 'Support & Consulting',
+];
+?>
+<ul class="nav nav-pills nav-stacked">
+<?php foreach ($links as $url => $title) : ?>
+    <li<?= ($url === $active) ? ' class="active"' : '' ?>>
+        <a href="<?= $url ?>"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;<?= $title ?></a>
+    </li>
+<?php endforeach ?>
+    <li><a href="http://www.zend.com/en/webinars/recorded/show-by-topic/242_zend+framework"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Webinars</a></li>
 </ul>
 
 <div class="spacing"></div>
