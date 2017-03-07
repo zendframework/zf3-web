@@ -110,7 +110,7 @@ detailing your specific problems](https://github.com/zendframework/zend-expressi
 New users can get started using [our skeleton application](https://docs.zendframework.com/zend-expressive/getting-started/skeleton/):
 
 ```bash
-$ composer create-project zendframework/zend-skeleton-application
+$ composer create-project zendframework/zend-expressive-skeleton
 ```
 
 This will prompt you for a number of requirements; use the defaults if you are
