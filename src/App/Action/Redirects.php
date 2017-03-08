@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,7 +27,7 @@ class Redirects implements MiddlewareInterface
 
         return new RedirectResponse(
             $uri->withPath($this->redirects[$path]),
-            301
+            StatusCode::STATUS_MOVED_PERMANENTLY
         );
     }
 }
