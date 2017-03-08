@@ -1,11 +1,13 @@
 <?php
+
 namespace AppTest\Model;
 
 use AppTest\Model\TestAsset\Collection;
 use Mni\FrontYAML\Bridge\CommonMark\CommonMarkParser;
 use Mni\FrontYAML\Parser;
+use PHPUnit\Framework\TestCase;
 
-class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
+class AbstractCollectionTest extends TestCase
 {
     /** @var Collection */
     private $collection;

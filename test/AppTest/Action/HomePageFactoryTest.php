@@ -7,11 +7,12 @@ use App\Action\HomePageFactory;
 use App\Model\Advisory;
 use App\Model\Post;
 use ArrayObject;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageFactoryTest extends \PHPUnit_Framework_TestCase
+class HomePageFactoryTest extends TestCase
 {
     /** @var ContainerInterface|ObjectProphecy */
     private $container;

@@ -5,11 +5,12 @@ namespace AppTest\Action;
 use App\Action\BlogAction;
 use App\Action\BlogFactory;
 use App\Model\Post;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class BlogFactoryTest extends \PHPUnit_Framework_TestCase
+class BlogFactoryTest extends TestCase
 {
     /** @var ContainerInterface|ObjectProphecy */
     private $container;

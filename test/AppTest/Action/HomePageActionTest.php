@@ -8,13 +8,14 @@ use App\Model\Post;
 use ArrayObject;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Interop\Http\ServerMiddleware\DelegateInterface;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class HomePageActionTest extends \PHPUnit_Framework_TestCase
+class HomePageActionTest extends TestCase
 {
     /** @var Post|ObjectProphecy */
     private $post;

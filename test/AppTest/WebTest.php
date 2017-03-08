@@ -1,10 +1,12 @@
 <?php
+
 namespace AppTest;
 
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
-class WebTest extends \PHPUnit_Framework_TestCase
+class WebTest extends TestCase
 {
     /** @var Client */
     private $client;
