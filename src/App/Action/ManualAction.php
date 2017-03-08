@@ -2,28 +2,30 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use DOMXPath;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template;
 use Zend\Dom\Query as DomQuery;
-use DOMXpath;
+use Zend\Expressive\Template;
 
-class ManualAction
+class ManualAction implements MiddlewareInterface
 {
-    protected $config;
+    /** @var array */
+    private $config;
 
-    protected $template;
+    /** @var Template\TemplateRendererInterface */
+    private $template;
 
-    public function __construct(array $config, Template\TemplateRendererInterface $template = null)
+    public function __construct(array $config, Template\TemplateRendererInterface $template)
     {
-        $this->config = $config;
+        $this->config   = $config;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-
         $page    = $request->getAttribute('page', false);
         $version = $request->getAttribute('version', false);
         $lang    = $request->getAttribute('lang', false);
@@ -32,7 +34,7 @@ class ManualAction
         $page    = $subpage ? $page . '/' . $subpage : $page;
 
         // Check URL params
-        if (!$page || false === $version || !$lang) {
+        if (! $page || false === $version || ! $lang) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
@@ -43,7 +45,7 @@ class ManualAction
         $docFile = $this->config['zf_document_path'][$version][$lang] . $page;
 
         // Check file
-        if (!file_exists($docFile)) {
+        if (! file_exists($docFile)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
@@ -62,7 +64,7 @@ class ManualAction
         );
 
         // Get current page link for select element with content list
-        $getLinks = function ($pages) use (&$getLinks) {
+        $getLinks = function (array $pages) use (&$getLinks) {
             $links = [];
             foreach ($pages as $key => $value) {
                 $links[] = $key;
@@ -73,7 +75,7 @@ class ManualAction
             return $links;
         };
 
-        if (in_array($page, $getLinks($contentList))) {
+        if (in_array($page, $getLinks($contentList), true)) {
             $currentPage = $page;
         } else {
             $currentPage = $this->getSelectedPage(
@@ -104,7 +106,7 @@ class ManualAction
             'latestZf1Version' => $this->config['zf1_latest_version'],
             'contentList'      => $contentList,
             'currentPage'      => $currentPage,
-            'currentPageTitle' => $currentPageTitle
+            'currentPageTitle' => $currentPageTitle,
         ];
 
         // Sort version numbers
@@ -120,14 +122,14 @@ class ManualAction
      *
      * @param  string $file
      * @param  string $version
-     * @return boolean|array
+     * @return bool|array
      */
-    protected function getPageContent($file, $version)
+    protected function getPageContent(string $file, string $version)
     {
-        if ('1.1' === substr($version, 0, 3)) {
+        if (strpos($version, '1.1') === 0) {
             return $this->getV1PageContent($file);
         }
-        if ('1.' === substr($version, 0, 2)) {
+        if (strpos($version, '1.') === 0) {
             return $this->getOldV1PageContent($file);
         }
         return $this->getV2PageContent($file);
@@ -139,7 +141,7 @@ class ManualAction
      * @param  string $file
      * @return array
      */
-    protected function getOldV1PageContent($file)
+    protected function getOldV1PageContent(string $file)
     {
         $pageContent = [];
 
@@ -160,7 +162,7 @@ class ManualAction
 
         $content = $doc->queryXpath('//div[@class="chapter"]/div[@class="sect1"]');
         if (count($content)) {
-            $xpath = new DOMXpath($content->getDocument());
+            $xpath = new DOMXPath($content->getDocument());
 
             // Replace A link tag without text with a space
             $nodelist = $xpath->query(
@@ -184,7 +186,7 @@ class ManualAction
         if (empty($pageContent['body'])) {
             $content = $doc->queryXpath('//div[@class="sect1"]');
             if (count($content)) {
-                $xpath = new DOMXpath($content->getDocument());
+                $xpath = new DOMXPath($content->getDocument());
                 // Replace A link tag without text with a space
                 $nodelist = $xpath->query(
                     '//a[@name]'
@@ -197,14 +199,14 @@ class ManualAction
                     );
                     $node->parentNode->replaceChild($newElement, $node);
                 }
-                $pageContent['body']= $content->current()->ownerDocument->saveXML(
+                $pageContent['body'] = $content->current()->ownerDocument->saveXML(
                     $content->current()
                 );
             }
         }
 
         // Sidebar
-        $headline= $doc->queryXpath('//div[@class="toc"]');
+        $headline = $doc->queryXpath('//div[@class="toc"]');
         if ($sidebar && count($headline)) {
             $pageContent['sidebar'] = $headline->current()->ownerDocument->saveXML(
                 $headline->current()
@@ -212,7 +214,7 @@ class ManualAction
         }
 
         // Previous topic
-        $prevTopic  = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="p"]')->current();
+        $prevTopic = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="p"]')->current();
 
         if (count($prevTopic)) {
             $pageContent['sidebar'] .= '<h1>Previous topic</h1>';
@@ -224,7 +226,7 @@ class ManualAction
         }
 
         // Next topic
-        $nextTopic  = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="n"]')->current();
+        $nextTopic = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="n"]')->current();
 
         if (count($nextTopic)) {
             $pageContent['sidebar'] .= '<h1>Next topic</h1>';
@@ -250,7 +252,7 @@ class ManualAction
         $navigation = '';
 
         // Previous link
-        $prevLink  = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="p"]')->current();
+        $prevLink = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="p"]')->current();
         if (count($prevLink)) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
@@ -260,7 +262,7 @@ class ManualAction
         }
 
         // Next link
-        $nextLink  = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="n"]')->current();
+        $nextLink = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="n"]')->current();
         if (count($nextLink)) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
@@ -269,7 +271,7 @@ class ManualAction
             );
         }
 
-        if (!empty($navigation)) {
+        if (! empty($navigation)) {
             $navigation = sprintf(
                 '<div class="related hide-on-print"><ul>%s</ul></div>',
                 $navigation
@@ -286,7 +288,7 @@ class ManualAction
      * @param  string $file
      * @return array
      */
-    protected function getV1PageContent($file)
+    protected function getV1PageContent(string $file)
     {
         $pageContent            = [];
         $doc                    = new DomQuery(file_get_contents($file));
@@ -297,7 +299,7 @@ class ManualAction
         // Body (standard)
         $content = $doc->queryXpath('//div[@class="section"]');
         if (count($content)) {
-            $xpath = new DOMXpath($content->getDocument());
+            $xpath = new DOMXPath($content->getDocument());
 
             // Replace headlines (h1 => h4)
             $nodelist = $xpath->query(
@@ -411,7 +413,7 @@ class ManualAction
             // Active page
             $active = $doc->queryXpath('//ul[@class="toc"]/li[@class = "active"]/a')->current();
 
-            $xpath = new DOMXpath($elements->getDocument());
+            $xpath = new DOMXPath($elements->getDocument());
 
             // Content list
             $pageContent['sidebar'] .= "<ul>\n";
@@ -449,7 +451,7 @@ class ManualAction
         $pageContent['sidebar'] .= "</ul>\n";
 
         // Previous topic
-        $prevTopic  = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
+        $prevTopic = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
 
         if (count($prevTopic)) {
             $pageContent['sidebar'] .= '<h1>Previous topic</h1>';
@@ -461,7 +463,7 @@ class ManualAction
         }
 
         // Next topic
-        $nextTopic  = $doc->queryXpath('//div[@class="next"]/a')->current();
+        $nextTopic = $doc->queryXpath('//div[@class="next"]/a')->current();
 
         if (count($nextTopic)) {
             $pageContent['sidebar'] .= '<h1>Next topic</h1>';
@@ -487,7 +489,7 @@ class ManualAction
         $navigation = '';
 
         // Previous link
-        $prevLink  = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
+        $prevLink = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
         if (count($prevLink)) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
@@ -497,7 +499,7 @@ class ManualAction
         }
 
         // Next link
-        $nextLink  = $doc->queryXpath('//div[@class="next"]/a')->current();
+        $nextLink = $doc->queryXpath('//div[@class="next"]/a')->current();
         if (count($nextLink)) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
@@ -506,7 +508,7 @@ class ManualAction
             );
         }
 
-        if (!empty($navigation)) {
+        if (! empty($navigation)) {
             $navigation = sprintf(
                 '<div class="related hide-on-print"><ul>%s</ul></div>',
                 $navigation
@@ -518,12 +520,12 @@ class ManualAction
     }
 
     /**
-     * get page content from a v2 manual
+     * Get page content from a v2 manual
      *
      * @param  string $file
      * @return array
      */
-    protected function getV2PageContent($file)
+    protected function getV2PageContent(string $file)
     {
         $pageContent = [];
         $doc         = new DomQuery(file_get_contents($file));
@@ -546,7 +548,7 @@ class ManualAction
         $navigation = '';
 
         // Previous link
-        $prevLink  = $doc->queryXpath('//link[@rel="prev"]')->current();
+        $prevLink = $doc->queryXpath('//link[@rel="prev"]')->current();
         if (count($prevLink)) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
@@ -556,7 +558,7 @@ class ManualAction
         }
 
         // Next link
-        $nextLink  = $doc->queryXpath('//link[@rel="next"]')->current();
+        $nextLink = $doc->queryXpath('//link[@rel="next"]')->current();
         if (count($nextLink)) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
@@ -565,7 +567,7 @@ class ManualAction
             );
         }
 
-        if (!empty($navigation)) {
+        if (! empty($navigation)) {
             $navigation = sprintf(
                 '<div class="related hide-on-print"><ul>%s</ul></div>',
                 $navigation
@@ -580,13 +582,13 @@ class ManualAction
         /** @var \DOMNode $node */
         foreach ($elements as $node) {
             // Get TOC headline
-            if ($node->nodeValue == 'Table Of Contents') {
+            if ($node->nodeValue === 'Table Of Contents') {
                 // Add headline to sidebar
                 $pageContent['sidebar'] .= '<section id="toc">';
                 $pageContent['sidebar'] .= $node->ownerDocument->saveXML($node);
 
                 // Get TOC list
-                if ('ul' == $node->nextSibling->nextSibling->nodeName) {
+                if ('ul' === $node->nextSibling->nextSibling->nodeName) {
                     // Add list to sidebar
                     $pageContent['sidebar'] .= $node->ownerDocument->saveXML(
                         $node->nextSibling->nextSibling
@@ -660,27 +662,24 @@ class ManualAction
     }
 
     /**
-     * @param string $path
-     * @param string $version
-     *
+     * @param  string $path
+     * @param  string $version
      * @return array
      */
-    protected function getContentList($path, $version)
+    protected function getContentList(string $path, string $version)
     {
-        if ('1.1' === substr($version, 0, 3)) {
+        if (strpos($version, '1.') === 0) {
             return [];
         }
-        if ('1.' === substr($version, 0, 2)) {
-            return [];
-        }
+
         return $this->getV2ContentList($path);
     }
 
     /**
-     * @param string $path
+     * @param  string $path
      * @return array
      */
-    protected function getV2ContentList($path)
+    protected function getV2ContentList(string $path)
     {
         // Create list
         $list = [
@@ -700,7 +699,7 @@ class ManualAction
 
         // Check sections
         if (count($sections)) {
-            $xpath = new DOMXpath($sections->getDocument());
+            $xpath = new DOMXPath($sections->getDocument());
 
             foreach ($sections as $section) {
                 // Get label for optgroup
@@ -766,32 +765,28 @@ class ManualAction
     }
 
     /**
-     * @param string $currentPage
-     * @param string $path
-     * @param string $version
-     * @param bool   $getHref
-     *
+     * @param  string $currentPage
+     * @param  string $path
+     * @param  string $version
+     * @param  bool   $getHref
      * @return string|null
      */
-    protected function getSelectedPage($currentPage, $path, $version, $getHref = true)
+    protected function getSelectedPage(string $currentPage, string $path, string $version, bool $getHref = true)
     {
-        if ('1.1' === substr($version, 0, 3)) {
+        if (strpos($version, '1.') === 0) {
             return null;
         }
-        if ('1.' === substr($version, 0, 2)) {
-            return null;
-        }
+
         return $this->getV2SelectedPage($currentPage, $path, $getHref);
     }
 
     /**
-     * @param string $currentPage
-     * @param string $path
-     * @param bool   $getHref
-     *
+     * @param  string $currentPage
+     * @param  string $path
+     * @param  bool   $getHref
      * @return string|null
      */
-    protected function getV2SelectedPage($currentPage, $path, $getHref = true)
+    protected function getV2SelectedPage(string $currentPage, string $path, bool $getHref = true)
     {
         $doc = new DomQuery(file_get_contents($path . 'index.html'));
 

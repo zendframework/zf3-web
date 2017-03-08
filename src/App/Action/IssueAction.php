@@ -2,50 +2,58 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model\Issue;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use App\Model\Issue;
 
-class IssueAction
+class IssueAction implements MiddlewareInterface
 {
     const ISSUE_PER_PAGE = 15;
 
+    /** @var Issue */
     private $issue;
 
-    public function __construct(Issue $issue, array $zfComponents, Template\TemplateRendererInterface $template = null)
+    /** @var array */
+    private $zfComponents;
+
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(Issue $issue, array $zfComponents, Template\TemplateRendererInterface $template)
     {
         $this->issue        = $issue;
         $this->zfComponents = $zfComponents;
         $this->template     = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $action = $request->getAttribute('type', false);
         if (! $action) {
-            return new HtmlResponse($this->template->render("app::issue-overview", [
+            return new HtmlResponse($this->template->render('app::issue-overview', [
                 'active'     => '/issues',
-                'repository' => $this->zfComponents
+                'repository' => $this->zfComponents,
             ]));
         }
 
-        if (! in_array($action, [ 'ZF1', 'ZF2', 'browse'])) {
+        if (! in_array($action, ['ZF1', 'ZF2', 'browse'], true)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        return $this->$action($request, $response, $next);
+        return $this->$action($request, $delegate);
     }
 
-    protected function browse(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function browse(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $issueId = $request->getAttribute('issue', false);
         if (! $issueId) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        $file = 'data/issues/' . $issueId . '.md';
+        $file = sprintf('data/issues/%s.md', $issueId);
         if (! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
@@ -58,12 +66,12 @@ class IssueAction
         return new HtmlResponse($this->template->render('app::issue', $content));
     }
 
-    protected function zf1(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function zf1(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        return $this->zf2($request, $response, $next);
+        return $this->zf2($request, $delegate);
     }
 
-    protected function zf2(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function zf2(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $action = $request->getAttribute('type', false);
 
@@ -79,10 +87,10 @@ class IssueAction
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        $nextPage = ($page === $totPages) ? 0 : $page + 1;
-        $prevPage = ($page === 1) ? 0 : $page - 1;
+        $nextPage = $page === $totPages ? 0 : $page + 1;
+        $prevPage = $page === 1 ? 0 : $page - 1;
 
-        $active = "/issues/$action";
+        $active = sprintf('/issues/%s', $action);
         $issues = array_slice($allIssues, ($page - 1) * self::ISSUE_PER_PAGE, self::ISSUE_PER_PAGE);
         return new HtmlResponse($this->template->render('app::zf-issue', [
             'issues'     => $issues,
@@ -93,7 +101,7 @@ class IssueAction
             'prev'       => $prevPage,
             'next'       => $nextPage,
             'active'     => $active,
-            'repository' => $this->zfComponents
+            'repository' => $this->zfComponents,
         ]));
     }
 }

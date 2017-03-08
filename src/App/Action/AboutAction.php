@@ -2,28 +2,32 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use ArrayObject;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use ArrayObject;
 
-class AboutAction
+class AboutAction implements MiddlewareInterface
 {
-    protected $config;
+    /** @var ArrayObject */
+    private $config;
 
-    protected $template;
+    /** @var Template\TemplateRendererInterface */
+    private $template;
 
-    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template = null)
+    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template)
     {
         $this->config   = $config;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $page = basename($request->getUri()->getPath());
-        $stat = $this->config['zf_stats']['total']  ?? false;
-        return new HtmlResponse($this->template->render("app::$page", [ 'stats' => $stat ]));
+        $stat = $this->config['zf_stats']['total'] ?? false;
+
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $page), ['stats' => $stat]));
     }
 }

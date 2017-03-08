@@ -21,7 +21,7 @@ if (! isset($zfComponents['zf_components'])) {
     exit(1);
 }
 
-$stats = [ 'zf_stats' => [] ];
+$stats = ['zf_stats' => []];
 
 printf("Generating the stats from packagist.org:\n");
 $tot = 0;
@@ -31,9 +31,9 @@ foreach ($zfComponents['zf_components'] as $comp) {
         continue;
     }
 
-    $apiUrl = sprintf("https://packagist.org/packages/zendframework/%s.json", $name);
+    $apiUrl = sprintf('https://packagist.org/packages/zendframework/%s.json', $name);
 
-    printf("%s...", $name);
+    printf('%s...', $name);
 
     $json = json_decode(file_get_contents($apiUrl));
     $date = time();

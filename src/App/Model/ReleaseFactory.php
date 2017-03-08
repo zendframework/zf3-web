@@ -1,7 +1,7 @@
 <?php
 namespace App\Model;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class ReleaseFactory
 {

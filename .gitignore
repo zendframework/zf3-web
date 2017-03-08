@@ -1,4 +1,2 @@
-.idea
-composer.phar
 phpunit.xml
 vendor/

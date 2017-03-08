@@ -2,21 +2,28 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model\Release;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use App\Model\Release;
 
-class InstallAction
+class InstallAction implements MiddlewareInterface
 {
-    public function __construct(Release $release, Template\TemplateRendererInterface $template = null)
+    /** @var Release */
+    private $release;
+
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(Release $release, Template\TemplateRendererInterface $template)
     {
+        $this->release  = $release;
         $this->template = $template;
-        $this->releases = $release;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $page = $request->getAttribute('page', false);
 
@@ -26,19 +33,19 @@ class InstallAction
             if (false !== $composer) {
                 $composer = json_decode($composer, true);
             }
-            return new HtmlResponse($this->template->render("app::install", [
+            return new HtmlResponse($this->template->render('app::install', [
                 'require'     => $composer['require'],
-                'composerUrl' => $url
+                'composerUrl' => $url,
             ]));
         }
 
-        if (! in_array($page, [ 'skeleton-app', 'expressive', 'archives' ])) {
+        if (! in_array($page, ['skeleton-app', 'expressive', 'archives'], true)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
         if ($page === 'archives') {
-            return new HtmlResponse($this->template->render("app::$page", [ 'releases' => $this->releases ]));
+            return new HtmlResponse($this->template->render(sprintf('app::%s', $page), ['releases' => $this->release]));
         }
-        return new HtmlResponse($this->template->render("app::$page"));
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $page)));
     }
 }

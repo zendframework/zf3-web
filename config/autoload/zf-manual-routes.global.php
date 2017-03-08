@@ -1,19 +1,14 @@
 <?php
-return array (
-  'router' => 
-  array (
-    'routes' => 
-    array (
-      'manual' => 
-      array (
-        'options' => 
-        array (
-          'defaults' => 
-          array (
-            'version' => '2.4',
-          ),
-        ),
-      ),
-    ),
-  ),
-);
+return [
+    'router' => [
+        'routes' => [
+            'manual' => [
+                'options' => [
+                    'defaults' => [
+                        'version' => '2.4',
+                    ],
+                ],
+            ],
+        ],
+    ],
+];

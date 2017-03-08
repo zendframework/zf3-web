@@ -1,7 +1,12 @@
 <?php
+use App\Action;
+use App\Model;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
 use Zend\Expressive\Helper;
+use Zend\Expressive\Router\RouterInterface;
+use Zend\Expressive\Router\ZendRouter;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     // Provides application-wide services.
@@ -13,17 +18,44 @@ return [
         // class name.
         'invokables' => [
             // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
-            Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class
+            Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
+            RouterInterface::class => ZendRouter::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
             Application::class => ApplicationFactory::class,
             Helper\UrlHelper::class => Helper\UrlHelperFactory::class,
-            App\Model\Post::class => App\Model\PostFactory::class,
-            App\Model\Advisory::class => App\Model\AdvisoryFactory::class,
-            App\Model\Changelog::class => App\Model\ChangelogFactory::class,
-            App\Model\Issue::class => App\Model\IssueFactory::class,
-            App\Model\Release::class => App\Model\ReleaseFactory::class
+
+            // Actions
+            Action\HomePageAction::class     => Action\HomePageFactory::class,
+            Action\ApiAction::class          => Action\ApiFactory::class,
+            Action\BlogAction::class         => Action\BlogFactory::class,
+            Action\AboutAction::class        => Action\AboutFactory::class,
+            Action\AdvisoryAction::class     => Action\AdvisoryFactory::class,
+            Action\SecurityAction::class     => Action\SecurityFactory::class,
+            Action\ChangelogAction::class    => Action\ChangelogFactory::class,
+            Action\IssueAction::class        => Action\IssueFactory::class,
+            Action\ManualAction::class       => Action\ManualFactory::class,
+            Action\LearnAction::class        => Action\LearnFactory::class,
+            Action\DocsAction::class         => Action\DocsFactory::class,
+            Action\SwitchManualAction::class => Action\SwitchManualFactory::class,
+            Action\InstallAction::class      => Action\InstallFactory::class,
+            Action\ParticipateAction::class  => Action\ParticipateFactory::class,
+            Action\StatusAction::class       => Action\StatusFactory::class,
+            Action\StatisticsAction::class   => Action\StatisticsFactory::class,
+
+            // Models
+            Model\Post::class      => Model\PostFactory::class,
+            Model\Advisory::class  => Model\AdvisoryFactory::class,
+            Model\Changelog::class => Model\ChangelogFactory::class,
+            Model\Issue::class     => Model\IssueFactory::class,
+            Model\Release::class   => Model\ReleaseFactory::class,
+
+            // Middlewares
+            Helper\ServerUrlMiddleware::class          => Helper\ServerUrlMiddlewareFactory::class,
+            Helper\UrlHelperMiddleware::class          => Helper\UrlHelperMiddlewareFactory::class,
+            Action\Redirects::class                    => InvokableFactory::class,
+            Action\StripTrailingSlashMiddleware::class => InvokableFactory::class,
         ],
     ],
 ];

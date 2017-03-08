@@ -45,13 +45,13 @@ $this->inlineScript()->captureEnd();
                 <?php if (is_array($items)) : ?>
                     <optgroup label="<?= $headline ?>">
                         <?php foreach ($items as $link => $label) : ?>
-                            <option value="<?= $link ?>"<?= ($currentPage == $link)?' selected="selected"':'' ?>>
+                            <option value="<?= $link ?>"<?= ($currentPage === $link)?' selected="selected"':'' ?>>
                                 <?= $label ?>
                             </option>
                         <?php endforeach ?>
                     </optgroup>
                 <?php else : ?>
-                    <option value="<?= $headline ?>"<?= ($currentPage == $headline)?' selected="selected"':'' ?>>
+                    <option value="<?= $headline ?>"<?= ($currentPage === $headline)?' selected="selected"':'' ?>>
                         <?= $items ?>
                     </option>
                 <?php endif ?>

@@ -7,17 +7,17 @@ matrix:
   include:
     - php: 7
       env:
-        - EXECUTE_CS_CHECK=true
+        - CS_CHECK=true
 
 before_install:
   - composer self-update
 
 install:
-  - travis_retry composer install --no-interaction --ignore-platform-reqs --prefer-source --no-scripts
+  - travis_retry composer install --no-interaction --prefer-source --no-scripts
 
 script:
   - composer test
-  - if [[ $EXECUTE_CS_CHECK == 'true' ]]; then composer cs ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 notifications:
   email: true

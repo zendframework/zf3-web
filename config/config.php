@@ -27,7 +27,7 @@ if (is_file($cachedConfigFile)) {
 
     // Cache config if enabled
     if (isset($config['config_cache_enabled']) && $config['config_cache_enabled'] === true) {
-        if (!is_dir($cachePath)) {
+        if (! is_dir($cachePath)) {
             mkdir($cachePath, 0775, true);
         }
         file_put_contents($cachedConfigFile, '<?php return ' . var_export($config, true) . ';');

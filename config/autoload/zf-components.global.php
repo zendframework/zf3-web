@@ -1,4 +1,4 @@
-<?php return [ "zf_components" => array (
+<?php return ['zf_components' => array (
   0 => 
   array (
     'name' => 'Tutorials',
@@ -395,4 +395,4 @@
     'url' => 'https://docs.zendframework.com/zend-xml2json/',
     'description' => 'Convert XML documents to JSON.',
   ),
-) ];
+)];
