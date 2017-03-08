@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 class Changelog extends AbstractCollection

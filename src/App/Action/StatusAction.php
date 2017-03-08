@@ -2,32 +2,34 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use ArrayObject;
 
-class StatusAction
+class StatusAction implements MiddlewareInterface
 {
-    private $template;
-
+    /** @var array */
     private $config;
 
-    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template = null)
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(array $config, Template\TemplateRendererInterface $template)
     {
         $this->config   = $config;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if (! isset($this->config['zf_stats'])) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
         return new HtmlResponse($this->template->render('app::status', [
-            'stats' => $this->config['zf_stats']
+            'stats' => $this->config['zf_stats'],
         ]));
     }
 }

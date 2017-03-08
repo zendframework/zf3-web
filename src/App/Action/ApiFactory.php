@@ -2,7 +2,7 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class ApiFactory
 {

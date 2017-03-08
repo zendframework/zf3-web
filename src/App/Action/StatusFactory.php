@@ -2,17 +2,15 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class StatusFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $template = ($container->has(TemplateRendererInterface::class))
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
         $config   = $container->get('config');
+        $template = $container->get(TemplateRendererInterface::class);
 
         return new StatusAction($config, $template);
     }

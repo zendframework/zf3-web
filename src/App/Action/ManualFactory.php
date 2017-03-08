@@ -2,18 +2,18 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class ManualFactory
 {
+    use PrepareManualConfigurationTrait;
+
     public function __invoke(ContainerInterface $container)
     {
-        $template = ($container->has(TemplateRendererInterface::class))
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
-        $config = $container->get('config');
+        $config   = $this->prepareManualConfiguration($container->get('config'));
+        $template = $container->get(TemplateRendererInterface::class);
 
-        return new ManualAction($config['manual'], $template);
+        return new ManualAction($config, $template);
     }
 }

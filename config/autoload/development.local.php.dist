@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Development-mode configuration.
+ *
+ * This configuration is toggled when enabling development mode by copying the
+ * file without the `.dist` suffix. If you make changes to this file, be sure
+ * to toggle development mode off and then on again.
+ */
+
+use Zend\Expressive\Container;
+use Zend\Expressive\Middleware\ErrorResponseGenerator;
+
+return [
+    'zf_manual_basepath' => realpath(getcwd()) . '/data/manual/',
+
+    'dependencies' => [
+        'factories'  => [
+            ErrorResponseGenerator::class       => Container\WhoopsErrorResponseGeneratorFactory::class,
+            'Zend\Expressive\Whoops'            => Container\WhoopsFactory::class,
+            'Zend\Expressive\WhoopsPageHandler' => Container\WhoopsPageHandlerFactory::class,
+        ],
+    ],
+
+    'whoops' => [
+        'json_exceptions' => [
+            'display'    => true,
+            'show_trace' => true,
+            'ajax_only'  => true,
+        ],
+    ],
+];
