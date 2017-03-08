@@ -2,25 +2,28 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use ArrayObject;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use ArrayObject;
 
-class StatisticsAction
+class StatisticsAction implements MiddlewareInterface
 {
-    private $template;
-
+    /** @var ArrayObject */
     private $config;
 
-    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template = null)
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template)
     {
         $this->config   = $config;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if (! isset($this->config['zf_stats'])) {
             return new HtmlResponse($this->template->render('error::404'));

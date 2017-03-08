@@ -2,20 +2,22 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\TextResponse;
 
-class ApiAction
+class ApiAction implements MiddlewareInterface
 {
+    /** @var array */
     private $versions;
 
-    public function __construct($versions)
+    public function __construct(array $versions)
     {
         $this->versions = $versions;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $version = $request->getQueryParams()['v'] ?? '1';
         if (! isset($this->versions[$version])) {

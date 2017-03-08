@@ -2,24 +2,34 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class ParticipateAction
+class ParticipateAction implements MiddlewareInterface
 {
+    /** @var array */
+    private $zfComponents;
+
+    /** @var array */
+    private $reviewTeam;
+
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
     public function __construct(
         array $zfComponents,
         array $reviewTeam,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template
     ) {
         $this->zfComponents = $zfComponents;
         $this->reviewTeam   = $reviewTeam;
         $this->template     = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $page = $request->getAttribute('page', false);
 

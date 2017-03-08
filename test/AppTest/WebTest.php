@@ -1,13 +1,15 @@
 <?php
 namespace AppTest;
 
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use GuzzleHttp\Client;
 
 class WebTest extends \PHPUnit_Framework_TestCase
 {
-    protected $client;
+    /** @var Client */
+    private $client;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->client = new Client([
             'base_uri' => sprintf('http://%s:%s', WEB_SERVER_HOST, WEB_SERVER_PORT),
@@ -52,11 +54,13 @@ class WebTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getUrlToTest
+     *
+     * @param string $url
      */
-    public function testHomePage($url)
+    public function testHomePage(string $url)
     {
         $response = $this->client->request('GET', $url);
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(StatusCode::STATUS_OK, $response->getStatusCode());
         $this->assertNotEmpty($response->getBody()->getContents());
     }
 }

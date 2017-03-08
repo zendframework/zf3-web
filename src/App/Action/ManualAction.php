@@ -2,26 +2,29 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use DOMXPath;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Template;
 use Zend\Dom\Query as DomQuery;
-use DOMXpath;
+use Zend\Expressive\Template;
 
-class ManualAction
+class ManualAction implements MiddlewareInterface
 {
-    protected $config;
+    /** @var array */
+    private $config;
 
-    protected $template;
+    /** @var Template\TemplateRendererInterface */
+    private $template;
 
-    public function __construct(array $config, Template\TemplateRendererInterface $template = null)
+    public function __construct(array $config, Template\TemplateRendererInterface $template)
     {
         $this->config = $config;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
 
         $page    = $request->getAttribute('page', false);

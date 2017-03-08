@@ -2,39 +2,42 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model\Post;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
-use App\Model\Post;
 use Zend\Feed\Writer\Feed;
 
-class BlogAction
+class BlogAction implements MiddlewareInterface
 {
     const POST_PER_PAGE = 10;
     const POST_PER_FEED = 15;
 
-    private $template;
-
+    /** @var Post */
     private $posts;
 
-    public function __construct(Post $posts, Template\TemplateRendererInterface $template = null)
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(Post $posts, Template\TemplateRendererInterface $template)
     {
         $this->posts    = $posts;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if (preg_match('#/feed.*?\.xml$#', $request->getUri()->getPath())) {
-            return $this->feed($request, $response, $next);
+            return $this->feed($request, $delegate);
         }
 
         $file = $request->getAttribute('file', false);
 
         if (! $file) {
-            return $this->blogPage($request, $response, $next);
+            return $this->blogPage($request, $delegate);
         }
 
         $post = sprintf('data/posts/%s.md', basename($file, '.html'));
@@ -49,7 +52,7 @@ class BlogAction
         return new HtmlResponse($this->template->render('app::post', $content));
     }
 
-    protected function blogPage(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function blogPage(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $params = $request->getQueryParams();
         $page = isset($params['page']) ? (int) $params['page'] : 1;
@@ -76,7 +79,7 @@ class BlogAction
         ]));
     }
 
-    protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function feed(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $uri     = $request->getUri();
         $blogUrl = (string) $uri->withPath('/blog');

@@ -2,23 +2,28 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model\Advisory;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use App\Model\Advisory;
 
-class AdvisoryAction
+class AdvisoryAction implements MiddlewareInterface
 {
+    /** @var Advisory */
     private $advisory;
 
-    public function __construct(Advisory $advisory, Template\TemplateRendererInterface $template = null)
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(Advisory $advisory, Template\TemplateRendererInterface $template)
     {
         $this->advisory = $advisory;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $advisory = $request->getAttribute('advisory', false);
         $file = sprintf('data/advisories/%s.md', basename($advisory));

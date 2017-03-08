@@ -2,9 +2,9 @@
 
 namespace App\Model;
 
-use Interop\Container\ContainerInterface;
 use Mni\FrontYAML\Bridge\CommonMark\CommonMarkParser;
 use Mni\FrontYAML\Parser;
+use Psr\Container\ContainerInterface;
 
 class AdvisoryFactory
 {

@@ -1,15 +1,16 @@
 <?php
 namespace AppTest\Model;
 
+use AppTest\Model\TestAsset\Collection;
 use Mni\FrontYAML\Bridge\CommonMark\CommonMarkParser;
 use Mni\FrontYAML\Parser;
-use AppTest\Model\TestAsset\Collection;
 
 class AbstractCollectionTest extends \PHPUnit_Framework_TestCase
 {
-    protected $collection;
+    /** @var Collection */
+    private $collection;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->collection = new Collection(
             new Parser(null, new CommonMarkParser())

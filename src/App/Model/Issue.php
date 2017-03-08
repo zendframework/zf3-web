@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use RuntimeException;
+
 class Issue extends AbstractCollection
 {
     const FOLDER_COLLECTION = 'data/issues';

@@ -2,21 +2,28 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model\Release;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use App\Model\Release;
 
-class InstallAction
+class InstallAction implements MiddlewareInterface
 {
-    public function __construct(Release $release, Template\TemplateRendererInterface $template = null)
+    /** @var Release */
+    private $release;
+
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(Release $release, Template\TemplateRendererInterface $template)
     {
+        $this->release  = $release;
         $this->template = $template;
-        $this->releases = $release;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $page = $request->getAttribute('page', false);
 

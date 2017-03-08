@@ -2,16 +2,17 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\RedirectResponse;
 
 /**
  * Strip trailing slashes from paths and permanently redirect.
  */
-class StripTrailingSlashMiddleware
+class StripTrailingSlashMiddleware implements MiddlewareInterface
 {
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $uri = $request->getUri();
         $path = $uri->getPath();
@@ -23,6 +24,6 @@ class StripTrailingSlashMiddleware
             );
         }
 
-        return $next($request, $response);
+        return $delegate->process($request);
     }
 }

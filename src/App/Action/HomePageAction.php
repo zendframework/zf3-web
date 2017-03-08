@@ -2,41 +2,44 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model;
+use ArrayObject;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
-use App\Model;
-use ArrayObject;
 
-class HomePageAction
+class HomePageAction implements MiddlewareInterface
 {
     const NUM_POSTS = 5;
-
     const NUM_ADVISORIES = 4;
 
-    private $template;
+    /** @var ArrayObject */
+    private $config;
 
+    /** @var Model\Post */
     private $posts;
 
+    /** @var Model\Advisory */
     private $advisories;
 
-    private $config;
+    /** @var Template\TemplateRendererInterface */
+    private $template;
 
     public function __construct(
         ArrayObject $config,
         Model\Post $posts,
         Model\Advisory $advisories,
-        Template\TemplateRendererInterface $template = null
+        Template\TemplateRendererInterface $template
     ) {
-
         $this->config     = $config;
         $this->posts      = $posts;
         $this->advisories = $advisories;
         $this->template   = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $data = [
             'projects'   => require 'data/projects.php',

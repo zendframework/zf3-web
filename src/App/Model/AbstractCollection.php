@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Model;
 
 use Mni\FrontYAML\Parser;
+use RuntimeException;
 
 abstract class AbstractCollection
 {

@@ -2,12 +2,16 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 
-class SwitchManualAction
+class SwitchManualAction implements MiddlewareInterface
 {
+    /** @var array */
     protected $config;
 
     public function __construct(array $config)
@@ -15,11 +19,11 @@ class SwitchManualAction
         $this->config = $config;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $body = json_decode($request->getBody());
         if (! isset($body->old) || ! isset($body->new) || ! isset($body->lang) || ! isset($body->page)) {
-            return $response->withStatus(422);
+            return new EmptyResponse(StatusCode::STATUS_UNPROCESSABLE_ENTITY);
         }
         $newVer = $body->new === 'current' ? $this->config['zf_latest_version'] : $body->new;
 
