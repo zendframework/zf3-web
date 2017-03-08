@@ -118,7 +118,7 @@ class Release
 
         list($major, $minor) = explode('.', $version, 2);
         if (strpos($minor, '.') !== false) {
-            throw new \DomainException(sprintf(
+            throw new DomainException(sprintf(
                 'Invalid version "%s" provided to %s; must be a major or minor version only',
                 $version,
                 __METHOD__
