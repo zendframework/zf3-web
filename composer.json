@@ -30,8 +30,8 @@
     "require-dev": {
         "phpunit/phpunit": "^5.4",
         "guzzlehttp/guzzle": "~6.0",
-        "squizlabs/php_codesniffer": "^2.3",
-        "filp/whoops": "^1.1 || ^2.0"
+        "filp/whoops": "^1.1 || ^2.0",
+        "zendframework/zend-coding-standard": "~1.0.0"
     },
     "autoload": {
         "psr-4": {
@@ -45,10 +45,10 @@
     },
     "scripts": {
         "check": [
-            "@cs",
+            "@cs-check",
             "@test"
         ],
-        "cs": "phpcs",
+        "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
         "test": "phpunit"
