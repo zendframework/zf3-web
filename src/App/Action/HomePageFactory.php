@@ -2,21 +2,19 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
-use App\Model\Post;
 use App\Model\Advisory;
+use App\Model\Post;
+use Psr\Container\ContainerInterface;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $template = ($container->has(TemplateRendererInterface::class))
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
+        $config   = $container->get('config');
         $post     = $container->get(Post::class);
         $advisory = $container->get(Advisory::class);
-        $config   = $container->get('config');
+        $template = $container->get(TemplateRendererInterface::class);
 
         return new HomePageAction($config, $post, $advisory, $template);
     }

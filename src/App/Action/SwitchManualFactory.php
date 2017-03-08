@@ -2,13 +2,15 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
 class SwitchManualFactory
 {
+    use PrepareManualConfigurationTrait;
+
     public function __invoke(ContainerInterface $container)
     {
-        $config = $container->get('config');
-        return new SwitchManualAction($config['manual']);
+        $config = $this->prepareManualConfiguration($container->get('config'));
+        return new SwitchManualAction($config);
     }
 }

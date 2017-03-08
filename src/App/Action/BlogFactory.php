@@ -2,18 +2,16 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 use App\Model\Post;
+use Psr\Container\ContainerInterface;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 class BlogFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $template = ($container->has(TemplateRendererInterface::class))
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
-        $post = $container->get(Post::class);
+        $post     = $container->get(Post::class);
+        $template = $container->get(TemplateRendererInterface::class);
 
         return new BlogAction($post, $template);
     }

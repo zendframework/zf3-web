@@ -2,19 +2,17 @@
 
 namespace App\Action;
 
-use Interop\Container\ContainerInterface;
-use Zend\Expressive\Template\TemplateRendererInterface;
 use App\Model\Release;
+use Psr\Container\ContainerInterface;
+use Zend\Expressive\Template\TemplateRendererInterface;
 
 class InstallFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $template = ($container->has(TemplateRendererInterface::class))
-            ? $container->get(TemplateRendererInterface::class)
-            : null;
+        $release  = $container->get(Release::class);
+        $template = $container->get(TemplateRendererInterface::class);
 
-        $release = $container->get(Release::class);
         return new InstallAction($release, $template);
     }
 }

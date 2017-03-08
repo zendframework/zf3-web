@@ -2,42 +2,45 @@
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseInterface;
+use App\Model\Post;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
-use App\Model\Post;
 use Zend\Feed\Writer\Feed;
 
-class BlogAction
+class BlogAction implements MiddlewareInterface
 {
     const POST_PER_PAGE = 10;
     const POST_PER_FEED = 15;
 
-    private $template;
-
+    /** @var Post */
     private $posts;
 
-    public function __construct(Post $posts, Template\TemplateRendererInterface $template = null)
+    /** @var Template\TemplateRendererInterface */
+    private $template;
+
+    public function __construct(Post $posts, Template\TemplateRendererInterface $template)
     {
         $this->posts    = $posts;
         $this->template = $template;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if (preg_match('#/feed.*?\.xml$#', $request->getUri()->getPath())) {
-            return $this->feed($request, $response, $next);
+            return $this->feed($request, $delegate);
         }
 
         $file = $request->getAttribute('file', false);
 
         if (! $file) {
-            return $this->blogPage($request, $response, $next);
+            return $this->blogPage($request, $delegate);
         }
 
-        $post = 'data/posts/' . basename($file, '.html') . '.md';
+        $post = sprintf('data/posts/%s.md', basename($file, '.html'));
         if (! file_exists($post)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
@@ -49,7 +52,7 @@ class BlogAction
         return new HtmlResponse($this->template->render('app::post', $content));
     }
 
-    protected function blogPage(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function blogPage(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $params = $request->getQueryParams();
         $page = isset($params['page']) ? (int) $params['page'] : 1;
@@ -60,8 +63,8 @@ class BlogAction
         if ($page > $totPages || $page < 1) {
             return new HtmlResponse($this->template->render('error::404'));
         }
-        $nextPage = ($page === $totPages) ? 0 : $page + 1;
-        $prevPage = ($page === 1) ? 0 : $page - 1;
+        $nextPage = $page === $totPages ? 0 : $page + 1;
+        $prevPage = $page === 1 ? 0 : $page - 1;
 
         $posts = array_slice($allPosts, ($page - 1) * self::POST_PER_PAGE, self::POST_PER_PAGE);
         foreach ($posts as $key => $value) {
@@ -72,24 +75,24 @@ class BlogAction
             'tot'   => $totPages,
             'page'  => $page,
             'prev'  => $prevPage,
-            'next'  => $nextPage
+            'next'  => $nextPage,
         ]));
     }
 
-    protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
+    protected function feed(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         $uri     = $request->getUri();
         $blogUrl = (string) $uri->withPath('/blog');
         $feedUrl = (string) $uri->withQuery('')->withFragment('');
         $baseUrl = sprintf(
-            "%s://%s",
+            '%s://%s',
             $uri->getScheme(),
-            $uri->getPort() == 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort()
+            $uri->getPort() === 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort()
         );
 
         $matches = [];
         preg_match('#(?P<type>atom|rss)#', $feedUrl, $matches);
-        $feedType = isset($matches['type']) ? $matches['type'] : 'rss';
+        $feedType = $matches['type'] ?? 'rss';
 
         $feed = new Feed();
         $feed->setTitle('Blog Entries - ZF Blog');
@@ -109,7 +112,7 @@ class BlogAction
             $entry->setLink($baseUrl . $content['permalink']);
             $entry->addAuthor([
                 'name' => $content['author'],
-                'url'  => $content['url_author']
+                'url'  => $content['url_author'],
             ]);
             $entry->setDateCreated($content['date']);
             $entry->setDateModified($content['date']);
@@ -120,6 +123,6 @@ class BlogAction
         $feed->setDateModified($dateModified);
 
         $response = new TextResponse($feed->export($feedType));
-        return $response->withHeader('Content-Type', 'application/' . $feedType . '+xml');
+        return $response->withHeader('Content-Type', sprintf('application/%s+xml', $feedType));
     }
 }

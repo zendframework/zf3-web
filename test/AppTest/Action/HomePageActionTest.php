@@ -3,69 +3,70 @@
 namespace AppTest\Action;
 
 use App\Action\HomePageAction;
+use App\Model\Advisory;
+use App\Model\Post;
+use ArrayObject;
+use Fig\Http\Message\StatusCodeInterface as StatusCode;
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
-use App\Model\Post;
-use App\Model\Advisory;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use ArrayObject;
 
-class HomePageActionTest extends \PHPUnit_Framework_TestCase
+class HomePageActionTest extends TestCase
 {
-    /** @var RouterInterface */
-    protected $router;
+    /** @var Post|ObjectProphecy */
+    private $post;
 
-    /** @var Post */
-    protected $post;
+    /** @var Advisory|ObjectProphecy */
+    private $advisory;
 
-    /** @var Advisory */
-    protected $advisory;
+    /** @var TemplateRendererInterface|ObjectProphecy */
+    private $template;
+
+    /** @var ArrayObject */
+    private $zfComponents;
+
+    protected function setUp()
+    {
+        $this->post = $this->prophesize(Post::class);
+        $this->post->getAll()->willReturn(['foo' => $this->getContent()])->shouldBeCalledTimes(1);
+
+        $this->advisory = $this->prophesize(Advisory::class);
+        $this->advisory->getAll()->willReturn(['foo' => $this->getContent()])->shouldBeCalledTimes(1);
+
+        $this->template = $this->prophesize(TemplateRendererInterface::class);
+        $this->template->render('app::home-page', Argument::type('array'))->willReturn('');
+
+        $this->zfComponents = new ArrayObject(['zf_components' => []]);
+    }
+
+    public function testResponse()
+    {
+        $delegate = $this->prophesize(DelegateInterface::class);
+        $homePage = new HomePageAction(
+            $this->zfComponents,
+            $this->post->reveal(),
+            $this->advisory->reveal(),
+            $this->template->reveal()
+        );
+        $response = $homePage->process(new ServerRequest(['/']), $delegate->reveal());
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(StatusCode::STATUS_OK, $response->getStatusCode());
+    }
 
     private function getContent($body = false)
     {
         $post = [
             'layout' => 'layout',
             'title'  => 'title',
-            'date'   => 1234828800
+            'date'   => 1234828800,
         ];
         if ($body) {
             $post['body'] = 'body';
         }
         return $post;
-    }
-    protected function setUp()
-    {
-        $this->post = $this->getMockBuilder(Post::class)
-                         ->disableOriginalConstructor()
-                         ->getMock();
-
-        $this->post->method('getAll')->willReturn([
-            'foo' => $this->getContent()
-        ]);
-        $this->post->method('getFromFile')->willReturn($this->getContent(true));
-
-        $this->advisory = $this->getMockBuilder(Advisory::class)
-                               ->disableOriginalConstructor()
-                               ->getMock();
-
-        $this->advisory->method('getAll')->willReturn([
-            'foo' => $this->getContent()
-        ]);
-        $this->advisory->method('getFromFile')->willReturn($this->getContent(true));
-
-        $this->template = $this->getMockBuilder(TemplateRendererInterface::class)
-                               ->getMock();
-        $this->template->method('render')->willReturn('');
-
-        $this->zfComponents = new ArrayObject([ 'zf_components' => [] ]);
-    }
-
-    public function testResponse()
-    {
-        $homePage = new HomePageAction($this->zfComponents, $this->post, $this->advisory, $this->template);
-        $response = $homePage(new ServerRequest(['/']), new Response(), function () {
-        });
-        $this->assertTrue($response instanceof Response);
-        $this->assertEquals(200, $response->getStatusCode());
     }
 }
