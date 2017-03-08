@@ -16,7 +16,7 @@
         "php": "^7.0",
         "league/commonmark": "^0.15.3",
         "mnapoli/front-yaml": "^1.5.2",
-        "ocramius/proxy-manager": "^2.1",
+        "ocramius/proxy-manager": "^2.0.4",
         "roave/security-advisories": "dev-master",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-expressive": "^2.0",
