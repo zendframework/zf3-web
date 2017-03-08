@@ -11,13 +11,13 @@ use Zend\Expressive\Template;
 
 class AboutAction implements MiddlewareInterface
 {
-    /** @var ArrayObject */
+    /** @var array */
     private $config;
 
     /** @var Template\TemplateRendererInterface */
     private $template;
 
-    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template)
+    public function __construct(array $config, Template\TemplateRendererInterface $template)
     {
         $this->config   = $config;
         $this->template = $template;

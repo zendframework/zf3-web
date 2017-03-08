@@ -6,6 +6,9 @@
         "issues": "https://github.com/zendframework/zf3-web/issues"
     },
     "license": "BSD-3-CLAUSE",
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev",
@@ -18,6 +21,7 @@
         "mnapoli/front-yaml": "^1.5.2",
         "ocramius/proxy-manager": "^2.0.4",
         "roave/security-advisories": "dev-master",
+        "zendframework/zend-config-aggregator": "^0.2.0",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-expressive": "^2.0",
         "zendframework/zend-expressive-helpers": "^3.0.1",
@@ -31,7 +35,8 @@
         "filp/whoops": "^2.1.8",
         "guzzlehttp/guzzle": "^6.2.3",
         "phpunit/phpunit": "^6.0.8",
-        "zendframework/zend-coding-standard": "~1.0.0"
+        "zendframework/zend-coding-standard": "~1.0.0",
+        "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -50,6 +55,9 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "development-disable": "zf-development-mode disable",
+        "development-enable": "zf-development-mode enable",
+        "development-status": "zf-development-mode status",
         "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
         "test": "phpunit"
     }
