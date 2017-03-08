@@ -1,27 +1,13 @@
 <?php $this->headTitle('Documentation')->prepend('API'); ?>
 
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>Documentation</h3>
-        </div>
-    </div>
-</div>
+<h2>API</h2>
+<h3 id="zf2">Zend Framework <?php echo $this->zf ?></h3>
+<?php
+foreach ($this->versions[$this->zf] as $version) {
+    echo $this->render('include::api-version', ['version' => $version]);
+}
+?>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
-            <h2>API</h2>
-            <h3 id="zf2">Zend Framework <?php echo $this->zf ?></h3>
-            <?php
-            foreach ($this->versions[$this->zf] as $version) {
-                echo $this->render('include::api-version', [ 'version' => $version ]);
-            }
-            ?>
-          </div>
-
-          <div class="col-lg-4">
-            <?php echo $this->render('include::learn-menu', [ 'active' => '/docs/api/' . $this->zf ]) ?>
-          </div>
-      </div>
-  </div>
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::learn-menu', ['active' => '/docs/api/' . $this->zf])
+) ?>

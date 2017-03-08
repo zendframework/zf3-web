@@ -1,42 +1,30 @@
 <?php $this->headTitle('Documentation')->prepend('Manual'); ?>
 
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>Documentation</h3>
-        </div>
-    </div>
-</div>
+<!-- Warning message -->
+<p class="alert alert-warning" role="alert">
+    <strong>Caution:</strong> The documentation you are viewing is
+    for an older version of Zend Framework.<br>
+    You can find the documentation of the current version at
+    <a href="https://docs.zendframework.com/">docs.zendframework.com</a>
+</p>
 
-<div class="container mtb" id="content">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Warning message -->
-            <p class="alert alert-warning" role="alert">
-                <strong>Caution:</strong> The documentation you are viewing is
-                for an older version of Zend Framework.<br>
-                You can find the documentation of the current version at
-                <a href="https://docs.zendframework.com/">docs.zendframework.com</a>
-            </p>
+<p><?php echo $title ?></p>
+<h1 id="component-name"><?php echo $currentPageTitle ?></h1>
+<p>
+    <?php echo $body ?>
+</p>
 
-            <p><?php echo $title ?></p>
-            <h1 id="component-name"><?php echo $currentPageTitle ?></h1>
-            <p>
-              <?php echo $body ?>
-            </p>
-        </div>
-
-        <div class="col-lg-4">
-          <?php echo $this->render('include::manual-sidebar', [
-              'sidebar'       => $this->sidebar,
-              'versions'      => $this->versions,
-              'version'       => $this->version,
-              'latestVersion' => $this->latestVersion,
-              'contentList'   => $contentList,
-              'currentPage'   => $currentPage,
-              'lang'          => $this->lang,
-              'page'          => $this->page
-          ]); ?>
-        </div>
-    </div>
-</div>
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render(
+        'include::manual-sidebar', [
+        'sidebar'       => $this->sidebar,
+        'versions'      => $this->versions,
+        'version'       => $this->version,
+        'latestVersion' => $this->latestVersion,
+        'contentList'   => $contentList,
+        'currentPage'   => $currentPage,
+        'lang'          => $this->lang,
+        'page'          => $this->page,
+    ]
+    )
+) ?>

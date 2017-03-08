@@ -4,68 +4,57 @@ $this->headLink()->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 
 $this->headLink()->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml', 'Zend Framework Blog Atom Feed');
 ?>
 
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>Blog</h3>
-        </div><!-- /row -->
-    </div> <!-- /container -->
-</div>
+<!-- -- Blog Post  ---->
+<h2><?= $title ?></h2>
+<p class="blog-post__metadata"><?= date('Y-m-d', $date) ?> | By: <a href="<?= $url_author ?>"><?= $author ?></a></p>
 
-<div class="container mtb">
-    <div class="row">
-        <!-- -- SINGLE POST ---->
-        <div class="col-lg-8">
-            <!-- -- Blog Post  ---->
-            <h2><?= $title ?></h2>
-            <p class="blog-post__metadata"><?= date('Y-m-d', $date) ?> | By: <a href="<?= $url_author ?>"><?= $author ?></a></p>
+<?= $body ?>
 
-            <?= $body ?>
+<div class="spacing"></div>
 
-            <div class="spacing"></div>
+<h6>SHARE:</h6>
 
-            <h6>SHARE:</h6>
+<p class="share">
+    <a href="https://twitter.com/home?status=<?= urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>"
+       target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode(
+        $title . ', last post by Zend Framework project'
+    ) ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+    <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+</p>
 
-            <p class="share">
-                <a href="https://twitter.com/home?status=<?= urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode($title . ', last post by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://plus.google.com/share?url=<?= $this->serverUrl()?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
-            </p>
-        </div>
+<?php $this->placeholder('sub-navigation')->captureStart() ?>
+<h4>Share</h4>
+<div class="hline"></div>
+<p class="share">
+    <a href="https://twitter.com/home?status=<?= urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>"
+       target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode(
+        $title . ', last post by Zend Framework project'
+    ) ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
+    <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
+</p>
 
-        <div class="col-lg-4">
-            <h4>Share</h4>
-            <div class="hline"></div>
-            <p class="share">
-                <a href="https://twitter.com/home?status=<?= urlencode(substr($title, 0, 50) . ', last post by @zfdevteam') ?>" target="_blank"><i class="fa fa-twitter fa-lg"></i></a>
-                <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-facebook fa-lg"></i></a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $this->serverUrl() ?>&title=<?= urlencode($title . ', last post by Zend Framework project') ?>" target="_blank"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://plus.google.com/share?url=<?= $this->serverUrl() ?>" target="_blank"><i class="fa fa-google-plus fa-lg"></i></a>
-            </p>
+<div class="spacing"></div>
 
-            <div class="spacing"></div>
+<h4>Subscribe</h4>
+<div class="hline"></div>
 
-            <h4>Subscribe</h4>
-            <div class="hline"></div>
+<p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
 
-            <p class="rss-subscribe">Subscribe to this blog <a href="/blog/feed-rss.xml">via RSS</a>.</p>
+<div class="spacing"></div>
 
-            <div class="spacing"></div>
+<h4>Recent Posts</h4>
+<div class="hline"></div>
 
-            <h4>Recent Posts</h4>
-            <div class="hline"></div>
-
-            <ul class="popular-posts">
-            <?php foreach ($posts as $post) : ?>
-                <li>
-                      <p><i class="fa fa-hand-o-right"></i> <a href="<?= $post['permalink'] ?>"><?= $post['title'] ?></a></p>
-                      <em><?= date('Y-m-d', $post['date']) ?></em>
-                </li>
-            <?php endforeach; ?>
-            </ul>
-
-            <div class="spacing"></div>
-        </div>
-    </div>
-</div>
+<ul class="popular-posts">
+    <?php foreach ($posts as $post) : ?>
+        <li>
+            <p><i class="fa fa-hand-o-right"></i> <a href="<?= $post['permalink'] ?>"><?= $post['title'] ?></a></p>
+            <em><?= date('Y-m-d', $post['date']) ?></em>
+        </li>
+    <?php endforeach; ?>
+</ul>
+<?php $this->placeholder('sub-navigation')->captureEnd() ?>

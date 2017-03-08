@@ -1,40 +1,26 @@
 <?php $this->headTitle('Issues')->prepend('Issue Archive'); ?>
 
-<div id="blue">
-    <div class="container">
-        <div class="row">
-            <h3>Issues</h3>
-        </div>
-    </div>
+<h2><?= $ver ?> Issue Archive</h2>
+<h3><?= $ver ?> Issue Archive (<?= $tot_issue ?> total)</h3>
+
+<p>
+    Click on an entry for full issue details.
+</p>
+
+<div class="list-group">
+    <?php foreach ($issues as $issue) : ?>
+        <a class="list-group-item" href="/issues/browse/<?= $issue['id'] ?>"><?= $issue['id'] ?>: <?= $issue['title'] ?></a>
+    <?php endforeach; ?>
 </div>
 
-<div class="container mtb">
-    <div class="row">
-        <div class="col-lg-8">
-            <h2><?= $ver ?> Issue Archive</h2>
-            <h3><?= $ver ?> Issue Archive (<?= $tot_issue ?> total)</h3>
+<div class="spacing"></div>
 
-            <p>
-                Click on an entry for full issue details.
-            </p>
+<ul class="pager">
+    <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
+    <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
+    <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
+</ul>
 
-            <div class="list-group">
-            <?php foreach ($issues as $issue) : ?>
-                <a class="list-group-item" href="/issues/browse/<?= $issue['id'] ?>"><?= $issue['id'] ?>: <?= $issue['title'] ?></a>
-            <?php endforeach; ?>
-            </div>
-
-            <div class="spacing"></div>
-
-            <ul class="pager">
-                <li class="previous<?= $prev ? '' : ' disabled' ?>"><a href="<?= $prev ? '?page=' . $prev : '#' ?>"><i class="fa fa-chevron-left"></i>&nbsp;Previous</a></li>
-                <li><strong class="text-info"><?php printf("Page %d/%d", $page, $tot) ?></strong></li>
-                <li class="next<?= $next ? '' : ' disabled' ?>"><a href="<?= $next ? '?page=' . $next : '#' ?>">Next&nbsp;<i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-        </div>
-
-        <div class="col-lg-4">
-            <?= $this->render('include::issue-menu') ?>
-        </div>
-    </div>
-</div>
+<?php $this->placeholder('sub-navigation')->set(
+    $this->render('include::issue-menu')
+) ?>
