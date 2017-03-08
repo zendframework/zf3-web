@@ -1,7 +1,10 @@
 {
-    "name": "zendframework/zend-expressive-skeleton",
+    "name": "zendframework/zf3-web",
     "type": "project",
-    "homepage": "https://github.com/zendframework/zend-expressive-skeleton",
+    "homepage": "https://framework.zend.com/",
+    "support": {
+        "issues": "https://github.com/zendframework/zf3-web/issues"
+    },
     "license": "BSD-3-CLAUSE",
     "extra": {
         "branch-alias": {
