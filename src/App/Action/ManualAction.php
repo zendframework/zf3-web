@@ -162,7 +162,7 @@ class ManualAction implements MiddlewareInterface
 
         $content = $doc->queryXpath('//div[@class="chapter"]/div[@class="sect1"]');
         if (count($content)) {
-            $xpath = new DOMXpath($content->getDocument());
+            $xpath = new DOMXPath($content->getDocument());
 
             // Replace A link tag without text with a space
             $nodelist = $xpath->query(
@@ -186,7 +186,7 @@ class ManualAction implements MiddlewareInterface
         if (empty($pageContent['body'])) {
             $content = $doc->queryXpath('//div[@class="sect1"]');
             if (count($content)) {
-                $xpath = new DOMXpath($content->getDocument());
+                $xpath = new DOMXPath($content->getDocument());
                 // Replace A link tag without text with a space
                 $nodelist = $xpath->query(
                     '//a[@name]'
@@ -299,7 +299,7 @@ class ManualAction implements MiddlewareInterface
         // Body (standard)
         $content = $doc->queryXpath('//div[@class="section"]');
         if (count($content)) {
-            $xpath = new DOMXpath($content->getDocument());
+            $xpath = new DOMXPath($content->getDocument());
 
             // Replace headlines (h1 => h4)
             $nodelist = $xpath->query(
@@ -413,7 +413,7 @@ class ManualAction implements MiddlewareInterface
             // Active page
             $active = $doc->queryXpath('//ul[@class="toc"]/li[@class = "active"]/a')->current();
 
-            $xpath = new DOMXpath($elements->getDocument());
+            $xpath = new DOMXPath($elements->getDocument());
 
             // Content list
             $pageContent['sidebar'] .= "<ul>\n";
@@ -699,7 +699,7 @@ class ManualAction implements MiddlewareInterface
 
         // Check sections
         if (count($sections)) {
-            $xpath = new DOMXpath($sections->getDocument());
+            $xpath = new DOMXPath($sections->getDocument());
 
             foreach ($sections as $section) {
                 // Get label for optgroup
