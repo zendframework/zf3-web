@@ -37,11 +37,12 @@ class Release
 
     /**
      * @param  string $releaseBasePath Base URI for releases
-     * @param  array $versions hash table of version/release date pairs
-     * @param  array $languages Manual languages available, by range of versions
-     * @param  array $products Products available, and first and latest version available
+     * @param  array|Traversable $versions Hash table of version/release date pairs
+     * @param  array|Traversable $languages Manual languages available, by range of versions
+     * @param  array|Traversable $products Products available, and first and latest version available
+     * @throws InvalidArgumentException
      */
-    public function __construct($releaseBasePath, $versions, $languages, $products)
+    public function __construct(string $releaseBasePath, $versions, $languages, $products)
     {
         $this->releaseBasePath = rtrim($releaseBasePath, '/');
 
@@ -101,6 +102,7 @@ class Release
      *
      * @param  null|int|string $version
      * @return string|false
+     * @throws DomainException
      */
     public function getCurrentStableVersion($version = null)
     {
@@ -136,7 +138,7 @@ class Release
      * @param  string $version
      * @return string|false
      */
-    public function getReleaseDate($version)
+    public function getReleaseDate(string $version)
     {
         $version  = $this->normalizeVersion($version);
         $versions = $this->getNormalizedVersions();
@@ -172,7 +174,7 @@ class Release
      * @param  string $version
      * @return bool
      */
-    public function hasMinimalVersion($version)
+    public function hasMinimalVersion(string $version)
     {
         $version = $this->normalizeVersion($version);
         if (strnatcmp($version, '1.6.0') < 0
@@ -186,10 +188,10 @@ class Release
     /**
      * Whether or not the given version has API docs
      *
-     * @param mixed $version
-     * @return void
+     * @param  string $version
+     * @return bool
      */
-    public function hasApidocs($version)
+    public function hasApidocs(string $version)
     {
         if (strnatcasecmp($version, '1.0.0') < 0
             || preg_match('/^1\.0\.0-rc1$/i', $version)
@@ -202,10 +204,10 @@ class Release
     /**
      * Whether or not the given version has end-user docs
      *
-     * @param mixed $version
-     * @return void
+     * @param  string $version
+     * @return bool
      */
-    public function hasDocumentation($version)
+    public function hasDocumentation(string $version)
     {
         $languages = $this->getManualLanguages($version);
         return ! empty($languages);
@@ -216,8 +218,9 @@ class Release
      *
      * @param  string $version
      * @return string
+     * @throws InvalidArgumentException
      */
-    public function getMajorVersion($version)
+    public function getMajorVersion(string $version)
     {
         if (!strstr($version, '.')) {
             throw new InvalidArgumentException(sprintf(
@@ -241,8 +244,9 @@ class Release
      *
      * @param  string $version
      * @return string
+     * @throws InvalidArgumentException
      */
-    public function getMinorVersion($version)
+    public function getMinorVersion(string $version)
     {
         if (!strstr($version, '.')) {
             throw new InvalidArgumentException(sprintf(
@@ -274,9 +278,9 @@ class Release
      * @param  string $version
      * @param  string $format One of the ARCHIVE_* constants
      * @return string|false
-     * @throw  InvalidArgumentException if the $version or $format is unknown
+     * @throws InvalidArgumentException if the $version or $format is unknown
      */
-    public function getArchive($version, $format = self::ARCHIVE_TAR)
+    public function getArchive(string $version, string $format = self::ARCHIVE_TAR)
     {
         if (! isset($this->versions[$version])) {
             throw new InvalidArgumentException(sprintf(
@@ -327,9 +331,9 @@ class Release
      * @param  string $version
      * @param  string $format One of the ARCHIVE_* constants
      * @return string|false
-     * @throw  InvalidArgumentException if the $version or $format is unknown
+     * @throws InvalidArgumentException if the $version or $format is unknown
      */
-    public function getMinimalArchive($version, $format = self::ARCHIVE_TAR)
+    public function getMinimalArchive(string $version, string $format = self::ARCHIVE_TAR)
     {
         if (! isset($this->versions[$version])) {
             throw new InvalidArgumentException(sprintf(
@@ -378,7 +382,7 @@ class Release
      * @param  string $version
      * @return array
      */
-    public function getManualLanguages($version)
+    public function getManualLanguages(string $version)
     {
         $version = $this->normalizeVersion($version);
         foreach ($this->languages as $data) {
@@ -400,8 +404,9 @@ class Release
      * @param  string $language
      * @param  string $format
      * @return string|false
+     * @throws InvalidArgumentException
      */
-    public function getManualArchive($version, $language, $format = self::ARCHIVE_TAR)
+    public function getManualArchive(string $version, string $language, string $format = self::ARCHIVE_TAR)
     {
         $languages = $this->getManualLanguages($version);
         $language  = strtolower($language);
@@ -445,8 +450,9 @@ class Release
      * @param  string $version
      * @param  string $format
      * @return string|false
+     * @throws InvalidArgumentException
      */
-    public function getApidocArchive($version, $format = self::ARCHIVE_TAR)
+    public function getApidocArchive(string $version, string $format = self::ARCHIVE_TAR)
     {
         if (! isset($this->versions[$version])) {
             throw new InvalidArgumentException(sprintf(
@@ -484,8 +490,10 @@ class Release
      * @param  string $version
      * @param  string $format
      * @return string
+     * @throws DomainException
+     * @throws InvalidArgumentException
      */
-    public function getProductArchive($product, $version, $format = self::ARCHIVE_TAR)
+    public function getProductArchive(string $product, string $version, string $format = self::ARCHIVE_TAR)
     {
         if (! $this->productVersionExists($product, $version)) {
             throw new DomainException(sprintf(
@@ -531,8 +539,9 @@ class Release
      * @param  string $product
      * @param  null|string $version
      * @return string|false
+     * @throws InvalidArgumentException
      */
-    public function getCurrentStableProductVersion($product, $version = null)
+    public function getCurrentStableProductVersion(string $product, string $version = null)
     {
         $product = strtolower($product);
         if (! isset($this->products[$product])) {
@@ -559,8 +568,9 @@ class Release
      *
      * @param  string $product
      * @return array
+     * @throws InvalidArgumentException
      */
-    public function getProductVersions($product)
+    public function getProductVersions(string $product)
     {
         $product = strtolower($product);
         if (! isset($this->products[$product])) {
@@ -616,7 +626,7 @@ class Release
      * @param  string $version
      * @return bool
      */
-    public function isStable($version)
+    public function isStable(string $version)
     {
         $version = $this->normalizeVersion($version);
         return ! preg_match('/(a|alpha|b|beta|rc|dev)/', $version);
@@ -631,7 +641,7 @@ class Release
      * @param  string $version
      * @return string
      */
-    public function normalizeVersion($version)
+    public function normalizeVersion(string $version)
     {
         $version = strtolower($version);
 
@@ -698,7 +708,7 @@ class Release
      * @param  string $end
      * @return string|false
      */
-    protected function findMostRecentVersionInSeries($start, $end)
+    protected function findMostRecentVersionInSeries(string $start, string $end)
     {
         $versions = $this->sortVersions();
         $versions = array_reverse($versions);
@@ -726,6 +736,7 @@ class Release
      * of all versions in reverse order.
      *
      * @return array
+     * @throws DomainException
      */
     protected function sortVersions()
     {
@@ -735,7 +746,7 @@ class Release
         $versions = array_keys($this->versions);
         array_walk($versions, [$this, 'normalizeVersion']);
         if (! usort($versions, 'version_compare')) {
-            throw new \DomainException('Sorting failed?');
+            throw new DomainException('Sorting failed?');
         }
         $this->sortedVersions = array_reverse($versions);
         return $this->sortedVersions;
@@ -749,7 +760,7 @@ class Release
      * @param  array|\ArrayAccess $data
      * @return false|array
      */
-    protected function compareLanguageVersions($version, $data)
+    protected function compareLanguageVersions(string $version, $data)
     {
         $versionMatch = $data['version_match'];
         if (version_compare($version, $versionMatch['min'], 'ge')
@@ -772,8 +783,9 @@ class Release
      * @param  string $product
      * @param  string $version
      * @return bool
+     * @throws DomainException
      */
-    protected function productVersionExists($product, $version)
+    protected function productVersionExists(string $product, string $version)
     {
         $product = strtolower($product);
         if (! isset($this->products[$product])) {
