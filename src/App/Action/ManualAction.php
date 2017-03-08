@@ -20,13 +20,12 @@ class ManualAction implements MiddlewareInterface
 
     public function __construct(array $config, Template\TemplateRendererInterface $template)
     {
-        $this->config = $config;
+        $this->config   = $config;
         $this->template = $template;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-
         $page    = $request->getAttribute('page', false);
         $version = $request->getAttribute('version', false);
         $lang    = $request->getAttribute('lang', false);
@@ -452,7 +451,7 @@ class ManualAction implements MiddlewareInterface
         $pageContent['sidebar'] .= "</ul>\n";
 
         // Previous topic
-        $prevTopic  = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
+        $prevTopic = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
 
         if (count($prevTopic)) {
             $pageContent['sidebar'] .= '<h1>Previous topic</h1>';
