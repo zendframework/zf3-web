@@ -125,7 +125,7 @@ class Release
             ));
         }
         $start = $version . '.0';
-        $end   = sprintf('%d.%d.0', $major, ($minor + 1));
+        $end   = sprintf('%d.%d.0', $major, $minor + 1);
         return $this->findMostRecentVersionInSeries($start, $end);
     }
 

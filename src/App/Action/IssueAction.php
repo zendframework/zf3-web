@@ -87,8 +87,8 @@ class IssueAction implements MiddlewareInterface
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        $nextPage = ($page === $totPages) ? 0 : $page + 1;
-        $prevPage = ($page === 1) ? 0 : $page - 1;
+        $nextPage = $page === $totPages ? 0 : $page + 1;
+        $prevPage = $page === 1 ? 0 : $page - 1;
 
         $active = sprintf('/issues/%s', $action);
         $issues = array_slice($allIssues, ($page - 1) * self::ISSUE_PER_PAGE, self::ISSUE_PER_PAGE);

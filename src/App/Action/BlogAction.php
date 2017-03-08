@@ -63,8 +63,8 @@ class BlogAction implements MiddlewareInterface
         if ($page > $totPages || $page < 1) {
             return new HtmlResponse($this->template->render('error::404'));
         }
-        $nextPage = ($page === $totPages) ? 0 : $page + 1;
-        $prevPage = ($page === 1) ? 0 : $page - 1;
+        $nextPage = $page === $totPages ? 0 : $page + 1;
+        $prevPage = $page === 1 ? 0 : $page - 1;
 
         $posts = array_slice($allPosts, ($page - 1) * self::POST_PER_PAGE, self::POST_PER_PAGE);
         foreach ($posts as $key => $value) {
