@@ -2,7 +2,6 @@
 
 namespace App\Action;
 
-use ArrayObject;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,13 +10,13 @@ use Zend\Expressive\Template;
 
 class StatisticsAction implements MiddlewareInterface
 {
-    /** @var ArrayObject */
+    /** @var array */
     private $config;
 
     /** @var Template\TemplateRendererInterface */
     private $template;
 
-    public function __construct(ArrayObject $config, Template\TemplateRendererInterface $template)
+    public function __construct(array $config, Template\TemplateRendererInterface $template)
     {
         $this->config   = $config;
         $this->template = $template;

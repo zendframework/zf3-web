@@ -3,7 +3,6 @@
 namespace App\Action;
 
 use App\Model;
-use ArrayObject;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -15,7 +14,7 @@ class HomePageAction implements MiddlewareInterface
     const NUM_POSTS = 5;
     const NUM_ADVISORIES = 4;
 
-    /** @var ArrayObject */
+    /** @var array */
     private $config;
 
     /** @var Model\Post */
@@ -28,7 +27,7 @@ class HomePageAction implements MiddlewareInterface
     private $template;
 
     public function __construct(
-        ArrayObject $config,
+        array $config,
         Model\Post $posts,
         Model\Advisory $advisories,
         Template\TemplateRendererInterface $template
