@@ -3,5 +3,5 @@
 return [
     'debug' => false,
     'zf_manual_basepath' => '<path to ZF manuals folder>',
-    'config_cache_enabled' => false
+    'config_cache_enabled' => false,
 ];

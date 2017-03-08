@@ -21,13 +21,14 @@ class AdvisoryAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $advisory = $request->getAttribute('advisory', false);
-        $file = 'data/advisories/' . basename($advisory) . '.md';
+        $file = sprintf('data/advisories/%s.md', basename($advisory));
         if (! $advisory || ! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
         $content = $this->advisory->getFromFile($file);
         $content['layout'] = 'layout::default';
         $content['advisory'] = $advisory;
-        return new HtmlResponse($this->template->render("app::advisory", $content));
+
+        return new HtmlResponse($this->template->render('app::advisory', $content));
     }
 }

@@ -18,7 +18,7 @@ class SwitchManualAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $body = json_decode($request->getBody());
-        if (!isset($body->old) || !isset($body->new) || !isset($body->lang) || !isset($body->page)) {
+        if (! isset($body->old) || ! isset($body->new) || ! isset($body->lang) || ! isset($body->page)) {
             return $response->withStatus(422);
         }
         $newVer = $body->new === 'current' ? $this->config['zf_latest_version'] : $body->new;
@@ -32,7 +32,7 @@ class SwitchManualAction
             }
         }
         return new JsonResponse([
-            'url' => sprintf("/manual/%s/%s/%s", $newVer, $body->lang, $body->page)
+            'url' => sprintf('/manual/%s/%s/%s', $newVer, $body->lang, $body->page),
         ]);
     }
 }

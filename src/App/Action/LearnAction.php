@@ -20,13 +20,13 @@ class LearnAction
         $page = $request->getAttribute('page', false);
 
         if (false === $page) {
-            return new HtmlResponse($this->template->render("app::learn", [ 'components' => $this->zfComponents ]));
+            return new HtmlResponse($this->template->render('app::learn', ['components' => $this->zfComponents]));
         }
 
-        if (! in_array($page, [ 'learn', 'training-and-certification', 'support-and-consulting' ])) {
+        if (! in_array($page, ['learn', 'training-and-certification', 'support-and-consulting'], true)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        return new HtmlResponse($this->template->render("app::$page"));
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $page)));
     }
 }

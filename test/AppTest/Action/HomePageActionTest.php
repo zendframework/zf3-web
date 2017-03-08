@@ -26,7 +26,7 @@ class HomePageActionTest extends \PHPUnit_Framework_TestCase
         $post = [
             'layout' => 'layout',
             'title'  => 'title',
-            'date'   => 1234828800
+            'date'   => 1234828800,
         ];
         if ($body) {
             $post['body'] = 'body';

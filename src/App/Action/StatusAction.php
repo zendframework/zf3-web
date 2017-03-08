@@ -27,7 +27,7 @@ class StatusAction
         }
 
         return new HtmlResponse($this->template->render('app::status', [
-            'stats' => $this->config['zf_stats']
+            'stats' => $this->config['zf_stats'],
         ]));
     }
 }

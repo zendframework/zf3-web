@@ -25,13 +25,13 @@ class IssueAction
     {
         $action = $request->getAttribute('type', false);
         if (! $action) {
-            return new HtmlResponse($this->template->render("app::issue-overview", [
+            return new HtmlResponse($this->template->render('app::issue-overview', [
                 'active'     => '/issues',
-                'repository' => $this->zfComponents
+                'repository' => $this->zfComponents,
             ]));
         }
 
-        if (! in_array($action, [ 'ZF1', 'ZF2', 'browse'])) {
+        if (! in_array($action, ['ZF1', 'ZF2', 'browse'], true)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
@@ -45,7 +45,7 @@ class IssueAction
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        $file = 'data/issues/' . $issueId . '.md';
+        $file = sprintf('data/issues/%s.md', $issueId);
         if (! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
@@ -82,7 +82,7 @@ class IssueAction
         $nextPage = ($page === $totPages) ? 0 : $page + 1;
         $prevPage = ($page === 1) ? 0 : $page - 1;
 
-        $active = "/issues/$action";
+        $active = sprintf('/issues/%s', $action);
         $issues = array_slice($allIssues, ($page - 1) * self::ISSUE_PER_PAGE, self::ISSUE_PER_PAGE);
         return new HtmlResponse($this->template->render('app::zf-issue', [
             'issues'     => $issues,
@@ -93,7 +93,7 @@ class IssueAction
             'prev'       => $prevPage,
             'next'       => $nextPage,
             'active'     => $active,
-            'repository' => $this->zfComponents
+            'repository' => $this->zfComponents,
         ]));
     }
 }

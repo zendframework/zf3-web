@@ -21,9 +21,9 @@ class DocsAction
         $ver = $request->getAttribute('ver', false);
 
         if (false === $ver) {
-            return new HtmlResponse($this->template->render("app::learn", [ 'components' => $this->zfComponents ]));
+            return new HtmlResponse($this->template->render('app::learn', ['components' => $this->zfComponents]));
         }
         $ver = (int) substr($ver, 2);
-        return new HtmlResponse($this->template->render("app::api", [ 'zf' => $ver, 'versions' => $this->apidoc ]));
+        return new HtmlResponse($this->template->render('app::api', ['zf' => $ver, 'versions' => $this->apidoc]));
     }
 }

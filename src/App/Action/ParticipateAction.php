@@ -24,18 +24,21 @@ class ParticipateAction
         $page = $request->getAttribute('page', false);
 
         if (false === $page) {
-            return new HtmlResponse($this->template->render("app::participate"));
+            return new HtmlResponse($this->template->render('app::participate'));
         }
 
-        if (! in_array($page, [ 'contributor-guide', 'code-manifesto', 'contributors', 'logos' ])) {
+        if (! in_array($page, ['contributor-guide', 'code-manifesto', 'contributors', 'logos'], true)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
         if ($page === 'contributor-guide') {
-            return new HtmlResponse($this->template->render("app::$page", [
-                'repository' => $this->zfComponents
+            return new HtmlResponse($this->template->render(sprintf('app::%s', $page), [
+                'repository' => $this->zfComponents,
             ]));
         }
-        return new HtmlResponse($this->template->render("app::$page", [ 'reviewTeam' => $this->reviewTeam ]));
+
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $page), [
+            'reviewTeam' => $this->reviewTeam,
+        ]));
     }
 }

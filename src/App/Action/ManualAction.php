@@ -32,7 +32,7 @@ class ManualAction
         $page    = $subpage ? $page . '/' . $subpage : $page;
 
         // Check URL params
-        if (!$page || false === $version || !$lang) {
+        if (! $page || false === $version || ! $lang) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
@@ -43,7 +43,7 @@ class ManualAction
         $docFile = $this->config['zf_document_path'][$version][$lang] . $page;
 
         // Check file
-        if (!file_exists($docFile)) {
+        if (! file_exists($docFile)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
@@ -104,7 +104,7 @@ class ManualAction
             'latestZf1Version' => $this->config['zf1_latest_version'],
             'contentList'      => $contentList,
             'currentPage'      => $currentPage,
-            'currentPageTitle' => $currentPageTitle
+            'currentPageTitle' => $currentPageTitle,
         ];
 
         // Sort version numbers
@@ -197,14 +197,14 @@ class ManualAction
                     );
                     $node->parentNode->replaceChild($newElement, $node);
                 }
-                $pageContent['body']= $content->current()->ownerDocument->saveXML(
+                $pageContent['body'] = $content->current()->ownerDocument->saveXML(
                     $content->current()
                 );
             }
         }
 
         // Sidebar
-        $headline= $doc->queryXpath('//div[@class="toc"]');
+        $headline = $doc->queryXpath('//div[@class="toc"]');
         if ($sidebar && count($headline)) {
             $pageContent['sidebar'] = $headline->current()->ownerDocument->saveXML(
                 $headline->current()
@@ -212,7 +212,7 @@ class ManualAction
         }
 
         // Previous topic
-        $prevTopic  = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="p"]')->current();
+        $prevTopic = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="p"]')->current();
 
         if (count($prevTopic)) {
             $pageContent['sidebar'] .= '<h1>Previous topic</h1>';
@@ -224,7 +224,7 @@ class ManualAction
         }
 
         // Next topic
-        $nextTopic  = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="n"]')->current();
+        $nextTopic = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="n"]')->current();
 
         if (count($nextTopic)) {
             $pageContent['sidebar'] .= '<h1>Next topic</h1>';
@@ -250,7 +250,7 @@ class ManualAction
         $navigation = '';
 
         // Previous link
-        $prevLink  = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="p"]')->current();
+        $prevLink = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="p"]')->current();
         if (count($prevLink)) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
@@ -260,7 +260,7 @@ class ManualAction
         }
 
         // Next link
-        $nextLink  = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="n"]')->current();
+        $nextLink = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="n"]')->current();
         if (count($nextLink)) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
@@ -269,7 +269,7 @@ class ManualAction
             );
         }
 
-        if (!empty($navigation)) {
+        if (! empty($navigation)) {
             $navigation = sprintf(
                 '<div class="related hide-on-print"><ul>%s</ul></div>',
                 $navigation
@@ -461,7 +461,7 @@ class ManualAction
         }
 
         // Next topic
-        $nextTopic  = $doc->queryXpath('//div[@class="next"]/a')->current();
+        $nextTopic = $doc->queryXpath('//div[@class="next"]/a')->current();
 
         if (count($nextTopic)) {
             $pageContent['sidebar'] .= '<h1>Next topic</h1>';
@@ -487,7 +487,7 @@ class ManualAction
         $navigation = '';
 
         // Previous link
-        $prevLink  = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
+        $prevLink = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
         if (count($prevLink)) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
@@ -497,7 +497,7 @@ class ManualAction
         }
 
         // Next link
-        $nextLink  = $doc->queryXpath('//div[@class="next"]/a')->current();
+        $nextLink = $doc->queryXpath('//div[@class="next"]/a')->current();
         if (count($nextLink)) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
@@ -506,7 +506,7 @@ class ManualAction
             );
         }
 
-        if (!empty($navigation)) {
+        if (! empty($navigation)) {
             $navigation = sprintf(
                 '<div class="related hide-on-print"><ul>%s</ul></div>',
                 $navigation
@@ -546,7 +546,7 @@ class ManualAction
         $navigation = '';
 
         // Previous link
-        $prevLink  = $doc->queryXpath('//link[@rel="prev"]')->current();
+        $prevLink = $doc->queryXpath('//link[@rel="prev"]')->current();
         if (count($prevLink)) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
@@ -556,7 +556,7 @@ class ManualAction
         }
 
         // Next link
-        $nextLink  = $doc->queryXpath('//link[@rel="next"]')->current();
+        $nextLink = $doc->queryXpath('//link[@rel="next"]')->current();
         if (count($nextLink)) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
@@ -565,7 +565,7 @@ class ManualAction
             );
         }
 
-        if (!empty($navigation)) {
+        if (! empty($navigation)) {
             $navigation = sprintf(
                 '<div class="related hide-on-print"><ul>%s</ul></div>',
                 $navigation

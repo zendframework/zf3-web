@@ -15,7 +15,7 @@ class ChangelogAction
     public function __construct(Changelog $changelog, Template\TemplateRendererInterface $template = null)
     {
         $this->changelog = $changelog;
-        $this->template = $template;
+        $this->template  = $template;
     }
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -23,7 +23,7 @@ class ChangelogAction
         $allChangelog = $this->changelog->getAll();
         $changelog = $request->getAttribute('changelog', basename(key($allChangelog), '.md'));
 
-        $file = "data/changelog/$changelog.md";
+        $file = sprintf('data/changelog/%s.md', $changelog);
         if (! $changelog || ! file_exists($file)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
@@ -33,6 +33,7 @@ class ChangelogAction
         $content['versions'] = array_map(function ($value) {
             return basename($value, '.md');
         }, array_keys($allChangelog));
-        return new HtmlResponse($this->template->render("app::changelog", $content));
+
+        return new HtmlResponse($this->template->render('app::changelog', $content));
     }
 }

@@ -26,19 +26,19 @@ class InstallAction
             if (false !== $composer) {
                 $composer = json_decode($composer, true);
             }
-            return new HtmlResponse($this->template->render("app::install", [
+            return new HtmlResponse($this->template->render('app::install', [
                 'require'     => $composer['require'],
-                'composerUrl' => $url
+                'composerUrl' => $url,
             ]));
         }
 
-        if (! in_array($page, [ 'skeleton-app', 'expressive', 'archives' ])) {
+        if (! in_array($page, ['skeleton-app', 'expressive', 'archives'], true)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
         if ($page === 'archives') {
-            return new HtmlResponse($this->template->render("app::$page", [ 'releases' => $this->releases ]));
+            return new HtmlResponse($this->template->render(sprintf('app::%s', $page), ['releases' => $this->release]));
         }
-        return new HtmlResponse($this->template->render("app::$page"));
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $page)));
     }
 }

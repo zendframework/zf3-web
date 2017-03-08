@@ -18,7 +18,7 @@ abstract class AbstractCollection
             throw new RuntimeException('The cache file path is not defined!');
         }
         $this->yamlParser = $yamlParser;
-        if (!file_exists(static::CACHE_FILE)) {
+        if (! file_exists(static::CACHE_FILE)) {
             $this->buildCache();
         } else {
             $this->collection = require static::CACHE_FILE;
@@ -51,7 +51,7 @@ abstract class AbstractCollection
             $fields = $doc->getYAML();
             $this->collection[$file] = $fields;
         }
-        uasort($this->collection, [ $this, 'order' ]);
+        uasort($this->collection, [$this, 'order']);
         file_put_contents(static::CACHE_FILE, '<?php return ' . var_export($this->collection, true) . ';', LOCK_EX);
     }
 

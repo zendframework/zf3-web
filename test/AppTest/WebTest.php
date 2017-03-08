@@ -10,7 +10,7 @@ class WebTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new Client([
-            'base_uri' => 'http://' . WEB_SERVER_HOST . ':' . WEB_SERVER_PORT,
+            'base_uri' => sprintf('http://%s:%s', WEB_SERVER_HOST, WEB_SERVER_PORT),
             'timeout'  => 5,
         ]);
     }
@@ -18,35 +18,35 @@ class WebTest extends \PHPUnit_Framework_TestCase
     public function getUrlToTest()
     {
         return [
-            [ '/' ],
-            [ '/about' ],
-            [ '/about/faq' ],
-            [ '/license' ],
-            [ '/long-term-support' ],
-            [ '/changelog' ],
-            [ '/issues' ],
-            [ '/issues/ZF2' ],
-            [ '/issues/ZF1' ],
-            [ '/security' ],
-            [ '/security/feed' ],
-            [ '/security/advisories' ],
-            [ '/downloads' ],
-            [ '/downloads/skeleton-app' ],
-            [ '/downloads/expressive' ],
-            [ '/downloads/archives' ],
-            [ '/learn' ],
-            [ '/learn/training-and-certifiation' ],
-            [ '/learn/support-and-consulting' ],
-            [ '/docs/api/zf2' ],
-            [ '/docs/api/zf1' ],
-            [ '/blog' ],
-            [ '/participate' ],
-            [ '/participate/contributor-guide' ],
-            [ '/participate/code-manifesto' ],
-            [ '/participate/contributors' ],
-            [ '/participate/logos' ],
-            [ '/status' ],
-            [ '/stats' ]
+            ['/'],
+            ['/about'],
+            ['/about/faq'],
+            ['/license'],
+            ['/long-term-support'],
+            ['/changelog'],
+            ['/issues'],
+            ['/issues/ZF2'],
+            ['/issues/ZF1'],
+            ['/security'],
+            ['/security/feed'],
+            ['/security/advisories'],
+            ['/downloads'],
+            ['/downloads/skeleton-app'],
+            ['/downloads/expressive'],
+            ['/downloads/archives'],
+            ['/learn'],
+            ['/learn/training-and-certifiation'],
+            ['/learn/support-and-consulting'],
+            ['/docs/api/zf2'],
+            ['/docs/api/zf1'],
+            ['/blog'],
+            ['/participate'],
+            ['/participate/contributor-guide'],
+            ['/participate/code-manifesto'],
+            ['/participate/contributors'],
+            ['/participate/logos'],
+            ['/status'],
+            ['/stats'],
         ];
     }
 

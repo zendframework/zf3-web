@@ -23,7 +23,8 @@ class AboutAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $page = basename($request->getUri()->getPath());
-        $stat = $this->config['zf_stats']['total']  ?? false;
-        return new HtmlResponse($this->template->render("app::$page", [ 'stats' => $stat ]));
+        $stat = $this->config['zf_stats']['total'] ?? false;
+
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $page), ['stats' => $stat]));
     }
 }

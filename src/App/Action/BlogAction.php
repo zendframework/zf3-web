@@ -37,7 +37,7 @@ class BlogAction
             return $this->blogPage($request, $response, $next);
         }
 
-        $post = 'data/posts/' . basename($file, '.html') . '.md';
+        $post = sprintf('data/posts/%s.md', basename($file, '.html'));
         if (! file_exists($post)) {
             return new HtmlResponse($this->template->render('error::404'));
         }
@@ -72,7 +72,7 @@ class BlogAction
             'tot'   => $totPages,
             'page'  => $page,
             'prev'  => $prevPage,
-            'next'  => $nextPage
+            'next'  => $nextPage,
         ]));
     }
 
@@ -82,7 +82,7 @@ class BlogAction
         $blogUrl = (string) $uri->withPath('/blog');
         $feedUrl = (string) $uri->withQuery('')->withFragment('');
         $baseUrl = sprintf(
-            "%s://%s",
+            '%s://%s',
             $uri->getScheme(),
             $uri->getPort() == 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort()
         );
@@ -109,7 +109,7 @@ class BlogAction
             $entry->setLink($baseUrl . $content['permalink']);
             $entry->addAuthor([
                 'name' => $content['author'],
-                'url'  => $content['url_author']
+                'url'  => $content['url_author'],
             ]);
             $entry->setDateCreated($content['date']);
             $entry->setDateModified($content['date']);
@@ -120,6 +120,6 @@ class BlogAction
         $feed->setDateModified($dateModified);
 
         $response = new TextResponse($feed->export($feedType));
-        return $response->withHeader('Content-Type', 'application/' . $feedType . '+xml');
+        return $response->withHeader('Content-Type', sprintf('application/%s+xml', $feedType));
     }
 }

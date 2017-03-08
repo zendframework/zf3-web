@@ -43,7 +43,7 @@ class HomePageAction
             'posts'      => array_slice($this->posts->getAll(), 0, self::NUM_POSTS),
             'advisories' => array_slice($this->advisories->getAll(), 0, self::NUM_ADVISORIES),
             'repository' => $this->config['zf_components'],
-            'stats'      => $this->config['zf_stats']['total'] ?? false
+            'stats'      => $this->config['zf_stats']['total'] ?? false,
         ];
         $data['layout'] = 'layout::default';
         return new HtmlResponse($this->template->render('app::home-page', $data));

@@ -31,7 +31,7 @@ class SecurityAction
             return $this->feed($request, $response, $next);
         }
 
-        if (! file_exists("templates/app/$action.phtml")) {
+        if (! file_exists(sprintf('templates/app/%s.phtml', $action))) {
             return new HtmlResponse($this->template->render('error::404'));
         }
 
@@ -51,14 +51,14 @@ class SecurityAction
 
             $advisories = array_slice($allAdvisories, ($page - 1) * self::ADVISORY_PER_PAGE, self::ADVISORY_PER_PAGE);
             $content = [
-              'advisories' => $advisories,
-              'tot'        => $totPages,
-              'page'       => $page,
-              'prev'       => $prevPage,
-              'next'       => $nextPage
+                'advisories' => $advisories,
+                'tot'        => $totPages,
+                'page'       => $page,
+                'prev'       => $prevPage,
+                'next'       => $nextPage,
             ];
         }
-        return new HtmlResponse($this->template->render("app::$action", $content));
+        return new HtmlResponse($this->template->render(sprintf('app::%s', $action), $content));
     }
 
     protected function feed(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
@@ -79,7 +79,7 @@ class SecurityAction
 
         if ($feedType === 'rss') {
             $feed->addAuthor([
-                'name' => 'Zend Framework Security',
+                'name'  => 'Zend Framework Security',
                 'email' => 'zf-security@zend.com (Zend Framework Security)',
             ]);
         }
@@ -94,7 +94,7 @@ class SecurityAction
             $entry->setTitle($content['title']);
             $entry->setLink(sprintf('%s/%s', $advisoryUrl, basename($id, '.md')));
             $entry->addAuthor([
-                'name' => 'Zend Framework Security',
+                'name'  => 'Zend Framework Security',
                 'email' => 'zf-security@zend.com',
             ]);
             $entry->setDateCreated($content['date']);
@@ -104,6 +104,6 @@ class SecurityAction
         }
 
         $response = new TextResponse($feed->export($feedType));
-        return $response->withHeader('Content-Type', 'application/' . $feedType . '+xml');
+        return $response->withHeader('Content-Type', sprintf('application/%s+xml', $feedType));
     }
 }

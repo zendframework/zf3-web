@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model;
 
 class Issue extends AbstractCollection
@@ -17,7 +18,7 @@ class Issue extends AbstractCollection
             return;
         }
 
-        $this->collection = [ 'ZF1' => [], 'ZF2' => [] ];
+        $this->collection = ['ZF1' => [], 'ZF2' => []];
         // ZF1 issues
         foreach (glob(static::FOLDER_COLLECTION . '/ZF-*.md') as $file) {
             $doc = $this->yamlParser->parse(file_get_contents($file));

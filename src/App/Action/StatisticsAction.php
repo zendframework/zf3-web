@@ -22,13 +22,13 @@ class StatisticsAction
 
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
-        if (!isset($this->config['zf_stats'])) {
+        if (! isset($this->config['zf_stats'])) {
             return new HtmlResponse($this->template->render('error::404'));
         }
         $stats = $this->config['zf_stats'];
         uasort($stats, function ($a, $b) {
             return ($a['total'] <=> $b['total']) * -1;
         });
-        return new HtmlResponse($this->template->render('app::statistics', [ 'stats' => $stats ]));
+        return new HtmlResponse($this->template->render('app::statistics', ['stats' => $stats]));
     }
 }
