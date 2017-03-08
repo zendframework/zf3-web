@@ -14,23 +14,23 @@
     },
     "require": {
         "php": "^7.0",
+        "league/commonmark": "^0.15.3",
+        "mnapoli/front-yaml": "^1.5.2",
+        "ocramius/proxy-manager": "^2.1",
         "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "^1.0",
-        "zendframework/zend-expressive-helpers": "^2.0",
-        "zendframework/zend-stdlib": "~2.7",
-        "zendframework/zend-expressive-zendrouter": "^1.0",
-        "zendframework/zend-servicemanager": "^2.7.3 || ^3.0",
-        "zendframework/zend-dom": "~2.6",
-        "zendframework/zend-feed": "~2.7",
-        "ocramius/proxy-manager": "^1.0 || ^2.0",
-        "zendframework/zend-expressive-zendviewrenderer": "^1.0",
-        "league/commonmark": "^0.13.2",
-        "mnapoli/front-yaml": "^1.5"
+        "zendframework/zend-dom": "^2.6",
+        "zendframework/zend-expressive": "^2.0",
+        "zendframework/zend-expressive-helpers": "^3.0.1",
+        "zendframework/zend-expressive-zendrouter": "^2.0.1",
+        "zendframework/zend-expressive-zendviewrenderer": "^1.3",
+        "zendframework/zend-feed": "^2.7",
+        "zendframework/zend-servicemanager": "^3.3",
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.4",
-        "guzzlehttp/guzzle": "~6.0",
-        "filp/whoops": "^1.1 || ^2.0",
+        "filp/whoops": "^2.1.8",
+        "guzzlehttp/guzzle": "^6.2.3",
+        "phpunit/phpunit": "^6.0.8",
         "zendframework/zend-coding-standard": "~1.0.0"
     },
     "autoload": {
