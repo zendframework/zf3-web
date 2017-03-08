@@ -21,7 +21,36 @@ $this->inlineScript()
 <body<?= (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) ? ' id="manual"' : '' ?>>
     <?php echo $this->render('include::nav') ?>
 
-    <?php echo $this->content ?>
+    <!-- Headline -->
+    <?php $offset = $this->headTitle()->count() - 2 ?>
+    <?php if ($this->headTitle()->offsetExists($offset)
+              && $this->headTitle()->offsetGet($offset) !== 'Home'): ?>
+        <div id="blue">
+            <div class="container">
+                <div class="row">
+                    <h3><?= $this->headTitle()->offsetGet($offset) ?></h3>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <?php if ((string) $this->placeholder('page-layout') === 'wide'): ?>
+        <?php echo $this->content ?>
+    <?php else: ?>
+        <div class="container mtb">
+            <div class="row">
+                <!-- Content -->
+                <div class="col-lg-8">
+                    <?php echo $this->content ?>
+                </div>
+
+                <!-- Sub-navigation -->
+                <div class="col-lg-4">
+                    <?= $this->placeholder('sub-navigation') ?>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
 
     <?php echo $this->render('include::footer') ?>
 
