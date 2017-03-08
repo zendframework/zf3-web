@@ -7,7 +7,7 @@
 <label for="version">Select version:</label>
 <select id="version" class="form-control" onchange="window.location='/changelog/' + this.options[this.selectedIndex].value">
     <?php foreach ($versions as $ver) : ?>
-        <option value="<?= $ver ?>" <?= ($ver == $changelog) ? 'selected' : '' ?>><?= $ver ?></option>
+        <option value="<?= $ver ?>" <?= ($ver === $changelog) ? 'selected' : '' ?>><?= $ver ?></option>
     <?php endforeach; ?>
 </select>
 

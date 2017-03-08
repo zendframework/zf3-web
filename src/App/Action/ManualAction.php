@@ -76,7 +76,7 @@ class ManualAction implements MiddlewareInterface
             return $links;
         };
 
-        if (in_array($page, $getLinks($contentList))) {
+        if (in_array($page, $getLinks($contentList), true)) {
             $currentPage = $page;
         } else {
             $currentPage = $this->getSelectedPage(
@@ -127,10 +127,10 @@ class ManualAction implements MiddlewareInterface
      */
     protected function getPageContent(string $file, string $version)
     {
-        if ('1.1' === substr($version, 0, 3)) {
+        if (strpos($version, '1.1') === 0) {
             return $this->getV1PageContent($file);
         }
-        if ('1.' === substr($version, 0, 2)) {
+        if (strpos($version, '1.') === 0) {
             return $this->getOldV1PageContent($file);
         }
         return $this->getV2PageContent($file);
@@ -583,13 +583,13 @@ class ManualAction implements MiddlewareInterface
         /** @var \DOMNode $node */
         foreach ($elements as $node) {
             // Get TOC headline
-            if ($node->nodeValue == 'Table Of Contents') {
+            if ($node->nodeValue === 'Table Of Contents') {
                 // Add headline to sidebar
                 $pageContent['sidebar'] .= '<section id="toc">';
                 $pageContent['sidebar'] .= $node->ownerDocument->saveXML($node);
 
                 // Get TOC list
-                if ('ul' == $node->nextSibling->nextSibling->nodeName) {
+                if ('ul' === $node->nextSibling->nextSibling->nodeName) {
                     // Add list to sidebar
                     $pageContent['sidebar'] .= $node->ownerDocument->saveXML(
                         $node->nextSibling->nextSibling
@@ -669,12 +669,10 @@ class ManualAction implements MiddlewareInterface
      */
     protected function getContentList(string $path, string $version)
     {
-        if ('1.1' === substr($version, 0, 3)) {
+        if (strpos($version, '1.') === 0) {
             return [];
         }
-        if ('1.' === substr($version, 0, 2)) {
-            return [];
-        }
+
         return $this->getV2ContentList($path);
     }
 
@@ -776,12 +774,10 @@ class ManualAction implements MiddlewareInterface
      */
     protected function getSelectedPage(string $currentPage, string $path, string $version, bool $getHref = true)
     {
-        if ('1.1' === substr($version, 0, 3)) {
+        if (strpos($version, '1.') === 0) {
             return null;
         }
-        if ('1.' === substr($version, 0, 2)) {
-            return null;
-        }
+
         return $this->getV2SelectedPage($currentPage, $path, $getHref);
     }
 

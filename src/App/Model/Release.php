@@ -110,14 +110,14 @@ class Release
             return $this->findMostRecentVersion();
         }
 
-        if (!strstr($version, '.')) {
+        if (strpos($version, '.') === false) {
             $next     = ($version + 1) . '.0.0';
             $version .= '.0.0';
             return $this->findMostRecentVersionInSeries($version, $next);
         }
 
         list($major, $minor) = explode('.', $version, 2);
-        if (strstr($minor, '.')) {
+        if (strpos($minor, '.') !== false) {
             throw new \DomainException(sprintf(
                 'Invalid version "%s" provided to %s; must be a major or minor version only',
                 $version,
@@ -222,7 +222,7 @@ class Release
      */
     public function getMajorVersion(string $version)
     {
-        if (!strstr($version, '.')) {
+        if (strpos($version, '.') === false) {
             throw new InvalidArgumentException(sprintf(
                 'Invalid version string provided to %s',
                 __METHOD__
@@ -248,7 +248,7 @@ class Release
      */
     public function getMinorVersion(string $version)
     {
-        if (!strstr($version, '.')) {
+        if (strpos($version, '.') === false) {
             throw new InvalidArgumentException(sprintf(
                 'Invalid version string provided to %s',
                 __METHOD__
@@ -298,7 +298,7 @@ class Release
         }
 
         list($major, $minor, $patch) = explode('.', $version, 3);
-        if ($major > 1 && $format == self::ARCHIVE_TAR) {
+        if ($major > 1 && $format === self::ARCHIVE_TAR) {
             $format = 'tgz';
         }
 
@@ -357,7 +357,7 @@ class Release
         }
 
         list($major, $minor, $patch) = explode('.', $version, 3);
-        if ($major > 1 && $format == self::ARCHIVE_TAR) {
+        if ($major > 1 && $format === self::ARCHIVE_TAR) {
             $format = 'tgz';
         }
 
@@ -428,7 +428,7 @@ class Release
         }
 
         list($major, $minor, $patch) = explode('.', $version, 3);
-        if ($major > 1 && $format == self::ARCHIVE_TAR) {
+        if ($major > 1 && $format === self::ARCHIVE_TAR) {
             $format = 'tgz';
         }
 
@@ -470,7 +470,7 @@ class Release
         }
 
         list($major, $minor, $patch) = explode('.', $version, 3);
-        if ($major > 1 && $format == self::ARCHIVE_TAR) {
+        if ($major > 1 && $format === self::ARCHIVE_TAR) {
             $format = 'tgz';
         }
 
@@ -645,10 +645,10 @@ class Release
     {
         $version = strtolower($version);
 
-        if (strstr($version, 'pr')) {
+        if (strpos($version, 'pr') !== false) {
             $version = str_replace('pr', 'alpha', $version);
         }
-        if (strstr($version, 'pl')) {
+        if (strpos($version, 'pl') !== false) {
             $version = str_replace('pl', 'p', $version);
         }
         return $version;
