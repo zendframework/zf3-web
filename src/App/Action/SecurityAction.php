@@ -74,7 +74,7 @@ class SecurityAction implements MiddlewareInterface
 
         $matches = [];
         preg_match('#(?P<type>atom|rss)#', $feedUrl, $matches);
-        $feedType = isset($matches['type']) ? $matches['type'] : 'rss';
+        $feedType = $matches['type'] ?? 'rss';
 
         $feed = new Feed();
         $feed->setTitle('Zend Framework Security Advisories');
