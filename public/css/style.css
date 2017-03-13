@@ -233,7 +233,6 @@ body > .container {
 #headerwrap {
 	background-color: #68b604;
 	background-image: url("/img/background.jpg");
-	min-height: 0px;
 	padding-top: 100px;
 	padding-bottom: 50px;
 	text-align: center;
