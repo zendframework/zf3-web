@@ -26,7 +26,7 @@ class HomePageFactoryTest extends TestCase
 
         $this->container->get(Post::class)->willReturn($post);
         $this->container->get(Advisory::class)->willReturn($advisory);
-        $this->container->get('config')->willReturn(new ArrayObject(['zf_components' => []]));
+        $this->container->get('config')->willReturn(['zf_components' => []]);
     }
 
     public function testFactoryWithTemplate()
