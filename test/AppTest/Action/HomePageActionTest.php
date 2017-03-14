@@ -5,7 +5,6 @@ namespace AppTest\Action;
 use App\Action\HomePageAction;
 use App\Model\Advisory;
 use App\Model\Post;
-use ArrayObject;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use PHPUnit\Framework\TestCase;
@@ -26,7 +25,7 @@ class HomePageActionTest extends TestCase
     /** @var TemplateRendererInterface|ObjectProphecy */
     private $template;
 
-    /** @var ArrayObject */
+    /** @var array */
     private $zfComponents;
 
     protected function setUp()
@@ -40,7 +39,7 @@ class HomePageActionTest extends TestCase
         $this->template = $this->prophesize(TemplateRendererInterface::class);
         $this->template->render('app::home-page', Argument::type('array'))->willReturn('');
 
-        $this->zfComponents = new ArrayObject(['zf_components' => []]);
+        $this->zfComponents = ['zf_components' => []];
     }
 
     public function testResponse()
