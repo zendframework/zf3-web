@@ -2,6 +2,7 @@
 layout: post
 title: Implement a SOAP server with zend-soap
 date: 2017-01-24T11:15:00-06:00
+updated: 2017-03-14T08:25:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net/
 permalink: /blog/2017-01-24-zend-soap-server.html
@@ -110,8 +111,10 @@ function populateServer($server, array $env)
     // Expose a class and its methods:
     $server->setClass(Model\Calculator::class);
 
-    // Expose an object instance and its methods:
-    $server->setObject(new Model\Env($env));
+    // Or expose an object instance and its methods.
+    // However, this only works for Zend\Soap\Server, not AutoDiscover, so
+    // should not be used here.
+    // $server->setObject(new Model\Env($env));
 
     // Expose a function:
     $server->addFunction('Acme\Model\ping');
@@ -176,6 +179,19 @@ to ensure the WSDL and server do not go out of sync.
 
 From here, you can point your clients at `/soap/server.php` on your domain, and
 they will have all the information they need to work with your service.
+
+> ### setObject()
+>
+> `Zend\Soap\Server` also exposes a `setObject()` method, which will take an
+> object instance, reflect it, and expose its public methods to the server.
+> However, this method is only available in the `Server` class, not the
+> `AutoDiscover` class.
+> 
+> As such, if you want to create logic that can be re-used between the `Server`
+> and `AutoDiscover` instances, you must confine your usage to `setClass()`. If
+> that class requires constructor arguments or other ways of setting instance
+> state, you should vary the logic for creation of the WSDL via `AutoDiscover` and
+> creation of the server via `Server`.
 
 ## Using zend-soap within a zend-mvc application
 
@@ -443,3 +459,8 @@ MVC application, or within _any_ application framework you might be using.
 
 Visit the [zend-soap documentation](https://docs.zendframework.com/zend-soap/)
 to find out what else you might be able to do with this component!
+
+## Updates
+
+- 2017-03-14: Added note about `setObject()`, and the fact it is not present in
+  the `AutoDiscover` class.
