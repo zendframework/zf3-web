@@ -29,6 +29,7 @@ it by _piping_ middleware into the application. As an example, the default
 pipeline installed with the skeleton application looks like this:
 
 ```php
+// In config/pipeline.php:
 use Zend\Expressive\Helper\ServerUrlMiddleware;
 use Zend\Expressive\Helper\UrlHelperMiddleware;
 use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
@@ -171,11 +172,15 @@ class AuthenticationMiddlewareFactory
 }
 ```
 
-Wire this in your dependencies somewhere:
+Wire this in your dependencies somewhere; we recommend either the file
+`config/autoload/dependencies.global.php` or the class `Acme\ConfigProvider` if
+you have defined it:
 
 ```php
-'factories' => [
-    Acme\AuthenticationMiddleware::class => Acme\AuthenticationMiddlewareFactory::class,
+'dependencies' => [
+    'factories' => [
+        Acme\AuthenticationMiddleware::class => Acme\AuthenticationMiddlewareFactory::class,
+    ],
 ],
 ```
 
@@ -186,6 +191,8 @@ early, sometime after the `ErrorHandler` and any middleware you want to run for
 every request:
 
 ```php
+// In config/pipeline.php:
+
 $app->pipe(ErrorHandler::class);
 $app->pipe(ServerUrlMiddleware::class);
 $app->pipe(\Acme\AuthenticationMiddleware::class);
@@ -224,6 +231,8 @@ We finally get to the purpose of this tutorial!
 Let's say our API defines the following routes:
 
 ```php
+// In config/routes.php:
+
 $app->get('/api/books', Acme\Api\BookListMiddleware::class, 'api.books');
 $app->post('/api/books', Acme\Api\CreateBookMiddleware::class);
 $app->get('/api/books/{book_id:\d+}', Acme\Api\BookMiddleware::class, 'api.book');
@@ -250,6 +259,8 @@ middleware is matched.
 So, going back to our previous example, we can write this as:
 
 ```php
+// In config/routes.php:
+
 $app->get('/api/books', Acme\Api\BookListMiddleware::class, 'api.books');
 $app->post('/api/books', [
     Acme\AuthenticationMiddleware::class,
@@ -281,6 +292,8 @@ book via the `/api/books` middleware, we could also add in middleware to check
 the content type, parse the incoming request, and validate the submitted data:
 
 ```php
+// In config/routes.php:
+
 $app->post('/api/books', [
     Acme\AuthenticationMiddleware::class,
     Acme\ContentNegotiationMiddleware::class,
@@ -497,7 +510,9 @@ class CommonApiPipelineDelegatorFactory
 ```
 
 You could then register this with any service that needs the pipeline, without
-needing to change their factories:
+needing to change their factories. As an example, you could have the following
+in either the `config/autoload/dependencies.global.php` file or the
+`Acme\ConfigProvider` class, if defined:
 
 ```php
 'dependencies' => [
