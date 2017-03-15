@@ -256,7 +256,8 @@ Internally, Expressive creates a `Zend\Stratigility\MiddlewarePipe` instance
 with the specified middleware, and processes this pipeline when the given
 middleware is matched.
 
-So, going back to our previous example, we can write this as:
+So, going back to our previous example, where we defined routes, we can rewrite
+them as follows:
 
 ```php
 // In config/routes.php:
@@ -315,10 +316,11 @@ instantiated!
 ## Middleware pipelines
 
 Another approach would be to setup a middleware pipeline manually within the
-factory for the requested middleware. The following examples creates and returns
-a `Zend\Stratigility\MiddlewarePipe` instance that composes the same middleware
-as in the previous example, returning the `MiddlewarePipe` instead of the
-requested `CreateBookMiddleware` (but composing it nonetheless):
+factory for the requested middleware. The following examples creates and
+returns a `Zend\Stratigility\MiddlewarePipe` instance that composes the same
+middleware as in the previous example that used a list of middleware when
+routing, returning the `MiddlewarePipe` instead of the requested
+`CreateBookMiddleware` (but composing it nonetheless):
 
 ```php
 namespace Acme\Api;
