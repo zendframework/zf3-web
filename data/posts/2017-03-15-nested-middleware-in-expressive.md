@@ -2,6 +2,7 @@
 layout: post
 title: Nested Middleware in Expressive
 date: 2017-03-15T15:00:00-05:00
+updated: 2017-03-15T16:02:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net/
 permalink: /blog/2017-03-15-nested-middleware-in-expressive.html
@@ -313,6 +314,17 @@ executed. In fact, if one of the pipeline middleware for the given route returns
 a response early, even the middleware later in the queue will not be
 instantiated!
 
+> ### A note about order
+>
+> When you create middleware pipelines such as the above, as well as in the
+> following examples, _order matters_. Pipelines are managed internally as
+> queues, and thus are first-in-first-out (FIFO). As such, putting the
+> responding `CreateBookMiddleware` (which will most likely return a response
+> with the API payload) will result in the other middleware never executing!
+>
+> As such, ensure that your pipelines contain middleware that will _delegate_
+> first, and your primary middleware that returns a response last.
+
 ## Middleware pipelines
 
 Another approach would be to setup a middleware pipeline manually within the
@@ -552,3 +564,7 @@ covered a number of features in this post:
 - Returning pipelines or applications from individual service factories.
 - Using delegator factories to create and return nested pipelines or
   applications.
+
+## Updates
+
+- **2017-03-15 16:02:00T-0500**: Added note about order of middleware execution.
