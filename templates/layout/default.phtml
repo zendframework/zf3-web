@@ -2,7 +2,9 @@
 $this->headLink()
     ->appendAlternate('/security/feed', 'application/rss+xml', 'Zend Framework Security Advisories')
     ->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml', 'Zend Framework Blog Atom Feed')
-    ->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 'Zend Framework Blog RSS Feed');
+    ->appendAlternate('/blog/feed-rss.xml', 'application/rss+xml', 'Zend Framework Blog RSS Feed')
+    ->appendAlternate('/releases/atom.xml', 'application/atom+xml', 'Zend Framework Releases Atom Feed')
+    ->appendAlternate('/releases/rss.xml', 'application/rss+xml', 'Zend Framework Releases RSS Feed');
 
 $this->inlineScript()
     ->prependFile('/js/prism.js')
@@ -24,7 +26,7 @@ $this->inlineScript()
     <!-- Headline -->
     <?php $offset = $this->headTitle()->count() - 2 ?>
     <?php if ($this->headTitle()->offsetExists($offset)
-              && $this->headTitle()->offsetGet($offset) !== 'Home'): ?>
+              && $this->headTitle()->offsetGet($offset) !== 'Home') : ?>
         <div id="blue">
             <div class="container">
                 <div class="row">
@@ -34,9 +36,9 @@ $this->inlineScript()
         </div>
     <?php endif ?>
 
-    <?php if ((string) $this->placeholder('page-layout') === 'wide'): ?>
+    <?php if ((string) $this->placeholder('page-layout') === 'wide') : ?>
         <?php echo $this->content ?>
-    <?php else: ?>
+    <?php else : ?>
         <div class="container mtb">
             <div class="row">
                 <!-- Content -->
