@@ -9,8 +9,9 @@ class DocsFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $apidoc       = require 'config/autoload/zf-apidoc-versions.php';
-        $zfComponents = $container->get('config')['zf_components'];
+        $config       = $container->get('config');
+        $apidoc       = $config['zf_apidoc_versions'];
+        $zfComponents = $config['zf_components'];
         $template     = $container->get(TemplateRendererInterface::class);
 
         return new DocsAction($apidoc, $zfComponents, $template);
