@@ -315,9 +315,11 @@ an outer layer to handle it.
 Last week, we blogged about [nested middleware pipelines](/blog/2017-03-15-nested-middleware-in-expressive.html).
 We'll use a similar technique here.
 
-Assuming we have already defined a factory for our `ListBooksRead` middleware,
-we have a few options. First, we could compose this error handler in a
-middleware pipeline within our routing configuration:
+Assuming we have already defined a factory for our `ListBooksRead` middleware
+(likely class `Acme\BooksRead\ListBooksReadFactory`, in
+`src/Acme/BooksRead/ListBooksReadFactory.php`), we have a few options. First, we
+could compose this error handler in a middleware pipeline within our routing
+configuration:
 
 ```php
 // In config/routes.php:
