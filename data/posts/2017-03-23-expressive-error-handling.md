@@ -29,6 +29,8 @@ handling otherwise.
 The middleware looks like the following:
 
 ```php
+// In src/Acme/BooksRead/ListBooksRead.php:
+
 namespace Acme\BooksRead;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -149,9 +151,9 @@ between these types, we'll use a trait to define the common code, and compose
 that into each.
 
 ```php
-namespace Acme\BooksRead\Exception;
+// In src/Acme/BooksRead/Exception/MiddlewareException.php:
 
-use RuntimeException;
+namespace Acme\BooksRead\Exception;
 
 interface MiddlewareException
 {
@@ -162,6 +164,12 @@ interface MiddlewareException
     public function getDescription() : string;
     public function getAdditionalData() : array;
 }
+```
+
+```php
+// In src/Acme/BooksRead/Exception/MiddlewareExceptionTrait.php:
+
+namespace Acme\BooksRead\Exception;
 
 trait MiddlewareExceptionTrait
 {
@@ -190,6 +198,14 @@ trait MiddlewareExceptionTrait
         return $this->additionalData;
     }
 }
+```
+
+```php
+// In src/Acme/BooksRead/Exception/ServerError.php:
+
+namespace Acme\BooksRead\Exception;
+
+use RuntimeException;
 
 class ServerError extends RuntimeException implements MiddlewareException
 {
@@ -209,6 +225,14 @@ class ServerError extends RuntimeException implements MiddlewareException
         return 'https://example.com/api/problems/server-error';
     }
 }
+```
+
+```php
+// In src/Acme/BooksRead/Exception/InvalidRequest.php:
+
+namespace Acme\BooksRead\Exception;
+
+use RuntimeException;
 
 class InvalidRequest extends RuntimeException implements MiddlewareException
 {
@@ -244,6 +268,8 @@ domain-specific exception type in order to create an appropriate response for
 us.
 
 ```php
+// In src/Acme/BooksRead/ProblemDetailsMiddleware.php:
+
 namespace Acme\BooksRead;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
@@ -308,6 +334,8 @@ factory; this can then be re-used for other API resources that need the same set
 of middleware. As an example:
 
 ```php
+// In src/Acme/BooksRead/ApiMiddlewareDelegatorFactory.php:
+
 namespace Acme\BooksRead;
 
 use Psr\Container\ContainerInterface;
