@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Handling OPTIONS and HEAD Requests with Expressive
-date: 2017-03-23T14:40:00-05:00
+date: 2017-03-28T14:40:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net
 permalink: /blog/2017-03-28-expressive-options-head.html
