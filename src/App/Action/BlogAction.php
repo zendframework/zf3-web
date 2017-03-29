@@ -87,7 +87,7 @@ class BlogAction implements MiddlewareInterface
         $baseUrl = sprintf(
             '%s://%s',
             $uri->getScheme(),
-            $uri->getPort() === 80 ? $uri->getHost() : $uri->getHost() . ':' . $uri->getPort()
+            $uri->getAuthority()
         );
 
         $matches = [];
