@@ -335,8 +335,11 @@ body > .container {
     background-size: cover;
 }
 
+#zendcon h1 {
+	color: #48bb22;
+}
 #zendcon h2 {
-	color: white;
+	color: black;
 }
 
 
