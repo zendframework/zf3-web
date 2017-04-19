@@ -12,19 +12,19 @@ categories:
 ---
 
 Performance is one of the key feature for web application. Using a middleware
-architecture become very simple to implement a caching system in PHP.
+architecture makes it very simple to implement a caching system in PHP.
 
 The general idea is to store the response output of a URL in a file (or in
-memory, using [memcached](https://memcached.org)) and use it for next requests.
-In this way we can bypass the execution of the previous middlewares starting
-from the second request.
+memory, using [memcached](https://memcached.org)) and use it for subsequent
+requests. In this way we can bypass the execution of the previous middlewares
+starting from the second request.
 
-Of course, this technique can only be applied for static contents, that do not
+Of course, this technique can only be applied for static contents, that does not
 require update for each HTTP request.
 
 ## Implement a caching middleware
 
-Imagine we want to create a simple cache system with [Expressive](https://docs.zendframework.com/zend-expressive/)
+Imagine we want to create a simple cache system with [Expressive](https://docs.zendframework.com/zend-expressive/).
 We can use an implementation like that:
 
 ```php
@@ -39,7 +39,7 @@ class CacheMiddleware implements ServerMiddlewareInterface
 {
     protected $config;
 
-    public function __construct($config)
+    public function __construct(array $config)
     {
         $this->config = $config;
     }
@@ -66,10 +66,10 @@ In this example, we used the [PSR-15](https://github.com/php-fig/fig-standards/b
 proposal to implement the Middleware interface using the `process()` function.
 This is the suggested way to implement middleware in Expressive 2.0.
 
-The idea of this middleware is quite simple, if the caching system is enabled
+The idea of this middleware is quite simple. If the caching system is enabled
 and if the requested URL matches an existing cache file, we return the cache
-content as [HtmlResponse](https://github.com/zendframework/zend-diactoros/blob/master/src/Response/HtmlResponse.php)
-, ending the execution flow.
+content as [HtmlResponse](https://zendframework.github.io/zend-diactoros/custom-responses/#html-responses),
+ending the execution flow.
 
 If the requested URL path does not exist in cache, we process the delegate
 middleware (basically we continue with the normal workflow) and we store the
@@ -92,7 +92,7 @@ function of PHP to retrieve the modification file time.
 > directly.
 
 In order to pass the `$config` dependency, we can use a simple factory class.
-Below is reported an example:
+This is an example:
 
 ```php
 namespace App\Action;
@@ -120,8 +120,8 @@ class CacheFactory
 }
 ```
 Following the folder structure of Expressive, we can store this configuration in
-a simple PHP file in the config/autoload directory. For instance, we can store
-it in config/autoload/cache.local.php file, as follow:
+a simple PHP file in the `config/autoload` directory. For instance, we can store
+it in `config/autoload/cache.local.php` file, as follows:
 
 ```php
 return [
@@ -144,7 +144,7 @@ with the following content:
 ```
 
 Finally, in order to activate the caching system we need to add the
-`CacheMiddleware` class as service. In our example, we used [zend-servicamanager](https://github.com/zendframework/zend-servicemanager)
+`CacheMiddleware` class as service. In our example, we used [zend-servicemanager](https://github.com/zendframework/zend-servicemanager)
 as service container. To add the cache system we can use a configuration file
 (e.g. `/config/autoload/cache.global.php`) with the following content:
 
@@ -160,14 +160,14 @@ return [
 
 ## How enable the cache for specific routes
 
-We mentioned early that this caching mechanism works fine for static contents.
+We mentioned early that this caching mechanism works fine for static content.
 That means we need a way to enable the cache only for specific routes.
 
 We can simply add the `CacheMiddleware` class as first middleware to be executed
 for all the routes representing static contents.
 
 For instance, imagine to have a `/about` route that show an about page of your
-web site. We can add the `CacheMiddleware as follow:
+web site. We can add the `CacheMiddleware` as follow:
 
 ```php
 use App\Action;
@@ -179,8 +179,8 @@ $app->get('/about', [
 ```
 
 The middleware actions to be excuted for the /about URL are `CacheMiddleware`
-and `AboutAction` in this order. The `$app` object is the instance of `Zend\Expressive\Application`
-, the main class that manages the execution of an Expressive application.
+and `AboutAction` in this order. The `$app` object is the instance of `Zend\Expressive\Application`,
+the main class that manages the execution of an Expressive application.
 
 ## Conclusion
 
