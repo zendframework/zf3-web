@@ -1,10 +1,10 @@
 ---
 layout: post
 title: Caching middleware with Expressive
-date: 2017-04-18T08:30:00-05:00
+date: 2017-04-19T08:30:00-05:00
 author: Enrico Zimuel
 url_author: http://www.zimuel.it
-permalink: /blog/2017-04-18-caching-middleware.html
+permalink: /blog/2017-04-19-caching-middleware.html
 categories:
 - blog
 - expressive
@@ -178,7 +178,7 @@ $app->get('/about', [
 ], 'about');
 ```
 
-The middleware actions to be excuted for the /about URL are `CacheMiddleware`
+The middleware actions to be excuted for the `/about` URL are `CacheMiddleware`
 and `AboutAction` in this order. The `$app` object is the instance of `Zend\Expressive\Application`,
 the main class that manages the execution of an Expressive application.
 
