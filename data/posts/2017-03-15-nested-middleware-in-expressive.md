@@ -422,7 +422,7 @@ The above approach of creating a nested application, as well as the original
 example of nested middleware provided via arrays, has one drawback: if several
 middleware need the exact same workflow, you'll have repetition.
 
-One approach is to create a [trait][http://php.net/trait] for creating the
+One approach is to create a [trait](http://php.net/trait) for creating the
 `Application` instance and populating the initial pipeline.
 
 ```php
