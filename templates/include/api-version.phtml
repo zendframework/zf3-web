@@ -1,12 +1,13 @@
 <?php
 $url = 'http://packages.zendframework.com/releases/ZendFramework-%s/ZendFramework-%s-apidoc.%s';
+$short = substr($this->version, 0, strrpos($this->version, '.'));
 ?>
 
 <div class="spacing"></div>
 
 <div class="row">
     <div class="col-lg-4">
-        <strong>Version <?= substr($this->version, 0, strrpos($this->version, '.')) ?></strong>
+        <strong>Version <?= $short  ?></strong>
     </div>
 
     <div class="col-lg-4">
