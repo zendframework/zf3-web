@@ -1,4 +1,7 @@
-<?php $this->headTitle('Blog'); ?>
+<?php
+$title = 'Blog';
+$this->headTitle($title);
+?>
 
 <?php foreach ($posts as $post) : ?>
     <a href="<?= $post['permalink'] ?>"><h3 class="ctitle"><?= $post['title'] ?></h3></a>
