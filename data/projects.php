@@ -37,10 +37,10 @@ return array (
   ),
   5 =>
   array (
-    'name' => 'Centroy',
-    'country' => 'United States',
+    'name' => 'Melis Technology',
+    'country' => 'France',
     'img' => 'user6.png',
-    'url' => 'http://centroy.com/',
+    'url' => 'http://www.melistechnology.com/',
   ),
   6 =>
   array (
