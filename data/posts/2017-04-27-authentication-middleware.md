@@ -12,33 +12,53 @@ categories:
 
 ---
 
-Most web applications need to guarantee access only to authorized users and
-allow only specific actions based on user roles. Implementing authentication and
-authorization in a PHP application it may be not trivial because they could be
-many parts to be changed. For instance, if you have an MVC design you may need
-to change code in the dispatch, add an authentication layer as first event in
-the execution flow and maybe apply some restrictions even in your controllers.
+Many web applications require restricting specific areas to _authenticated_
+users, and may further restrict specific actions to _authorized_ user roles.
+Implementing authentication and authorization in a PHP application is often
+non-trivial as doing so requires altering the application workflow. For
+instance, if you have an MVC design, you may need to change the dispatch logic
+to add an authentication layer as an initial event in the execution flow, and
+perhaps apply restrictions within your controllers.
 
-This can be trivial and it really depends on the architecture design and PHP
-framework used.
+Using a middleware approach is simpler and more natural, as middleware easily
+accommodates workflow changes. In this article, we will demonstrate how to
+provide authentication in a PSR-7 middleware application using
+[Expressive](https://docs.zendframework.com/zend-expressive/) and
+[zend-authentication](https://docs.zendframework.com/zend-authentication).  We
+will build a simple authentication system using a login page with username and
+password credentials.
 
-Using a middleware approach, everything become simpler and more natural. In this
-article, we will demonstrate how to provide authentication in a PSR-7 middleware
-application using [Expressive](https://docs.zendframework.com/zend-expressive/)
-and [zend-authentication](https://docs.zendframework.com/zend-authentication).
-We will build a simple authentication system using a login page with username
-and password credentials.
+> Since the content of this post is quite long, we'll detail authorization 
+> in a separate blog post.
 
-Since the content of this post is quite long, we'll show the authorization part
-in a separate blog post.
+## Getting started
+
+This article assumes you have already created an Expressive application. For the
+purposes of our application, we'll create a new module, `Auth`, in which we'll
+put our classes, middleware, and general configuration.
+
+First, if you have not already, install the tooling support:
+
+```bash
+$ composer require --dev zendframework/zend-expressive-tooling
+```
+
+Next, we'll create the `Auth` module:
+
+```bash
+$ ./vendor/bin/expressive module:create Auth
+```
+
+With that out of the way, we can get started.
 
 ## Authentication
 
-`zend-authentication` is a component that offers different adapters or custom
-implementation for all the use cases.
+The zend-authentication component offers an adapter-based authentication
+solution, with both a number of concrete adapters as well as mechanisms for
+creating and consuming custom adapters.
 
-This component exposes the `Zend\Authentication\Adapter\AdapterInterface`
-interface with a single `authenticate()` function to be implemented:
+The component exposes `Zend\Authentication\Adapter\AdapterInterface`, which
+defines a single `authenticate()` method:
 
 ```php
 namespace Zend\Authentication\Adapter;
@@ -55,10 +75,11 @@ interface AdapterInterface
 }
 ```
 
-The `authenticate()` function performs the authentication and returns a
+Adapters implementing the `authenticate()` method perform the logic necessary to
+authenticate a request, and return the results via a
 `Zend\Authentication\Result` object. This `Result` object contains the
-authentication code and the user's identity, in case of success.
-The authentication code are defined using the following constants:
+authentication result code and, in the case of success, the user's identity.
+The authentication result codes are defined using the following constants:
 
 ```php
 namespace Zend\Authentication;
@@ -74,32 +95,35 @@ class Result
 }
 ```
 
-For instance, if we want to implement a login page with `username` and `password`
-authentication we can use a custom adapter like this:
+If we want to implement a login page with `username` and `password`
+authentication, we can create a custom adapter such as the following:
 
 ```php
-namespace Auth\Service;
+// In src/Auth/src/MyAuthAdapter.php:
+
+namespace Auth;
 
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 
 class MyAuthAdapter implements AdapterInterface
 {
-    protected $username;
-    protected $password;
+    private $password;
+    private $username;
 
-    public function __construct(/** any dependencies */)
+    public function __construct(/* any dependencies */)
     {
+        // Likely assign dependencies to properties
     }
 
-    public function setUsername(string $username)
-    {
-        $this->username = $username;
-    }
-
-    public function setPassword(string $password)
+    public function setPassword(string $password) : void
     {
         $this->password = $password;
+    }
+
+    public function setUsername(string $username) : void
+    {
+        $this->username = $username;
     }
 
     /**
@@ -109,211 +133,312 @@ class MyAuthAdapter implements AdapterInterface
      */
     public function authenticate()
     {
-        // retrieve the user's information (e.g. from a database)
-        // and store the result in $row (e.g. associative array)
-        // we stored the passwords using PHP password_hash() function
+        // Retrieve the user's information (e.g. from a database)
+        // and store the result in $row (e.g. associative array).
+        // If you do something like this, always store the passwords using the
+        // PHP password_hash() function!
 
         if (password_verify($this->password, $row['password'])) {
             return new Result(Result::SUCCESS, $row);
-        } else {
-            return new Result(Result::FAILURE_CREDENTIAL_INVALID, $this->username);
         }
+
+        return new Result(Result::FAILURE_CREDENTIAL_INVALID, $this->username);
     }
 }
 ```
 
-## Authentication Service
-
-Using this adapter, we can create an *Authentication Service* and consume it in
-a middleware, checking for valid users. Using [zend-servicemanager](https://github.com/zendframework/zend-servicemanager)
-we can create this service with `Zend\Authentication\AuthenticationService`.
-
-The *Authentication Service* can be implemented as follows:
+We will want a factory for this service as well, so that we can seed the
+username and password to it later:
 
 ```php
-namespace Auth\Service;
+// In src/Auth/src/MyAuthAdapterFactory.php:
+
+namespace Auth;
 
 use Interop\Container\ContainerInterface;
 use Zend\Authentication\AuthenticationService;
 
-class MyAuthFactory
+class MyAuthAdapterFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        // get dependencies from $container
-        $adapter = new MyAuthAdapter(/* any dependencies */);
-
-        return new AuthenticationService(null, $adapter);
+        // Retrieve any dependencies from the container when creating the instance
+        return new MyAuthAdapter(/* any dependencies */);
     }
 }
 ```
 
-This factory class creates an instance of `MyAuthAdapter` and use it to returns
-the `AuthenticationService`. We may need to pass some dependencies to the
-custom authentication adapter, e.g. a database connection.
-The `Zend\Authentication\AuthenticationService` class accepts two parameters in
-construction. The first is the storage identity and the second is the
-authentication adapter. If storage is `null` it will be used the PHP Session
-mechanism to store the user's identity.
+This factory class creates and returns an instance of `MyAuthAdapter`.
+We may need to pass some dependencies to its constructor, such as a database
+connection; these would be fetched from the container.
 
-In order to consume the `AuthenticationService` we need to store it in the
-service manager. This can be done in different ways. A simple solution is to
-add the following configuration key in the application:
+## Authentication Service
+
+We can now create a `Zend\Authentication\AuthenticationService`
+that composes our adapter, and then consume the `AuthenticationService` in
+middleware to check for a valid user. Let's now create a factory for the
+`AuthenticationService`:
 
 ```php
-return [
-    'dependencies' => [
+// in src/Auth/src/AuthenticationServiceFactory.php:
+
+namespace Auth;
+
+use Interop\Container\ContainerInterface;
+use Zend\Authentication\AuthenticationService;
+
+class AuthenticationServiceFactory
+{
+    public function __invoke(ContainerInterface $container)
+    {
+        return new AuthenticationService(
+            null,
+            $container->get(MyAuthAdapter::class)
+        );
+    }
+}
+```
+
+This factory class retrieves an instance of the `MyAuthAdapter` service and use
+it to return an `AuthenticationService` instance.  The `AuthenticationService`
+class accepts two parameters:
+
+- A storage service instance, for persisting the user identity. If none is
+  provided, the built-in PHP session mechanisms will be used.
+- The actual adapter to use for authentication.
+
+Now that we have created both the custom adapter, as well as factories for the
+adapter and the `AuthenticationService`, we need to configure our application
+dependencies to use them:
+
+```php
+// In src/Auth/src/ConfigProvider.php:
+
+// Add the following import statement at the top of the classfile:
+use Zend\Authentication\AuthenticationService;
+
+// And update the following method:
+public function getDependencies()
+{
+    return [
         'factories' => [
-            'AuthService' => Auth\Service\MyAuthFactory::class
-        ]
-    ]
-];
+            AuthenticationService::class => AuthenticationServiceFactory::class,
+            MyAuthAdapter::class => MyAuthAdapterFactory::class,
+        ],
+    ];
+}
 ```
 
 ## Authenticate using a login page
 
-Using a login page, we can create a middleware that render the login form
-if the HTTP method is GET and checks for `username` and `password` if HTTP
-method is POST. If the credentials are valid we can open a welcome page,
-otherwise we send back an error message.
+With an authentication mechanism in place, we now need to create middleware to
+render the login form. This middleware will do the following:
+
+- for `GET` requests, it will render the login form.
+- for `POST` requests, it will check for credentials and then attempt to
+  validate them.
+  - for valid authentication requests, we will redirect to a welcome page
+  - for invalid requests, we will provide an error message and redisplay the
+    form.
+
+Let's create the middleware now:
 
 ```php
+// In src/Auth/src/Action/LoginAction.php:
+
 namespace Auth\Action;
 
+use Auth\MyAuthAdapter;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Authentication\AuthenticationService;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Expressive\Template\TemplateRendererInterface;
-use Zend\Authentication\AuthenticationService;
 
 class LoginAction implements ServerMiddlewareInterface
 {
-    public function __construct(TemplateRendererInterface $template, AuthenticationService $auth)
-    {
-        $this->template = $template;
-        $this->auth     = $auth;
+    private $auth;
+    private $authAdapter;
+    private $template;
+
+    public function __construct(
+        TemplateRendererInterface $template,
+        AuthenticationService $auth,
+        MyAuthAdapter $authAdapter
+    ) {
+        $this->template    = $template;
+        $this->auth        = $auth;
+        $this->authAdapter = $authAdapter;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
         if ($request->getMethod() === 'POST') {
-            return $this->authenticate($request, $delegate);
+            return $this->authenticate($request);
         }
-        return new HtmlResponse($this->template->render('app::login'));
+
+        return new HtmlResponse($this->template->render('auth::login'));
     }
 
-    public function authenticate(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function authenticate(ServerRequestInterface $request)
     {
         $params = $request->getParsedBody();
+
         if (empty($params['username'])) {
-            return new HtmlResponse($this->template->render('app::login', [
-                'error' => 'The username cannot be empty'
+            return new HtmlResponse($this->template->render('auth::login', [
+                'error' => 'The username cannot be empty',
             ]));
         }
+
         if (empty($params['password'])) {
-            return new HtmlResponse($this->template->render('app::login', [
+            return new HtmlResponse($this->template->render('auth::login', [
                 'username' => $params['username'],
-                'error'    => 'The password cannot be empty'
+                'error'    => 'The password cannot be empty',
             ]));
         }
-        $this->auth->getAdapter()->setUsername($params['username']);
-        $this->auth->getAdapter()->setPassword($params['password']);
+
+        $this->authAdapter->setUsername($params['username']);
+        $this->authAdapter->setPassword($params['password']);
 
         $result = $this->auth->authenticate();
         if (!$result->isValid()) {
-            return new HtmlResponse($this->template->render('app::login', [
+            return new HtmlResponse($this->template->render('auth::login', [
                 'username' => $params['username'],
-                'error'    => 'The credentials provided are not valid'
+                'error'    => 'The credentials provided are not valid',
             ]));
         }
+
         return new RedirectResponse('/admin');
     }
 }
 ```
 
-This middleware manages two actions: the login form render and the user's
-authentication with username and password sent via POST.
+This middleware manages two actions: rendering the login form, and
+authenticating the user's credentials when submitted via a `POST` request.
 
-We need to create a factory to provide the dependencies for this middleware:
+> You will also need to ensure that you have:
+>
+> - Created a `login` template.
+> - Added configuration to map the `auth` template namespace to one or more
+>   filesystem paths.
+>
+> We leave those tasks as an exercise to the reader.
+
+We now need to create a factory to provide the dependencies for this
+middleware:
 
 ```php
+// In src/Auth/src/Action/LoginActionFactory.php:
+
 namespace Auth\Action;
 
+use Auth\MyAuthAdapter;
 use Interop\Container\ContainerInterface;
+use Zend\Authentication\AuthenticationService;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
-class LoginFactory
+class LoginActionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $template = $container->get(TemplateRendererInterface::class);
-        $auth     = $container->get('AuthService');
-
-        return new LoginAction($template, $auth);
+        return new LoginAction(
+            $container->get(TemplateRendererInterface::class),
+            $container->get(AuthenticationService::class),
+            $container->get(MyAuthAdapter::class)
+        );
     }
 }
 ```
 
-The `AuthService` instance is retrieved by the container, implemented by
-`zend-servicemanager`. We can use the `/login` URL to render the login form and
-to perform the authentication via POST. We can add two simple routes like these:
+Map the middleware to this factory in your dependencies configuration witin the
+`ConfigProvider`:
 
 ```php
-$app->get('/login', Auth\Action\LoginAction::class);
+// In src/Auth/src/ConfigProvider.php,
+
+// Update the following method to read as follows:
+public function getDependencies()
+{
+    return [
+        'factories' => [
+            Action\LoginAction::class => Action\LoginActionFactory::class,
+            AuthenticationService::class => AuthenticationServiceFactory::class,
+            MyAuthAdapter::class => MyAuthAdapterFactory::class,
+        ],
+    ];
+}
+```
+
+> ### Use zend-servicemanager's ReflectionBasedAbstractFactory
+>
+> If you are using zend-servicemanager in your application, you could skip the
+> step of creating the factory, and instead map the middleware to
+> `Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory`.
+
+Finally, we can create appropriate routes. We'll map `/login` to the
+`LoginAction` now, and allow it to react to either the `GET` or `POST` methods:
+
+```php
+// in config/routes.php:
+$app->route('/login', Auth\Action\LoginAction::class, ['GET', 'POST'], 'login');
+```
+
+Alternately, the above could be written as two separate statements:
+
+```php
+// in config/routes.php:
+$app->get('/login', Auth\Action\LoginAction::class, 'login');
 $app->post('/login', Auth\Action\LoginAction::class);
 ```
 
-
 ## Authentication middleware
 
-Now that we have the `AuthService` service and the login page in place, we can
-create the middleware that checks for authentication, providing the redirect to
-the `/login` page if the user is not authenticated.
+Now that we have the authentication service and its adapter and the login
+middleware in place, we can create middleware that checks for authenticated
+users, having it redirect to the `/login` page if the user is not authenticated.
 
 ```php
+// In src/Auth/src/Action/AuthAction.php:
+
 namespace Auth\Action;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Authentication\AuthenticationService;
+use Zend\Diactoros\Response\RedirectResponse;
 
 class AuthAction implements ServerMiddlewareInterface
 {
-    protected $auth;
+    private $auth;
 
-    protected $config;
-
-    public function __construct(AuthenticationService $auth, array $config)
+    public function __construct(AuthenticationService $auth)
     {
-        $this->auth   = $auth;
-        $this->config = $config;
+        $this->auth = $auth;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        if (!$this->auth->hasIdentity()) {
+        if (! $this->auth->hasIdentity()) {
             return new RedirectResponse('/login');
         }
+
         $identity = $this->auth->getIdentity();
-        return $delegate($request->withAttribute(self::class, $identity));
+        return $delegate->process($request->withAttribute(self::class, $identity));
     }
 }
 ```
 
-This middleware works checking for a valid identity, using the `hasIdentity()`
-function of `AuthenticationService`. If the authentication service does not
-have an identity we redirect the response to a specific URL, stored in a
-`redirect` configuration value.
+This middleware checks for a valid identity using the `hasIdentity()` method of
+`AuthenticationService`. If no identity is present, we redirect the `redirect`
+configuration value.
 
 If the user is authenticated, we continue the execution of the next middleware,
-storing the identity in a request attribute. This will facilitate the
-consumption of the identity information for the other middlewares. For instance,
-imagine you need to retrieve user's information in a middleware, you can get
-it as follows:
+storing the identity in a request attribute. This facilitates consumption of the
+identity information in subsequent middleware layers. For instance, imagine you
+need to retrieve the user's information:
 
 ```php
 namespace App\Action;
@@ -321,7 +446,6 @@ namespace App\Action;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Auth\Action\AuthAction;
 
 class FooAction
 {
@@ -333,56 +457,58 @@ class FooAction
 }
 ```
 
-The `AuthAction` middleware needs some dependencies. These can be passed using a
-`AuthFactory` class, implemented as follows:
+The `AuthAction` middleware needs some dependencies, so we will need to create
+and register a factory for it as well.
+
+First, the factory:
 
 ```php
+// In src/Auth/src/Action/AuthActionFactory.php:
+
 namespace Auth\Action;
 
 use Interop\Container\ContainerInterface;
 use Zend\Authentication\AuthenticationService;
 use Exception;
 
-class AuthFactory
+class AuthActionFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        $config = $container->get('config');
-        if (!isset($config['auth']['service'])) {
-            throw new Exception('The auth service adapter is not configured');
-        }
-        if (!isset($config['auth']['redirect'])) {
-            throw new Exception('The auth URL redirect is not configured');
-        }
-        $auth = $container->get($config['auth']['service']);
-
-        return new AuthAction($auth, $config['auth']);
+        return new AuthAction($container->get(AuthenticationService::class));
     }
 }
 ```
 
-This factory class reads the configuration key `auth` and get the
-*Authentication Service* from the service manager. Finally, in order to consume
-this middleware we need to add it in the `zend-servicamager`, using the
-following application configuration:
+And then mapping it:
 
 ```php
-return [
-    'dependencies' => [
+// In src/Auth/src/ConfigProvider.php:
+
+
+// Update the following method to read as follows:
+public function getDependencies()
+{
+    return [
         'factories' => [
-            Action\AuthAction::class => Action\AuthFactory::class
-        ]
-    ]
-];
+            Action\AuthAction::class => Action\AuthActionFactory::class,
+            Action\LoginAction::class => Action\LoginActionFactory::class,
+            AuthenticationService::class => AuthenticationServiceFactory::class,
+            MyAuthAdapter::class => MyAuthAdapterFactory::class,
+        ],
+    ];
+}
 ```
 
+> Like the `LoginActionFactory` above, you could skip the factory creation and
+> instead use the `ReflectionBasedAbstractFactory` if using zend-servicemanager.
 
 ## Require authentication for specific routes
 
 Now that we built the authentication middleware, we can use it to protect
-specific routes that require authentication. For instance, image we have a
-set of pages that needs authentication, we can protect it adding the
-`Auth\Action\AuthAction::class` in the routes, as in the following example:
+specific routes that require authentication. For instance, for each route that
+needs authentication, we can modify the routing to create a pipeline that
+incorporates our `AuthAction` middleware early:
 
 ```php
 $app->get('/admin', [
@@ -397,21 +523,29 @@ $app->get('/admin/config', [
 ```
 
 The order of execution for the middleware is the order of the array elements.
-The authentication is provided first as first element. In this way if the user
-is not authenticated the `DashBoardAction` and the `ConfigAction` will never be
-executed.
-
+Since the `AuthAction` middleware is provided as the first element, if a user is
+not authenticated when requesting either the admin dashboard or config page,
+they will be immediately redirected to the login page instead.
 
 ## Conclusion
 
-We started this article introducing the needs for authentication and
-authorization in web applications and how to implement it using middleware in
-PHP. We presented only the authentication part and we will show the
-authorization in a future blog post.
+There are many ways to accommodate authentication within middleware
+applications; this is just one. Our goal was to demonstrate the ease with which
+you may compose authentication into existing workflows by creating middleware
+that intercepts the request early within a pipeline.
 
-We will demonstrate how to authorize actions for specific users using
-[zend-permissions-rbac](https://github.com/zendframework/zend-permissions-rbac/)
-component.
+You could certainly make a number of improvements to the workflow:
+
+- The path to the login page could be configurable.
+- You could capture the original request path in order to allow redirecting to
+  it following successful login.
+- You could introduce rate limiting of login requests.
+
+These are each interesting exercises for you to try!
+
+As noted in the introduction, this article demonstrates only _authentication_.
+Stay tuned for a future article that will demonstrate _authorization_ middleware
+using [zend-permissions-rbac](https://github.com/zendframework/zend-permissions-rbac/).
 
 > ## Save the date!
 >
