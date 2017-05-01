@@ -2,6 +2,7 @@
 layout: post
 title: Handling OPTIONS and HEAD Requests with Expressive
 date: 2017-03-28T14:40:00-05:00
+updated: 2017-05-01T08:40:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net
 permalink: /blog/2017-03-28-expressive-options-head.html
@@ -237,3 +238,7 @@ give you the flexibility and power to accomplish whatever you might need.
 
 For more information on the built-in capabilities, [visit the
 documentation](https://docs.zendframework.com/zend-expressive/features/middleware/implicit-methods-middleware/).
+
+> ### Updates
+>
+> - 2017-05-01: Fixed notation in last PHP example to replace `:` with `=>`.
