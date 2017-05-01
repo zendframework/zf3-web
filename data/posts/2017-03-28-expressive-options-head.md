@@ -90,7 +90,7 @@ $app->route(
 ## Handling OPTIONS requests
 
 Like `HEAD` requests above, if you're using Expressive 2, the middleware for
-implicitly handling `OPTIONS` requests is already enabled; if not, 
+implicitly handling `OPTIONS` requests is already enabled; if not,
 please go [read the documentation](https://docs.zendframework.com/zend-expressive/features/middleware/implicit-methods-middleware/#implicitoptionsmiddleware).
 
 `OPTIONS` requests are handled by `Zend\Expressive\Middleware\ImplicitOptionsMiddleware`,
@@ -179,43 +179,43 @@ $app->route(
         {
             // Return a custom response
             $response = new JsonResponse([
-                'GET': [
-                    'query': [
-                        'page': 'int; page of results to return',
-                        'per_page': 'int; number of results to return per page',
+                'GET' => [
+                    'query' => [
+                        'page' => 'int; page of results to return',
+                        'per_page' => 'int; number of results to return per page',
                     ],
-                    'response': [
-                        'total': 'Total number of items',
-                        'count': 'Total number of items returned on this page',
-                        '_links': [
-                            'self': 'URI to collection',
-                            'first': 'URI to first page of results',
-                            'prev': 'URI to previous page of results',
-                            'next': 'URI to next page of results',
-                            'last': 'URI to last page of results',
-                            'search': 'URI template for searching',
+                    'response' => [
+                        'total' => 'Total number of items',
+                        'count' => 'Total number of items returned on this page',
+                        '_links' => [
+                            'self' => 'URI to collection',
+                            'first' => 'URI to first page of results',
+                            'prev' => 'URI to previous page of results',
+                            'next' => 'URI to next page of results',
+                            'last' => 'URI to last page of results',
+                            'search' => 'URI template for searching',
                         ],
-                        '_embedded': [
-                            'books': [
+                        '_embedded' => [
+                            'books' => [
                                 'See ... for details',
                             ],
                         ],
                     ],
                 ],
-                'POST': [
-                    'data': [
-                        'title': 'string; title of book',
-                        'author': 'string; author of book',
-                        'info': 'string; book description and notes',
+                'POST' => [
+                    'data' => [
+                        'title' => 'string; title of book',
+                        'author' => 'string; author of book',
+                        'info' => 'string; book description and notes',
                     ],
-                    'response': [
-                        '_links': [
-                            'self': 'URI to book',
+                    'response' => [
+                        '_links' => [
+                            'self' => 'URI to book',
                         ],
-                        'id': 'string; generated UUID for book',
-                        'title': 'string; title of book',
-                        'author': 'string; author of book',
-                        'info': 'string; book description and notes',
+                        'id' => 'string; generated UUID for book',
+                        'title' => 'string; title of book',
+                        'author' => 'string; author of book',
+                        'info' => 'string; book description and notes',
                     ],
                 ],
             ], 200, ['Allow' => 'GET,POST']);
