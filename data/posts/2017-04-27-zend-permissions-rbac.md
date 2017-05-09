@@ -57,7 +57,7 @@ use Zend\Permissions\Rbac\Role;
 
 // Create some roles
 $guest= new Role('guest');
-$guest>addPermission('read');
+$guest->addPermission('read');
 
 $rbac = new Rbac();
 $rbac->addRole($guest);

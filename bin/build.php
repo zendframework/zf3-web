@@ -3,8 +3,11 @@ chdir(dirname(__DIR__));
 require 'vendor/autoload.php';
 
 use App\Model;
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment;
 use Mni\FrontYAML\Bridge\CommonMark\CommonMarkParser;
 use Mni\FrontYAML\Parser;
+use Webuni\CommonMark\TableExtension\TableExtension;
 
 printf('Checking for apidoc symlinks... ');
 
@@ -58,7 +61,11 @@ foreach (glob(sprintf('%s/*.php', $cacheFolder)) as $filename) {
     unlink($filename);
 }
 
-$parser = new Parser(null, new CommonMarkParser());
+$cmenv = Environment::createCommonMarkEnvironment();
+$cmenv->addExtension(new TableExtension());
+$converter = new CommonMarkConverter([], $cmenv);
+
+$parser = new Parser(null, new CommonMarkParser($converter));
 
 printf('Advisory... ');
 $advisory = new Model\Advisory($parser);

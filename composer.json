@@ -21,6 +21,7 @@
         "mnapoli/front-yaml": "^1.5.2",
         "ocramius/proxy-manager": "^2.0.4",
         "roave/security-advisories": "dev-master",
+        "webuni/commonmark-table-extension": "^0.6.1",
         "zendframework/zend-config-aggregator": "^0.2.0",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-expressive": "^2.0",
