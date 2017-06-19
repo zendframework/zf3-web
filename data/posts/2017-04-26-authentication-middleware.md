@@ -2,6 +2,7 @@
 layout: post
 title: Middleware authentication
 date: 2017-04-26T11:10:00-05:00
+updated: 2017-06-19T08:50-05:00
 author: Enrico Zimuel
 url_author: http://www.zimuel.it
 permalink: /blog/2017-04-26-authentication-middleware.html
@@ -28,8 +29,8 @@ provide authentication in a PSR-7 middleware application using
 will build a simple authentication system using a login page with username and
 password credentials.
 
-> Since the content of this post is quite long, we'll detail authorization 
-> in a separate blog post.
+> Since the content of this post is quite long, [we detail authorization 
+> in a separate blog post](/blog/2017-05-04-authorization-middleware.html).
 
 ## Getting started
 
@@ -544,8 +545,14 @@ You could certainly make a number of improvements to the workflow:
 These are each interesting exercises for you to try!
 
 As noted in the introduction, this article demonstrates only _authentication_.
-Stay tuned for a future article that will demonstrate _authorization_ middleware
-using [zend-permissions-rbac](https://github.com/zendframework/zend-permissions-rbac/).
+Our next article [details how to use zend-permissions-rbac](/blog/2017-04-27-zend-permissions-rbac.html),
+and a later article details [authorization middleware using an RBAC](/blog/2017-04-26-authentication-middleware.html).
+
+## Updates
+
+- _2017-06-19_: Updated comment at start of article to link to post on
+  authorization middleware, and last paragraph to link to same post, as well as
+  the post on creating RBACs.
 
 > ## Save the date!
 >
