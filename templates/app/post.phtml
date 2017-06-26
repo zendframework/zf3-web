@@ -8,7 +8,7 @@ $this->headLink()->appendAlternate('/blog/feed-atom.xml', 'application/atom+xml'
 <h2><?= $title ?></h2>
 <p class="blog-post__metadata"><?= date('Y-m-d', $date) ?> | By: <a href="<?= $url_author ?>"><?= $author ?></a></p>
 <?php if (isset($updated)) : ?>
-<p class="blog-post__metadata">Updated <?= date('Y-m-d', $updated) ?></p>
+<p class="blog-post__metadata">Updated <?= is_numeric($updated) ? date('Y-m-d', $updated) : (new DateTime($updated))->format('Y-m-d') ?></p>
 <?php endif ?>
 
 <?= $body ?>
