@@ -2,7 +2,6 @@
 
 namespace Release;
 
-use Closure;
 use ErrorException;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -28,7 +27,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
             return $delegate->process($request);
         }
 
-        set_error_handler(Closure::fromCallable([$this, 'handleError']));
+        set_error_handler([$this, 'handleError']);
 
         try {
             return $delegate->process($request);
@@ -70,7 +69,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
      * @param int $line
      * @throws ErrorException
      */
-    private function handleError($severity, $message, $file, $line)
+    public function handleError($severity, $message, $file, $line)
     {
         throw new ErrorException($message, 0, $severity, $file, $line);
     }
