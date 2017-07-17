@@ -58,7 +58,11 @@ return [
             Helper\UrlHelperMiddleware::class          => Helper\UrlHelperMiddlewareFactory::class,
             Action\Redirects::class                    => InvokableFactory::class,
             Action\StripTrailingSlashMiddleware::class => InvokableFactory::class,
-            ApplicationErrorLogger::class              => ApplicationErrorLoggerFactory::class,
+        ],
+        'delegators' => [
+            \Zend\Stratility\Middleware\ErrorHandler::class => [
+                ApplicationErrorLoggerFactory::class,
+            ],
         ],
     ],
 ];

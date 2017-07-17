@@ -6,7 +6,6 @@
 /** @var \Zend\Expressive\Application $app */
 $app->pipe(\Zend\Stratigility\Middleware\OriginalMessages::class);
 $app->pipe(\Zend\Stratigility\Middleware\ErrorHandler::class);
-$app->pipe('/releases/new-release', \App\ApplicationErrorLogger::class);
 $app->pipe(\App\Action\StripTrailingSlashMiddleware::class);
 $app->pipe(\App\Action\Redirects::class);
 $app->pipe(\Zend\Expressive\Helper\ServerUrlMiddleware::class);
