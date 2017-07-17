@@ -1,5 +1,7 @@
 <?php
 use App\Action;
+use App\ApplicationErrorLogger;
+use App\ApplicationErrorLoggerFactory;
 use App\Model;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
@@ -56,6 +58,7 @@ return [
             Helper\UrlHelperMiddleware::class          => Helper\UrlHelperMiddlewareFactory::class,
             Action\Redirects::class                    => InvokableFactory::class,
             Action\StripTrailingSlashMiddleware::class => InvokableFactory::class,
+            ApplicationErrorLogger::class              => ApplicationErrorLoggerFactory::class,
         ],
     ],
 ];
