@@ -10,6 +10,7 @@ class ReleaseRoutesDelegatorFactory
     {
         $app = $callback();
         $app->post('/releases/new-release', [
+            ErrorHandlerMiddleware::class,
             VerifyHubSignatureMiddleware::class,
             AcceptReleaseAction::class,
         ], 'release.new');

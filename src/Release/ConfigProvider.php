@@ -17,8 +17,12 @@ class ConfigProvider
                 ],
                 'factories' => [
                     AcceptReleaseAction::class => AcceptReleaseActionFactory::class,
+                    ErrorHandlerMiddleware::class => ErrorHandlerMiddlewareFactory::class,
                     VerifyHubSignatureMiddleware::class => VerifyHubSignatureMiddlewareFactory::class,
                 ],
+            ],
+            'api' => [
+                'debug' => false,
             ],
             'hub' => [
                 'secret' => false,
