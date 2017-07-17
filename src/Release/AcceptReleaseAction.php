@@ -99,7 +99,7 @@ class AcceptReleaseAction implements MiddlewareInterface
 
         foreach ($feed as $entry) {
             $title = $entry->getTitle();
-            [$repo, $version] = explode(' ', $title);
+            list($repo, $version) = explode(' ', $title);
 
             $author = $entry->getAuthor();
             $author = new Author($author['name'], $author['uri'] ?? 'https://framework.zend.com/');
