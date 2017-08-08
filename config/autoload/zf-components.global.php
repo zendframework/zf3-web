@@ -139,263 +139,275 @@
   ),
   23 => 
   array (
+    'name' => 'HAL for PSR-7',
+    'url' => 'https://docs.zendframework.com/zend-expressive-hal/',
+    'description' => 'Hypertext Application Language (HAL) for PSR-7.',
+  ),
+  24 => 
+  array (
     'name' => 'HTTP',
     'url' => 'https://docs.zendframework.com/zend-http/',
     'description' => 'HTTP message and header abstractions, and HTTP client implementation.  (Not a PSR-7 implementation.)',
   ),
-  24 => 
+  25 => 
   array (
     'name' => 'Hydrator',
     'url' => 'https://docs.zendframework.com/zend-hydrator/',
     'description' => 'Serialize objects to arrays, and vice versa.',
   ),
-  25 => 
+  26 => 
   array (
     'name' => 'InputFilter',
     'url' => 'https://docs.zendframework.com/zend-inputfilter/',
     'description' => 'Normalize and validate input sets from the web, APIs, the CLI, and more, including files.',
   ),
-  26 => 
+  27 => 
   array (
     'name' => 'Internationalization',
     'url' => 'https://docs.zendframework.com/zend-i18n/',
     'description' => 'Provide translations for your application, and filter and validate internationalized values.',
   ),
-  27 => 
+  28 => 
   array (
     'name' => 'JSON',
     'url' => 'https://docs.zendframework.com/zend-json/',
     'description' => 'De/Serialize JSON in PHP, including JavaScript expressions.',
   ),
-  28 => 
+  29 => 
   array (
     'name' => 'JSON-RPC Server',
     'url' => 'https://docs.zendframework.com/zend-json-server/',
     'description' => 'JSON-RPC implementation for PHP.',
   ),
-  29 => 
+  30 => 
   array (
     'name' => 'LDAP',
     'url' => 'https://docs.zendframework.com/zend-ldap/',
     'description' => 'Perform LDAP operations, including binding, searching and modifying entries in an LDAP directory.',
   ),
-  30 => 
+  31 => 
   array (
     'name' => 'Loader',
     'url' => 'https://docs.zendframework.com/zend-loader/',
     'description' => 'Autoloading and plugin loading strategies.',
   ),
-  31 => 
+  32 => 
   array (
     'name' => 'Log',
     'url' => 'https://docs.zendframework.com/zend-log/',
     'description' => 'Robust, composite logger with filtering, formatting, and PSR-3 support.',
   ),
-  32 => 
+  33 => 
   array (
     'name' => 'Mail',
     'url' => 'https://docs.zendframework.com/zend-mail/',
     'description' => 'Parse, create, store, and send email messages, using a variety of storage and transport protocols.',
   ),
-  33 => 
+  34 => 
   array (
     'name' => 'Math',
     'url' => 'https://docs.zendframework.com/zend-math/',
     'description' => 'Create cryptographically secure pseudo-random numbers, and manage big integers.',
   ),
-  34 => 
+  35 => 
   array (
     'name' => 'Memory',
     'url' => 'https://docs.zendframework.com/zend-memory/',
     'description' => 'Manage data in an environment with limited memory.',
   ),
-  35 => 
+  36 => 
   array (
     'name' => 'MIME',
     'url' => 'https://docs.zendframework.com/zend-mime/',
     'description' => 'Create and parse MIME messages and parts.',
   ),
-  36 => 
+  37 => 
   array (
     'name' => 'Module Manager',
     'url' => 'https://docs.zendframework.com/zend-modulemanager/',
     'description' => 'Modular application system for zend-mvc applications.',
   ),
-  37 => 
+  38 => 
   array (
     'name' => 'MVC',
     'url' => 'https://docs.zendframework.com/zend-mvc/',
     'description' => 'Zend Framework\'s event-driven MVC layer, including MVC Applications, Controllers, and Plugins.',
   ),
-  38 => 
+  39 => 
   array (
     'name' => 'MVC-Console integration',
     'url' => 'https://docs.zendframework.com/zend-mvc-console/',
     'description' => 'Integration between zend-mvc and zend-console.',
   ),
-  39 => 
+  40 => 
   array (
     'name' => 'MVC-i18n integration',
     'url' => 'https://docs.zendframework.com/zend-mvc-i18n/',
     'description' => 'Integration between zend-mvc and zend-i18n.',
   ),
-  40 => 
+  41 => 
   array (
     'name' => 'fileprg() plugin',
     'url' => 'https://docs.zendframework.com/zend-mvc-plugin-fileprg/',
     'description' => 'Post/Redirect/Get plugin with file upload handling for zend-mvc controllers.',
   ),
-  41 => 
+  42 => 
   array (
     'name' => 'flashmessenger() plugin',
     'url' => 'https://docs.zendframework.com/zend-mvc-plugin-flashmessenger/',
     'description' => 'Plugin for creating and exposing flash messages via zend-mvc controllers.',
   ),
-  42 => 
+  43 => 
   array (
     'name' => 'identity() plugin',
     'url' => 'https://docs.zendframework.com/zend-mvc-plugin-identity/',
     'description' => 'Plugin for retrieving the current authenticated identity within zend-mvc controllers.',
   ),
-  43 => 
+  44 => 
   array (
     'name' => 'prg() plugin',
     'url' => 'https://docs.zendframework.com/zend-mvc-plugin-prg/',
     'description' => 'Post/Redirect/Get plugin for zend-mvc controllers.',
   ),
-  44 => 
+  45 => 
   array (
     'name' => 'Navigation',
     'url' => 'https://docs.zendframework.com/zend-navigation/',
     'description' => 'Manage trees of pointers to web pages in order to build navigation systems.',
   ),
-  45 => 
+  46 => 
   array (
     'name' => 'Paginator',
     'url' => 'https://docs.zendframework.com/zend-paginator/',
     'description' => 'Paginate collections of data from arbitrary sources.',
   ),
-  46 => 
+  47 => 
   array (
     'name' => 'ACL',
     'url' => 'https://docs.zendframework.com/zend-permissions-acl/',
     'description' => 'Create, manage, and query access control lists.',
   ),
-  47 => 
+  48 => 
   array (
     'name' => 'RBAC',
     'url' => 'https://docs.zendframework.com/zend-permissions-rbac/',
     'description' => 'Provide and query Role-Based Access Controls for your application.',
   ),
-  48 => 
+  49 => 
+  array (
+    'name' => 'Problem Details',
+    'url' => 'https://docs.zendframework.com/zend-problem-details/',
+    'description' => 'PSR-7 Problem Details for HTTP API responses and middleware.',
+  ),
+  50 => 
   array (
     'name' => 'ProgressBar',
     'url' => 'https://docs.zendframework.com/zend-progressbar/',
     'description' => 'Create and update progress bars in different environments.',
   ),
-  49 => 
+  51 => 
   array (
     'name' => 'PSR-7 Bridge',
     'url' => 'https://docs.zendframework.com/zend-psr7bridge/',
     'description' => 'PSR-7 &lt;-&gt; zend-http message conversions.',
   ),
-  50 => 
+  52 => 
   array (
     'name' => 'Router',
     'url' => 'https://docs.zendframework.com/zend-router/',
     'description' => 'Flexible routing system for HTTP and console applications.',
   ),
-  51 => 
+  53 => 
   array (
     'name' => 'Serializer',
     'url' => 'https://docs.zendframework.com/zend-serializer/',
     'description' => 'Serialize and deserialize PHP structures to a variety of representations.',
   ),
-  52 => 
+  54 => 
   array (
     'name' => 'Server',
     'url' => 'https://docs.zendframework.com/zend-server/',
     'description' => 'Create Reflection-based RPC servers.',
   ),
-  53 => 
+  55 => 
   array (
     'name' => 'ServiceManager',
     'url' => 'https://docs.zendframework.com/zend-servicemanager/',
     'description' => 'Factory-Driven Dependency Injection Container',
   ),
-  54 => 
+  56 => 
   array (
     'name' => 'ServiceManager-Di integration',
     'url' => 'https://docs.zendframework.com/zend-servicemanager-di/',
     'description' => 'zend-di integration for zend-servicemanager',
   ),
-  55 => 
+  57 => 
   array (
     'name' => 'Session',
     'url' => 'https://docs.zendframework.com/zend-session/',
     'description' => 'Object-oriented interface to PHP sessions and storage.',
   ),
-  56 => 
+  58 => 
   array (
     'name' => 'SOAP',
     'url' => 'https://docs.zendframework.com/zend-soap/',
     'description' => 'Create, serve, and access SOAP applications, and parse and generate WSDL.',
   ),
-  57 => 
+  59 => 
   array (
     'name' => 'Stdlib',
     'url' => 'https://docs.zendframework.com/zend-stdlib/',
     'description' => 'SPL extensions, array utilities, error handlers, and more.',
   ),
-  58 => 
+  60 => 
   array (
     'name' => 'Stratigility',
     'url' => 'https://docs.zendframework.com/zend-stratigility/',
     'description' => 'PSR-7 middleware foundation for building and dispatching middleware pipelines.',
   ),
-  59 => 
+  61 => 
   array (
     'name' => 'Tag',
     'url' => 'https://docs.zendframework.com/zend-tag/',
     'description' => 'Manipulate and weight taggable items, and create tag clouds.',
   ),
-  60 => 
+  62 => 
   array (
     'name' => 'Test',
     'url' => 'https://docs.zendframework.com/zend-test/',
     'description' => 'Tools to facilitate unit testing of zend-mvc applications.',
   ),
-  61 => 
+  63 => 
   array (
     'name' => 'Text',
     'url' => 'https://docs.zendframework.com/zend-text/',
     'description' => 'Create FIGlets and text-based tables.',
   ),
-  62 => 
+  64 => 
   array (
     'name' => 'URI',
     'url' => 'https://docs.zendframework.com/zend-uri/',
     'description' => 'Object oriented interface to URIs, with facilities for validation.',
   ),
-  63 => 
+  65 => 
   array (
     'name' => 'Validator',
     'url' => 'https://docs.zendframework.com/zend-validator/',
     'description' => 'Validation classes for a wide range of domains, and the ability to chain validators to create complex validation criteria.',
   ),
-  64 => 
+  66 => 
   array (
     'name' => 'View',
     'url' => 'https://docs.zendframework.com/zend-view/',
     'description' => 'Flexible view layer supporting and providing multiple view layers, helpers, and more.',
   ),
-  65 => 
+  67 => 
   array (
     'name' => 'XML-RPC',
     'url' => 'https://docs.zendframework.com/zend-xmlrpc/',
     'description' => 'Fully-featured XML-RPC server and client implementations.',
   ),
-  66 => 
+  68 => 
   array (
     'name' => 'XML2JSON',
     'url' => 'https://docs.zendframework.com/zend-xml2json/',
