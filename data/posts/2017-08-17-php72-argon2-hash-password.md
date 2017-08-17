@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Protecting passwords with Argon2 in PHP 7.2
-date: 2017-08-17T15:14:00-05:00
+date: 2017-08-17T11:12:00-05:00
 author: Enrico Zimuel
 url_author: https://www.zimuel.it
 permalink: /blog/2017-08-08-php72-argon2-hash-password.html
@@ -14,24 +14,24 @@ categories:
 
 ---
 
-The new version of PHP 7.2 will be released at the [end of November 2017](https://wiki.php.net/todo/php72).
+PHP 7.2 will be released [later this year (2017)](https://wiki.php.net/todo/php72).
 This version contains some interesting additions, including two new security
-features: the support of the [Argon2](https://en.wikipedia.org/wiki/Argon2)
-password hash algorithm and the *ext/sodium* extension for [libsodium](https://libsodium.org)
-library.
+features: support of the [Argon2](https://en.wikipedia.org/wiki/Argon2)
+password hash algorithm, and the *ext/sodium* extension wrapping the
+[libsodium](https://libsodium.org) library.
 
-With these new features PHP is the first programming language to adopt
+With these new features, PHP is the first programming language to adopt
 [modern cryptography](https://dev.to/paragonie/php-72-the-first-programming-language-to-add-modern-cryptography-to-its-standard-library)
 in its standard library.
 
-In this article, we will show the usage of the Argon2 password hash algorithm.
+In this article, we demonstrate the usage of the Argon2 password hash algorithm.
 
 ## Installation of PHP 7.2
 
 If you are reading this article before the general availability of 7.2, you need
 to compile PHP to use that version. You can download the source code from
-[this website](https://downloads.php.net/~pollita/). For instance, today 17th
-August 2017, the last available version is 7.2.0 Beta 3 (file
+[the PHP downloads site](https://downloads.php.net/~pollita/). Today, 17
+August 2017, the most recent available version is 7.2.0 Beta 3 (file
 `php-7.2.0beta3.tar.gz`).
 
 Before compiling PHP, you need to install the [argon2](https://launchpad.net/ubuntu/+source/argon2)
@@ -51,56 +51,56 @@ make
 make install
 ```
 
-> Notice the usage of the option `--with-password-argon2` for including the
-> support of the Argon2 algorithm.
+> Please note the usage of the option `--with-password-argon2` for including
+> support for the Argon2 algorithm.
 
-This will install the PHP 7.2 as the default PHP on your system. If you do not
-want to change the default PHP, you can omit the execution of the last command
-`make install`. In this case, you will need to reference to PHP 7.2 using the
+This will install PHP 7.2 as the default PHP on your system. If you do not want
+to change the default PHP, you can omit the execution of the last command `make
+install`, or use the `--prefix` option to `configure` to specify an alternate
+location. In each of these cases, you will need to reference PHP 7.2 using the
 path of the folder installation.
-
 
 ## Argon2
 
-Argon2 is a password-based key derivation function winner of the [Password Hashing Competition](https://password-hashing.net/)
+Argon2 is a password-based key derivation function winner of the
+[Password Hashing Competition](https://password-hashing.net/)
 in July 2015.
 
-This function is an evolution of [bcrypt](https://en.wikipedia.org/wiki/Bcrypt)
+This function is an evolution of the [bcrypt](https://en.wikipedia.org/wiki/Bcrypt)
 and [scrypt](https://en.wikipedia.org/wiki/Scrypt) algorithms.
 
 Argon2 provides security against brute force attacks using a predefined memory
-size, CPU time, and degree of parallelism to prevent [GPU](https://it.wikipedia.org/wiki/Graphics_Processing_Unit)
-attacks.
+size, CPU time, and a degree of parallelism to prevent
+[GPU](https://it.wikipedia.org/wiki/Graphics_Processing_Unit) attacks.
 
-It uses 3 parameters that control the memory requires, the execution time and
-the parallelism level.
+It uses 3 parameters that control the memory requirements, the execution time,
+and the parallelism level.
 
 There are two main versions of this algorithm: *Argon2i* and *Argon2d*.
 *Argon2i* is the safest against [side-channel attacks](https://en.wikipedia.org/wiki/Side-channel_attack),
 while *Argon2d* provides the highest resistance against [GPU](https://it.wikipedia.org/wiki/Graphics_Processing_Unit)
 cracking attacks.
 
-Argon2d is not suitable for password hashing and should be
+Argon2d is not suitable for password hashing and should not be used.
 
-PHP 7.2 adds the *Argon2i* support in the [Password Hashing Functions](http://php.net/manual/en/ref.password.php).
-
+PHP 7.2 adds *Argon2i* support to its [Password Hashing Functions](http://php.net/manual/en/ref.password.php).
 
 ## Usage of Argon2i in PHP
 
-The Argon2 support in PHP has been proposed by Charles R. Portwood II in [this RFC](https://wiki.php.net/rfc/argon2_password_hash).
+Argon2 support in PHP was proposed by Charles R. Portwood II in [via an RFC](https://wiki.php.net/rfc/argon2_password_hash).
 
-The implemented algorithm in PHP is the Argon2i (v1.3) and it can be used as
-parameter of the [password_hash()](http://php.net/manual/en/function.password-hash.php)
-function. The syntax of `password_hash()` is as follows:
+The implemented algorithm in PHP is Argon2i (v1.3), and it can be provided via
+the `$algo` parameter to the [password_hash()](http://php.net/manual/en/function.password-hash.php)
+function. The signature of `password_hash()` is as follows:
 
 ```php
-string password_hash ( string $password , integer $algo [, array $options ] )
+password_hash( string $password , integer $algo [, array $options ]) : string
 ```
 
-The second parameter (`$algo`) specifies the algorithm to use for the hashing.
-The Argon2i algorithm is represented by the constant `PASSWORD_ARGON2I`.
+The second parameter (`$algo`) specifies the algorithm to use when hashing;
+the Argon2i algorithm is represented by the constant `PASSWORD_ARGON2I`.
 
-Below is reported a code example:
+As an example:
 
 ```php
 $password = 'test';
@@ -126,22 +126,21 @@ TmxLemFoVnZFaEJuT1NyYg
 ```
 
 The first part is the algorithm name (`argon2i`), the second is the Argon2i
-version 19 (that is 13 in hexadecimal), the third part are the algorithm
-parameters related to memory cost (in Kb), time cost and threads to be used
-(parallelism).
+version, and the third part is a list of algorithm parameters related to memory
+cost (in Kb), time cost, and threads to be used (parallelism).
 
-The fourth parameter is the random salt value, encoded in [Base64](https://en.wikipedia.org/wiki/Base64).
-This value is generated by the `password_hash()` using a random value for each
-execution. This is why we have different hash outputs for the same string in
-input. The default size of the salt is 16 bytes.
+The fourth parameter is the random salt value, encoded in
+[Base64](https://en.wikipedia.org/wiki/Base64). This value is generated by
+`password_hash()` using a random value for each execution. This is why we have
+different hash outputs for the same input string. The default size of the salt
+is 16 bytes.
 
-The last parts of the string contains the hash value, encoded in Base64. The
-hash size is 32 bytes.
+The fifth and last parameter of the string contains the hash value, encoded in
+Base64. The hash size is 32 bytes.
 
-PHP offers a special function named [password_get_info($hash)](http://php.net/manual/en/function.password-get-info.php)
+PHP provides a function named [password_get_info($hash)](http://php.net/manual/en/function.password-get-info.php)
 to get information about the hash generated by `password_hash()`. For instance,
-if you use the `password_get_info()` on the previous value, you will get a
-result as follows:
+if you use `password_get_info()` on the previous value, you will receive:
 
 ```php
 array(3) {
@@ -162,25 +161,25 @@ array(3) {
 ```
 
 The default parameters for the algorithm are a `memory_cost` of 1024 Kb (1 Mb),
-a `time_cost` of 2 and two `threads` to be used for the parallelism. The Argon2
+a `time_cost` of 2, and two `threads` to be used for parallelism. The Argon2
 specifications suggest to use a power of 2 value for the `memory_cost`.
 
-These values can be changed using the $options parameter of `password_hash()`
-function. Below is reported an example:
+These values can be changed using the `$options` parameter of the
+`password_hash()` function. As an example:
 
 ```php
 $password = 'test';
 $options = [
     'memory_cost' => 1<<17, // 128 Mb
-    'time_cost' => 4,
-    'threads' => 3
+    'time_cost'   => 4,
+    'threads'     => 3,
 ];
 $hash = password_hash($password, PASSWORD_ARGON2I, $options);
 var_dump($hash);
 ```
 
-PHP will generate an `E_WARNING` for values that cannot be used as options for
-the `PASSWORD_ARGON2I` algorithm.
+> PHP will generate an `E_WARNING` for values that cannot be used as options for
+> the `PASSWORD_ARGON2I` algorithm.
 
 Regarding the default option values, we suggest to change it according to the
 use cases and CPU + RAM available. From the [PHP RFC](https://wiki.php.net/rfc/argon2_password_hash#discussion_issues):
@@ -189,18 +188,17 @@ use cases and CPU + RAM available. From the [PHP RFC](https://wiki.php.net/rfc/a
 > deliberately set low as to not accidentally exhaust system resources on shared
 > or low resource systems when using the default cost parameters. Consequently,
 > users should adjust the cost factors to match the system they're working on.
-> As Argon2 doesn't have any “bad” values, however consuming more resources is
+> As Argon2 doesn't have any "bad" values, however consuming more resources is
 > considered better than consuming less. Users are encouraged to adjust the cost
 > factors for the platform they're developing for.
 
-
 ## Conclusion
 
-In this article we showed how to use the Argon2 password hash function with
+In this article we demonstrated usager of the Argon2 password hash algorithm with
 PHP 7.2. The Argon2 algorithm is the state of the art for password protection
 and it can be now used in PHP without installing additional extensions.
 This is a very nice security feature that will improve the security of PHP
-applications that use users' passwords. In a future article, we will introduce
-also the `Sodium` extension, the other new security feature included in PHP 7.2.
+applications that store user passwords. In a future article, we will cover
+the `Sodium` extension, another new security feature included in PHP 7.2.
 With these new features, PHP is the first language to support *modern
 cryptography* in the core of the language.
