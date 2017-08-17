@@ -4,7 +4,7 @@ title: Protecting passwords with Argon2 in PHP 7.2
 date: 2017-08-17T11:12:00-05:00
 author: Enrico Zimuel
 url_author: https://www.zimuel.it
-permalink: /blog/2017-08-08-php72-argon2-hash-password.html
+permalink: /blog/2017-08-17-php72-argon2-hash-password.html
 categories:
 - blog
 - php
