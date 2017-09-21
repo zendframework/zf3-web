@@ -15,7 +15,7 @@ printf('Building CSS and JS assets...%s', PHP_EOL);
 $curdir = getcwd();
 chdir(realpath(__DIR__) . '/../asset');
 printf('- Installing NPM packages%s', PHP_EOL);
-exec('npm install', $output, $status);
+exec('npm install --no-save', $output, $status);
 if ($status !== 0) {
     printf(
         '[ERROR] npm install returned a non-zero status:%s%s%s%s',
