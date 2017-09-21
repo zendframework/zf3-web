@@ -43,18 +43,6 @@ var gulp = require('gulp'),
         'yaml'
     ];
 
-gulp.task('scripts-home', function () {
-    return gulp.src([
-            'node_modules/imagesloaded/imagesloaded.pkgd.js',
-            'node_modules/isotope-layout/dist/isotope.pkgd.min.js',
-            'js/home/portfolio.js',
-            'js/home/jquery.hoverex.min.js'
-        ])
-        .pipe(concat({path: 'home.js'}))
-        .pipe(uglify({mangle: false}))
-        .pipe(gulp.dest('../public/js/'));
-});
-
 gulp.task('scripts', function () {
     var prismComponents = [];
     for (var component in prism) {
@@ -62,14 +50,18 @@ gulp.task('scripts', function () {
     }
 
     return gulp.src(prismComponents.concat([
-            'node_modules/prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.min.js'
+            'node_modules/prismjs/plugins/normalize-whitespace/prism-normalize-whitespace.min.js',
+            'node_modules/imagesloaded/imagesloaded.pkgd.js',
+            'node_modules/isotope-layout/dist/isotope.pkgd.min.js',
+            'js/portfolio.js',
+            'js/jquery.hoverex.min.js'
         ]))
         .pipe(concat({path: 'scripts.js'}))
         .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('../public/js/'));
 });
 
-gulp.task('styles', ['scripts-home'], function () {
+gulp.task('styles', function () {
     return gulp.src('sass/*.scss')
         .pipe(cssimport({filter: /^..\/node_modules\//gi}))
         .pipe(sass({outputStyle: 'compressed'}))
@@ -78,9 +70,7 @@ gulp.task('styles', ['scripts-home'], function () {
 
 gulp.task('revision', ['styles', 'scripts'], function () {
     gulp.src([
-            '../public/css/manual.css',
             '../public/css/styles.css',
-            '../public/js/home.js',
             '../public/js/scripts.js'
         ], {base: '../public'})
         .pipe(rev())

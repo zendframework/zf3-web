@@ -16,9 +16,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/<?= $this->asset('css/styles.css') ?>">
-    <?php if (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) : ?>
-    <link rel="stylesheet" href="/<?= $this->asset('css/manual.css') ?>">
-    <?php endif; ?>
 
     <?= $this->headLink() ?>
 </head>
