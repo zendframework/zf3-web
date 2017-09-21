@@ -142,3 +142,19 @@ environment variable before invoking the script:
 ```bash
 $ APP_CACHE=/path/to/cache/ php bin/build.php
 ```
+
+## CSS and JavaScript
+
+CSS can be found in the `asset/sass/` directory (we use SASS for defining our CSS),
+and JS can be found in the `asset/js/` directory.
+
+After changing CSS or JS you need rebuild assets, as following:
+```bash
+$ cd asset
+$ npm install
+$ gulp
+```
+
+New files will be generated in `public/js` and `public/css` and old files will
+be removed. File `asset/rev-manifest.json` will contain new revision names for
+our assets. The file is used by [`asset` view helper](https://docs.zendframework.com/zend-view/helpers/asset/).
