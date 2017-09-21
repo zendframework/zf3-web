@@ -126,7 +126,7 @@ follows:
 
 ```php
 $editor = new Role('editor');
-$editor->addChild('guest');
+$editor->addChild($guest);
 $editor->addPermission('write');
 
 $rbac->addRole($editor);
@@ -140,7 +140,7 @@ Another role might be a "reviewer" who can "moderate" content:
 
 ```php
 $reviewer = new Role('reviewer');
-$reviewer->addChild('guest');
+$reviewer->addChild($guest);
 $reviewer->addPermission('moderate');
 
 $rbac->addRole($reviewer);
@@ -156,8 +156,8 @@ permissions for "settings":
 
 ```php
 $admin= new Role('admin');
-$admin->addChild('editor');
-$admin->addChild('reviewer');
+$admin->addChild($editor);
+$admin->addChild($reviewer);
 $admin->addPermission('settings');
 
 $rbac->addRole($admin);
@@ -198,7 +198,7 @@ examples, I might do the following:
 
 ```php
 $mario= new Role('mario');
-$mario->addChild('editor');
+$mario->addChild($editor);
 $mario->addPermission('update');
 
 $rbac->addRole($mario);
