@@ -13,23 +13,12 @@
 
     <?= $this->headTitle('Zend Framework')->setSeparator(' - ') ?>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/prism.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/main.css?201606301756">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/<?= $this->asset('css/styles.css') ?>">
     <?php if (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) : ?>
-    <link rel="stylesheet" href="/css/manual.css">
+    <link rel="stylesheet" href="/<?= $this->asset('css/manual.css') ?>">
     <?php endif; ?>
 
     <?= $this->headLink() ?>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
