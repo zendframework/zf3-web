@@ -353,7 +353,10 @@ class CreateBookMiddlewareFactory
         $pipeline->pipe($container->get(ContentValidationMiddleware::class));
         $pipeline->pipe($container->get(BodyParamsMiddleware::class));
         $pipeline->pipe($container->get(BookValidationMiddleware::class));
-        $pipeline->pipe($container->get(CreateBookMiddleware::class));
+
+        // If dependencies are needed, pull them from the container and pass
+        // them to the constructor:
+        $pipeline->pipe(new CreateBookMiddleware());
 
         return $pipeline;
     }
@@ -396,7 +399,10 @@ class CreateBookMiddlewareFactory
         $nested->pipe(ContentValidationMiddleware::class);
         $nested->pipe(BodyParamsMiddleware::class);
         $nested->pipe(BookValidationMiddleware::class);
-        $nested->pipe(CreateBookMiddleware::class);
+
+        // If dependencies are needed, pull them from the container and pass
+        // them to the constructor:
+        $nested->pipe(new CreateBookMiddleware());
 
         return $nested;
     }
@@ -468,7 +474,11 @@ class CreateBookMiddlewareFactory
     public function __invoke(ContainerInterface $container)
     {
         $nested = $this->createNestedApplication($container);
-        $nested->pipe(CreateBookMiddleware::class);
+
+        // If dependencies are needed, pull them from the container and pass
+        // them to the constructor:
+        $nested->pipe(new CreateBookMiddleware());
+
         return $nested;
     }
 }
@@ -567,4 +577,6 @@ covered a number of features in this post:
 
 ## Updates
 
+- **2017-09-21 15:32:00T-0500**: Fixed all `CreateBookMiddlewareFactory`
+  implementations to ensure they do not demonstrate infinite recursive loops.
 - **2017-03-15 16:02:00T-0500**: Added note about order of middleware execution.
