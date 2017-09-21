@@ -152,6 +152,7 @@ interface FilterInterface
     /**
      * @param string $property
      * @return bool
+     */
     public function filter($property);
 }
 ```
