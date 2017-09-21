@@ -97,6 +97,36 @@ file_put_contents(
 );
 printf('done.' . PHP_EOL);
 
+printf('Building CSS and JS assets...%s', PHP_EOL);
+$curdir = getcwd();
+chdir(realpath(__DIR__) . '/../asset');
+printf('- Installing NPM packages%s', PHP_EOL);
+exec('npm install', $output, $status);
+if ($status !== 0) {
+    printf(
+        '[ERROR] npm install returned a non-zero status:%s%s%s%s',
+        PHP_EOL,
+        PHP_EOL,
+        implode(PHP_EOL, $output),
+        PHP_EOL
+    );
+    exit(1);
+}
+printf('- Building assets%s', PHP_EOL);
+exec('gulp', $output, $status);
+if ($status !== 0) {
+    printf(
+        '[ERROR] gulp returned a non-zero status:%s%s%s%s',
+        PHP_EOL,
+        PHP_EOL,
+        implode(PHP_EOL, $output),
+        PHP_EOL
+    );
+    exit(1);
+}
+chdir($curdir);
+unset($curdir, $output, $status);
+
 printf('Clearing config cache... ');
 if (getenv('APP_CACHE')) {
     $configCache = sprintf('%s/app_config.php', getenv('APP_CACHE'));
