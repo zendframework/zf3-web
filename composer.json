@@ -7,7 +7,10 @@
     },
     "license": "BSD-3-CLAUSE",
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.0"
+        }
     },
     "extra": {
         "branch-alias": {
