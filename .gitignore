@@ -1,3 +1,8 @@
 phpunit.xml
 config/development.config.php
+asset/node_modules/
+asset/npm-debug.log
+asset/rev-manifest.json
+public/js/*
+public/css/*
 vendor/
