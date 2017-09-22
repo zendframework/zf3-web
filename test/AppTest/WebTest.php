@@ -15,7 +15,7 @@ class WebTest extends TestCase
     {
         $this->client = new Client([
             'base_uri' => sprintf('http://%s:%s', WEB_SERVER_HOST, WEB_SERVER_PORT),
-            'timeout'  => 5,
+            'timeout'  => 20,
         ]);
     }
 
