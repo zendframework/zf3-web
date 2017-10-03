@@ -11,7 +11,7 @@ if (! isset($argv[1])) {
 
 $fileStats = $argv[1];
 
-$fileZfComponents = 'config/autoload/zf-components.global.php';
+$fileZfComponents = 'config/autoload/zf-components.local.php';
 if (! file_exists($fileZfComponents)) {
     fwrite(STDERR, sprintf("Error: the file '%s' does not exist!\n", $fileZfComponents));
     exit(1);

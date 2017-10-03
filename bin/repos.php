@@ -36,6 +36,6 @@ $writer = new Writer\PhpArray();
 $writer->setUseBracketArraySyntax(true);
 
 $writer->toFile(
-    dirname(__DIR__) . '/config/autoload/zf-components.global.php',
+    dirname(__DIR__) . '/config/autoload/zf-components.local.php',
     ['zf_components' => $repos]
 );
