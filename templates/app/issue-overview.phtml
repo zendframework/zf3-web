@@ -17,8 +17,8 @@
     </div>
 
     <div class="list-group hidden">
-        <?php foreach ($repository as $component) : ?>
-            <a class="list-group-item" href="https://github.com/zendframework/<?= basename($component['url']) ?>/issues"><?= basename($component['url']) ?></a>
+        <?php foreach ($repository as $name => $component) : ?>
+            <a class="list-group-item" href="https://github.com/zendframework/<?= $name ?>/issues"><?= $name ?></a>
         <?php endforeach ?>
     </div>
 </div>

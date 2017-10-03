@@ -115,20 +115,6 @@ printf('Post... ');
 $post = new Model\Post($parser);
 printf('done.' . PHP_EOL);
 
-printf('Building the config files:' . PHP_EOL);
-
-printf('Update ZF component list... ');
-$list = json_decode(
-    file_get_contents('https://docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json'),
-    true
-);
-file_put_contents(
-    dirname(__DIR__) . '/config/autoload/zf-components.global.php',
-    '<' . '?php return [\'zf_components\' => ' . var_export($list, true) . '];',
-    LOCK_EX
-);
-printf('done.' . PHP_EOL);
-
 printf('Clearing config cache... ');
 if (getenv('APP_CACHE')) {
     $configCache = sprintf('%s/app_config.php', getenv('APP_CACHE'));
