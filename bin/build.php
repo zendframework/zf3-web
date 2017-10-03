@@ -118,15 +118,22 @@ printf('done.' . PHP_EOL);
 printf('Building the config files:' . PHP_EOL);
 
 printf('Update ZF component list... ');
-$list = json_decode(
-    file_get_contents('https://docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json'),
-    true
-);
-file_put_contents(
-    dirname(__DIR__) . '/config/autoload/zf-components.global.php',
-    '<' . '?php return [\'zf_components\' => ' . var_export($list, true) . '];',
-    LOCK_EX
-);
+if (! getenv('GITHUB_TOKEN')) {
+    printf('%s[ERROR] GITHUB_TOKEN env variable is not set%s', PHP_EOL, PHP_EOL);
+    exit(1);
+}
+exec(sprintf('php bin/repos.php %s', getenv('GITHUB_TOKEN')), $output, $status);
+if ($status !== 0) {
+    printf(
+        '%s[ERROR] updating component list script returned a non-zero status:%s%s%s%s',
+        PHP_EOL,
+        PHP_EOL,
+        PHP_EOL,
+        implode(PHP_EOL, $output),
+        PHP_EOL
+    );
+    exit(1);
+}
 printf('done.' . PHP_EOL);
 
 printf('Clearing config cache... ');

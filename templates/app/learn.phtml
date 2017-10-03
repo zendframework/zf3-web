@@ -33,12 +33,16 @@ reset($components);
     </div>
 </div>
 
-<?php while ($comp = next($components)) : ?>
-    <div class="row">
+<?php foreach ($components as $name => $comp) : ?>
+    <?php
+    if (! $comp['docs']) {
+        continue;
+    }
+    ?>
         <div class="col-md-6">
             <div class="panel panel-default panel-component">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?= basename($comp['url']) ?></h3>
+                    <h3 class="panel-title"><?= $name ?></h3>
                 </div>
 
                 <div class="panel-body">
@@ -47,42 +51,15 @@ reset($components);
 
                 <div class="panel-footer">
                     <i class="fa fa-github"></i>
-                    <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a>
+                    <a href="https://github.com/zendframework/<?= $name ?>" target="_blank">Github</a>
                     <span class="pull-right">
-                                    <i class="fa fa-book"></i>
-                                    <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a>
-                                </span>
+                        <i class="fa fa-book"></i>
+                        <a href="https://docs.zendframework.com/<?= $name ?>" target="_blank">Documentation</a>
+                    </span>
                 </div>
             </div>
         </div>
-
-        <?php $comp = next($components) ?>
-
-        <?php if ($comp) : ?>
-            <div class="col-md-6">
-                <div class="panel panel-default panel-component">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><?= basename($comp['url']) ?></h3>
-                    </div>
-
-                    <div class="panel-body">
-                        <p><?= $comp['description'] ?></p>
-                    </div>
-
-                    <div class="panel-footer">
-                        <i class="fa fa-github"></i>
-                        <a href="https://github.com/zendframework/<?= basename($comp['url']) ?>" target="_blank">Github</a>
-                        <span class="pull-right">
-                                    <i class="fa fa-book"></i>
-                                    <a href="<?= $comp['url'] ?>" target="_blank">Documentation</a>
-                                </span>
-                    </div>
-                </div>
-            </div>
-        <?php endif ?>
-    </div>
-
-<?php endwhile; ?>
+<?php endforeach; ?>
 
 <?php $this->placeholder('sub-navigation')->set(
     $this->render('include::learn-menu', ['active' => '/learn'])

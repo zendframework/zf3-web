@@ -16,8 +16,8 @@
 
                 <label for="gitrepo">Select GitHub repository:</label>
                 <select class="form-control" id="gitrepo">
-                <?php foreach ($repository as $repo) : ?>
-                    <option value="https://github.com/zendframework/<?= basename($repo['url']) ?>/issues/new"><?= $repo['name'] ?></option>
+                <?php foreach ($repository as $name => $repo) : ?>
+                    <option value="https://github.com/zendframework/<?= $name ?>/issues/new"><?= $name ?></option>
                 <?php endforeach; ?>
                 </select>
             </div>
