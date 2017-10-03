@@ -12,7 +12,7 @@ $this->inlineScript()
     ->prependFile('https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js');
 ?>
 <!DOCTYPE html>
-<html class="csstransforms no-csstransforms3d csstransitions">
+<html>
 <?php echo $this->render('include::head') ?>
 <body<?= (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) ? ' id="manual"' : '' ?>>
     <?php echo $this->render('include::nav') ?>
