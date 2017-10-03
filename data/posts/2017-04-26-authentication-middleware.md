@@ -546,7 +546,7 @@ These are each interesting exercises for you to try!
 
 As noted in the introduction, this article demonstrates only _authentication_.
 Our next article [details how to use zend-permissions-rbac](/blog/2017-04-27-zend-permissions-rbac.html),
-and a later article details [authorization middleware using an RBAC](/blog/2017-04-26-authentication-middleware.html).
+and a later article details [authorization middleware using an RBAC](/blog/2017-05-04-authorization-middleware.html).
 
 ## Updates
 
