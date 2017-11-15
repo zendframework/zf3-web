@@ -246,6 +246,37 @@ a:focus {
   margin: 0 auto;
 }
 
+#carousel-header {
+    width: 100%;
+    padding: 0;
+}
+
+#headerbook {
+    background-color: #1c61c9;
+    background-image: url("/img/bg_book.jpg");
+    padding-top: 100px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#headerbook h1 {
+  color: white;
+  margin-bottom: 25px;
+}
+
+#headerbook2 {
+    background-color: #9dd2aa;
+    background-image: url("/img/bg_book2.jpg");
+    padding-top: 100px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#headerbook2 h1 {
+  color: white;
+  margin-bottom: 25px;
+}
+
 /* Services Wrap */
 #service {
   margin-top: 20px;
