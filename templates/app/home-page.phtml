@@ -5,25 +5,77 @@ $this->headTitle('Home');
 $this->placeholder('page-layout')->set('wide');
 ?>
 
-<div id="headerwrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
-            </div>
+<div id="carousel-header" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-header" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-header" data-slide-to="1"></li>
+        <li data-target="#carousel-header" data-slide-to="2"></li>
+      </ol>
 
-            <div class="col-lg-8">
-                <h1>Zend Framework</h1>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+          <div class="item active" id="headerwrap">
+              <div class="container">
+                  <div class="row centered">
+                      <div class="col-lg-4">
+                          <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
+                      </div>
+                      <div class="col-lg-8">
+                          <h1>Zend Framework</h1>
 
-                <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
-                <?php if ($stats > 0) : ?>
-                <h2><?= number_format($stats); ?> installs from <a href="https://packagist.org/" class="text-info">Packagist</a>!</a></h2>
-                <?php endif; ?>
-                <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
+                          <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
+                          <?php if ($stats > 0) : ?>
+                          <h2><?= number_format($stats); ?> installs from <a href="https://packagist.org/" class="text-info">Packagist</a>!</a></h2>
+                          <?php endif; ?>
+                          <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            <div class="item" id="headerbook">
+                <div class="container">
+                    <div class="row centered">
+                        <div class="col-lg-4">
+                            <img src="img/zf3cookbook.png" align="right" title="ZF3 Cookbook" alt="ZF3 Cookbook">
+                        </div>
+                        <div class="col-lg-8">
+                            <h1>Zend Framework 3 Cookbook</h1>
+
+                            <h3>A free ebook of PHP recipes using Zend components</h3>
+                            <p><br /><a href="http://www.zend.com/phpcookbooks" class="btn btn-theme">Download now</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="item" id="headerbook2">
+                <div class="container">
+                    <div class="row centered">
+                        <div class="col-lg-4">
+                            <img src="img/expressivecookbook.png" align="right" title="Expressive Cookbook" alt="Expressive Cookbook">
+                        </div>
+                        <div class="col-lg-8">
+                            <h1>Expressive Cookbook</h1>
+
+                            <h3>A free ebook of PHP recipes for PSR-7 applications</h3>
+                            <p><br /><a href="http://www.zend.com/phpcookbooks" class="btn btn-theme">Download now</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-header" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#carousel-header" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
 </div>
+
 
 <div id="service">
     <div class="container">
