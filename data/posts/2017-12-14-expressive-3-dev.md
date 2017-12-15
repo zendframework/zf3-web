@@ -108,7 +108,7 @@ This is all very nice and technical, but how can YOU test out the new versions?
 Install the development version of the Expressive skeleton!
 
 ```bash
-$ composer create-project "zendframework/zend-expressive-skeleton:3.0.0-dev" expressive-3.0-dev
+$ composer create-project "zendframework/zend-expressive-skeleton:3.0.x-dev" expressive-3.0-dev
 ```
 
 This will create the skeleton project, with your selected functionality, in a
