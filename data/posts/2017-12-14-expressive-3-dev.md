@@ -74,7 +74,7 @@ Our approach in updating the various packages was as follows:
   `"dev-release-3.0.0": "3.0.x-dev".
 - On the release branches, we updated dependencies as follows:
   - PHP dependencies became simply `^7.1` (per [our decision posted in
-    June](https://framework.zend.com/blog/2017-06-06-zf-php-7-1.html).
+    June](https://framework.zend.com/blog/2017-06-06-zf-php-7-1.html)).
   - References to `http-interop/http-middleware` packages were changed to
     `"http-interop/http-server-middleware": "^1.0.1"`.
   - References to packages that have corresponding release branches were updated
