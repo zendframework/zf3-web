@@ -121,7 +121,7 @@ class XClacksOverheadMiddleware implements MiddlewareInterface
 Once your middleware is created, register it in the container as an invokable,
 via the `config/autoload/dependencies.global.php` file:
 
-```
+```php
 'dependencies' => [
     'invokables' => [
         App\XClacksOverheadMiddleware::class => App\XClacksOverheadMiddleware::class,
@@ -190,7 +190,7 @@ class HelloWorldHandler implements RequestHandlerInterface
 Like the `XClacksOverhead` middleware, We'll register this with the container as
 an invokable, via the file `config/autoload/dependencies.global.php`:
 
-```
+```php
 'dependencies' => [
     'invokables' => [
         App\Handler\HelloWorldHandler::class => App\Handler\HelloWorldHandler::class,
