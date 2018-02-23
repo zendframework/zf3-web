@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Model\Advisory;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -27,12 +28,12 @@ class SecurityAction implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $action = $request->getAttribute('action', 'security');
 
         if ($action === 'feed') {
-            return $this->feed($request, $delegate);
+            return $this->feed($request);
         }
 
         if (! file_exists(sprintf('templates/app/%s.phtml', $action))) {
@@ -65,7 +66,7 @@ class SecurityAction implements RequestHandlerInterface
         return new HtmlResponse($this->template->render(sprintf('app::%s', $action), $content));
     }
 
-    protected function feed(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function feed(ServerRequestInterface $request)
     {
         $baseUrl = (string) $request->getUri()->withPath('/security');
         $feedUrl = (string) $request->getUri()->withQuery('')->withFragment('');

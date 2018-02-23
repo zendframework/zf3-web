@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
@@ -18,7 +19,7 @@ class SwitchManualAction implements RequestHandlerInterface
         $this->config = $config;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $body = json_decode($request->getBody());
         if (! isset($body->old) || ! isset($body->new) || ! isset($body->lang) || ! isset($body->page)) {

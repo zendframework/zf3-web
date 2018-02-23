@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use DOMXPath;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -23,7 +24,7 @@ class ManualAction implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $page    = $request->getAttribute('page', false);
         $version = $request->getAttribute('version', false);

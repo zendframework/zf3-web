@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -21,7 +22,7 @@ class AboutAction implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $page = basename($request->getUri()->getPath());
         $stat = $this->config['zf_stats']['total'] ?? false;

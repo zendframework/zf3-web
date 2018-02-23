@@ -44,14 +44,13 @@ class HomePageActionTest extends TestCase
 
     public function testResponse()
     {
-        $delegate = $this->prophesize(DelegateInterface::class);
         $homePage = new HomePageAction(
             $this->zfComponents,
             $this->post->reveal(),
             $this->advisory->reveal(),
             $this->template->reveal()
         );
-        $response = $homePage->process(new ServerRequest(['/']), $delegate->reveal());
+        $response = $homePage->handle(new ServerRequest(['/']));
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(StatusCode::STATUS_OK, $response->getStatusCode());
     }

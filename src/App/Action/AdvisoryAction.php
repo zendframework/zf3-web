@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Model\Advisory;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -22,7 +23,7 @@ class AdvisoryAction implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $advisory = $request->getAttribute('advisory', false);
         $file = sprintf('data/advisories/%s.md', basename($advisory));

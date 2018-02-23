@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -25,7 +26,7 @@ class DocsAction implements RequestHandlerInterface
         $this->template     = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $ver = $request->getAttribute('ver', false);
 

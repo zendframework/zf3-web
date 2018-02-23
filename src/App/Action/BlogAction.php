@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Model\Post;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -27,16 +28,16 @@ class BlogAction implements RequestHandlerInterface
         $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         if (preg_match('#/feed.*?\.xml$#', $request->getUri()->getPath())) {
-            return $this->feed($request, $delegate);
+            return $this->feed($request);
         }
 
         $file = $request->getAttribute('file', false);
 
         if (! $file) {
-            return $this->blogPage($request, $delegate);
+            return $this->blogPage($request);
         }
 
         $post = sprintf('data/posts/%s.md', basename($file, '.html'));
@@ -51,7 +52,7 @@ class BlogAction implements RequestHandlerInterface
         return new HtmlResponse($this->template->render('app::post', $content));
     }
 
-    protected function blogPage(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function blogPage(ServerRequestInterface $request)
     {
         $params = $request->getQueryParams();
         $page = isset($params['page']) ? (int) $params['page'] : 1;
@@ -78,7 +79,7 @@ class BlogAction implements RequestHandlerInterface
         ]));
     }
 
-    protected function feed(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function feed(ServerRequestInterface $request)
     {
         $uri     = $request->getUri();
         $blogUrl = (string) $uri->withPath('/blog');

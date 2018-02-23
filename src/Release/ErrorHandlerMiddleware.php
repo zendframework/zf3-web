@@ -21,16 +21,16 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
     /**
      * @return JsonResponse
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate) : \Psr\Http\Message\ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $handler) : \Psr\Http\Message\ResponseInterface
     {
         if (! $this->enabled) {
-            return $delegate->handle($request);
+            return $handler->handle($request);
         }
 
         set_error_handler([$this, 'handleError']);
 
         try {
-            return $delegate->handle($request);
+            return $handler->handle($request);
         } catch (Throwable $e) {
         } finally {
             restore_error_handler();

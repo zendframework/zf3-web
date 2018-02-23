@@ -13,7 +13,7 @@ use Zend\Diactoros\Response\RedirectResponse;
  */
 class StripTrailingSlashMiddleware implements MiddlewareInterface
 {
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate) : \Psr\Http\Message\ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $handler) : \Psr\Http\Message\ResponseInterface
     {
         $uri = $request->getUri();
         $path = $uri->getPath();
@@ -25,6 +25,6 @@ class StripTrailingSlashMiddleware implements MiddlewareInterface
             );
         }
 
-        return $delegate->handle($request);
+        return $handler->handle($request);
     }
 }

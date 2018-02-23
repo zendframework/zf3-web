@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Model;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -37,7 +38,7 @@ class HomePageAction implements RequestHandlerInterface
         $this->template   = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $data = [
             'projects'   => require 'data/projects.php',

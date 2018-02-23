@@ -30,7 +30,7 @@ class VerifyHubSignatureMiddleware implements MiddlewareInterface
         $this->streamFactory = $streamFactory;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate) : ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $handler) : ResponseInterface
     {
         $sigSent = $request->getHeaderLine('X-Hub-Signature');
         if (empty($sigSent) || ! preg_match('/^(sha1\=)?(?P<sig>[a-f0-9]+)$/', $sigSent, $matches)) {
@@ -51,7 +51,7 @@ class VerifyHubSignatureMiddleware implements MiddlewareInterface
                 ]));
         }
 
-        return $delegate->handle($request);
+        return $handler->handle($request);
     }
 
     private function createJsonResponseBody(array $data) : StreamInterface

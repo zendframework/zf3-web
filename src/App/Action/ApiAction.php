@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\TextResponse;
@@ -16,7 +17,7 @@ class ApiAction implements RequestHandlerInterface
         $this->versions = $versions;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $version = $request->getQueryParams()['v'] ?? '1';
         if (! isset($this->versions[$version])) {

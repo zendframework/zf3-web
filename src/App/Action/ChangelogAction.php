@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use App\Model\Changelog;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -22,7 +23,7 @@ class ChangelogAction implements RequestHandlerInterface
         $this->template  = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $allChangelog = $this->changelog->getAll();
         $changelog = $request->getAttribute('changelog', basename(key($allChangelog), '.md'));
