@@ -19,7 +19,7 @@
         }
     },
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
         "league/commonmark": "^0.15.3",
         "mnapoli/front-yaml": "^1.5.2",
         "ocramius/proxy-manager": "^2.0.4",
