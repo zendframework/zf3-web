@@ -3,14 +3,13 @@
 namespace App\Action;
 
 use DOMXPath;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Dom\Query as DomQuery;
 use Zend\Expressive\Template;
 
-class ManualAction implements MiddlewareInterface
+class ManualAction implements RequestHandlerInterface
 {
     /** @var array */
     private $config;
@@ -24,7 +23,7 @@ class ManualAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $page    = $request->getAttribute('page', false);
         $version = $request->getAttribute('version', false);

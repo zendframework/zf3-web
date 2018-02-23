@@ -3,13 +3,12 @@
 namespace App\Action;
 
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\JsonResponse;
 
-class SwitchManualAction implements MiddlewareInterface
+class SwitchManualAction implements RequestHandlerInterface
 {
     /** @var array */
     protected $config;
@@ -19,7 +18,7 @@ class SwitchManualAction implements MiddlewareInterface
         $this->config = $config;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $body = json_decode($request->getBody());
         if (! isset($body->old) || ! isset($body->new) || ! isset($body->lang) || ! isset($body->page)) {

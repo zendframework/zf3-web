@@ -3,8 +3,7 @@
 namespace Release;
 
 use DateTime;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use League\CommonMark\CommonMarkConverter;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\EmptyResponse;
@@ -12,7 +11,7 @@ use Zend\Diactoros\Response\JsonResponse;
 use Zend\Feed\Reader\Reader;
 use Zend\Feed\Writer\Feed;
 
-class AcceptReleaseAction implements MiddlewareInterface
+class AcceptReleaseAction implements RequestHandlerInterface
 {
     const DEFAULT_FEED_AUTHOR = [
         'name' => 'Zend Framework Development Team',
@@ -36,7 +35,7 @@ class AcceptReleaseAction implements MiddlewareInterface
     /**
      * @return JsonResponse|EmptyResponse
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $content = (string) $request->getBody();
         $data = json_decode($content, true);

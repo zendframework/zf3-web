@@ -3,15 +3,14 @@
 namespace App\Action;
 
 use App\Model\Advisory;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
 use Zend\Feed\Writer\Feed;
 
-class SecurityAction implements MiddlewareInterface
+class SecurityAction implements RequestHandlerInterface
 {
     const ADVISORY_PER_PAGE = 10;
     const ADVISORY_PER_FEED = 15;
@@ -28,7 +27,7 @@ class SecurityAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $action = $request->getAttribute('action', 'security');
 

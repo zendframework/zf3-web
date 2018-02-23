@@ -1,9 +1,16 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Expressive routed middleware
  */
 
 /** @var \Zend\Expressive\Application $app */
+return function (
+    \Zend\Expressive\Application $app,
+    \Zend\Expressive\MiddlewareFactory $factory,
+    \Psr\Container\ContainerInterface $container
+) : void {
 $app->get('/api/zf-version', \App\Action\ApiAction::class, 'api-zf-version');
 $app->get('/', \App\Action\HomePageAction::class, 'home');
 $app->get('/blog[/:file]', \App\Action\BlogAction::class, 'blog');
@@ -22,3 +29,4 @@ $app->get('/downloads[/:page]', \App\Action\InstallAction::class, 'install');
 $app->get('/participate[/:page]', \App\Action\ParticipateAction::class, 'participate');
 $app->get('/status', \App\Action\StatusAction::class, 'status');
 $app->get('/stats', \App\Action\StatisticsAction::class, 'statistics');
+};

@@ -9,7 +9,7 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.0"
+            "php": "7.1.3"
         }
     },
     "extra": {
@@ -27,10 +27,10 @@
         "webuni/commonmark-table-extension": "^0.6.1",
         "zendframework/zend-config-aggregator": "^1.0.0",
         "zendframework/zend-dom": "^2.6",
-        "zendframework/zend-expressive": "^2.0.3",
-        "zendframework/zend-expressive-helpers": "^3.0.1",
-        "zendframework/zend-expressive-zendrouter": "^2.0.1",
-        "zendframework/zend-expressive-zendviewrenderer": "^1.4",
+        "zendframework/zend-expressive": "^3.0@alpha",
+        "zendframework/zend-expressive-helpers": "^5.0@alpha",
+        "zendframework/zend-expressive-zendrouter": "^3.0@alpha",
+        "zendframework/zend-expressive-zendviewrenderer": "^2.0@alpha",
         "zendframework/zend-feed": "^2.8",
         "zendframework/zend-servicemanager": "^3.3",
         "zendframework/zend-stdlib": "^3.1"
@@ -40,6 +40,8 @@
         "guzzlehttp/guzzle": "^6.3",
         "phpunit/phpunit": "^6.3",
         "zendframework/zend-coding-standard": "~1.0.0",
+        "zendframework/zend-component-installer": "^2.1",
+        "zendframework/zend-expressive-tooling": "^1.0@alpha",
         "zfcampus/zf-development-mode": "^3.1"
     },
     "autoload": {
@@ -65,5 +67,6 @@
         "development-status": "zf-development-mode status",
         "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
         "test": "phpunit"
-    }
+    },
+    "minimum-stability": "alpha"
 }

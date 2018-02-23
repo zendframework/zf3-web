@@ -3,13 +3,12 @@
 namespace App\Action;
 
 use App\Model\Issue;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class IssueAction implements MiddlewareInterface
+class IssueAction implements RequestHandlerInterface
 {
     const ISSUE_PER_PAGE = 15;
 
@@ -29,7 +28,7 @@ class IssueAction implements MiddlewareInterface
         $this->template     = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $action = $request->getAttribute('type', false);
         if (! $action) {

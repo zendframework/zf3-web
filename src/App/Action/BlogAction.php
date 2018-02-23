@@ -3,15 +3,14 @@
 namespace App\Action;
 
 use App\Model\Post;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
 use Zend\Feed\Writer\Feed;
 
-class BlogAction implements MiddlewareInterface
+class BlogAction implements RequestHandlerInterface
 {
     const POST_PER_PAGE = 10;
     const POST_PER_FEED = 15;
@@ -28,7 +27,7 @@ class BlogAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         if (preg_match('#/feed.*?\.xml$#', $request->getUri()->getPath())) {
             return $this->feed($request, $delegate);

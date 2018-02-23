@@ -2,13 +2,12 @@
 
 namespace App\Action;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class AboutAction implements MiddlewareInterface
+class AboutAction implements RequestHandlerInterface
 {
     /** @var array */
     private $config;
@@ -22,7 +21,7 @@ class AboutAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $page = basename($request->getUri()->getPath());
         $stat = $this->config['zf_stats']['total'] ?? false;

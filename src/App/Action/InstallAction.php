@@ -3,13 +3,12 @@
 namespace App\Action;
 
 use App\Model\Release;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class InstallAction implements MiddlewareInterface
+class InstallAction implements RequestHandlerInterface
 {
     /** @var Release */
     private $release;
@@ -23,7 +22,7 @@ class InstallAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $page = $request->getAttribute('page', false);
 

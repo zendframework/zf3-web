@@ -3,13 +3,12 @@
 namespace App\Action;
 
 use App\Model\Advisory;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class AdvisoryAction implements MiddlewareInterface
+class AdvisoryAction implements RequestHandlerInterface
 {
     /** @var Advisory */
     private $advisory;
@@ -23,7 +22,7 @@ class AdvisoryAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
     {
         $advisory = $request->getAttribute('advisory', false);
         $file = sprintf('data/advisories/%s.md', basename($advisory));
