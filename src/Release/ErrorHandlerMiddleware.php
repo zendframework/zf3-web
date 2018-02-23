@@ -3,6 +3,7 @@
 namespace Release;
 
 use ErrorException;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface as DelegateInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,7 +22,7 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
     /**
      * @return JsonResponse
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $handler) : \Psr\Http\Message\ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $handler) : ResponseInterface
     {
         if (! $this->enabled) {
             return $handler->handle($request);

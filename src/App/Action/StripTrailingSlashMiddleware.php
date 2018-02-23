@@ -3,6 +3,7 @@
 namespace App\Action;
 
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface as DelegateInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,7 +14,7 @@ use Zend\Diactoros\Response\RedirectResponse;
  */
 class StripTrailingSlashMiddleware implements MiddlewareInterface
 {
-    public function process(ServerRequestInterface $request, DelegateInterface $handler) : \Psr\Http\Message\ResponseInterface
+    public function process(ServerRequestInterface $request, DelegateInterface $handler) : ResponseInterface
     {
         $uri = $request->getUri();
         $path = $uri->getPath();

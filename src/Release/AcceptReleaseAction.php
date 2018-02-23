@@ -3,6 +3,7 @@
 namespace Release;
 
 use DateTime;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use League\CommonMark\CommonMarkConverter;
 use Psr\Http\Message\ServerRequestInterface;
@@ -35,7 +36,7 @@ class AcceptReleaseAction implements RequestHandlerInterface
     /**
      * @return JsonResponse|EmptyResponse
      */
-    public function handle(ServerRequestInterface $request) : \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $content = (string) $request->getBody();
         $data = json_decode($content, true);
