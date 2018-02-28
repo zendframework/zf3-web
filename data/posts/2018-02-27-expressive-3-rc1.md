@@ -52,7 +52,7 @@ $ composer create-project "zendframework/zend-expressive-skeleton:3.0.0rc1"
 If you want to install to a custom directory name, use the following instead:
 
 ```bash
-$ composer create project zendframework/zend-expressive-skeleton {your directory} 3.0.0rc1
+$ composer create-project zendframework/zend-expressive-skeleton {your directory} 3.0.0rc1
 ```
 
 The installer will prompt you for a number of things:
