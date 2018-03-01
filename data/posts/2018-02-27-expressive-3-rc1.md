@@ -113,7 +113,7 @@ You can also create middleware to add to your application pipeline, or within
 route-specific pipelines. From here, you have the basic building blocks and
 application structure to get started!
 
-## Migrating from alpha3 and rc1
+## Migrating from alpha3 to rc1
 
 While a ton has changed between the 3.0.0alpha3 release and today, most
 applications built on alpha3 should be able to continue working as they were
