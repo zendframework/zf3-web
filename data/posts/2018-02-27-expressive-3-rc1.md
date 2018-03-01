@@ -2,6 +2,7 @@
 layout: post
 title: Expressive 3.0.0RC1 is now ready!
 date: 2018-02-27T16:25:00-05:00
+updated: 2018-03-01T08:30:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net
 permalink: /blog/2018-02-27-expressive-3-rc1.html
@@ -516,3 +517,8 @@ that are not documented, let us know by filing issues or asking questions in
 
 We look forward to the stable release, and the positive impact PSR-15 will have
 on the PHP ecosystem!
+
+#### Updates
+
+- **2018-03-01**: Fixes a syntax error in the instructions for creating a
+  project. Additionally, fixes a grammatical issue in one of the headers.
