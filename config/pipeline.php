@@ -16,7 +16,7 @@ return function (
     $app->pipe(\App\Action\StripTrailingSlashMiddleware::class);
     $app->pipe(\App\Action\Redirects::class);
     $app->pipe(\Zend\Expressive\Helper\ServerUrlMiddleware::class);
-    $app->pipe(\Zend\Expressive\Router\Middleware\PathBasedRoutingMiddleware::class);
+    $app->pipe(\Zend\Expressive\Router\Middleware\RouteMiddleware::class);
     $app->pipe(\Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware::class);
     $app->pipe(\Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware::class);
     $app->pipe(\Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware::class);
