@@ -20,11 +20,11 @@
     },
     "require": {
         "php": "^7.1",
-        "league/commonmark": "^0.15.3",
+        "league/commonmark": "^0.17",
         "mnapoli/front-yaml": "^1.5.2",
         "ocramius/proxy-manager": "^2.0.4",
         "roave/security-advisories": "dev-master",
-        "webuni/commonmark-table-extension": "^0.6.1",
+        "webuni/commonmark-table-extension": "^0.8",
         "zendframework/zend-config-aggregator": "^1.1",
         "zendframework/zend-dom": "^2.6",
         "zendframework/zend-expressive": "^3.0.0rc5",
