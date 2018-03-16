@@ -113,7 +113,7 @@ and months; stay tuned for announcements!
 We have prepared a [migration document](https://docs.zendframework.com/zend-expressive/v3/reference/migration/)
 that covers new features, removed features, and a list of all changes.
 
-Additionally, we have provided [migration tooling](https://docs.zendframework.com/zend-expressive/v3/reference/migration/#upgrading
+Additionally, we have provided [migration tooling](https://docs.zendframework.com/zend-expressive/v3/reference/migration/#upgrading)
 to aid you in your migration from version 2 to version 3. _The tool will not
 necessarily give you a fully running application_, but it _will_ take care of
 the majority of the changes necessary to bump your application to version 3,
