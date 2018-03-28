@@ -3,8 +3,9 @@
 namespace Release;
 
 use ErrorException;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface as DelegateInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Throwable;
 use Zend\Diactoros\Response\JsonResponse;
@@ -21,16 +22,16 @@ class ErrorHandlerMiddleware implements MiddlewareInterface
     /**
      * @return JsonResponse
      */
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, DelegateInterface $handler) : ResponseInterface
     {
         if (! $this->enabled) {
-            return $delegate->process($request);
+            return $handler->handle($request);
         }
 
         set_error_handler([$this, 'handleError']);
 
         try {
-            return $delegate->process($request);
+            return $handler->handle($request);
         } catch (Throwable $e) {
         } finally {
             restore_error_handler();

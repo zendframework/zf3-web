@@ -1,23 +1,16 @@
-version: '2'
+version: '3'
 
 services:
-  fpm:
-    image: php:7.0-fpm
-    volumes_from:
-      - source
+  php:
+    build: .docker/php/
+    volumes:
+      - .:/var/vhosts/framework.zend.com
   
   nginx:
-    build:
-      context: .
-      dockerfile: .docker/Dockerfile-Nginx
+    build: .docker/nginx/
     ports:
       - "8080:80"
     links:
-      - fpm
-    volumes_from:
-      - source
-
-  source:
-    image: busybox
+      - php
     volumes:
       - .:/var/vhosts/framework.zend.com

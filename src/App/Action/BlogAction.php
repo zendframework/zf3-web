@@ -3,15 +3,15 @@
 namespace App\Action;
 
 use App\Model\Post;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
 use Zend\Feed\Writer\Feed;
 
-class BlogAction implements MiddlewareInterface
+class BlogAction implements RequestHandlerInterface
 {
     const POST_PER_PAGE = 10;
     const POST_PER_FEED = 15;
@@ -28,16 +28,16 @@ class BlogAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         if (preg_match('#/feed.*?\.xml$#', $request->getUri()->getPath())) {
-            return $this->feed($request, $delegate);
+            return $this->feed($request);
         }
 
         $file = $request->getAttribute('file', false);
 
         if (! $file) {
-            return $this->blogPage($request, $delegate);
+            return $this->blogPage($request);
         }
 
         $post = sprintf('data/posts/%s.md', basename($file, '.html'));
@@ -52,7 +52,7 @@ class BlogAction implements MiddlewareInterface
         return new HtmlResponse($this->template->render('app::post', $content));
     }
 
-    protected function blogPage(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function blogPage(ServerRequestInterface $request)
     {
         $params = $request->getQueryParams();
         $page = isset($params['page']) ? (int) $params['page'] : 1;
@@ -79,7 +79,7 @@ class BlogAction implements MiddlewareInterface
         ]));
     }
 
-    protected function feed(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function feed(ServerRequestInterface $request)
     {
         $uri     = $request->getUri();
         $blogUrl = (string) $uri->withPath('/blog');

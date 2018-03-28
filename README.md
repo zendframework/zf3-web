@@ -53,16 +53,10 @@ $ php bin/build.php
 For development, we use [docker-compose](https://docs.docker.com/compose/);
 make sure you have both that and Docker installed on your machine.
 
-Build the images:
+Build the images and launch them:
 
 ```bash
-$ docker-compose build
-```
-
-And then launch them:
-
-```bash
-$ docker-compose up -d
+$ docker-compose up --build -d
 ```
 
 You can then browse to `http://localhost:8080`, and any changes you make in the

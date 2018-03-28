@@ -3,13 +3,13 @@
 namespace App\Action;
 
 use App\Model;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class HomePageAction implements MiddlewareInterface
+class HomePageAction implements RequestHandlerInterface
 {
     const NUM_POSTS = 5;
     const NUM_ADVISORIES = 4;
@@ -38,7 +38,7 @@ class HomePageAction implements MiddlewareInterface
         $this->template   = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $data = [
             'projects'   => require 'data/projects.php',
