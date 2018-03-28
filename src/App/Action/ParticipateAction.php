@@ -2,13 +2,13 @@
 
 namespace App\Action;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class ParticipateAction implements MiddlewareInterface
+class ParticipateAction implements RequestHandlerInterface
 {
     /** @var array */
     private $zfComponents;
@@ -29,7 +29,7 @@ class ParticipateAction implements MiddlewareInterface
         $this->template     = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $page = $request->getAttribute('page', false);
 

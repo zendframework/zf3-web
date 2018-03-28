@@ -3,13 +3,13 @@
 namespace App\Action;
 
 use App\Model\Issue;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class IssueAction implements MiddlewareInterface
+class IssueAction implements RequestHandlerInterface
 {
     const ISSUE_PER_PAGE = 15;
 
@@ -29,7 +29,7 @@ class IssueAction implements MiddlewareInterface
         $this->template     = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $action = $request->getAttribute('type', false);
         if (! $action) {
@@ -43,10 +43,10 @@ class IssueAction implements MiddlewareInterface
             return new HtmlResponse($this->template->render('error::404'));
         }
 
-        return $this->$action($request, $delegate);
+        return $this->$action($request);
     }
 
-    protected function browse(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function browse(ServerRequestInterface $request)
     {
         $issueId = $request->getAttribute('issue', false);
         if (! $issueId) {
@@ -66,12 +66,12 @@ class IssueAction implements MiddlewareInterface
         return new HtmlResponse($this->template->render('app::issue', $content));
     }
 
-    protected function zf1(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function zf1(ServerRequestInterface $request)
     {
-        return $this->zf2($request, $delegate);
+        return $this->zf2($request);
     }
 
-    protected function zf2(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function zf2(ServerRequestInterface $request)
     {
         $action = $request->getAttribute('type', false);
 

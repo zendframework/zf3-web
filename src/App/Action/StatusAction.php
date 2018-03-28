@@ -2,13 +2,13 @@
 
 namespace App\Action;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Template;
 
-class StatusAction implements MiddlewareInterface
+class StatusAction implements RequestHandlerInterface
 {
     /** @var array */
     private $config;
@@ -22,7 +22,7 @@ class StatusAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         if (! isset($this->config['zf_stats'])) {
             return new HtmlResponse($this->template->render('error::404'));

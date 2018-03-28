@@ -3,15 +3,15 @@
 namespace App\Action;
 
 use App\Model\Advisory;
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\TextResponse;
 use Zend\Expressive\Template;
 use Zend\Feed\Writer\Feed;
 
-class SecurityAction implements MiddlewareInterface
+class SecurityAction implements RequestHandlerInterface
 {
     const ADVISORY_PER_PAGE = 10;
     const ADVISORY_PER_FEED = 15;
@@ -28,12 +28,12 @@ class SecurityAction implements MiddlewareInterface
         $this->template = $template;
     }
 
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function handle(ServerRequestInterface $request) : ResponseInterface
     {
         $action = $request->getAttribute('action', 'security');
 
         if ($action === 'feed') {
-            return $this->feed($request, $delegate);
+            return $this->feed($request);
         }
 
         if (! file_exists(sprintf('templates/app/%s.phtml', $action))) {
@@ -66,7 +66,7 @@ class SecurityAction implements MiddlewareInterface
         return new HtmlResponse($this->template->render(sprintf('app::%s', $action), $content));
     }
 
-    protected function feed(ServerRequestInterface $request, DelegateInterface $delegate)
+    protected function feed(ServerRequestInterface $request)
     {
         $baseUrl = (string) $request->getUri()->withPath('/security');
         $feedUrl = (string) $request->getUri()->withQuery('')->withFragment('');
