@@ -35,6 +35,7 @@
         "zendframework/zend-expressive-zendrouter": "^3.0",
         "zendframework/zend-expressive-zendviewrenderer": "^2.0",
         "zendframework/zend-feed": "^2.8",
+        "zendframework/zend-problem-details": "^1.0",
         "zendframework/zend-servicemanager": "^3.3.2",
         "zendframework/zend-stdlib": "^3.1"
     },
