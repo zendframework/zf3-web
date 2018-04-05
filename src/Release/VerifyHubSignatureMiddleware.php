@@ -2,62 +2,48 @@
 
 namespace Release;
 
-use Psr\Http\Server\RequestHandlerInterface as DelegateInterface;
-use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamInterface;
-use Zend\Diactoros\Response\JsonResponse;
+use Psr\Http\Server\RequestHandlerInterface as DelegateInterface;
+use Psr\Http\Server\MiddlewareInterface;
 
 class VerifyHubSignatureMiddleware implements MiddlewareInterface
 {
-    /** @var ResponseInterface */
-    private $responsePrototype;
+    /** @var callable */
+    private $responseFactory;
 
     /** @var string */
     private $secret;
 
-    /** @var callable */
-    private $streamFactory;
-
     public function __construct(
         string $secret,
-        ResponseInterface $responsePrototype,
-        callable $streamFactory
+        callable $responseFactory
     ) {
         $this->secret = $secret;
-        $this->responsePrototype = $responsePrototype;
-        $this->streamFactory = $streamFactory;
+        $this->responseFactory = $responseFactory;
     }
 
     public function process(ServerRequestInterface $request, DelegateInterface $handler) : ResponseInterface
     {
         $sigSent = $request->getHeaderLine('X-Hub-Signature');
         if (empty($sigSent) || ! preg_match('/^(sha1\=)?(?P<sig>[a-f0-9]+)$/', $sigSent, $matches)) {
-            return $this->responsePrototype
-                ->withStatus(203)
-                ->withBody($this->createJsonResponseBody([
-                    'error' => 'missing signature',
-                ]));
+            $response = ($this->responseFactory)();
+            $response->write(json_encode([
+                'error' => 'missing signature',
+            ]));
+            return $response->withStatus(203);
         }
 
         $sigSent = $matches['sig'];
         $content = (string) $request->getBody();
         if (hash_hmac('sha1', $content, $this->secret) !== $sigSent) {
-            return $this->responsePrototype
-                ->withStatus(203)
-                ->withBody($this->createJsonResponseBody([
-                    'error' => 'signature mismatch',
-                ]));
+            $response = ($this->responseFactory)();
+            $response->write(json_encode([
+                'error' => 'signature mismatch',
+            ]));
+            return $response->withStatus(203);
         }
 
         return $handler->handle($request);
-    }
-
-    private function createJsonResponseBody(array $data) : StreamInterface
-    {
-        $stream = ($this->streamFactory)();
-        $stream->write(json_encode($data));
-        return $stream;
     }
 }

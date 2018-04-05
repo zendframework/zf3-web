@@ -3,6 +3,7 @@
 namespace Release;
 
 use Psr\Container\ContainerInterface;
+use Zend\ProblemDetails\ProblemDetailsMiddleware;
 
 class ReleaseRoutesDelegatorFactory
 {
@@ -10,7 +11,7 @@ class ReleaseRoutesDelegatorFactory
     {
         $app = $callback();
         $app->post('/releases/new-release', [
-            ErrorHandlerMiddleware::class,
+            ProblemDetailsMiddleware::class,
             VerifyHubSignatureMiddleware::class,
             AcceptReleaseAction::class,
         ], 'release.new');

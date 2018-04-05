@@ -4,9 +4,7 @@ namespace Release;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Stream;
+use RuntimeException;
 
 class VerifyHubSignatureMiddlewareFactory
 {
@@ -21,15 +19,6 @@ class VerifyHubSignatureMiddlewareFactory
             ));
         }
 
-        $response = $container->has(ResponseInterface::class)
-            ? $container->get(ResponseInterface::class)
-            : new Response();
-        $streamFactory = $container->has(StreamInterface::class)
-            ? $container->get(StreamInterface::class)
-            : function () {
-                return new Stream('php://temp', 'wb+');
-            };
-
-        return new VerifyHubSignatureMiddleware($secret, $response, $streamFactory);
+        return new VerifyHubSignatureMiddleware($secret, $container->get(ResponseInterface::class));
     }
 }

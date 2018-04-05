@@ -58,13 +58,16 @@ class AcceptReleaseAction implements RequestHandlerInterface
 
     private function validateData(array $data) : bool
     {
-        return isset($data['release'])
-            && isset($data['repository']['full_name'])
-            && isset($data['release']['tag_name'])
-            && isset($data['release']['published_at'])
-            && isset($data['release']['author']['login'])
-            && isset($data['release']['author']['html_url'])
-            && isset($data['release']['html_url'])
+        return
+            isset(
+                $data['release'],
+                $data['repository']['full_name'],
+                $data['release']['tag_name'],
+                $data['release']['published_at'],
+                $data['release']['author']['login'],
+                $data['release']['author']['html_url'],
+                $data['release']['html_url']
+            )
             && array_key_exists('body', $data['release']);
     }
 
