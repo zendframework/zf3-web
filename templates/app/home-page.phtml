@@ -6,88 +6,100 @@ $this->placeholder('page-layout')->set('wide');
 ?>
 
 <div id="carousel-header" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
         <li data-target="#carousel-header" data-slide-to="0" class="active"></li>
         <li data-target="#carousel-header" data-slide-to="1"></li>
         <li data-target="#carousel-header" data-slide-to="2"></li>
         <li data-target="#carousel-header" data-slide-to="3"></li>
-      </ol>
+    </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
-          <div class="item active" id="headerwrap">
-              <div class="container">
-                  <div class="row centered">
-                      <div class="col-lg-4">
-                          <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
-                      </div>
-                      <div class="col-lg-8">
-                          <h1>Zend Framework</h1>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active" id="headerwrap">
+            <div class="container">
+                <div class="row centered">
+                    <div class="col-lg-4">
+                        <img src="img/superzf.png" align="right" title="ZF Hero!" alt="ZF Hero!">
+                    </div>
 
-                          <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
-                          <?php if ($stats > 0) : ?>
-                          <h2><?= number_format($stats); ?> installs from <a href="https://packagist.org/" class="text-info">Packagist</a>!</a></h2>
-                          <?php endif; ?>
-                          <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="item" id="headerexpressive">
-              <div class="container">
-                  <div class="row centered">
-                      <div class="col-lg-12">
-                          <img src="img/expressive.png" title="Expressive" alt="Expressive">
-                          <h3>Build PHP microservices and web applications in minutes!<br />Fully compliant with <a href="https://www.php-fig.org/psr/psr-15/">PSR-15</a> and <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> standards.</h3>
-                          <p><a href="https://getexpressive.org" class="btn btn-theme">Get started!</a><br /><br /></p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="item" id="headerbook">
-              <div class="container">
-                  <div class="row centered">
-                      <div class="col-lg-4">
-                          <img src="img/zf3cookbook.png" align="right" title="ZF3 Cookbook" alt="ZF3 Cookbook">
-                      </div>
-                      <div class="col-lg-8">
-                          <h1>Zend Framework 3 Cookbook</h1>
+                    <div class="col-lg-8">
+                        <h1>Zend Framework</h1>
 
-                          <h3>A free ebook of PHP recipes using Zend components</h3>
-                          <p><br /><a href="http://www.zend.com/phpcookbooks" class="btn btn-theme">Download now</a></p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="item" id="headerbook2">
-              <div class="container">
-                  <div class="row centered">
-                      <div class="col-lg-4">
-                          <img src="img/expressivecookbook.png" align="right" title="Expressive Cookbook" alt="Expressive Cookbook">
-                      </div>
-                      <div class="col-lg-8">
-                          <h1>Expressive Cookbook</h1>
+                        <h3>Professional PHP packages ready for <a href="http://www.zend.com/en/resources/php-7" class="text-info"><strong>PHP 7</strong></a><br />Focused on Simplicity, Reusability, and Performance</h3>
 
-                          <h3>A free ebook of PHP recipes for <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> applications</h3>
-                          <p><br /><a href="http://www.zend.com/phpcookbooks" class="btn btn-theme">Download now</a></p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+                        <?php if ($stats > 0) : ?>
+                        <h2><?= number_format($stats); ?> installs from <a href="https://packagist.org/" class="text-info">Packagist</a>!</a></h2>
+                        <?php endif; ?>
 
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-header" role="button" data-slide="prev">
+                        <p><br /><a href="/downloads" class="btn btn-theme">Get started!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item" id="headerexpressive">
+            <div class="container">
+                <div class="row centered">
+                    <div class="col-lg-12">
+                        <img src="img/expressive.png" title="Expressive" alt="Expressive">
+
+                        <h3>Build PHP microservices and web applications in minutes!<br />Fully compliant with <a href="https://www.php-fig.org/psr/psr-15/">PSR-15</a> and <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> standards.</h3>
+
+                        <p><a href="https://getexpressive.org" class="btn btn-theme">Get started!</a><br /><br /></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item" id="headerbook">
+            <div class="container">
+                <div class="row centered">
+                    <div class="col-lg-4">
+                        <img src="img/zf3cookbook.png" align="right" title="ZF3 Cookbook" alt="ZF3 Cookbook">
+                    </div>
+
+                    <div class="col-lg-8">
+                        <h1>Zend Framework 3 Cookbook</h1>
+
+                        <h3>A free ebook of PHP recipes using Zend components</h3>
+
+                        <p><br /><a href="http://www.zend.com/phpcookbooks" class="btn btn-theme">Download now</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item" id="headerbook2">
+            <div class="container">
+                <div class="row centered">
+                    <div class="col-lg-4">
+                        <img src="img/expressivecookbook.png" align="right" title="Expressive Cookbook" alt="Expressive Cookbook">
+                    </div>
+
+                    <div class="col-lg-8">
+                        <h1>Expressive Cookbook</h1>
+
+                        <h3>A free ebook of PHP recipes for <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a> applications</h3>
+
+                        <p><br /><a href="http://www.zend.com/phpcookbooks" class="btn btn-theme">Download now</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-header" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#carousel-header" role="button" data-slide="next">
+    </a>
+
+    <a class="right carousel-control" href="#carousel-header" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-      </a>
+    </a>
 </div>
-
 
 <div id="service">
     <div class="container">
@@ -123,17 +135,21 @@ $this->placeholder('page-layout')->set('wide');
     <div class="row">
         <div class="col-lg-4">
             <h4>Latest blog posts <small>( <a href="/blog">full list</a> )</small></h4>
+
             <div class="hline"></div>
+
             <?php foreach ($posts as $post) : ?>
-                <p><a href="<?= $post['permalink'] ?>"><?= $post['title'] ?></a></p>
+            <p><a href="<?= $post['permalink'] ?>"><?= $post['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
 
         <div class="col-lg-5">
             <h4>Latest security advisories <small>( <a href="/security/advisories">full list</a> )</small></h4>
+
             <div class="hline"></div>
+
             <?php foreach ($advisories as $key => $advisor) : ?>
-                <p><a href="/security/advisory/<?= basename($key, '.md') ?>"><?= $advisor['title'] ?></a></p>
+            <p><a href="/security/advisory/<?= basename($key, '.md') ?>"><?= $advisor['title'] ?></a></p>
             <?php endforeach; ?>
         </div>
 
@@ -162,23 +178,28 @@ $this->placeholder('page-layout')->set('wide');
     <div class="row">
         <div class="col-lg-12">
             <h2 align="center">Maximize Development Productivity</h2>
+
             <div class="hline"></div>
+
             <div class="spacing"></div>
+
             <div class="row">
                 <div class="col-lg-4 centered">
-                  <img src="/img/ag-hero.png"><br />
-                  <p>The easiest way to create high-quality APIs</p>
-                  <a href="https://apigility.org" class="btn btn-theme btn-sm">Learn more</a>
+                    <img src="/img/ag-hero.png"><br />
+                    <p>The easiest way to create high-quality APIs</p>
+                    <a href="https://apigility.org" class="btn btn-theme btn-sm">Learn more</a>
                 </div>
+
                 <div class="col-lg-4 centered">
-                  <img src="/img/expressive_small.png"><br />
-                  <p>PHP microservices and web app in minutes!</p>
-                  <a href="https://getexpressive.org" class="btn btn-theme btn-sm">Learn more</a>
+                    <img src="/img/expressive_small.png"><br />
+                    <p>PHP microservices and web apps in minutes!</p>
+                    <a href="https://getexpressive.org" class="btn btn-theme btn-sm">Learn more</a>
                 </div>
+
                 <div class="col-lg-4 centered">
-                  <img src="/img/zray.png">
-                  <p>The Ultimate PHP Productivity Solution</p>
-                  <a href="http://www.zend.com/en/products/server/z-ray" class="btn btn-theme btn-sm">Learn more</a>
+                    <img src="/img/zray.png">
+                    <p>The Ultimate PHP Productivity Solution</p>
+                    <a href="http://www.zend.com/en/products/server/z-ray" class="btn btn-theme btn-sm">Learn more</a>
                 </div>
             </div>
         </div>
@@ -195,14 +216,18 @@ $this->placeholder('page-layout')->set('wide');
                 <h4>Take a look at our PHP and Zend Framework certifications!</h4>
             </div>
         </div>
+
         <div class="spacing"></div>
+
         <div class="row">
             <div class="col-lg-4">
                 <a href="http://www.zend.com/en/services/certification"><img src="img/phpcert.png" alt="Zend Certified PHP Engineer" title="Zend Certified PHP Engineer"></a>
             </div>
+
             <div class="col-lg-4">
                 <a href="http://www.zend.com/en/services/certification"><img src="img/zf2cert.png" alt="Zend Framework 2 Certified Architect" title="Zend Framework 2 Certified Architect"></a>
             </div>
+
             <div class="col-lg-4">
                 <a href="http://www.zend.com/en/services/certification"><img src="img/zf1cert.png" alt="Zend Framework 1 Certified Engineer" title="Zend Framework 1 Certified Engineer"></a>
             </div>
@@ -214,19 +239,20 @@ $this->placeholder('page-layout')->set('wide');
     <div class="portfolio-centered">
         <h2>Who uses Zend Framework?</h2>
         <div class="recentitems portfolio">
-            <?php foreach ($projects as $project) : ?>
-                <div class="portfolio-item graphic-design">
-                    <div class="he-wrap tpl6">
+        <?php foreach ($projects as $project) : ?>
+            <div class="portfolio-item graphic-design">
+                <div class="he-wrap tpl6">
                     <img src="/img/clients/<?= $project['img']; ?>" alt="">
-                        <div class="he-view">
-                            <div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown"><?= $project['name']; ?><br><small>(<?= $project['country'] ?>)</small></h3>
-                                <a href="<?= $project['url']; ?>" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                            </div>
+
+                    <div class="he-view">
+                        <div class="bg a0" data-animate="fadeIn">
+                            <h3 class="a1" data-animate="fadeInDown"><?= $project['name']; ?><br><small>(<?= $project['country'] ?>)</small></h3>
+                            <a href="<?= $project['url']; ?>" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
         </div>
     </div>
 </div>
