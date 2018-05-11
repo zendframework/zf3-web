@@ -251,22 +251,44 @@ a:focus {
     padding: 0;
 }
 
+#headerexpressive {
+    background-color: #1c61c9;
+    background-image: url("/img/bg_expressive.jpg");
+    padding-top: 100px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#headerexpressive h3 {
+  color: white;
+  margin-bottom: 25px;
+  font-weight: 400;
+}
+
+#headerexpressive h3 a {
+  color: #b1ef60;
+}
+
 #headerbook {
     background-color: #1c61c9;
-    background-image: url("/img/bg_book.jpg");
+    background-image: url("/img/bg_book2.jpg");
     padding-top: 100px;
     padding-bottom: 50px;
     text-align: center;
 }
 
 #headerbook h1 {
-  color: white;
-  margin-bottom: 25px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+#headerbook h3 {
+    font-weight: 400;
 }
 
 #headerbook2 {
     background-color: #9dd2aa;
-    background-image: url("/img/bg_book2.jpg");
+    background-image: url("/img/bg_book.jpg");
     padding-top: 100px;
     padding-bottom: 50px;
     text-align: center;
@@ -275,6 +297,14 @@ a:focus {
 #headerbook2 h1 {
   color: white;
   margin-bottom: 25px;
+}
+
+#headerbook2 h3 {
+    font-weight: 400;
+}
+
+#headerbook2 h3 a {
+    color: #b1ef60;
 }
 
 /* Services Wrap */
