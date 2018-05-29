@@ -426,6 +426,29 @@ a:focus {
     }
 }
 
+/* ZendCon banner */
+#zendconwrap {
+    display: block;
+    background: url(/images/ZCOE-header-1920x605-v1.jpg) no-repeat center top;
+    position: relative;
+    margin-top: 0px;
+    padding-top: 60px;
+    text-align: center;
+    background-position: center center;
+    min-height: 450px;
+    width: 100%;
+
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 /* clients logo */
 #cwrap {
     background: #f7f7f7;
