@@ -16,7 +16,7 @@ return function (
     $app->get('/blog[/:file]', \App\Action\BlogAction::class, 'blog');
     $app->get('/about[/faq]', \App\Action\AboutAction::class, 'about');
     $app->get('/license', \App\Action\AboutAction::class, 'license');
-    $app->get('/long-term-support', \App\Action\AboutAction::class, 'long-term-support');
+    $app->get('/long-term-support', \LongTermSupport\LongTermSupportAction::class, 'long-term-support');
     $app->get('/security[/:action]', \App\Action\SecurityAction::class, 'security');
     $app->get('/security/advisory/:advisory', \App\Action\AdvisoryAction::class, 'advisory');
     $app->get('/changelog[/:changelog]', \App\Action\ChangelogAction::class, 'changelog');
