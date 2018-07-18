@@ -25,6 +25,14 @@
     # Generating statistics on the shared folder
     echo "Generating statistics" ;
     php bin/stats.php /mnt/efs/stats/zendframework;
+
+    # Fetching and preparing LTS data
+    echo "Fetching and preparing LTS data" ;
+    COMPOSER_HOME=/var/cache/composer composer lts:build ;
+
+    # Install crontab
+    echo "Installing crontab" ;
+    crontab < .aws/www-data.crontab ;
 )
 
 echo "[DONE] after-install-www-data.sh"
