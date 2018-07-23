@@ -2,7 +2,7 @@
 
 ## Issues
 
-- `/apidoc/{version}` URIs are not working
+- [ ] `/apidoc/{version}` URIs are not working
 
 ## Sections left for Matthew to review
 
