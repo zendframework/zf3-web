@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LongTermSupport\Command;
 
 use DateInterval;
+use DateTimeInterface;
 use InvalidArgumentException;
 
 class SkeletonPackage extends Package
@@ -20,12 +21,16 @@ class SkeletonPackage extends Package
 
     protected $status = self::STATUS_LTS;
 
-    public function __construct(GithubRepo $repo, Tag $lts, array $requirements)
-    {
+    public function __construct(
+        GithubRepo $repo,
+        Tag $lts,
+        DateTimeInterface $ltsExpires,
+        array $requirements
+    ) {
         $this->repo = $repo;
         $this->lts = $lts;
-        $this->skeletons = [$repo->getName()];
-        $this->supportEnds = $lts->getDate()->add(new DateInterval('P2Y'));
+        $this->skeleton = $repo->getName();
+        $this->supportEnds = $ltsExpires;
         $this->processRequirements($requirements);
         $this->versions = [$lts->getMinorVersion()];
     }

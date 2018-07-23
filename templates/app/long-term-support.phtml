@@ -97,14 +97,18 @@ support status (Support or LTS), skeleton under which LTS is invoked (if any),
 versions under support (multiple versions are possible when an LTS is present),
 and date when support ends (if an LTS version or deprecated package).
 
+When a component has multiple support statuses, it will be listed multiple
+times, showing the specific status and version(s) it applies to. For LTS
+components, the skeleton that provides the status is listed as well.
+
 <table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th>Package</th>
             <th>Status</th>
-            <th>Skeleton Project(s)</th>
             <th>Supported Version(s)</th>
             <th>Support Ends</th>
+            <th>Skeleton Projects</th>
         </tr>
     </thead>
 
@@ -113,12 +117,12 @@ and date when support ends (if an LTS version or deprecated package).
         <tr>
             <td><a href="<?= $package['url'] ?>"><?= $package['name'] ?></a></td>
             <td><?= $package['status'] ?></td>
-            <td><?= implode(', ', array_map(function ($skeleton) {
-                [$org, $repo] = explode('/', $skeleton, 2);
-                return $repo;
-            }, $package['skeletons'])) ?></td>
             <td><?= implode(', ', $package['versions']) ?></td>
             <td><?= $package['support_ends'] ?></td>
+            <td><? if ($package['skeleton']) :
+                [$org, $repo] = explode('/', $package['skeleton'], 2);
+                echo $repo;
+            endif ?></td>
         </tr>
     <?php endforeach ?>
     </tbody>
@@ -132,9 +136,8 @@ and date when support ends (if an LTS version or deprecated package).
     <li>Status <strong>ACTIVE</strong> indicates <em>active support</em> for the
         listed minor version and any version following within the same major version
         series.</li>
-    <li>Status <strong>SECURITY</strong> indicates the lowest listed version is
-        receiving <em>security support</em>; all other listed versions receive
-        <em>active support</em>.</li>
+    <li>Status <strong>SECURITY</strong> indicates the listed minor release
+        branch is receiving <em>security support</em>.</li>
     <li>Status <strong>LTS</strong> indicates <em>security support</em> (and, in
         most cases, <em>active support</em>) for the listed version within the
         listed major version series.</li>

@@ -2,6 +2,7 @@
 <?php
 declare(strict_types=1);
 
+use LongTermSupport\Command\FetchRepoVersionDataCommand;
 use LongTermSupport\Command\PackageListBuilderCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\CommandLoader\FactoryCommandLoader;
@@ -13,6 +14,9 @@ $container = require __DIR__ . '/../config/container.php';
 $loader = new FactoryCommandLoader([
     'lts:build' => function () use ($container) {
         return $container->get(PackageListBuilderCommand::class);
+    },
+    'lts:fetch-tag-data' => function () use ($container) {
+        return $container->get(FetchRepoVersionDataCommand::class);
     },
 ]);
 

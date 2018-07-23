@@ -27,9 +27,9 @@ class Package implements JsonSerializable
     protected $repo;
 
     /**
-     * @var string[]
+     * @var ?string
      */
-    protected $skeletons = [];
+    protected $skeleton;
 
     /**
      * @var ?DateTimeInterface
@@ -47,13 +47,13 @@ class Package implements JsonSerializable
         self::STATUS_SECURITY,
     ];
 
-    public function __construct(GithubRepo $repo, array $skeletons = [])
+    public function __construct(GithubRepo $repo)
     {
         $this->repo = $repo;
 
-        [] === $skeletons
-            ? $this->determineSupportVersions()
-            : $this->calculateLtsValues($skeletons);
+        $tags = $repo->getTags();
+        $latest = array_shift($tags);
+        $this->normalizeSupportVersions([$latest->getName()]);
     }
 
     public function jsonSerialize()
@@ -61,7 +61,7 @@ class Package implements JsonSerializable
         $supportEnds = $this->supportEnds();
         return [
             'name' => $this->getName(),
-            'skeletons' => $this->getSkeletons(),
+            'skeleton' => $this->getSkeleton() ?: '',
             'status' => $this->status,
             'support_ends' => $supportEnds ? $supportEnds->format('Y-m-d') : 'N/A',
             'url'  => $this->getUrl(),
@@ -69,9 +69,9 @@ class Package implements JsonSerializable
         ];
     }
 
-    public function getSkeletons() : array
+    public function getSkeleton() : ?string
     {
-        return $this->skeletons;
+        return $this->skeleton;
     }
 
     public function getName() : string
@@ -94,7 +94,7 @@ class Package implements JsonSerializable
         return $this->versions;
     }
 
-    private function normalizeSupportVersions(array $versions) : void
+    protected function normalizeSupportVersions(array $versions) : void
     {
         // Ensure all versions are in <major>.<minor> format
         $versions = array_map(function ($version) {
@@ -141,107 +141,5 @@ class Package implements JsonSerializable
             array_push($filtered, $version);
             return $filtered;
         }, []);
-    }
-
-    /**
-     * @param SkeletonPackage[] $skeletons
-     * @throws InvalidArgumentException See validateSkeletons() for details
-     */
-    private function calculateLtsValues(array $skeletons) : void
-    {
-        $this->validateSkeletons($skeletons);
-
-        $today = new DateTimeImmutable('now');
-        $this->supportEnds = array_reduce($skeletons, function ($date, $skeleton) use ($today) {
-            $supportDate = $skeleton->supportEnds();
-            if ($supportDate < $today) {
-                return $date;
-            }
-
-            if (! $date) {
-                return $supportDate;
-            }
-
-            return $supportDate < $date ? $date : $supportDate;
-        }, null);
-
-        if (null === $this->supportEnds) {
-            $this->determineSupportVersions();
-            return;
-        }
-
-        $map = array_reduce($skeletons, function ($map, $skeleton) {
-            if (! $skeleton->isPackageInSkeleton($this->repo)) {
-                return $map;
-            }
-            $map[$skeleton->getName()] = $skeleton->getPackageConstraints($this->repo);
-            return $map;
-        }, []);
-
-        $this->status = self::STATUS_LTS;
-        $this->skeletons = array_keys($map);
-        $this->normalizeSupportVersions(array_reduce(array_values($map), function ($versions, $constraints) {
-            return array_merge($versions, $constraints);
-        }, []));
-    }
-
-    private function determineSupportVersions() : void
-    {
-        $interval = new DateInterval('P1Y');
-        $today = new DateTimeImmutable('now');
-        $latestMajor = $this->repo->getMostRecentMajorRelease();
-
-        if (! $latestMajor) {
-            $this->status = self::STATUS_ACTIVE;
-            $this->normalizeSupportVersions([
-                $this->repo->getMostRecentMinorRelease()->getName()
-            ]);
-            return;
-        }
-
-        $previousMinor = $this->repo->getPreviousMinorRelease($latestMajor);
-        if (! $previousMinor
-            || $latestMajor->getDate()->add($interval) < $today
-        ) {
-            $this->status = self::STATUS_ACTIVE;
-            $this->normalizeSupportVersions([
-                $this->repo->getMostRecentMinorRelease()->getName()
-            ]);
-            return;
-        }
-
-        $this->status = self::STATUS_SECURITY;
-        $this->supportEnds = $latestMajor->getDate()->add($interval);
-        $this->normalizeSupportVersions([
-            $this->repo->getMostRecentMinorRelease()->getName(),
-            $previousMinor->getName(),
-        ]);
-    }
-
-    /**
-     * @throws InvalidArgumentException if any given skeleton is not a
-     *     SkeletonPackage instance.
-     * @throws InvalidArgumentException if the package repository is not found
-     *     in any given skeleton instance.
-     */
-    private function validateSkeletons(array $skeletons)
-    {
-        array_walk($skeletons, function ($skeleton) {
-            if (! $skeleton instanceof SkeletonPackage) {
-                throw new InvalidArgumentException(sprintf(
-                    'A value provided in the $skeletons array was invalid; all values must be a %s',
-                    SkeletonPackage::class
-                ));
-            }
-
-            if (! $skeleton->isPackageInSkeleton($this->repo)) {
-                throw new InvalidArgumentException(sprintf(
-                    'The skeleton "%s" provided in the $skeletons array does not'
-                    .' contain "%s" as a requirement; aborting',
-                    $skeleton->getName(),
-                    $this->repo->getName()
-                ));
-            }
-        });
     }
 }
