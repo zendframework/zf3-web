@@ -6,10 +6,8 @@ namespace LongTermSupport\Command;
 use Github\Client;
 use RuntimeException;
 
-class GraphqlRepository implements RepositoryInterface
+class GraphqlQuery
 {
-    use GraphqlDataProcessingTrait;
-
     /**
      * Arbitrary start cursor for paginated results.
      *
@@ -75,30 +73,41 @@ query tagsByOrganization(
 }
 EOT;
 
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * @var GithubRepo[]
-     */
-    private $data = [];
-
-    public function __construct(Client $client, array $filterCriteria)
+    public function execute(Client $client) : iterable
     {
-        $this->client = $client;
-        $this->assignCriteriaCallbacks($filterCriteria);
-    }
+        $data = [];
 
-    public function getAllRepos() : iterable
-    {
-        if ([] !== $this->data) {
-            return $this->data;
+        foreach (self::GRAPHQL_ORGANIZATIONS as $organization) {
+            $cursor = self::GRAPHQL_CURSOR_START;
+
+            do {
+                $results = $client->api('graphql')->execute(self::GRAPHQL_QUERY, [
+                    'organization' => $organization,
+                    'cursor' => $cursor,
+                ]);
+
+                if (isset($results['errors'])) {
+                    throw new RuntimeException(sprintf(
+                        'Error fetching tags: %s',
+                        $results['errors']['message']
+                    ));
+                }
+
+                $data = array_merge($data, $results['data']['organization']['repositories']['nodes']);
+
+                $cursor = $this->getNextCursorFromResults($results);
+            } while ($cursor);
         }
 
-        $this->data = $this->processData((new GraphqlQuery())->execute($client));
+        return $data;
+    }
 
-        return $this->data;
+    private function getNextCursorFromResults(array $results) : ?string
+    {
+        // @codingStandardsIgnoreStart
+        return isset($results['data']['organization']['repositories']['pageInfo']['hasNextPage'])
+            ? $results['data']['organization']['repositories']['pageInfo']['endCursor']
+            : null;
+        // @codingStandardsIgnoreEnd
     }
 }

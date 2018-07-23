@@ -24,13 +24,14 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                Client::class                            => Command\GithubClientFactory::class,
-                Command\CachedConfigRepository::class    => Command\CachedConfigRepositoryFactory::class,
-                Command\GraphqlRepository::class         => Command\GraphqlRepositoryFactory::class,
-                Command\PackageList::class               => Command\PackageListFactory::class,
-                Command\PackageListBuilderCommand::class => Command\PackageListBuilderCommandFactory::class,
-                HttpMethodsClient::class                 => Command\HttpMethodsClientFactory::class,
-                LongTermSupportAction::class             => LongTermSupportActionFactory::class,
+                Client::class                              => Command\GithubClientFactory::class,
+                Command\CachedConfigRepository::class      => Command\CachedConfigRepositoryFactory::class,
+                Command\FetchRepoVersionDataCommand::class => Command\FetchRepoVersionDataCommandFactory::class,
+                Command\GraphqlRepository::class           => Command\GraphqlRepositoryFactory::class,
+                Command\PackageList::class                 => Command\PackageListFactory::class,
+                Command\PackageListBuilderCommand::class   => Command\PackageListBuilderCommandFactory::class,
+                HttpMethodsClient::class                   => Command\HttpMethodsClientFactory::class,
+                LongTermSupportAction::class               => LongTermSupportActionFactory::class,
             ],
         ];
     }
