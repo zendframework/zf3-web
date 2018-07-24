@@ -97,7 +97,7 @@ EOT;
             return $this->data;
         }
 
-        $this->data = $this->processData((new GraphqlQuery())->execute($client));
+        $this->data = $this->processData((new GraphqlQuery())->execute($this->client));
 
         return $this->data;
     }
