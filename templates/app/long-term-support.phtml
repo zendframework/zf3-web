@@ -119,10 +119,7 @@ components, the skeleton that provides the status is listed as well.
             <td><?= $package['status'] ?></td>
             <td><?= implode(', ', $package['versions']) ?></td>
             <td><?= $package['support_ends'] ?></td>
-            <td><? if ($package['skeleton']) :
-                [$org, $repo] = explode('/', $package['skeleton'], 2);
-                echo $repo;
-            endif ?></td>
+            <td><?= $package['skeleton'] ?></td>
         </tr>
     <?php endforeach ?>
     </tbody>

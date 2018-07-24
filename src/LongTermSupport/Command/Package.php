@@ -59,11 +59,17 @@ class Package implements JsonSerializable
     public function jsonSerialize()
     {
         $supportEnds = $this->supportEnds();
+        $skeleton = $this->getSkeleton() ?: '';
+        if (strstr($skeleton, '/')) {
+            $parts = explode('/', $skeleton, 2);
+            $skeleton = array_pop($parts);
+        }
+
         return [
             'name' => $this->getName(),
-            'skeleton' => $this->getSkeleton() ?: '',
+            'skeleton' => $skeleton,
             'status' => $this->getStatus(),
-            'support_ends' => $supportEnds ? $supportEnds->format('Y-m-d') : 'N/A',
+            'support_ends' => $supportEnds ? $supportEnds->format('Y-m-d') : '',
             'url'  => $this->getUrl(),
             'versions' => $this->getVersions(),
         ];
