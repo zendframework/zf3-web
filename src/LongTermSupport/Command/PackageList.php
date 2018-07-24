@@ -35,6 +35,17 @@ class PackageList
     private const COMPOSER_JSON_URL_TEMPLATE = 'https://raw.githubusercontent.com/%s/%s/composer.json';
 
     /**
+     * Maps package status to a priority integer
+     *
+     * @var arrary<string, int>
+     */
+    private const STATUS_PRIORITY_MAP = [
+        Package::STATUS_LTS      => 1,
+        Package::STATUS_SECURITY => 2,
+        Package::STATUS_ACTIVE   => 4,
+    ];
+
+    /**
      * @var HttpMethodsClient
      */
     private $httpClient;
@@ -90,6 +101,8 @@ class PackageList
                 []
             )
         );
+
+        usort($this->packages, Closure::fromCallable([$this, 'sortPackages']));
 
         return $this->packages;
     }
@@ -288,5 +301,77 @@ class PackageList
 
             return true;
         };
+    }
+
+    /**
+     * Sorts packages
+     *
+     * - Skeletons appear at the top of the list
+     * - Ascending order by name
+     * - Descending order by:
+     *   - Package type (LTS -> Support -> Package)
+     *   - Support date when packages are of same type, and have a support date
+     */
+    private function sortPackages(Package $a, Package $b) : int
+    {
+        $aName = $a->getName();
+        $bName = $b->getName();
+
+        // Skeletons get sorted to the top
+        $aIsSkeleton = in_array($aName, self::SKELETONS, true);
+        $bIsSkeleton = in_array($bName, self::SKELETONS, true);
+
+        if ($aIsSkeleton && ! $bIsSkeleton) {
+            return -1;
+        }
+
+        if (! $aIsSkeleton && $bIsSkeleton) {
+            return 1;
+        }
+
+        if ($aIsSkeleton && $bIsSkeleton) {
+            return $this->sortSkeletonPackages($a, $b);
+        }
+
+        // If names are different, sort by name, ASC
+        if ($aName !== $bName) {
+            return strnatcmp($aName, $bName);
+        }
+
+        // If both are LTS or Support packages, sort by date support ends, DESC
+        if (($a instanceof LtsPackage && $b instanceof LtsPackage)
+            || ($a instanceof SecurityPackage && $b instanceof SecurityPackage)
+        ) {
+            return $b->supportEnds() <=> $a->supportEnds();
+        }
+
+        // Otherwise, sort by priority
+        $aPriority = self::STATUS_PRIORITY_MAP[$a->getStatus()];
+        $bPriority = self::STATUS_PRIORITY_MAP[$b->getStatus()];
+        return $aPriority <=> $bPriority;
+    }
+
+    private function sortSkeletonPackages(Package $a, Package $b) : int
+    {
+        $aName = $a->getName();
+        $bName = $b->getName();
+
+        if ($aName !== $bName) {
+            return strnatcmp($aName, $bName);
+        }
+
+        if ($a instanceof SkeletonPackage && $b instanceof SkeletonPackage) {
+            return $b->supportEnds() <=> $a->supportEnds();
+        }
+
+        if ($a instanceof SkeletonPackage && ! $b instanceof SkeletonPackage) {
+            return -1;
+        }
+
+        if (! $a instanceof SkeletonPackage && $b instanceof SkeletonPackage) {
+            return 1;
+        }
+
+        return 0;
     }
 }

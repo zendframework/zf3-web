@@ -62,11 +62,16 @@ class Package implements JsonSerializable
         return [
             'name' => $this->getName(),
             'skeleton' => $this->getSkeleton() ?: '',
-            'status' => $this->status,
+            'status' => $this->getStatus(),
             'support_ends' => $supportEnds ? $supportEnds->format('Y-m-d') : 'N/A',
             'url'  => $this->getUrl(),
             'versions' => $this->getVersions(),
         ];
+    }
+
+    public function getName() : string
+    {
+        return $this->repo->getName();
     }
 
     public function getSkeleton() : ?string
@@ -74,9 +79,9 @@ class Package implements JsonSerializable
         return $this->skeleton;
     }
 
-    public function getName() : string
+    public function getStatus() : string
     {
-        return $this->repo->getName();
+        return $this->status;
     }
 
     public function supportEnds() : ?DateTimeInterface
