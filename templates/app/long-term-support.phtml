@@ -42,7 +42,18 @@ This policy governs individual component packages.
         the component will enter a <em>security support</em> phase for a period
         of 12 months.
     </li>
+
+    <li>
+        When a new minor release of a component is made, the previous minor
+        release is no longer supported and will not receive security fixes.
+    </li>
 </ul>
+
+<p>
+    Users are encouraged to update to the latest supported version. As we follow
+    <a href="https://semver.org">semantic versioning</a>, your code will continue to
+    work without changes within the same major version.
+</p>
 
 <h3>Long Term Support Policy</h3>
 
@@ -105,23 +116,28 @@ components, the skeleton that provides the status is listed as well.
     <thead>
         <tr>
             <th>Package</th>
-            <th>Status</th>
             <th>Supported Version(s)</th>
+            <th>Status</th>
             <th>Support Ends</th>
             <th>Skeleton Projects</th>
         </tr>
     </thead>
 
     <tbody>
-    <?php foreach ($packages as $package) : ?>
+    <?php
+    $previousPackage = null;
+    foreach ($packages as $package) : ?>
         <tr>
-            <td><a href="<?= $package['url'] ?>"><?= $package['name'] ?></a></td>
-            <td><?= $package['status'] ?></td>
+            <td><?= $previousPackage === $package['name'] ? '' : sprintf('<a href="%s">%s</a>', $package['url'], $package['name']); ?></td>
             <td><?= implode(', ', $package['versions']) ?></td>
+            <td><?= $package['status'] ?></td>
             <td><?= $package['support_ends'] ?></td>
             <td><?= $package['skeleton'] ?></td>
         </tr>
-    <?php endforeach ?>
+    <?php
+        $previousPackage = $package['name'];
+    endforeach;
+    ?>
     </tbody>
 </table>
 
