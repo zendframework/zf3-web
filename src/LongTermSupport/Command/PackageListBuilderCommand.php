@@ -30,13 +30,19 @@ contents. Typically, use "data/long-term-support.json".
 EOT;
 
     /**
+     * @var string
+     */
+    private $defaultPackageFile;
+
+    /**
      * @var PackageList
      */
     private $packageList;
 
-    public function __construct(PackageList $packageList)
+    public function __construct(PackageList $packageList, string $defaultPackageFile)
     {
         $this->packageList = $packageList;
+        $this->defaultPackageFile = $defaultPackageFile;
         parent::__construct();
     }
 
@@ -45,15 +51,23 @@ EOT;
         $this->setName('lts:build');
         $this->setDescription('Compile a list of support versions for all components.');
         $this->setHelp(self::HELP);
-        $this->addArgument('target', InputArgument::REQUIRED, self::HELP_TARGET);
+        $this->addArgument('target', InputArgument::OPTIONAL, self::HELP_TARGET);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
+        $target = $input->getArgument('target') ?? $this->defaultPackageFile;
+        if (empty($target)) {
+            $output->writeLn(
+                '<error>Target MUST be non-empty! Either specify it as an argument,'
+                . ' or in the long-term-support.packages-file configuration</error>'
+            );
+            return 1;
+        }
+
         $output->writeLn('<info>Fetching package details; this may take a while.</info>');
         $packages = $this->packageList->fetchPackages();
 
-        $target = $input->getArgument('target');
         $output->writeLn(sprintf(
             '<info>Writing package details to %s</info>',
             $target

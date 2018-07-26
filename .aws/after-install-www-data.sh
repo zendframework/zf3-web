@@ -24,11 +24,11 @@
 
     # Generating statistics on the shared folder
     echo "Generating statistics" ;
-    php bin/stats.php /mnt/efs/stats/zendframework;
+    php bin/stats.php /mnt/efs/stats/zendframework ;
 
     # Fetching and preparing LTS data
     echo "Fetching and preparing LTS data" ;
-    COMPOSER_HOME=/var/cache/composer composer lts:build ;
+    ./bin/zfweb.php lts:build ;
 
     # Install crontab
     echo "Installing crontab" ;

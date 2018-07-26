@@ -9,8 +9,10 @@ class PackageListBuilderCommandFactory
 {
     public function __invoke(ContainerInterface $container) : PackageListBuilderCommand
     {
+        $packageFile = $container->get('config')['long-term-support']['packages-file'] ?? '';
         return new PackageListBuilderCommand(
-            $container->get(PackageList::class)
+            $container->get(PackageList::class),
+            $packageFile
         );
     }
 }
