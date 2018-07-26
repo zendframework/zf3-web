@@ -50,7 +50,7 @@ EOT;
 
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $output->writeLn('<info>Fetching packgage details; this may take a while.</info>');
+        $output->writeLn('<info>Fetching package details; this may take a while.</info>');
         $packages = $this->packageList->fetchPackages();
 
         $target = $input->getArgument('target');
