@@ -40,9 +40,9 @@ class PackageList
      * @var arrary<string, int>
      */
     private const STATUS_PRIORITY_MAP = [
-        Package::STATUS_LTS      => 1,
-        Package::STATUS_SECURITY => 2,
-        Package::STATUS_ACTIVE   => 4,
+        Package::STATUS_LTS      => 2,
+        Package::STATUS_SECURITY => 4,
+        Package::STATUS_ACTIVE   => 1,
     ];
 
     /**
@@ -365,11 +365,11 @@ class PackageList
         }
 
         if ($a instanceof SkeletonPackage && ! $b instanceof SkeletonPackage) {
-            return -1;
+            return 1;
         }
 
         if (! $a instanceof SkeletonPackage && $b instanceof SkeletonPackage) {
-            return 1;
+            return -1;
         }
 
         return 0;
