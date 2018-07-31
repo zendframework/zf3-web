@@ -9,6 +9,6 @@ class Advisory extends AbstractCollection
 
     protected function order($a, $b)
     {
-        return ($a['date'] <=> $b['date']) * -1; // reverse order
+        return $b['date'] <=> $a['date']; // reverse order
     }
 }
