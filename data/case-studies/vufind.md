@@ -47,7 +47,7 @@ Some component updates (such as major releases of *zend-mvc* and *zend-servicema
 
 ## Shortcomings of Zend Framework
 
-The VuFind community's experience with Zend Framework has been overwhelmingly positive thus far. If one problem had to be identified at the moment, it would probably be *zend-mvc* controllers and routes. As of this writing, VuFind's controllers are currently quite heavy-weight, with many dependencies and too much logic per class; configuration for routes is so verbose that VuFind includes code to dynamically generate it, which makes some of the configurations a bit opaque.
+The VuFind community's experience with Zend Framework has been overwhelmingly positive thus far. If one problem had to be identified at the moment, it would probably be the software's use of *zend-mvc* controllers and routes. As of this writing, many of VuFind's controllers are  quite heavy-weight, with many dependencies and too much logic per class; configuration for routes is so verbose and repetitive that VuFind includes code to dynamically generate it, which makes some of the configurations more readable but harder to override.
 
 These problems (especially the heavy controllers) are not entirely Zend Framework's fault, but they are symptoms of some anti-patterns that were encouraged by early releases of Zend Framework 2, such as overuse of auto-injected service managers and reliance on "magic" controller plugins. These practices have been appropriately discouraged in newer Zend Framework releases, but their use during early VuFind framework development introduced technical debt that will take some time to pay off.
 
