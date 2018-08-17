@@ -11,4 +11,21 @@ categories:
 
 ---
 
-Content goes here.
+# Case Study: VuFind
+
+## Background
+
+[VuFind](https://vufind.org) is an open source search abstraction layer used primarily by libraries and other cultural heritage institutions, but also adaptable to many other applications where a flexible search engine is needed. The software provides a largely configuration-driven and highly extensible approach to building a search system, allowing a common interface to be applied to multiple backend systems. The most common application is as a front end for [Apache Solr](http://lucene.apache.org/solr/), but the software can also connect to a variety of third-party search APIs, etc.
+
+VuFind was originally written as a stand-alone model-view-controller application using a homegrown framework, but it was completely rewritten during 2011 and 2012 to use Zend Framework, in order to improve extensibility and better follow community standards.
+
+## Requirements
+
+VuFind had several key requirements that had to be taken into account when selecting a framework:
+
+  * **Extensibility**: VuFind is widely adopted and covers a broad range of use cases. Users need the ability to customize and override nearly every part of the software. Ideally, customizations should be achieved by adding custom subclasses without having to modify any core code. The *zend-servicemanager* provided a perfect mechanism for customization, since all core logic could be built as overrideable services, and plugin managers could be used to create configurable extensions. The *zend-modulemanager* provided a way to encapsulate custom code and manage it separately from the VuFind core.
+  * **Custom Themes**: Just as users may need to override nearly any piece of code, they also need to override individual view templates. With *zend-view*, VuFind is able to provide simple PHP templates that, with the help of some VuFind-specific listeners and view helpers, can be organized into configurable themes that inherit from each other, allowing a user to override only the files that need to be changed.
+  * **Multitenancy**: Some institutions use a single installation of VuFind to manage multiple independently customized sites. By using environment variables to control which modules and configurations are loaded, the extensibility and theming features listed above, combined with a bit of clever Apache configuration, enable multitenancy.
+  * **Command Line Utilities**: While VuFind is primarily a web application, it also uses a variety of command-line tools to perform maintenance tasks such as indexing records and managing Solr. The *zend-console* library allows command-line tools to be built that share common logic with the web application.
+  * **Code Generation**: With its many customization options, automatic code/configuration generators can save users a great deal of time. VuFind's generators are powered by *zend-code*.
+  * **Robust HTTP Interactions**: Because VuFind connects to a wide variety of APIs, it needs to make many different HTTP requests, originating from a variety of different server and network environments; *zend-http* offers the flexibility needed to make this work.
