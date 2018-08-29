@@ -19,7 +19,7 @@ categories:
 
 VuFind was originally written as a stand-alone model-view-controller application using a homegrown framework, but it was completely rewritten during 2011 and 2012 to use Zend Framework (then version 2), in order to improve extensibility and better follow community standards.
 
-The VuFind project has a fairly informal structure, with an overall project lead developer, a user interface lead designer, a small team of 3-5 core contributors, and a long tail of dozens of occasional contributors. Over its lifetime, hundreds of people have touched the code in one way or another, the lead developer has changed once, and the core team has shifted significantly over time.
+The VuFind project has a fairly informal structure, with an overall project lead developer (following the "benevolent dictator" model), a user interface lead designer, a small team of 3-5 core contributors, and a long tail of dozens of occasional contributors. Over its lifetime, hundreds of people have touched the code in one way or another, the lead developer has changed once, and the core team has shifted significantly over time.
 
 ## Requirements
 
@@ -54,6 +54,8 @@ The VuFind community's experience with Zend Framework has been overwhelmingly po
 These problems (especially the heavy controllers) are not entirely Zend Framework's fault, but they are symptoms of some anti-patterns that were encouraged by early releases of Zend Framework 2, such as overuse of auto-injected service managers and reliance on "magic" controller plugins. These practices have been appropriately discouraged in newer Zend Framework releases, but their use during early VuFind framework development introduced technical debt that will take some time to pay off.
 
 Zend Expressive offers some interesting alternative approaches to managing web applications, and VuFind may eventually investigate whether its controllers could be replaced with middleware. However, for the moment, its current architecture continues to meet its community's needs, and incremental progress is planned for resolving existing technical debt.
+
+Outside of this fairly specific complaint, the biggest criticism of Zend Framework is its relatively steep learning curve; understanding verbose configuration files and specific design patterns is critical to effectively modifying the code. New members of the community need some hand-holding to get up to speed. However, because of the way the framework helps enforce separation of concerns and extensibility, the cost seems justified by the benefits. Before the framework, developers could dive in and make changes more quickly, but the resulting code often lacked structure and led to problems with maintainability. With Zend Framework, these issues have been significantly reduced.
 
 ## Conclusions
 
