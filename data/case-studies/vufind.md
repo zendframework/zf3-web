@@ -19,6 +19,8 @@ categories:
 
 VuFind was originally written as a stand-alone model-view-controller application using a homegrown framework, but it was completely rewritten during 2011 and 2012 to use Zend Framework (then version 2), in order to improve extensibility and better follow community standards.
 
+The VuFind project has a fairly informal structure, with an overall project lead developer, a user interface lead designer, a small team of 3-5 core contributors, and a long tail of dozens of occasional contributors. Over its lifetime, hundreds of people have touched the code in one way or another, the lead developer has changed once, and the core team has shifted significantly over time.
+
 ## Requirements
 
 VuFind had several key requirements that had to be taken into account when selecting a framework:
