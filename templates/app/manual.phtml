@@ -5,7 +5,9 @@
     <strong>Caution:</strong> The documentation you are viewing is
     for an older version of Zend Framework.<br>
     You can find the documentation of the current version at
-    <a href="https://docs.zendframework.com/">docs.zendframework.com</a>
+    <a href="<?= $currentPageV3ComponentUrl ?? 'https://docs.zendframework.com/' ?>">
+        <?= isset($currentPageV3ComponentUrl) ? substr($currentPageV3ComponentUrl, 8, -1) : 'docs.zendframework.com' ?>
+    </a>
 </p>
 
 <p><?php echo $title ?></p>

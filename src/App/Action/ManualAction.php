@@ -4,8 +4,8 @@ namespace App\Action;
 
 use DOMXPath;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Dom\Query as DomQuery;
 use Zend\Expressive\Template;
@@ -93,20 +93,35 @@ class ManualAction implements RequestHandlerInterface
             false
         );
 
+        $currentPageV3ComponentUrl = null;
+
+        // Usually the page title is the namespace of the component,
+        // which can be used to figure out the URL from the component-url map.
+        if ($currentPageTitle !== null && strpos($currentPageTitle, '\\') !== false) {
+            $componentName = str_replace(
+                '\\',
+                '-',
+                strtolower($currentPageTitle)
+            );
+
+            $currentPageV3ComponentUrl = $this->config['zf_component_url_map'][$componentName] ?? null;
+        }
+
         // Set variables for the template
         $data = [
-            'name'             => $name,
-            'lang'             => $lang,
-            'page'             => $page,
-            'title'            => $content['title'],
-            'body'             => $content['body'],
-            'sidebar'          => $content['sidebar'],
-            'version'          => $version,
-            'latestVersion'    => $this->config['zf_latest_version'],
-            'latestZf1Version' => $this->config['zf1_latest_version'],
-            'contentList'      => $contentList,
-            'currentPage'      => $currentPage,
-            'currentPageTitle' => $currentPageTitle,
+            'name'                      => $name,
+            'lang'                      => $lang,
+            'page'                      => $page,
+            'title'                     => $content['title'],
+            'body'                      => $content['body'],
+            'sidebar'                   => $content['sidebar'],
+            'version'                   => $version,
+            'latestVersion'             => $this->config['zf_latest_version'],
+            'latestZf1Version'          => $this->config['zf1_latest_version'],
+            'contentList'               => $contentList,
+            'currentPage'               => $currentPage,
+            'currentPageTitle'          => $currentPageTitle,
+            'currentPageV3ComponentUrl' => $currentPageV3ComponentUrl,
         ];
 
         // Sort version numbers

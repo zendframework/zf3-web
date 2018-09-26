@@ -37,12 +37,27 @@ trait PrepareManualConfigurationTrait
         $zf1MinorVersions = array_keys($zf1versions);
         usort($zf1MinorVersions, 'version_compare');
 
+        // Generate a map for component names to URLs in V3 documentation.
+        // The map is used in the manual to show the correct URL for the new docs.
+        $components      = $config['zf_components'] ?? [];
+        $componentUrlMap = [];
+
+        foreach ($components as $component) {
+            $componentName = substr(
+                strrchr($component['package'], '/'),
+                1
+            );
+
+            $componentUrlMap[$componentName] = $component['url'];
+        }
+
         return [
             'zf_document_path'             => $paths,
             'zf_apidoc_versions'           => $config['zf_apidoc_versions'],
             'zf_latest_version'            => max(array_keys($paths)),
             'zf1_latest_version'           => array_pop($zf1MinorVersions),
             'zf_maintained_major_versions' => ['1.12'],
+            'zf_component_url_map'         => $componentUrlMap,
         ];
     }
 
