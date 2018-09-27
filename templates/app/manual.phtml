@@ -4,9 +4,10 @@
 <p class="alert alert-warning" role="alert">
     <strong>Caution:</strong> The documentation you are viewing is
     for an older version of Zend Framework.<br>
-    You can find the documentation of the current version at
+    You can find the documentation of the current version at:
+    <br>
     <a href="<?= $currentPageV3ComponentUrl ?? 'https://docs.zendframework.com/' ?>">
-        <?= isset($currentPageV3ComponentUrl) ? substr($currentPageV3ComponentUrl, 8, -1) : 'docs.zendframework.com' ?>
+        <?= $currentPageV3ComponentUrl ?? 'https://docs.zendframework.com/' ?>
     </a>
 </p>
 
