@@ -258,10 +258,7 @@ class PackageList
                 $packages,
                 array_reduce(
                     array_filter($skeletons, $this->generateSkeletonFilter($repo)),
-                    function (array $packages, SkeletonPackage $skeleton) use ($repo) : array {
-                        array_push($packages, new LtsPackage($repo, $skeleton));
-                        return $packages;
-                    },
+                    $this->generateLtsPackageReducer($repo),
                     []
                 )
             );
@@ -300,6 +297,90 @@ class PackageList
             }
 
             return true;
+        };
+    }
+
+    /**
+     * Produce a reducer callback for injecting LTS packages
+     */
+    private function generateLtsPackageReducer($repo) : callable
+    {
+        return function (array $packages, SkeletonPackage $skeleton) use ($repo) : array {
+            $ltsPackage = new LtsPackage($repo, $skeleton);
+
+            if (array_reduce(
+                $packages,
+                $this->generateLtsPackageComparator($ltsPackage),
+                true
+            )) {
+                array_push($packages, $ltsPackage);
+                $packages = array_filter($packages, $this->generateLtsPackageFilter($ltsPackage));
+            }
+
+            return $packages;
+        };
+    }
+
+    /**
+     * Produce a callback for determining if an LTS package should be injected
+     *
+     * Generates a callback for use in an array_reduce operation that determines
+     * if the $ltsPackage closed over should be included in an array of packages.
+     * It does so by comparing the current Package in the array with the LTS package,
+     * and returns false for the first Package that is each of:
+     *
+     * - An LTS package
+     * - with the same name as the closed over LTS package
+     * - identifying the same skeleton as the closed over LTS package
+     * - identifying the same support versions as the closed over LTS package
+     * - and with a support ending date earlier than the closed over LTS package
+     */
+    private function generateLtsPackageComparator(LtsPackage $ltsPackage) : callable
+    {
+        return function (bool $shouldInclude, Package $package) use ($ltsPackage) {
+            if (! $shouldInclude) {
+                return $shouldInclude;
+            }
+
+            if (! $package instanceof LtsPackage
+                || $package->getName() !== $ltsPackage->getName()
+                || $package->getSkeleton() !== $ltsPackage->getSkeleton()
+                || $package->getVersions() != $ltsPackage->getVersions()
+            ) {
+                return $shouldInclude;
+            }
+
+            return $ltsPackage->supportEnds() >= $package->supportEnds();
+        };
+    }
+
+    /**
+     * Produce a callback for filtering out unneeded LTS packages
+     *
+     * Generates a callback for use in an array_filter operation that determines
+     * if the current Package item should be included in an array of packages.
+     * It does so by comparing the current Package in the array with the LTS package,
+     * and returns false for the Package if each of the following are true:
+     *
+     * - An LTS package
+     * - with the same name as the closed over LTS package
+     * - identifying the same skeleton as the closed over LTS package
+     * - identifying the same support versions as the closed over LTS package
+     * - and with a support ending date earlier than the closed over LTS package
+     */
+    private function generateLtsPackageFilter(LtsPackage $ltsPackage) : callable
+    {
+        return function (Package $package) use ($ltsPackage) {
+            if (! $package instanceof LtsPackage
+                || $package === $ltsPackage
+                || $package->getName() !== $ltsPackage->getName()
+                || $package->getSkeleton() !== $ltsPackage->getSkeleton()
+                || $package->getVersions() != $ltsPackage->getVersions()
+            ) {
+                return true;
+            }
+
+            return $package->supportEnds() > $ltsPackage->supportEnds();
         };
     }
 
