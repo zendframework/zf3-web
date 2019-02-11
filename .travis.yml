@@ -28,7 +28,7 @@ deploy:
     revision_type: github
     access_key_id: AKIAJDDM5YXDN774B3VA
     secret_access_key:
-      secure: "C3nUjMzVtPYIRQkq/wxi5jIJp6v+g11/i3e2EVhTcBWOpHtwZA7mmMTKbqVk1+MBvoZ2XfLbYrhZx2IVVlPldv+bUVcDE03Pdx5j2kDpwPLvH1q29hI2Xz25WJe3BzGE4I2BZiMEtFhmmQAW03KW6wl3ry3wIq7+5vndUG1RtMpaLmHj/2/LSP+t+1tUlqt4tBD1eO5Y7gDDWJnR3b0FNQxJYUdr+tv5Dg1fzkpnebQpnJYct/SlPPPlYy8zfdJNt2ALZqNle6DeK2ZR3iXg3UuunIxKyggxAtm3IZqAi9VaMN2Gzb/Wgfulrs6dti66EEhFB9090jLYMD5Jxvy5FFHJYTLVODJVMxY8vMm+NvVFydRD2yl+1EeGo4KnYV4LJQs7RHOqu5KcDktplETf7uAgw7tOANczLw75eWWfeRmJXfpPN3eZenmJpRQue1UloI4S90t5Hoy/sSr5HvkJ/d6ipowP3JHkmHjv/CXQuemrpQMvM3o6f7U5I0ZRXTaF89DpqvbOzUt0JkH2lffwOrzJZlWvUx2d4GYscl9RV88HkQmO3VIl3jDNILUhyDBoxsuOQoheQ6ESWGSpPH5M/O1lN3NzvTe/KwsSQvD0Sz30kaKPe3nq4biXedw8FR+Td+FXdUAhMEU5bEQV7sYCItc5QNgrcf2RLKsyW700hxQ="
+      secure: $AWS_SECRET_KEY
     application: zf3-web
     deployment_group: zf-devteam
     region: us-east-1
