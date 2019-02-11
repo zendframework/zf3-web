@@ -7,7 +7,7 @@ matrix:
   include:
     - php: 7.1
       env:
-        - CS_CHECK=true
+      - CS_CHECK=true
 
 before_install:
   - composer self-update
@@ -18,6 +18,18 @@ install:
 script:
   - composer test
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
+
+deploy:
+  - provider: codedeploy
+    revision_type: github
+    access_key_id: AKIAJDDM5YXDN774B3VA
+    secret_access_key:
+      secure: xn5lhjgvmeaeYA0QYSozEmpSxW+O7teuP5a74ySxyaVBDmeFxuvo9Fz6JC0psi9TO2Enj9xjjZR+ypwfUswx3kHHBfOYJi1VAn5eiBJK6Memcgm9r38s/20ydPSPfm4lNcVqFPoTns8YQh4y+ICtaa/qYHwV+qRgx26ytCrKWawx1qLXn0zYI11AkduSanF6AcCHzc2sv16iytWOJ3ilFDn5hj5va22xC5+CUtwkk4tgo30Gonh5Om+CMc599na5g/ssU75Bq4CgT1P3WcTxe7j+IA0vgF7sZYGdSOijmczojJh3PumBBKf71G/6xMhaEhtJwtDGNuMe2RCntlHcfXvYgO8iRi4aOlecaTs5fs96hqxmDbf48AhYxc7dUVWjbPrT4YaUZ6r5lLsvCKz8LkM+MJwbljDgBPtzlik8MZ8+si9xXHkP1mU24ZBgDsYh0JTRn+Ermut1TTrPcNegBJa560dlGm+7XE6nHR+HFoHMDQprXRzFrw0vF4C0Smv0McJNqEwn1GZcOXSjJFAcWxDOzQsi7oXIZNP2XY7l2sTSJUw/EjMSgkuTLgSG6GixatOHoLY2GUtMcfzwjHB1Qz3xfgnj0TDEDRbXx8nESnUnfBs/kRpmiYLY/NuV7x83InVPB5Knu0sU4vk8dr+xaMWIJBFc+XppYnjBgkrwALs=
+    application: zf3-web
+    deployment_group: zf-devteam
+    region: us-east-1
+    on:
+      branch: master
 
 notifications:
   email: true
