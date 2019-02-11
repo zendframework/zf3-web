@@ -2,6 +2,10 @@ sudo: false
 
 language: php
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 matrix:
   fast_finish: true
   include:
@@ -24,7 +28,7 @@ deploy:
     revision_type: github
     access_key_id: AKIAJDDM5YXDN774B3VA
     secret_access_key:
-      secure: xn5lhjgvmeaeYA0QYSozEmpSxW+O7teuP5a74ySxyaVBDmeFxuvo9Fz6JC0psi9TO2Enj9xjjZR+ypwfUswx3kHHBfOYJi1VAn5eiBJK6Memcgm9r38s/20ydPSPfm4lNcVqFPoTns8YQh4y+ICtaa/qYHwV+qRgx26ytCrKWawx1qLXn0zYI11AkduSanF6AcCHzc2sv16iytWOJ3ilFDn5hj5va22xC5+CUtwkk4tgo30Gonh5Om+CMc599na5g/ssU75Bq4CgT1P3WcTxe7j+IA0vgF7sZYGdSOijmczojJh3PumBBKf71G/6xMhaEhtJwtDGNuMe2RCntlHcfXvYgO8iRi4aOlecaTs5fs96hqxmDbf48AhYxc7dUVWjbPrT4YaUZ6r5lLsvCKz8LkM+MJwbljDgBPtzlik8MZ8+si9xXHkP1mU24ZBgDsYh0JTRn+Ermut1TTrPcNegBJa560dlGm+7XE6nHR+HFoHMDQprXRzFrw0vF4C0Smv0McJNqEwn1GZcOXSjJFAcWxDOzQsi7oXIZNP2XY7l2sTSJUw/EjMSgkuTLgSG6GixatOHoLY2GUtMcfzwjHB1Qz3xfgnj0TDEDRbXx8nESnUnfBs/kRpmiYLY/NuV7x83InVPB5Knu0sU4vk8dr+xaMWIJBFc+XppYnjBgkrwALs=
+      secure: "0uKPTpE6Pacl5GefUuFGRQiKE2apQlbZE4YK+1YTKdUeJTwoUDulJrNsgnZsP8JNdjVjaFACsap7P9LuErAqWyvFdy6gOAP7bRm2HAwMVwWn0VlI4Tuh1H6APYPHZt+hcmTH5u2enOlrTyjuEz71PR5gCMWFtY/h4LDnz4gv2bQ2m+TiTLRoSa8rSn7nlBGZMZVTUHWsnav+gljgCXn1dxEQQq0aQ9bWWfNdpEGwFWpDr/57z8Nsqe8YEnDG9kOyijOj2Xg/tTsEcw0o+krZUwxsznKtzGVGDt9zQgheUPdcHXUkgWuXdn2OnC3oGE7EhTDOeHFxQVcE9NTFbqopsNj9BrNkqT3uWbtHv91LvKfLFdc/3xMgzTmZO6dE23F0egeYz3JPg5HXgADchNHxyMOma2RT+W1PKn8fkp/YHrUtW3G3L4vDifuzesXeJgbmSdCd66OwU+2+JRhjeBmkWAv3UXfXCrFz0xD8eAwJodxhqyYlgIE07LvldTcJ4RUvEQrR5yCU91QbHV3BBCSDPh8vi0elwtl+TJyf1rIDKz6SSR4eHi1wr7tVQxW9mDxCiCmiVK5UG1j4daB0JDOzdzl/At+TO+avMmfVjIRkdVN1JYTmZK0PrO5ublyHYjoE8F1G8BAuUebJh31jscGlIgTvUmvFRXdYvD60sXi0Abs="
     application: zf3-web
     deployment_group: zf-devteam
     region: us-east-1
