@@ -23,16 +23,5 @@ script:
   - composer test
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
-deploy:
-  - provider: codedeploy
-    revision_type: github
-    access_key_id: AKIAJDDM5YXDN774B3VA
-    secret_access_key: $AWS_SECRET_KEY
-    application: zf3-web
-    deployment_group: zf-devteam
-    region: us-east-1
-    on:
-      branch: master
-
 notifications:
   email: true
