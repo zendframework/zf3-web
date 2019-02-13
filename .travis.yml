@@ -23,5 +23,8 @@ script:
   - composer test
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
+after_success:
+  - curl --header "Content-Type: application/x-zfweb-deploy+json" --header "Authorization: Bearer ${DEPLOY_TOKEN}" --request POST --data '{"site":"'"${SITE_NAME}"'","commit":"'"${TRAVIS_COMMIT}"'"}' https://zf-node1.zend.com
+
 notifications:
   email: true
