@@ -24,7 +24,7 @@ script:
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_success:
-  - .deploy/travis_deploy.sh
+  - .deploy/travis_deploy.sh $DEPLOY_TOKEN $SITE_NAME $TRAVIS_COMMIT
 
 notifications:
   email: true
