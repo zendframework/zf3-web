@@ -39,7 +39,7 @@ characters with hex entities, each with different rules. While much of this can
 be done with built-in PHP features, these features do not catch all potential
 attack vectors. A comprehensive solution is required.
 
-Zend Framework provides the [zend-escaper](https://docs.zendframework.com/zend-esscaper)
+Zend Framework provides the [zend-escaper](https://docs.zendframework.com/zend-escaper)
 component to manage this complexity for you, exposing functionality for escaping
 HTML, HTML attributes, JavaScript, CSS, and URLs to ensure they are safe for the
 browser.
