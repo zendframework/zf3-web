@@ -12,6 +12,7 @@ return function (
     \Psr\Container\ContainerInterface $container
 ) : void {
     $app->pipe(\Zend\Stratigility\Middleware\OriginalMessages::class);
+    $app->pipe(\App\HostnameMiddleware::class);
     $app->pipe(\Zend\Stratigility\Middleware\ErrorHandler::class);
     $app->pipe(\App\Action\StripTrailingSlashMiddleware::class);
     $app->pipe(\App\Action\Redirects::class);
