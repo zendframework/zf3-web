@@ -4,6 +4,7 @@ namespace App;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Throwable;
 
 class ApplicationErrorLogger
 {
@@ -43,13 +44,11 @@ class ApplicationErrorLogger
 
         $method = strtoupper($request->getMethod());
         $message = sprintf(
-            "[%s] (%s %s): %s (%s): %s\n",
+            "[%s] (%s %s): %s",
             date('Y-m-d H:i:s'),
             $method,
             (string) $request->getUri(),
-            get_class($error),
-            $error->getCode(),
-            $error->getMessage()
+            $this->getErrorMessage($error)
         );
 
         if (! in_array($method, self::NON_BODY_METHODS, true)) {
@@ -61,5 +60,20 @@ class ApplicationErrorLogger
         fwrite($log, $message);
         flock($log, LOCK_UN);
         fclose($log);
+    }
+
+    private function getErrorMessage(Throwable $e) : string
+    {
+        $message = sprintf(
+            "%s (%s) in %s line %d: %s\n%s\n",
+            get_class($e),
+            $e->getCode(),
+            $e->getFile(),
+            $e->getLine(),
+            $e->getMessage(),
+            $e->getTraceAsString()
+        );
+        $previous = $e->getPrevious();
+        return $previous ? $message . $this->getErrorMessage($e) : $message;
     }
 }
