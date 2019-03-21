@@ -2,7 +2,7 @@
 use App\Action;
 use App\ApplicationErrorLogger;
 use App\ApplicationErrorLoggerFactory;
-use App\Middleware\HostnameMiddleware;
+use App\HostnameMiddleware;
 use App\Model;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
