@@ -62,7 +62,7 @@ return [
             Action\StripTrailingSlashMiddleware::class => InvokableFactory::class,
         ],
         'delegators' => [
-            \Zend\Stratility\Middleware\ErrorHandler::class => [
+            \Zend\Stratigility\Middleware\ErrorHandler::class => [
                 ApplicationErrorLoggerFactory::class,
             ],
         ],
