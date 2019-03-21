@@ -2,6 +2,7 @@
 
 namespace App\Action;
 
+use DOMNode;
 use DOMXPath;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -230,8 +231,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Previous topic
         $prevTopic = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="p"]')->current();
-
-        if (count($prevTopic)) {
+        if ($prevTopic instanceof DOMNode) {
             $pageContent['sidebar'] .= '<h1>Previous topic</h1>';
             $pageContent['sidebar'] .= sprintf(
                 '<p class="topless"><a href="%s" title="previous chapter">%s</a></p>',
@@ -242,8 +242,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Next topic
         $nextTopic = $doc->queryXpath('//div[@class="navheader"]//a[@accesskey="n"]')->current();
-
-        if (count($nextTopic)) {
+        if ($nextTopic instanceof DOMNode) {
             $pageContent['sidebar'] .= '<h1>Next topic</h1>';
             $pageContent['sidebar'] .= sprintf(
                 '<p class="topless"><a href="%s" title="next chapter">%s</a></p>',
@@ -254,12 +253,12 @@ class ManualAction implements RequestHandlerInterface
 
         // Head title
         $elem = $doc->queryXpath('//ul[@class="toc"]/li[@class = "active"]/a/text()')->current();
-        if (count($elem)) {
+        if ($elem instanceof DOMNode) {
             $pageContent['title'] = $elem->ownerDocument->saveXML($elem);
         }
 
         $elem = $doc->queryXpath('//ul[@class="toc"]/li[@class="header up"][last()]/a/text()')->current();
-        if (count($elem)) {
+        if ($elem instanceof DOMNode) {
             $pageContent['title'] .= ' - ' . $elem->ownerDocument->saveXML($elem);
         }
 
@@ -268,7 +267,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Previous link
         $prevLink = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="p"]')->current();
-        if (count($prevLink)) {
+        if ($prevLink instanceof DOMNode) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
                 $prevLink->getAttribute('href'),
@@ -278,7 +277,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Next link
         $nextLink = $doc->queryXpath('//div[@class="navfooter"]//a[@accesskey="n"]')->current();
-        if (count($nextLink)) {
+        if ($nextLink instanceof DOMNode) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
                 $nextLink->getAttribute('href'),
@@ -564,7 +563,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Previous link
         $prevLink = $doc->queryXpath('//link[@rel="prev"]')->current();
-        if (count($prevLink)) {
+        if ($prevLink) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
                 $prevLink->getAttribute('href'),
@@ -574,7 +573,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Next link
         $nextLink = $doc->queryXpath('//link[@rel="next"]')->current();
-        if (count($nextLink)) {
+        if ($nextLink) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
                 $nextLink->getAttribute('href'),
