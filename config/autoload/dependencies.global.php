@@ -2,6 +2,7 @@
 use App\Action;
 use App\ApplicationErrorLogger;
 use App\ApplicationErrorLoggerFactory;
+use App\Middleware\HostnameMiddleware;
 use App\Model;
 use Zend\Expressive\Application;
 use Zend\Expressive\Container\ApplicationFactory;
@@ -21,6 +22,7 @@ return [
         'invokables' => [
             // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
             Helper\ServerUrlHelper::class => Helper\ServerUrlHelper::class,
+            HostnameMiddleware::class => HostnameMiddleware::class,
             RouterInterface::class => ZendRouter::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
