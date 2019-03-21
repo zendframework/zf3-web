@@ -24,7 +24,7 @@
     "require": {
         "php": "^7.1",
         "cache/filesystem-adapter": "^1.0",
-        "knplabs/github-api": "^2.8",
+        "knplabs/github-api": "^2.11.0",
         "league/commonmark": "^0.17",
         "mnapoli/front-yaml": "^1.6",
         "ocramius/proxy-manager": "^2.1.1",
