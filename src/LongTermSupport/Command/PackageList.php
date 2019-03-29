@@ -8,6 +8,7 @@ use DateInterval;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Http\Client\Common\HttpMethodsClient;
+use OutOfBoundsException;
 use RuntimeException;
 
 /**
@@ -235,11 +236,13 @@ class PackageList
             return false;
         }
 
-        if (version_compare(
-            $repo->getMostRecentMinorRelease()->getName(),
-            '1.0.0',
-            'lt'
-        )) {
+        try {
+            $releaseName = $repo->getMostRecentMinorRelease()->getName();
+        } catch (OutOfBoundsException $e) {
+            return false;
+        }
+
+        if (version_compare($releaseName, '1.0.0', 'lt')) {
             return false;
         }
 
