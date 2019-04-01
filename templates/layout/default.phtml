@@ -15,8 +15,9 @@ $this->inlineScript()
 <html>
 <?php echo $this->render('include::head') ?>
 <body<?= (false !== strpos(parse_url($this->serverUrl(), PHP_URL_PATH), '/manual')) ? ' id="manual"' : '' ?>>
-	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T36WFBL"  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T36WFBL"  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PG5L5N"  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <?php echo $this->render('include::nav') ?>
 
