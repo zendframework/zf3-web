@@ -511,6 +511,20 @@ a:focus {
     }
 }
 
+#laminas-announcement {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #081531;
+  background-image: url("/img/bg_linux_foundation.jpg");
+
+  h1, h3 {
+    color: white;
+    margin-bottom: 25px;
+  }
+}
+
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
   display: block;
