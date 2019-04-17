@@ -1,7 +1,7 @@
 ---
 layout: post
 title: From Zend to Laminas
-6ate: 2019-04-17T09:00:00-05:00
+date: 2019-04-17T09:00:00-05:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net
 permalink: /blog/2019-04-17-announcing-laminas.html
