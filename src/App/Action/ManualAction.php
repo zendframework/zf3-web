@@ -36,7 +36,13 @@ class ManualAction implements RequestHandlerInterface
 
         // Check URL params
         if (! $page || false === $version || ! $lang) {
-            return new HtmlResponse($this->template->render('error::404'));
+            $this->log(sprintf(
+                'Missing page ("%s"), version ("%s"), or language ("%s")',
+                $page ?: '',
+                $version ?: '',
+                $lang ?: ''
+            ));
+            return new HtmlResponse($this->template->render('error::404'), 404);
         }
 
         $name = $page;
@@ -47,7 +53,8 @@ class ManualAction implements RequestHandlerInterface
 
         // Check file
         if (! file_exists($docFile)) {
-            return new HtmlResponse($this->template->render('error::404'));
+            $this->log(sprintf('Identified documentation file "%s" for page "%s" could not be found', $docFile, $page));
+            return new HtmlResponse($this->template->render('error::404'), 404);
         }
 
         // Get page content
@@ -55,7 +62,12 @@ class ManualAction implements RequestHandlerInterface
 
         // Check content
         if (false === $content) {
-            return new HtmlResponse($this->template->render('error::404'));
+            $this->log(sprintf(
+                'No page content could be retrieved for docfile "%s" associated with page "%s"',
+                $docFile,
+                $page
+            ));
+            return new HtmlResponse($this->template->render('error::404'), 404);
         }
 
         // Get content list for select element
@@ -362,41 +374,41 @@ class ManualAction implements RequestHandlerInterface
         // Body (table of contents)
         $headline    = $doc->queryXpath('//div[@id="the.index"]/strong/text()')->current();
         $contentList = $doc->queryXpath('//div[@id="the.index"]/ul')->current();
-        if (count($headline) && count($contentList)) {
+        if ($headline instanceof DOMNode && $contentList instanceof DOMNode) {
             $pageContent['body'] = '<h1>'
-                                 . $headline->ownerDocument->saveXML($headline)
-                                 . '</h1>'
-                                 . $contentList->ownerDocument->saveXML($contentList);
+                . $headline->ownerDocument->saveXML($headline)
+                . '</h1>'
+                . $contentList->ownerDocument->saveXML($contentList);
         }
 
         // Body (part)
         $part = $doc->queryXpath('//div[@class="part"]')->current();
-        if (count($part)) {
+        if ($part instanceof DOMNode) {
             $h1          = $doc->queryXpath('//div[@class="part"]/h1')->current();
             $h2          = $doc->queryXpath('//div[@class="part"]/strong/text()')->current();
             $contentList = $doc->queryXpath('//div[@class="part"]/ul')->current();
 
-            if (count($h1) && count($h2) && count($contentList)) {
+            if ($h1 instanceof DOMNode && $h2 instanceof DOMNode && $contentList instanceof DOMNode) {
                 $pageContent['body'] = $h1->ownerDocument->saveXML($h1)
-                                     . '<h2>'
-                                     . $h2->ownerDocument->saveXML($h2)
-                                     . '</h2>'
-                                     . $contentList->ownerDocument->saveXML($contentList);
+                    . '<h2>'
+                    . $h2->ownerDocument->saveXML($h2)
+                    . '</h2>'
+                    . $contentList->ownerDocument->saveXML($contentList);
             }
         }
         // Body (chapter and appendix)
         $body = $doc->queryXpath('//div[@class="chapter" or @class="appendix"]')->current();
-        if (count($body)) {
+        if ($body instanceof DOMNode) {
             $h1          = $doc->queryXpath('//div[@class="chapter" or @class="appendix"]//h1')->current();
             $h2          = $doc->queryXpath('//div[@class="chapter" or @class="appendix"]//strong/text()')->current();
             $contentList = $doc->queryXpath('//div[@class="chapter" or @class="appendix"]//ul')->current();
 
-            if (count($h1) && count($h2) && count($contentList)) {
+            if ($h1 instanceof DOMNode && $h2 instanceof DOMNode && $contentList instanceof DOMNode) {
                 $pageContent['body'] = $h1->ownerDocument->saveXML($h1)
-                                     . '<h2>'
-                                     . $h2->ownerDocument->saveXML($h2)
-                                     . '</h2>'
-                                     . $contentList->ownerDocument->saveXML($contentList);
+                    . '<h2>'
+                    . $h2->ownerDocument->saveXML($h2)
+                    . '</h2>'
+                    . $contentList->ownerDocument->saveXML($contentList);
             } else {
                 $pageContent['body'] = $body->ownerDocument->saveXML($body);
             }
@@ -406,7 +418,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Headline (table of contents)
         $headline = $doc->queryXpath('//ul[@class="toc"]/li[@class = "header home"]/a');
-        if (count($headline)) {
+        if ($headline instanceof DOMNode) {
             $pageContent['sidebar'] = sprintf(
                 '<h1><a href="%s">Table Of Contents</a></h1>',
                 $headline->current()->getAttribute('href')
@@ -417,13 +429,13 @@ class ManualAction implements RequestHandlerInterface
 
         // First list item (section)
         $firstItem = $doc->queryXpath('//ul[@class="toc"]/li[@class = "header up"][last()]')->current();
-        if (count($firstItem)) {
+        if ($firstItem instanceof DOMNode) {
             $pageContent['sidebar'] .= $firstItem->ownerDocument->saveXML($firstItem);
         }
 
         // Content list items
         $elements = $doc->queryXpath('//body/table/tr/td/div/div[@class="section" and @name and @id]');
-        if (count($elements)) {
+        if ($elements->count() > 0) {
             // Active page
             $active = $doc->queryXpath('//ul[@class="toc"]/li[@class = "active"]/a')->current();
 
@@ -467,7 +479,7 @@ class ManualAction implements RequestHandlerInterface
         // Previous topic
         $prevTopic = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
 
-        if (count($prevTopic)) {
+        if ($prevTopic instanceof DOMNode) {
             $pageContent['sidebar'] .= '<h1>Previous topic</h1>';
             $pageContent['sidebar'] .= sprintf(
                 '<p class="topless"><a href="%s" title="previous chapter">%s</a></p>',
@@ -479,7 +491,7 @@ class ManualAction implements RequestHandlerInterface
         // Next topic
         $nextTopic = $doc->queryXpath('//div[@class="next"]/a')->current();
 
-        if (count($nextTopic)) {
+        if ($nextTopic instanceof DOMNode) {
             $pageContent['sidebar'] .= '<h1>Next topic</h1>';
             $pageContent['sidebar'] .= sprintf(
                 '<p class="topless"><a href="%s" title="next chapter">%s</a></p>',
@@ -490,12 +502,12 @@ class ManualAction implements RequestHandlerInterface
 
         // Head title
         $elem = $doc->queryXpath('//ul[@class="toc"]/li[@class = "active"]/a/text()')->current();
-        if (count($elem)) {
+        if ($elem instanceof DOMNode) {
             $pageContent['title'] = $elem->ownerDocument->saveXML($elem);
         }
 
         $elem = $doc->queryXpath('//ul[@class="toc"]/li[@class="header up"][last()]/a/text()')->current();
-        if (count($elem)) {
+        if ($elem instanceof DOMNode) {
             $pageContent['title'] .= ' - ' . $elem->ownerDocument->saveXML($elem);
         }
 
@@ -504,7 +516,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Previous link
         $prevLink = $doc->queryXpath('//div[@class="next"]/parent::td/preceding-sibling::td/a')->current();
-        if (count($prevLink)) {
+        if ($prevLink instanceof DOMNode) {
             $navigation .= sprintf(
                 '<li class="prev"><a href="%s">%s</a>',
                 $prevLink->getAttribute('href'),
@@ -514,7 +526,7 @@ class ManualAction implements RequestHandlerInterface
 
         // Next link
         $nextLink = $doc->queryXpath('//div[@class="next"]/a')->current();
-        if (count($nextLink)) {
+        if ($nextLink instanceof DOMNode) {
             $navigation .= sprintf(
                 '<li class="next"><a href="%s">%s</a>',
                 $nextLink->getAttribute('href'),
@@ -846,5 +858,13 @@ class ManualAction implements RequestHandlerInterface
         }
 
         return null;
+    }
+
+    private function log(string $message) : void
+    {
+        $message = sprintf("[%s] %s\n", date('Y-m-d H:i:s'), $message);
+        $log     = fopen(realpath(getcwd()) . '/data/log/app.log', 'ab+');
+        fwrite($log, $message);
+        fclose($log);
     }
 }
