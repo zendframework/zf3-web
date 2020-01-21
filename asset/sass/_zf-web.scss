@@ -525,6 +525,25 @@ a:focus {
   }
 }
 
+#laminas-launch {
+  padding-top: 100px;
+  padding-bottom: 50px;
+  padding-left: 0;
+  padding-right: 0;
+  background: rgb(104,182,4);
+  background: linear-gradient(180deg, rgba(104,182,4,1) 0%, rgba(66,135,34,1) 18%, rgba(1,55,86,1) 100%); 
+
+  img {
+      width: auto;
+      max-height: 16em;
+  }
+
+  h1, h3 {
+    color: white;
+    margin-bottom: 25px;
+  }
+}
+
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
   display: block;
