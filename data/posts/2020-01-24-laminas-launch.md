@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "Endings and Beginnings: Goodbye, and Please Welcome the Laminas Project!"
-date: 2020-01-21T14:00:00-06:00
+date: 2020-01-24T12:15:00-06:00
 author: Matthew Weier O'Phinney
 url_author: https://mwop.net
-permalink: /blog/2020-01-21-laminas-launch
+permalink: /blog/2020-01-24-laminas-launch
 categories:
 - apigility
 - blog
